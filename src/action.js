@@ -2,23 +2,6 @@ export function setSearchTerm(searchTerm) {
   console.log('action: SearchTerm called');
   return { type: 'SET_SEARCH_TERM', searchTerm };
 }
-
-
-export function movePiece(location){
-  console.log('action: movePiece called');
-  return {type: 'MOVE_PIECE', location}
-}
-
-export function setWidth(width){
-  console.log('action: setWidth called');
-  return {type: 'SET_WIDTH', width}
-}
-
-export function setHeight(height){
-  console.log('action: setHeight called');
-  return {type: 'SET_HEIGHT', height}
-}
-
 export function setGardenParameters(width, height, color){
   console.log('action: SET_GARDEN_PARAMETERS called');
 
@@ -29,6 +12,11 @@ export function setGarden(dbGardenGrid){
   console.log('action: SET_GARDEN from db called');
 
   return {type: 'SET_GARDEN', dbGardenGrid};
+}
+
+export function getGardenFromDropdown(gardenIndex) {
+  console.log('action: getGardenFromDropdown');
+  return { type: 'GET_GARDEN_FROM_DROPDOWN', gardenIndex};
 }
 
 export function getAllGardens(dbGardenGrids){
@@ -62,14 +50,14 @@ export function setDropdown(dbDropdownOptions) {
   return { type: 'SET_DROPDOWN_OPTIONS', dbDropdownOptions};
 }
 
-export function getGardenFromDropdown(gardenIndex) {
-  console.log('action: getGardenFromDropdown');
-  return { type: 'GET_GARDEN_FROM_DROPDOWN', gardenIndex};
+export function addPlantToPlantGrid(plant){
+  console.log('action: addPlantToPlantGrid');
+  return { type: 'ADD_PLANT_TO_PLANT_GRID', plant}
 }
 
 export function requestLogin(creds) {
   return {
-    type: LOGIN_REQUEST,
+    type: 'LOGIN_REQUEST',
     isFetching: true,
     isAuthenticated: false,
     creds
@@ -78,18 +66,18 @@ export function requestLogin(creds) {
 
 export function receiveLogin(user) {
   return {
-    type: LOGIN_SUCCESS,
+    type: 'LOGIN_SUCCESS',
     isFetching: false,
     isAuthenticated: true,
     id_token: user.id_token
-  }
+  };
 }
 
 export function loginError(message) {
   return {
-    type: LOGIN_FAILURE,
+    type: 'LOGIN_FAILURE',
     isFetching: false,
     isAuthenticated: false,
     message
-  }
+  };
 }

@@ -6,6 +6,7 @@ import GardenGrid from './GardenGrid.js';
 import MySquare from './MySquare.js';
 import Plant from './Plant.js';
 import {Layer, Rect, Circle, Stage, Group} from 'react-konva';
+import PlantShelf from './PlantShelf.js'
 
 
 
@@ -35,6 +36,9 @@ const MakeGardenSquareGridView = React.createClass({
               <Layer >
                 <Plant />
               </Layer>
+              <Layer>
+                <PlantShelf />
+              </Layer>
             </Stage>
           </div>
         </div>
@@ -44,7 +48,8 @@ const MakeGardenSquareGridView = React.createClass({
 
 const mapStateToProps = (state) => {
   return {
-    searchTerm: state.searchTerm
+    searchTerm: state.searchTerm,
+
   };
 };
 

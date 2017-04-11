@@ -118,6 +118,7 @@ const GardenSquareGridView = React.createClass({
               <Layer >
                 <Plant/>
               </Layer>
+
             </Stage>
           </div>
         </div>

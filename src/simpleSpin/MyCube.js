@@ -10,7 +10,7 @@ class MyCube extends React.Component {
   };
 
   constructor(props, context) {
-    super(props, context);/
+    super(props, context);
     console.log("MYCUBE HASE BEEN CREATED");
 
     this.cameraPosition = new THREE.Vector3(0, 0, 5);
