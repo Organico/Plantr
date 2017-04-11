@@ -29,10 +29,10 @@
         {"x": 50, "y": 0, "color": "brown", "size": 50 }
       ],
       "plantGrid": [
-        {"x": 0, "y": 0, "plantId": "101", "size": 20},
-        {"x": 50, "y": 50, "plantId": "101", "size": 20},
-        {"x": 0, "y": 50, "plantId": "101", "size": 20 },
-        {"x": 50, "y": 0, "plantId": "101", "size": 20 }
+        // {"x": 0, "y": 0, "plantId": "101", "size": 20},
+        {"x": 139, "y": 255, "plantId": "101", "size": 20},
+        // {"x": 0, "y": 50, "plantId": "101", "size": 20 },
+        // {"x": 50, "y": 0, "plantId": "101", "size": 20 }
       ]
     },
     {
@@ -46,10 +46,10 @@
         {"x": 0, "y": 100, "color": "red", "size": 50 },
         {"x": 50, "y": 100, "color": "red", "size": 50 }],
       "plantGrid": [
-        {"x": 0, "y": 0, "plantId": "101", "size": 20},
-        {"x": 50, "y": 50, "plantId": "101", "size": 20},
-        {"x": 0, "y": 50, "plantId": "101", "size": 20 },
-        {"x": 50, "y": 0, "plantId": "101", "size": 20 }
+        // {"x": 0, "y": 0, "plantId": "101", "size": 20},
+        {"x": 139, "y": 255, "plantId": "101", "size": 20},
+        // {"x": 0, "y": 50, "plantId": "101", "size": 20 },
+        // {"x": 50, "y": 0, "plantId": "101", "size": 20 }
       ]
     }
   ]

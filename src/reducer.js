@@ -14,14 +14,18 @@ const initialState = {
   ],
   plantGrid: [
       {
-        'x':0,
-        'y':0,
-        'color': 'brown'
+        'x':20,
+        'y':20,
+        'color': 'blue'
       }
   ],
   //user profile state
   username: '',
-  gardens: []
+  gardens: [],
+  plants: [],
+
+  gardenDropdown: [],
+  gardenIndex: 0
 };
 
 
@@ -164,6 +168,78 @@ const getAllGardens = (state, action) => {
   return newState;
 }
 
+const getGardenFromDropdown = (state, action) => {
+  console.log('(before) state: ', state);
+
+  const newState = {};
+
+
+  const { gardens } = state
+  var newGardenGrid = gardens[action.gardenIndex];
+
+  // var newGardenGrid = state.gardens[action.gardenIndex];
+
+  console.log("Garden at gardens action.gardenIndex", newGardenGrid)
+  const {gardenGrid} = state;
+
+  // console.log("The gardens for this user are ", action.dbGardenGrids);
+
+  Object.assign(newState, state, {gardenGrid: newGardenGrid});
+  console.log('(before) state: ', state);
+  console.log('(after) state: ', newState);
+  return newState;
+};
+
+
+
+
+const getAllPlants = (state, action) => {
+  console.log('(before) state: ', state);
+
+  const newState = {};
+  const {plants} = state;
+
+  console.log("This is db plant grids at 0: ", action.dbPlantGrids[0]);
+  console.log("This is db plant grids at 0: ", action.dbPlantGrids[0][0]);
+  console.log("DB plant grid x at 0 is ", action.dbPlantGrids[0][0].x);
+
+  var newPlantGrid = [
+      {
+        'x': action.dbPlantGrids[0][0].x,
+        'y': action.dbPlantGrids[0][0].y,
+        'color': 'brown'
+      }
+  ]
+
+  console.log("The new plant grid is: ", newPlantGrid);
+  console.log("Inside here!");
+  console.log("The plants for this user are ", action.dbPlantGrids);
+
+  Object.assign(newState, state, {plantGrid: newPlantGrid});
+  console.log('(before) state: ', state);
+  console.log('(after) state: ', newState);
+  return newState;
+}
+
+const setDropdown = (state, action) => {
+  console.log("set dropdown function reducer")
+  console.log("set dropdown function action: ", action);
+
+  const newState = {};
+  const {gardenDropdown} = state;
+
+  var newGardenDropdown = action.dbDropdownOptions
+  Object.assign(newState, state, {gardenDropdown: newGardenDropdown});
+
+  console.log('(before) state: ', state);
+  console.log('(after) state: ', newState);
+
+  return newState;
+}
+
+
+
+
 const userProfile = (state, action) => {
   console.log('(before) state: ', state);
 
@@ -178,6 +254,7 @@ const userProfile = (state, action) => {
   console.log('(after) state: ', newState);
   return newState
 }
+
 
   function reducer(state = initialState, action) {
     console.log('reducer.js - Reducer called');
@@ -195,10 +272,16 @@ const userProfile = (state, action) => {
         return setGarden(state, action);
       case 'GET_ALL_GARDENS':
         return getAllGardens(state, action);
+      case 'GET_ALL_PLANTS':
+        return getAllPlants(state, action);
       case 'TOGGLE_SQUARE':
         return toggleSquare(state, action);
       case 'SET_USER_PARAMETERS':
         return userProfile(state, action);
+      case 'SET_DROPDOWN_OPTIONS':
+        return setDropdown(state, action);
+      case 'GET_GARDEN_FROM_DROPDOWN':
+        return getGardenFromDropdown(state, action);
       default:
         return state
     }

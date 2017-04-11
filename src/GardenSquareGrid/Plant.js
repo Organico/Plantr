@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Layer, Rect, Circle, Stage, Group} from 'react-konva';
-
+import { connect } from 'react-redux'
+// import { togglePlant} from '../action'
 
 class Plant extends React.Component {
      constructor(...args) {
@@ -74,8 +75,8 @@ class Plant extends React.Component {
     render() {
         return (
             <Circle
-                x={0} y={0} width={50} height={50}
-                fill={this.state.color}
+                x={this.props.x} y={this.props.y} width={50} height={50}
+                fill={this.props.color}
                 stroke={'black'}
                 shadowBlur={10}
                 onClick={this.handleClick}
@@ -90,4 +91,29 @@ class Plant extends React.Component {
     }
 }
 
-export default Plant;
+
+const mapStateToProps = (state) => {
+  return {
+    x: state.plantGrid[0].x,
+    y: state.plantGrid[0].y,
+    color: state.plantGrid[0].color
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    // dispatchMovePiece (location) {
+    //   dispatch(movePiece(location))
+    // }
+    // dispatchTogglePlant(x, y){
+    //   dispatch(togglePlant(x,y))
+    // }
+  }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Plant)
+
+
+// export default MySquare
+
+// export default Plant;

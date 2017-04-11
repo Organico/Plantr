@@ -3,6 +3,7 @@ export function setSearchTerm(searchTerm) {
   return { type: 'SET_SEARCH_TERM', searchTerm };
 }
 
+
 export function movePiece(location){
   console.log('action: movePiece called');
   return {type: 'MOVE_PIECE', location}
@@ -37,6 +38,14 @@ export function getAllGardens(dbGardenGrids){
   return {type: 'GET_ALL_GARDENS', dbGardenGrids};
 }
 
+export function getAllPlants(dbPlantGrids){
+  console.log('action: GET_ALL_PLANTS from db called');
+  console.log("DB Plant grids: ", dbPlantGrids);
+
+  return {type: 'GET_ALL_PLANTS', dbPlantGrids};
+}
+
+
 export function setUserParameters(username, gardens){
   console.log('action: SET_USER_PARAMETERS called');
 
@@ -46,6 +55,16 @@ export function setUserParameters(username, gardens){
 export function toggleSquare(x,y){
   console.log('action: toggleSquare called');
   return {type: 'TOGGLE_SQUARE', x, y};
+}
+
+export function setDropdown(dbDropdownOptions) {
+  console.log('action: setDropdown options');
+  return { type: 'SET_DROPDOWN_OPTIONS', dbDropdownOptions};
+}
+
+export function getGardenFromDropdown(gardenIndex) {
+  console.log('action: getGardenFromDropdown');
+  return { type: 'GET_GARDEN_FROM_DROPDOWN', gardenIndex};
 }
 
 export function requestLogin(creds) {
