@@ -82,12 +82,14 @@ class Plant extends React.Component {
 
    handleMouseDragEnd(pos){
       console.log("end dragging", "x: ", pos.evt.x, "y: ", pos.evt.y);
-      console.log("this is ", this);
-      console.log("this is ");
-      console.log("this.state  drage end is: ", this.state)
-      // var plant = {x: pos.evt.x, y: pos.evt.y, color: 'yellow'};
-      console.log("New X from the state is,", this.state.posX, " new y from the state is ", this.state.posY)
-      var plant = {x: this.state.posX, y: this.state.posY, color: "red"};
+
+
+      var plant =
+      {
+        x: this.state.posX,
+        y: this.state.posY,
+        color: this.props.color
+      };
       this.props.dispatchAddPlantToPlantGrid(plant)
       console.log("Drag end This.props", this.props)
     }
