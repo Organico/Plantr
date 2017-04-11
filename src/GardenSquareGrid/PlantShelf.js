@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import {Layer, Rect, Circle, Stage, Group} from 'react-konva';
 import { connect } from 'react-redux'
 import Plant from './Plant'
-import { addPlantToPlantGrid } from '../action';
 
 // import { togglePlant} from '../action'
 
@@ -82,21 +81,13 @@ class PlantShelf extends React.Component {
         return (
           <Group>
             {this.props.plantShelf.map((plantShelfPlant, i) =>
-              <Circle
-                  key={i} x={plantShelfPlant.x} y={plantShelfPlant.y} width={50} height={50}
-                  fill={plantShelfPlant.color}
-                  stroke={'black'}
-                  shadowBlur={10}
-                  onClick={this.handleClick}
-                  onMouseOver={this.handleMouseOver}
-                  onMouseOut={this.handleMouseOut}
-                  draggable={true}
-                  dragBoundFunc={this.dragBoundFunc}
-                  onDragStart={this.handleMouseDragStart}
-                  onDragEnd={this.handleMouseDragEnd}
+              <Plant
+                key={i}
+                x={plantShelfPlant.x}
+                y={plantShelfPlant.y}
+                color={plantShelfPlant.color}
               />
-              )
-            }
+            )}
           </Group>
         );
     }

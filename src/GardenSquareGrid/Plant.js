@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Layer, Rect, Circle, Stage, Group} from 'react-konva';
 import { connect } from 'react-redux'
+import { addPlantToPlantGrid } from '../action';
+
 // import { togglePlant} from '../action'
 
 class Plant extends React.Component {
@@ -68,9 +70,10 @@ class Plant extends React.Component {
       this.setState({isDragging: true})
     }
 
-    handleMouseDragEnd(pos){
+   handleMouseDragEnd(pos){
       console.log("end dragging", "x: ", pos.evt.x, "y: ", pos.evt.y);
-
+      var plant = {x: pos.evt.x, y: pos.evt.y, color: 'yellow'};
+      this.props.dispatchAddPlantToPlantGrid(plant)
     }
 
     render() {
@@ -104,18 +107,15 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    // dispatchMovePiece (location) {
-    //   dispatch(movePiece(location))
-    // }
-    // dispatchTogglePlant(x, y){
-    //   dispatch(togglePlant(x,y))
-    // }
+     dispatchAddPlantToPlantGrid (plant) {
+      dispatch(addPlantToPlantGrid(plant))
+    }
   }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Plant)
+export default connect(mapStateToProps, mapDispatchToProps)(Plant);
 
 
-// export default MySquare
+// exxxxxxxxxxxxxxxxxport default MySquare
 
 // export default Plant;
