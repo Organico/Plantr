@@ -22,6 +22,7 @@ const MySquare = React.createClass({
       var newY;
       var newX;
 
+
       if(pos.y < 50){
         newY = 10;
       } else if(pos.y < 100){

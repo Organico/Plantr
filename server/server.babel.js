@@ -86,9 +86,12 @@ app.post('/api/users', (req, res, next) => {
 });
 
 app.post('/api/gardens', (req, res, next) => {
+  console.log("In /api/gardens server side")
   let garden = new Garden(req.body);
+  console.log(req.body);
   garden.save({}, (err)=> {
     if (err) {
+      console.log("Errored out");
       return next(new Error(err));
     }
     res.status(200);
