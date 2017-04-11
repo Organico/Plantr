@@ -34,6 +34,7 @@ class Plant extends React.Component {
       var newY;
       var newY;
       var newX;
+      console.log("Pos in dragBoundFunc", pos);
 
       if(pos.y < 50){
         newY = 25;
@@ -59,10 +60,19 @@ class Plant extends React.Component {
         newX = pos.x;
       }
 
+      this.setState({
+        posX: newX,
+        posY: newY
+      })
+
+      console.log(this.state);
+
       return {
         x: newX,
         y: newY
       };
+
+
     }
 
     handleMouseDragStart(pos){
@@ -72,8 +82,14 @@ class Plant extends React.Component {
 
    handleMouseDragEnd(pos){
       console.log("end dragging", "x: ", pos.evt.x, "y: ", pos.evt.y);
-      var plant = {x: pos.evt.x, y: pos.evt.y, color: 'yellow'};
+      console.log("this is ", this);
+      console.log("this is ");
+      console.log("this.state  drage end is: ", this.state)
+      // var plant = {x: pos.evt.x, y: pos.evt.y, color: 'yellow'};
+      console.log("New X from the state is,", this.state.posX, " new y from the state is ", this.state.posY)
+      var plant = {x: this.state.posX, y: this.state.posY, color: "red"};
       this.props.dispatchAddPlantToPlantGrid(plant)
+      console.log("Drag end This.props", this.props)
     }
 
     render() {
