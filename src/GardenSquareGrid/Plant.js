@@ -7,10 +7,10 @@ import { connect } from 'react-redux'
 class Plant extends React.Component {
      constructor(...args) {
       super(...args);
-      this.state = {
-        color: 'red',
-        isDragging: false
-      };
+      // this.state = {
+      //   color: 'red',
+      //   isDragging: false
+      // };
       this.handleClick = this.handleClick.bind(this);
       this.dragBoundFunc = this.dragBoundFunc.bind(this);
       this.handleMouseDragStart = this.handleMouseDragStart.bind(this);
@@ -70,6 +70,7 @@ class Plant extends React.Component {
 
     handleMouseDragEnd(pos){
       console.log("end dragging", "x: ", pos.evt.x, "y: ", pos.evt.y);
+
     }
 
     render() {
@@ -94,9 +95,10 @@ class Plant extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    x: state.plantGrid[0].x,
-    y: state.plantGrid[0].y,
-    color: state.plantGrid[0].color
+    // x: state.plantGrid[0].x,
+    // y: state.plantGrid[0].y,
+    // color: state.plantGrid[0].color
+    plantGrid: state.plantGrid
   }
 }
 

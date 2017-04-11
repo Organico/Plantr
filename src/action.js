@@ -18,6 +18,10 @@ export function getGardenFromDropdown(gardenIndex) {
   console.log('action: getGardenFromDropdown');
   return { type: 'GET_GARDEN_FROM_DROPDOWN', gardenIndex};
 }
+export function getPlantsFromDropdown(gardenIndex) {
+  console.log('action: getPlantsFromDropdown');
+  return { type: 'GET_PLANTS_FROM_DROPDOWN', gardenIndex};
+}
 
 export function getAllGardens(dbGardenGrids){
   console.log('action: GET_ALL_GARDENS from db called');

@@ -42,53 +42,17 @@ const initialState = {
       'color': 'green'
     }
   ],
-
   //user profile state
   username: '',
   gardens: [],
   plants: [],
 
   gardenDropdown: [],
-  gardenIndex: 0
+  gardenIndex: 0,
+  isFetching: false,
+  isAuthenticated: localStorage.getItem('id_token') ? true : false
+
 };
-
-
-// const movePiece = (state, action) => {
-//   const {location} = state;
-//   const newState = {};
-//   Object.assign(newState, state, {location: action.location});
-
-//   console.log('(before) state: ', state);
-//   console.log('(after) state: ', newState);
-//   return newState
-// }
-
-// const setWidth = (state, action) => {
-//   // console.log(state);
-//   // console.log(action.width);
-//   // console.log("action", action);
-
-//   const {width} = state;
-//   const newState = {};
-//   Object.assign(newState, state, {width: action.width})
-
-//   console.log('(before) state: ', state)
-//   console.log('(after) state: ', newState)
-//   return newState
-// }
-
-// const setHeight = (state, action) => {
-//   // console.log(state);
-//   // console.log(action.height);
-//   // console.log("action", action);
-//   const {height} = state;
-//   const newState = {};
-//   Object.assign(newState, state, {width: action.height})
-
-//   console.log('(before) state: ', state)
-//   console.log('(after) state: ', newState)
-//   return newState
-// }
 
 const toggleSquare = (state, action) => {
   var squareToToggle;
@@ -109,9 +73,8 @@ const toggleSquare = (state, action) => {
   }
 
   var gardenCopy = state.gardenGrid.slice();
-  // console.log("Here is the original gardenCopy: ", gardenCopy);
+
   gardenCopy[squareToToggleIndex].color = colorToToggleTo;
-  console.log("Here is the altered gardenCopy: ", gardenCopy);
   const {gardenGrid} = state;
   const newState = {};
 
@@ -169,6 +132,22 @@ const getAllGardens = (state, action) => {
   return newState;
 }
 
+const getAllPlants = (state, action) => {
+  console.log('(before) state: ', state);
+
+  const newState = {};
+  const {plants} = state;
+
+  console.log("This is db plant grids at 0: ", action.dbPlantGrids);
+  console.log("DB plant grid x at 0 is ", action.dbPlantGrids.x);
+
+  Object.assign(newState, state, {plants: action.dbPlantGrids});
+  console.log('(before) state: ', state);
+  console.log('(after) state: ', newState);
+  return newState;
+}
+
+
 const getGardenFromDropdown = (state, action) => {
   console.log('(before) state: ', state);
   const newState = {};
@@ -188,33 +167,21 @@ const getGardenFromDropdown = (state, action) => {
   return newState;
 };
 
-const getAllPlants = (state, action) => {
+
+const getPlantsFromDropdown = (state, action) => {
   console.log('(before) state: ', state);
-
   const newState = {};
-  const {plants} = state;
+  const { plants } = state
 
-  console.log("This is db plant grids at 0: ", action.dbPlantGrids[0]);
-  console.log("This is db plant grids at 0: ", action.dbPlantGrids[0][0]);
-  console.log("DB plant grid x at 0 is ", action.dbPlantGrids[0][0].x);
-
-  var newPlantGrid = [
-      {
-        'x': action.dbPlantGrids[0][0].x,
-        'y': action.dbPlantGrids[0][0].y,
-        'color': 'brown'
-      }
-  ]
-
-  console.log("The new plant grid is: ", newPlantGrid);
-  console.log("Inside here!");
-  console.log("The plants for this user are ", action.dbPlantGrids);
+  var newPlantGrid = plants[action.gardenIndex]; //NOTE: THIS STAYS THE SAME "GRADEN.INDEX(?)
+  const {plantGrid} = state;
 
   Object.assign(newState, state, {plantGrid: newPlantGrid});
   console.log('(before) state: ', state);
   console.log('(after) state: ', newState);
   return newState;
-}
+};
+
 
 const setDropdown = (state, action) => {
   console.log("set dropdown function reducer")
@@ -250,9 +217,21 @@ const addPlantToPlantGrid = (state, action) => {
   const {plantGrid} = state;
 
   console.log("action", action);
-  console.log("plantGrid before", plantGrid)
-  var newPlantGrid = plantGrid.push(action.plant)
-  console.log("plantGrid after", newPlantGrid)
+  console.log("plantGrid before", Array.isArray(plantGrid));
+
+  var newPlantGrid = plantGrid.slice();
+
+  newPlantGrid.push(action.plant);
+
+  console.log("The new plantGrid is", newPlantGrid);
+
+
+  console.dir(plantGrid);
+  console.log("plantGrid type", typeof(plantGrid))
+  // var newPlantGrid = plantGrid.push(action.plant)
+  // var newPlantGrid = [action.plant];
+  console.log("plantGrid after", newPlantGrid);
+
 
   Object.assign(newState, state, {plantGrid: newPlantGrid});
   console.log('(before) state: ', state);
@@ -263,35 +242,53 @@ const addPlantToPlantGrid = (state, action) => {
 
 function reducer(state = initialState, action) {
   console.log('reducer.js - Reducer called');
-  console.log('current action: ', action)
+  console.log('current action: ', action);
   switch (action.type) {
-    // case 'SET_WIDTH':
-    //   return setWidth(state, action);
-    // case 'SET_HEIGHT':
-    //   return setHeight(state, action);
-    // case 'MOVE_PIECE':
-    //   return movePiece(state, action);
-    case 'TOGGLE_SQUARE':
-      return toggleSquare(state, action);
-    case 'SET_GARDEN_PARAMETERS':
-      return setGardenParameters(state, action);
-    case 'SET_GARDEN':
-      return setGarden(state, action);
-    case 'SET_DROPDOWN_OPTIONS':
-      return setDropdown(state, action);
-    case 'GET_ALL_GARDENS':
-      return getAllGardens(state, action);
-    case 'GET_GARDEN_FROM_DROPDOWN':
-      return getGardenFromDropdown(state, action);
-    case 'GET_ALL_PLANTS':
-      return getAllPlants(state, action);
-    case 'ADD_PLANT_TO_PLANT_GRID':
-      return addPlantToPlantGrid(state, action);
-    //userProfile
-    case 'SET_USER_PARAMETERS':
-      return userProfile(state, action);
-    default:
-      return state
+  case 'TOGGLE_SQUARE':
+    return toggleSquare(state, action);
+  case 'SET_GARDEN_PARAMETERS':
+    return setGardenParameters(state, action);
+  case 'SET_GARDEN':
+    return setGarden(state, action);
+  case 'SET_DROPDOWN_OPTIONS':
+    return setDropdown(state, action);
+  case 'GET_ALL_GARDENS':
+    return getAllGardens(state, action);
+  case 'GET_GARDEN_FROM_DROPDOWN':
+    return getGardenFromDropdown(state, action);
+  case 'GET_PLANTS_FROM_DROPDOWN':
+    return getPlantsFromDropdown(state, action);
+  case 'GET_ALL_PLANTS':
+    return getAllPlants(state, action);
+  case 'ADD_PLANT_TO_PLANT_GRID':
+    return addPlantToPlantGrid(state, action);
+  case 'SET_USER_PARAMETERS':
+    return userProfile(state, action);
+  case 'LOGIN_REQUEST':
+    return Object.assign({}, state, {
+      isFetching: true,
+      isAuthenticated: false,
+      user: action.creds
+    });
+  case 'LOGIN_SUCCESS':
+    return Object.assign({}, state, {
+      isFetching: false,
+      isAuthenticated: true,
+      errorMessage: ''
+    });
+  case 'LOGIN_FAILURE':
+    return Object.assign({}, state, {
+      isFetching: false,
+      isAuthenticated: false,
+      errorMessage: action.message
+    });
+  case 'LOGOUT_SUCCESS':
+    return Object.assign({}, state, {
+      isFetching: true,
+      isAuthenticated: false
+    });
+  default:
+    return state;
   }
 }
 

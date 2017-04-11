@@ -8,8 +8,7 @@ import Plant from './Plant.js';
 import {Layer, Rect, Circle, Stage, Group} from 'react-konva';
 import PlantShelf from './PlantShelf.js'
 
-
-
+import PlantGrid from './PlantGrid.js';
 
 
 const MakeGardenSquareGridView = React.createClass({
@@ -33,9 +32,8 @@ const MakeGardenSquareGridView = React.createClass({
           <div >
             <Stage id="cat" width={500} height={500} fill="white" stroke="black" className="text-center">
               <GardenGrid />
-              <Layer >
-                <Plant />
-              </Layer>
+              <PlantGrid />
+
               <Layer>
                 <PlantShelf />
               </Layer>

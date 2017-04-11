@@ -1,12 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { setWidth, setHeight, setGardenParameters, setGarden, getAllGardens, getAllPlants, setDropdown, getGardenFromDropdown} from '../action';
+import { setWidth, setHeight, setGardenParameters, setGarden, getAllGardens, getAllPlants, setDropdown, getGardenFromDropdown, getPlantsFromDropdown} from '../action';
 import axios from 'axios';
 import GardenGrid from './GardenGrid.js';
 import MySquare from './MySquare.js';
-import Plant from './Plant.js';
 import {Layer, Rect, Circle, Stage, Group} from 'react-konva';
 import Dropdown from "react-bootstrap-dropdown";
+import PlantGrid from './PlantGrid.js';
+import Plant from './Plant.js';
 
 
 const GardenSquareGridView = React.createClass({
@@ -19,6 +20,7 @@ const GardenSquareGridView = React.createClass({
     var gardenIndex = item.value
     console.log("About to go to the action. Garden index is: ", gardenIndex);
     this.props.dispatchGetGardenFromDropdown(gardenIndex);
+    this.props.dispatchGetPlantsFromDropdown(gardenIndex);
   },
 
   getAllGardens() {
@@ -115,9 +117,8 @@ const GardenSquareGridView = React.createClass({
 
             <Stage id="cat" width={500} height={500} fill="white" stroke="black" className = "text-center">
               <GardenGrid />
-              <Layer >
-                <Plant/>
-              </Layer>
+              <PlantGrid />
+
 
             </Stage>
           </div>
@@ -153,6 +154,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     dispatchGetGardenFromDropdown(gardenIndex) {
       dispatch(getGardenFromDropdown(gardenIndex));
+    },
+    dispatchGetPlantsFromDropdown(gardenIndex) {
+      dispatch(getPlantsFromDropdown(gardenIndex));
     }
   };
 };
