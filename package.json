@@ -33,6 +33,7 @@
     "mongoose": "^4.9.1",
     "morgan": "^1.8.1",
     "react": "^15.4.2",
+    "react-bootstrap-dropdown": "^0.3.0",
     "react-dnd": "^2.3.0",
     "react-dnd-html5-backend": "^2.3.0",
     "react-dom": "^15.4.2",
@@ -40,8 +41,13 @@
     "react-redux": "^5.0.3",
     "react-router": "^4.0.0",
     "react-router-dom": "^4.0.0",
+    "react-three": "^0.9.7",
+    "react-three-renderer": "^3.1.0",
     "redux": "^3.6.0",
+    "redux-thunk": "^2.2.0",
     "semantic-ui-react": "^0.67.2",
+    "stats.js": "^0.17.0",
+    "three": "^0.84.0",
     "webpack": "^2.3.0"
   },
   "devDependencies": {

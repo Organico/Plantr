@@ -1,40 +1,59 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { setWidth, setHeight, setGardenParameters, setGarden, getAllGardens } from '../action';
+import { setWidth, setHeight, setGardenParameters, setGarden, getAllGardens, getAllPlants, setDropdown, getGardenFromDropdown, getPlantsFromDropdown} from '../action';
 import axios from 'axios';
 import GardenGrid from './GardenGrid.js';
 import MySquare from './MySquare.js';
-import Plant from './Plant.js';
 import {Layer, Rect, Circle, Stage, Group} from 'react-konva';
+import Dropdown from "react-bootstrap-dropdown";
+import PlantGrid from './PlantGrid.js';
+import Plant from './Plant.js';
+
 
 const GardenSquareGridView = React.createClass({
 
-  componentDidMount (){
+  componentDidMount () {
     // this.props.dispatchGetAllGardens()
+  },
 
+  select(item){
+    var gardenIndex = item.value
+    console.log("About to go to the action. Garden index is: ", gardenIndex);
+    this.props.dispatchGetGardenFromDropdown(gardenIndex);
+    this.props.dispatchGetPlantsFromDropdown(gardenIndex);
   },
 
   getAllGardens() {
    axios.get('/api/gardens').then((res) => {
 
             var dbGardenGridData = res.data;
+            console.log("DB gargen Grid data: ", dbGardenGridData);
             var dbGardenGrids = [];
             var dbPlantGrids = [];
+            var dbDropdownOptions = [];
 
             for (var i = 0; i<dbGardenGridData.length; i++) {
               var individualGarden = dbGardenGridData[i].gardenGrid;
               var individualPlant = dbGardenGridData[i].plantGrid;
               dbGardenGrids.push(individualGarden);
               dbPlantGrids.push(individualPlant);
+
+              var dropDownObject = {
+                text: "Garden :" + i,
+                value: i.toString()
+              }
+              dbDropdownOptions.push(dropDownObject);
             }
 
-            console.log("Res ", res);
-            console.log("Res.data ", dbGardenGrids);
+            // console.log("Res ", res);
+            // console.log("Res.data ", dbGardenGrids);
 
-            console.log("Db garden grids in getAllGardens: ", dbGardenGrids)
-            console.log("Db garden grids in getAllPlants: ", dbPlantGrids)
+            // console.log("Db garden grids in getAllGardens: ", dbGardenGrids)
+            // console.log("Db garden grids in getAllPlants: ", dbPlantGrids)
 
             this.props.dispatchGetAllGardens(dbGardenGrids);
+            this.props.dispatchGetAllPlants(dbPlantGrids);
+            this.props.dispatchSetDropdown(dbDropdownOptions);
 
           }).catch((err) => {
             console.error(err);
@@ -53,13 +72,36 @@ const GardenSquareGridView = React.createClass({
   },
 
   render () {
+
     let input;
     let width;
     let height;
     let color;
+    let demo1 = [
+  {
+    text: "Action",
+    value: "0"
+  },
+  {
+    text: "Another action",
+    value: "1"
+  },
+  {
+    text: "Something else here",
+    value: "2"
+  },
+  {
+    text: "Separated link",
+    value: "3"
+  },
+];
 
     return (
         <div className="text-center">
+           <Dropdown
+            title="MyDropdown"
+            items={this.props.gardenDropdown}
+            onSelect={this.select} />
           <h1> Garden Square Grid </h1>
             <input ref={(node) => width = node } type="number" name="width" placeholder='Feet [width] is your garden?'/>
             <input ref={(node) => height = node } type="number" name="height" placeholder='Feet [height] is your garden?'/>
@@ -68,15 +110,16 @@ const GardenSquareGridView = React.createClass({
               this.getAllGardens();
             }} type="submit">Get All Gardens
             </button>
+
           <div >
           <br></br>
           <br></br>
 
             <Stage id="cat" width={500} height={500} fill="white" stroke="black" className = "text-center">
               <GardenGrid />
-              <Layer >
-                <Plant/>
-              </Layer>
+              <PlantGrid />
+
+
             </Stage>
           </div>
         </div>
@@ -86,7 +129,8 @@ const GardenSquareGridView = React.createClass({
 
 const mapStateToProps = (state) => {
   return {
-    searchTerm: state.searchTerm
+    searchTerm: state.searchTerm,
+    gardenDropdown: state.gardenDropdown
   };
 };
 
@@ -96,11 +140,23 @@ const mapDispatchToProps = (dispatch) => {
     dispatchSetGardenParameters(width, height, color) {
       dispatch(setGardenParameters(width, height, color));
     },
+    dispatchSetDropdown(dbDropdownOptions) {
+      dispatch(setDropdown(dbDropdownOptions));
+    },
     dispatchSetGarden(dbGardenGrid) {
       dispatch(setGarden(dbGardenGrid));
     },
     dispatchGetAllGardens(dbGardenGrids) {
       dispatch(getAllGardens(dbGardenGrids));
+    },
+    dispatchGetAllPlants(dbPlantGrids) {
+      dispatch(getAllPlants(dbPlantGrids));
+    },
+    dispatchGetGardenFromDropdown(gardenIndex) {
+      dispatch(getGardenFromDropdown(gardenIndex));
+    },
+    dispatchGetPlantsFromDropdown(gardenIndex) {
+      dispatch(getPlantsFromDropdown(gardenIndex));
     }
   };
 };

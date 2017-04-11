@@ -1,15 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Layer, Rect, Circle, Stage, Group} from 'react-konva';
+import { connect } from 'react-redux'
+import { addPlantToPlantGrid } from '../action';
 
+// import { togglePlant} from '../action'
 
 class Plant extends React.Component {
      constructor(...args) {
       super(...args);
-      this.state = {
-        color: 'red',
-        isDragging: false
-      };
+      // this.state = {
+      //   color: 'red',
+      //   isDragging: false
+      // };
       this.handleClick = this.handleClick.bind(this);
       this.dragBoundFunc = this.dragBoundFunc.bind(this);
       this.handleMouseDragStart = this.handleMouseDragStart.bind(this);
@@ -31,6 +34,7 @@ class Plant extends React.Component {
       var newY;
       var newY;
       var newX;
+      console.log("Pos in dragBoundFunc", pos);
 
       if(pos.y < 50){
         newY = 25;
@@ -56,10 +60,19 @@ class Plant extends React.Component {
         newX = pos.x;
       }
 
+      this.setState({
+        posX: newX,
+        posY: newY
+      })
+
+      console.log(this.state);
+
       return {
         x: newX,
         y: newY
       };
+
+
     }
 
     handleMouseDragStart(pos){
@@ -67,15 +80,25 @@ class Plant extends React.Component {
       this.setState({isDragging: true})
     }
 
-    handleMouseDragEnd(pos){
+   handleMouseDragEnd(pos){
       console.log("end dragging", "x: ", pos.evt.x, "y: ", pos.evt.y);
+
+
+      var plant =
+      {
+        x: this.state.posX,
+        y: this.state.posY,
+        color: this.props.color
+      };
+      this.props.dispatchAddPlantToPlantGrid(plant)
+      console.log("Drag end This.props", this.props)
     }
 
     render() {
         return (
             <Circle
-                x={0} y={0} width={50} height={50}
-                fill={this.state.color}
+                x={this.props.x} y={this.props.y} width={50} height={50}
+                fill={this.props.color}
                 stroke={'black'}
                 shadowBlur={10}
                 onClick={this.handleClick}
@@ -90,4 +113,27 @@ class Plant extends React.Component {
     }
 }
 
-export default Plant;
+
+const mapStateToProps = (state) => {
+  return {
+    // x: state.plantGrid[0].x,
+    // y: state.plantGrid[0].y,
+    // color: state.plantGrid[0].color
+    plantGrid: state.plantGrid
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+     dispatchAddPlantToPlantGrid (plant) {
+      dispatch(addPlantToPlantGrid(plant))
+    }
+  }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Plant);
+
+
+// exxxxxxxxxxxxxxxxxport default MySquare
+
+// export default Plant;

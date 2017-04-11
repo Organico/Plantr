@@ -60,7 +60,6 @@ class GardenCubeGridView extends ExampleBase {
     console.log("logging current dom element", this.stats.domElement)
     console.log("logging this.refs", this.refs)
     console.log("logging this.refs.container1", this.refs.container.children)
-lkjlkj
     const controls = new TrackballControls(camera, this.refs.container.children[1]);
 
     controls.rotateSpeed = 1.0;
