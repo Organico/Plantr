@@ -1,0 +1,20 @@
+// var userSchema = new mongoose.Schema({
+//   userId: {type: Number, unique: true},
+//   username: String,
+//   email: String,
+//   gardens: Array
+// });
+
+
+
+
+[
+  {
+    "user": {
+      "userId": "1",
+      "username": "Habibi123",
+      "email": "falafel@gmail.com",
+      "gardens": ["201"]
+    }
+  }
+]

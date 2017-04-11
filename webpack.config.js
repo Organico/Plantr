@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-  entry: './src/client.js',
+  entry: './src/client.js', //array of entry points.. webpack hot only, client.js
   devtool: 'eval',
   output: {
     path: path.join(__dirname, '/public'),
@@ -29,4 +29,5 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.json']
   }
+  //dev server
 };
