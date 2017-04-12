@@ -27,6 +27,7 @@ class AllCubes extends React.Component {
 
     const cubePositions = [];
     cubePositions.length = 4;
+    console.log("in AllCubes ============== thi", this.props.gardenGrid);
 
     cubePositions[0] = new THREE.Vector3(
       0,
@@ -49,6 +50,17 @@ class AllCubes extends React.Component {
       0,
       200
     );
+
+    var newCubePositions = []
+    for (var i=0; i < this.props.gardenGrid.length; i++){
+      newCubePositions[i] = new THREE.Vector3(
+        this.props.gardenGrid[i].x * 4,
+        0,
+        this.props.gardenGrid[i].y * 4
+        )
+    }
+
+    this.newCubePositions = newCubePositions
 
     const cubes = [];
     cubes.length = cubePositions.length;
@@ -136,7 +148,7 @@ class AllCubes extends React.Component {
     } = this.props;
 
     return (<group>
-      {this.cubePositions.map((cubePosition, index) => {
+      {this.newCubePositions.map((cubePosition, index) => {
         const onCreate = this._onCubeCreate.bind(this, index);
         return (<DraggableCube
           key={index}
