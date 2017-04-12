@@ -10,6 +10,7 @@ import AllCubes from './AllCubes';
 import Navigation from '../Navigation';
 import sizeMe from 'react-sizeme';
 
+import { connect } from 'react-redux'
 
 
 
@@ -267,6 +268,7 @@ class GardenCubeGridView extends ExampleBase {
             shadowMapHeight={2048}
           />
           <AllCubes
+            gardenGrid = {this.props.gardenGrid}
             mouseInput={mouseInput}
             camera={camera}
 
@@ -303,6 +305,22 @@ class GardenCubeGridView extends ExampleBase {
   }
 }
 
+
+const mapStateToProps = (state) => {
+  return {
+    gardenGrid: state.gardenGrid
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    // dispatchMovePiece (location) {
+    //   dispatch(movePiece(location))
+    // }
+  }
+};
+
+
 // export default GardenCubeGridView;
-export default sizeMe({ monitorHeight: true })(GardenCubeGridView);
+export default connect(mapStateToProps, mapDispatchToProps)(sizeMe({ monitorHeight: true })(GardenCubeGridView));
 
