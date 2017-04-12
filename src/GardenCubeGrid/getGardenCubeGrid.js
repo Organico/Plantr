@@ -8,6 +8,7 @@ import TrackballControls from '../trackball';
 import MouseInput from '../inputs/MouseInput';
 import AllCubes from './AllCubes';
 import Navigation from '../Navigation';
+import sizeMe from 'react-sizeme';
 
 
 
@@ -15,6 +16,9 @@ import Navigation from '../Navigation';
 class GardenCubeGridView extends ExampleBase {
   constructor(props, context) {
     super(props, context);
+
+    console.log("LOGGING ============", this.props);
+
 
     this.state = {
       cameraPosition: new THREE.Vector3(0, 0, 1000),
@@ -61,7 +65,7 @@ class GardenCubeGridView extends ExampleBase {
     console.log("logging this.refs", this.refs)
     console.log("logging this.refs.container1", this.refs.container.children[0])
 
-    const controls = new TrackballControls(camera, this.refs.container.children[0]);
+    const controls = new TrackballControls(camera);
 
     controls.rotateSpeed = 1.0;
     controls.zoomSpeed = 1.2;
@@ -113,7 +117,7 @@ class GardenCubeGridView extends ExampleBase {
     const {
       width,
       height,
-    } = this.props;
+    } = this.props.size;
 
     if (width !== newProps.width || height !== newProps.height) {
       mouseInput.containerResized();
@@ -173,7 +177,7 @@ class GardenCubeGridView extends ExampleBase {
     const {
       width,
       height,
-    } = this.props;
+    } = this.props.size;
 
     const {
       cameraPosition,
@@ -202,8 +206,8 @@ class GardenCubeGridView extends ExampleBase {
       style={style}
     >
       <React3
-        width={500}
-        height={500}
+        width={width}
+        height={600}
         antialias
         pixelRatio={window.devicePixelRatio}
         mainCamera="mainCamera"
@@ -235,7 +239,7 @@ class GardenCubeGridView extends ExampleBase {
         <scene ref="scene">
           <perspectiveCamera
             fov={70}
-            aspect={500 / 500}
+            aspect={width / 600}
             near={1}
             far={10000}
             name="mainCamera"
@@ -299,4 +303,6 @@ class GardenCubeGridView extends ExampleBase {
   }
 }
 
-export default GardenCubeGridView;
+// export default GardenCubeGridView;
+export default sizeMe({ monitorHeight: true })(GardenCubeGridView);
+

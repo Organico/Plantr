@@ -1,4 +1,5 @@
 import React from 'react';
+import sizeMe from 'react-sizeme';
 
 const { PropTypes } = React;
 
@@ -10,3 +11,4 @@ class ExampleBase extends React.Component {
 }
 
 export default ExampleBase;
+// export default sizeMe({ monitorHeight: true, refreshRate: 200 })(ExampleBase);

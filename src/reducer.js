@@ -73,8 +73,8 @@ const toggleSquare = (state, action) => {
   }
 
   var gardenCopy = state.gardenGrid.slice();
-
   gardenCopy[squareToToggleIndex].color = colorToToggleTo;
+
   const {gardenGrid} = state;
   const newState = {};
 
@@ -86,7 +86,6 @@ const toggleSquare = (state, action) => {
 }
 
 const setGardenParameters = (state, action) => {
-  console.log('(before) state: ', state);
   const newState = {};
 
   const {gardenGrid} = state;
@@ -96,24 +95,26 @@ const setGardenParameters = (state, action) => {
   for (var i = 1; i < action.height + 1; i++ ) {
     for (var j =1; j < action.width + 1; j++) {
       var squareCounter = "square" + idCounter;
-      // console.log("The square counter is: ", squareCounter);
-      // gardenGridArray.push({squareCounter: {'x': i * 50, 'y': j * 50, 'color': action.color}});
       gardenGridArray.push({'x': i * 50, 'y': j * 50, 'color': action.color});
       idCounter++;
     }
   }
   Object.assign(newState, state, {gardenGrid: gardenGridArray});
+  console.log('(before) state: ', state);
+  console.log('(after) state: ', newState);
   return newState;
 }
 
 
 const setGarden = (state, action) => {
-  console.log('(before) state: ', state);
 
   const newState = {};
   const {gardenGrid} = state;
 
   Object.assign(newState, state, {gardenGrid: action.dbGardenGrid});
+  console.log('(before) state: ', state);
+  console.log('(after) state: ', newState);
+
   return newState;
 }
 
@@ -124,8 +125,6 @@ const getAllGardens = (state, action) => {
   const newState = {};
   const {gardens} = state;
 
-  console.log("The gardens for this user are ", action.dbGardenGrids);
-
   Object.assign(newState, state, {gardens: action.dbGardenGrids});
   console.log('(before) state: ', state);
   console.log('(after) state: ', newState);
@@ -133,17 +132,13 @@ const getAllGardens = (state, action) => {
 }
 
 const getAllPlants = (state, action) => {
-  console.log('(before) state: ', state);
-
   const newState = {};
   const {plants} = state;
-
-  console.log("This is db plant grids at 0: ", action.dbPlantGrids);
-  console.log("DB plant grid x at 0 is ", action.dbPlantGrids.x);
 
   Object.assign(newState, state, {plants: action.dbPlantGrids});
   console.log('(before) state: ', state);
   console.log('(after) state: ', newState);
+
   return newState;
 }
 
@@ -154,16 +149,12 @@ const getGardenFromDropdown = (state, action) => {
   const { gardens } = state
 
   var newGardenGrid = gardens[action.gardenIndex];
-  // var newGardenGrid = state.gardens[action.gardenIndex];
-
-  console.log("Garden at gardens action.gardenIndex", newGardenGrid)
   const {gardenGrid} = state;
-
-  // console.log("The gardens for this user are ", action.dbGardenGrids);
 
   Object.assign(newState, state, {gardenGrid: newGardenGrid});
   console.log('(before) state: ', state);
   console.log('(after) state: ', newState);
+
   return newState;
 };
 
@@ -179,13 +170,12 @@ const getPlantsFromDropdown = (state, action) => {
   Object.assign(newState, state, {plantGrid: newPlantGrid});
   console.log('(before) state: ', state);
   console.log('(after) state: ', newState);
+
   return newState;
 };
 
 
 const setDropdown = (state, action) => {
-  console.log("set dropdown function reducer")
-  console.log("set dropdown function action: ", action);
 
   const newState = {};
   const {gardenDropdown} = state;
@@ -203,41 +193,26 @@ const userProfile = (state, action) => {
   console.log('(before) state: ', state);
   const newState = {};
   const {username, gardens} = state;
-  console.log("The gardens for this user are ", action.username);
   Object.assign(newState, state, {username: action.username, gardens: action.gardens});
   console.log('(before) state: ', state);
   console.log('(after) state: ', newState);
+
   return newState
 }
 
 const addPlantToPlantGrid = (state, action) => {
-  console.log("addingPlant to plant grid in reducer");
-  console.log('(before) state: ', state);
+
   const newState = {};
   const {plantGrid} = state;
 
-  console.log("action", action);
-  console.log("plantGrid before", Array.isArray(plantGrid));
-
   var newPlantGrid = plantGrid.slice();
-
   newPlantGrid.push(action.plant);
-
-  console.log("The new plantGrid is", newPlantGrid);
-
-
-  console.dir(plantGrid);
-  console.log("plantGrid type", typeof(plantGrid))
-  // var newPlantGrid = plantGrid.push(action.plant)
-  // var newPlantGrid = [action.plant];
-  console.log("plantGrid after", newPlantGrid);
-
 
   Object.assign(newState, state, {plantGrid: newPlantGrid});
   console.log('(before) state: ', state);
   console.log('(after) state: ', newState);
-  return newState
 
+  return newState
 }
 
 function reducer(state = initialState, action) {
