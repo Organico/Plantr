@@ -51,10 +51,3 @@ export function addPlantToPlantGrid(plant){
   console.log('action: addPlantToPlantGrid');
   return { type: 'ADD_PLANT_TO_PLANT_GRID', plant}
 }
-
-
-/*SET SEARCH TERM NOT FOUND*/
-export function setSearchTerm(searchTerm) {
-  console.log('action: SearchTerm called');
-  return { type: 'SET_SEARCH_TERM', searchTerm };
-}
