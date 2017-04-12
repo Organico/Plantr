@@ -4,7 +4,7 @@ import Navigation from './Navigation';
 export default class Layout extends React.Component {
   render(){
     return(
-  <body>
+  <div>
 
     <div className="blog-masthead">
       <div className="container">
@@ -124,7 +124,7 @@ export default class Layout extends React.Component {
         <a href="#">Back to top</a>
       </p>
     </footer>
-    </body>
+    </div>
     )
   }
 }

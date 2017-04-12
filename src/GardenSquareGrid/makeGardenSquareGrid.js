@@ -7,20 +7,13 @@ import MySquare from './MySquare.js';
 import Plant from './Plant.js';
 import {Layer, Rect, Circle, Stage, Group} from 'react-konva';
 import PlantShelf from './PlantShelf.js'
-
+import CostEstimate from './CostEstimate.js';
 import PlantGrid from './PlantGrid.js';
 import querystring from 'querystring'
+import MyRect from './MyRectangle.js'
 
 
 const MakeGardenSquareGridView = React.createClass({
-
- // querystring.stringify({
- //        gardenId: 10,
- //        userId: 10,
- //        gardenGrid: this.props.gardenGrid,
- //        plantGrid: this.props.plantGrid
- //     })
-
 
   saveGarden() {
     console.log("Saving garden...")
@@ -44,10 +37,13 @@ const MakeGardenSquareGridView = React.createClass({
     let width;
     let height;
     let color;
+    let center = {
+      textAlign: "center"
+    };
 
     return (
-        <div className="text-center">
-          <h1> Garden Square Grid </h1>
+        <div className="row" style={center}>
+          <h1>Create a Garden</h1>
             <input ref={(node) => width = node } type="number" name="width" placeholder='Feet [width] is your garden?'/>
             <input ref={(node) => height = node } type="number" name="height" placeholder='Feet [height] is your garden?'/>
               <button className="btn btn-primary btn-sm" onClick={() => {
@@ -58,17 +54,21 @@ const MakeGardenSquareGridView = React.createClass({
                   this.saveGarden();
                        }} type="submit">Submit Garden
             </button>
-
-          <div >
-            <Stage id="cat" width={500} height={500} fill="white" stroke="black" className="text-center">
+            <br></br><br></br>
+          <div className="col-xs-5 col-xs-offset-1">
+            <h2>Your new Garden!</h2>
+            <Stage id="cat" width={600} height={600} fill="white" stroke="black" className="text-center">
               <GardenGrid />
               <PlantGrid />
-
               <Layer>
                 <PlantShelf />
+                <MyRect />
               </Layer>
             </Stage>
           </div>
+        <div className="col-xs-6">
+          <CostEstimate />
+        </div>
         </div>
     );
   }

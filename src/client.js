@@ -35,7 +35,7 @@ const App = React.createClass({
               <div>
                 <Navigation />
 
-                <Route exact path="/" component={Navigation}></Route>
+                <Route exact path="/" component={Layout}></Route>
                 <Route path="/test" component={Test}></Route>
                 <Route path="/layout" component={Layout}></Route>
                 <Route path="/cubes" component={GardenCubeGridView}></Route>

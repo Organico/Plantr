@@ -9,36 +9,36 @@ const initialState = {
       {
         'x':0,
         'y':0,
-        'color': 'brown'
+        'color': 'green'
       }
   ],
   plantGrid: [
       {
-        'x':20,
-        'y':20,
-        'color': 'blue'
+        'x': 25,
+        'y': 25,
+        'color': 'red'
       }
   ],
 
   plantShelf: [
     {
-      'x':230,
-      'y':300,
+      'x':200,
+      'y':400,
       'color': 'yellow'
     },
     {
-      'x':230,
-      'y':360,
+      'x':250,
+      'y':400,
       'color': 'black'
     },
     {
-      'x':230,
-      'y':420,
+      'x':300,
+      'y':400,
       'color': 'green'
     },
     {
-      'x':230,
-      'y':480,
+      'x':350,
+      'y':400,
       'color': 'green'
     }
   ],

@@ -5,7 +5,7 @@ export function setSearchTerm(searchTerm) {
 export function setGardenParameters(width, height, color){
   console.log('action: SET_GARDEN_PARAMETERS called');
 
-  return {type: 'SET_GARDEN_PARAMETERS', width, height, color}
+  return {type: 'SET_GARDEN_PARAMETERS', width, height, color};
 }
 
 export function setGarden(dbGardenGrid){
@@ -36,7 +36,6 @@ export function getAllPlants(dbPlantGrids){
 
   return {type: 'GET_ALL_PLANTS', dbPlantGrids};
 }
-
 
 export function setUserParameters(username, gardens){
   console.log('action: SET_USER_PARAMETERS called');
