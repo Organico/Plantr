@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { setWidth, setHeight, setGardenParameters, setGarden } from '../action';
+import { setWidth, setHeight, setGardenParameters, setGarden } from '../Actions/GardenActions.js';
 import axios from 'axios';
 import GardenGrid from './GardenGrid.js';
 import MySquare from './MySquare.js';

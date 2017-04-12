@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Layer, Rect, Circle, Stage, Group} from 'react-konva';
 import { connect } from 'react-redux'
-import { addPlantToPlantGrid } from '../action';
+import { addPlantToPlantGrid } from '../Actions/GardenActions.js';
 
 // import { togglePlant} from '../action'
 
