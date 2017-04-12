@@ -1,8 +1,8 @@
 
 import React, { Component, PropTypes } from 'react';
 import {Layer, Rect, Stage} from 'react-konva';
-import { connect } from 'react-redux'
-import { toggleSquare} from '../action'
+import { connect } from 'react-redux';
+import { toggleSquare} from '../Actions/GardenActions.js';
 
 
 const MySquare = React.createClass({
