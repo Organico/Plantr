@@ -1,7 +1,26 @@
+const makeImage = function(urlsrc) {
+  var newImage = new Image();
+  newImage.src = urlsrc;
+  return newImage;
+};
+
+console.log(makeImage('https://c1.staticflickr.com/3/2909/33168957064_a7ef238410_o.png'));
 const initialGardenState = {
   //garden state
   location: [0, 2],
   isDragging: false,
+  tooltipOpen: false,
+
+  gardenStats: {
+    'Estimated Cost': 0,
+    'Number of Vegetables': 0,
+    'Number of Fruits': 0,
+    'Estimated Daily Water Consumption': 0,
+    'Current Garden Square Footage': 0,
+    'Peak Harvest Time': "Month",
+    'Harvest Times': [{}],
+    'Temperature ranges': []
+  },
 
   gardenGrid: [
       {
@@ -14,7 +33,8 @@ const initialGardenState = {
       {
         'x': 25,
         'y': 25,
-        'color': 'red',
+        'img': makeImage('https://c1.staticflickr.com/3/2909/33168957064_a7ef238410_o.png'),
+        'isDraggable': false
       }
   ],
 
@@ -22,22 +42,44 @@ const initialGardenState = {
     {
       'x':200,
       'y':400,
-      'color': 'yellow'
+      'img': makeImage('https://c1.staticflickr.com/3/2909/33168957064_a7ef238410_o.png'),
+      'isDraggable': true,
     },
     {
       'x':250,
       'y':400,
-      'color': 'black'
+      'img': makeImage('https://c1.staticflickr.com/3/2844/33627640530_f866a32b60_o.png'),
+      'isDraggable': true
     },
     {
       'x':300,
       'y':400,
-      'color': 'green'
+      'img': makeImage('https://c1.staticflickr.com/3/2899/33972285536_46e0dbdb99_o.png'),
+      'isDraggable': true
     },
     {
       'x':350,
       'y':400,
-      'color': 'green'
+      'img': makeImage('https://c1.staticflickr.com/3/2939/33200675713_ea06c54442_o.png'),
+      'isDraggable': true
+    },
+    {
+      'x':400,
+      'y':400,
+      'img': makeImage('https://c1.staticflickr.com/3/2884/33883916601_9c04b38e73_o.png'),
+      'isDraggable': true
+    },
+    {
+      'x':450,
+      'y':400,
+      'img': makeImage('https://c1.staticflickr.com/3/2810/33856016232_8ed446a91d_o.png'),
+      'isDraggable': true
+    },
+    {
+      'x':500,
+      'y':400,
+      'img': makeImage('https://c2.staticflickr.com/4/3954/33856016382_0778302b97_o.png'),
+      'isDraggable': true
     }
   ],
   gardens: [],
@@ -101,21 +143,9 @@ const setGardenParameters = (state, action) => {
   return newState;
 }
 
-
-// const setGarden = (state, action) => {
-
-//   const newState = {};
-//   const {gardenGrid} = state;
-
-//   Object.assign(newState, state, {gardenGrid: action.dbGardenGrid});
-//   console.log('(before) state: ', state);
-//   console.log('(after) state: ', newState);
-
-//   return newState;
-// }
-
-
 const getAllGardens = (state, action) => {
+  console.log(makeImage('https://c1.staticflickr.com/3/2909/33168957064_a7ef238410_o.png'));
+
   console.log('(before) state: ', state);
 
   const newState = {};
@@ -221,6 +251,15 @@ const addPlantToPlantGrid = (state, action) => {
   return newState
 }
 
+const setTooltip = (state, action) => {
+  var newTooltip = !state.tooltipOpen;
+
+  Object.assign(newState, state, {tooltipOpen: newTooltip});
+
+  console.log('(before) state: ', state);
+  console.log('(after) state: ', newState);
+  return newState;
+};
 
 function gardenReducer(state = initialGardenState, action) {
   console.log('GardenReducer.js - Reducer called');
@@ -230,8 +269,8 @@ function gardenReducer(state = initialGardenState, action) {
     return toggleSquare(state, action);
   case 'SET_GARDEN_PARAMETERS':
     return setGardenParameters(state, action);
-  // case 'SET_GARDEN':
-  //   return setGarden(state, action);
+  case 'SET_TOOLTIP':
+    return setTooltip(state, action);
   case 'SET_DROPDOWN_OPTIONS':
     return setDropdown(state, action);
   case 'GET_ALL_GARDENS':
@@ -250,5 +289,7 @@ function gardenReducer(state = initialGardenState, action) {
     return state;
   }
 }
+
+
 
 export default gardenReducer;

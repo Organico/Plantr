@@ -4,24 +4,25 @@ import {Layer, Rect, Circle, Stage, Group} from 'react-konva';
 import { connect } from 'react-redux'
 import { addPlantToPlantGrid } from '../Actions/GardenActions.js';
 
+
+
 // import { togglePlant} from '../action'
 
 class Plant extends React.Component {
      constructor(...args) {
       super(...args);
-      // this.state = {
-      //   color: 'red',
-      //   isDragging: false
-      // };
+
+
       this.handleClick = this.handleClick.bind(this);
       this.dragBoundFunc = this.dragBoundFunc.bind(this);
       this.handleMouseDragStart = this.handleMouseDragStart.bind(this);
       this.handleMouseDragEnd = this.handleMouseDragEnd.bind(this);
+
     }
     handleClick() {
       this.setState({
         color: Konva.Util.getRandomColor(),
-        isDragging: true
+        isDragging: this.props.isDragging
       });
     }
     handleMouseOver(){
@@ -30,6 +31,7 @@ class Plant extends React.Component {
     handleMouseOut(){
       document.body.style.cursor = 'default';
     }
+
     dragBoundFunc(pos) {
       var newY;
       var newY;
@@ -88,40 +90,47 @@ class Plant extends React.Component {
       {
         x: this.state.posX,
         y: this.state.posY,
-        color: this.props.color
+        img: this.props.img,
+        isDraggable: false
       };
+
+
       this.props.dispatchAddPlantToPlantGrid(plant)
       console.log("Drag end This.props", this.props)
     }
 
     render() {
+      let image = this.props.plantGrid[0].img;
+
+      let xOffset = (-1*this.props.x);
+      let yOffset = this.props.y;
         return (
             <Circle
                 x={this.props.x} y={this.props.y} width={50} height={50}
-                fill={this.props.color}
+                fillPatternImage={this.props.img}
+                fillPatternOffset= {{ x: 25, y: 25}}
                 stroke={'black'}
                 shadowBlur={10}
                 onClick={this.handleClick}
                 onMouseOver={this.handleMouseOver}
                 onMouseOut={this.handleMouseOut}
-                draggable={true}
+                draggable={this.props.isDraggable}
                 dragBoundFunc={this.dragBoundFunc}
                 onDragStart={this.handleMouseDragStart}
                 onDragEnd={this.handleMouseDragEnd}
             />
+
         );
+
     }
 }
 
 
 const mapStateToProps = (state) => {
   return {
-    // x: state.plantGrid[0].x,
-    // y: state.plantGrid[0].y,
-    // color: state.plantGrid[0].color
     plantGrid: state.gardenReducer.plantGrid
-  }
-}
+  };
+};
 
 const mapDispatchToProps = (dispatch) => {
   return {

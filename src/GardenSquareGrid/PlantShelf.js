@@ -10,20 +10,14 @@ import MyRect from './MyRectangle'
 class PlantShelf extends React.Component {
      constructor(...args) {
       super(...args);
-      // this.state = {
-      //   color: 'red',
-      //   isDragging: false
-      // };
+
       this.handleClick = this.handleClick.bind(this);
       this.dragBoundFunc = this.dragBoundFunc.bind(this);
       this.handleMouseDragStart = this.handleMouseDragStart.bind(this);
       this.handleMouseDragEnd = this.handleMouseDragEnd.bind(this);
     }
     handleClick() {
-      // this.setState({
-      //   color: Konva.Util.getRandomColor(),
-      //   isDragging: true
-      // });
+
       console.log("click!")
     }
     handleMouseOver(){
@@ -79,6 +73,7 @@ class PlantShelf extends React.Component {
     }
 
     render() {
+        console.log("The plant shelf is", this.props.plantShelf);
         return (
           <Group>
             <MyRect />
@@ -87,7 +82,8 @@ class PlantShelf extends React.Component {
                 key={i}
                 x={plantShelfPlant.x}
                 y={plantShelfPlant.y}
-                color={plantShelfPlant.color}
+                img={plantShelfPlant.img}
+                isDraggable={plantShelfPlant.isDraggable}
               />
             )}
           </Group>
@@ -107,7 +103,7 @@ const mapDispatchToProps = (dispatch) => {
     dispatchAddPlantToPlantGrid (plant) {
       dispatch(addPlantToPlantGrid(plant))
     }
-  }
+  };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(PlantShelf)

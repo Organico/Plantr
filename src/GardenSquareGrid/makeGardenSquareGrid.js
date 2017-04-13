@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { setWidth, setHeight, setGardenParameters, setGarden } from '../Actions/GardenActions.js';
+import { setWidth, setHeight, setGardenParameters, setGarden, setTooltip} from '../Actions/GardenActions.js';
 import axios from 'axios';
 import GardenGrid from './GardenGrid.js';
 import MySquare from './MySquare.js';
@@ -11,6 +11,7 @@ import CostEstimate from './CostEstimate.js';
 import PlantGrid from './PlantGrid.js';
 import querystring from 'querystring'
 import MyRect from './MyRectangle.js'
+
 
 
 const MakeGardenSquareGridView = React.createClass({
@@ -32,6 +33,12 @@ const MakeGardenSquareGridView = React.createClass({
     });
   },
 
+  toggleTip(misc){
+       console.log("toggleTip called!")
+    this.props.dispatchSetTooltip(misc);
+  },
+
+
   render () {
     let input;
     let width;
@@ -41,9 +48,12 @@ const MakeGardenSquareGridView = React.createClass({
       textAlign: "center"
     };
 
+
+
+
     return (
-        <div className="row" style={center}>
-          <h1>Create a Garden</h1>
+      <div style={center}>
+      <h1>Create a Garden</h1>
             <input ref={(node) => width = node } type="number" name="width" placeholder='Feet [width] is your garden?'/>
             <input ref={(node) => height = node } type="number" name="height" placeholder='Feet [height] is your garden?'/>
               <button className="btn btn-primary btn-sm" onClick={() => {
@@ -55,18 +65,21 @@ const MakeGardenSquareGridView = React.createClass({
                        }} type="submit">Submit Garden
             </button>
             <br></br><br></br>
-          <div className="col-xs-5 col-xs-offset-1">
-            <h2>Your new Garden!</h2>
+        <div className="row" style={center}>
+        <div className="col-1"></div>
+          <div className="col-5">
             <Stage id="cat" width={600} height={600} fill="white" stroke="black" className="text-center">
               <GardenGrid />
               <PlantGrid />
               <Layer>
                 <PlantShelf />
+                <MyRect />
               </Layer>
             </Stage>
           </div>
-        <div className="col-xs-6">
+        <div className="col-6">
           <CostEstimate />
+        </div>
         </div>
         </div>
     );
@@ -76,7 +89,8 @@ const MakeGardenSquareGridView = React.createClass({
 const mapStateToProps = (state) => {
   return {
     gardenGrid: state.gardenReducer.gardenGrid,
-    plantGrid: state.gardenReducer.plantGrid
+    plantGrid: state.gardenReducer.plantGrid,
+    tooltipOpen: state.gardenReducer.tooltipOpen
   };
 };
 
@@ -88,6 +102,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     dispatchSetGarden(dbGardenGrid) {
       dispatch(setGarden(dbGardenGrid));
+    },
+    dispatchSetTooltip(misc){
+      dispatch(setTooltip);
     }
   };
 };

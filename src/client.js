@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Home from './Home/Home.js';
 import '../public/style.css';
 import axios from 'axios';
 // import Plant from './Plant';

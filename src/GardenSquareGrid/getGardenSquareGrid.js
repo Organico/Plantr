@@ -5,23 +5,45 @@ import axios from 'axios';
 import GardenGrid from './GardenGrid.js';
 import MySquare from './MySquare.js';
 import {Layer, Rect, Circle, Stage, Group} from 'react-konva';
-import Dropdown from "react-bootstrap-dropdown";
+import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import PlantGrid from './PlantGrid.js';
 import Plant from './Plant.js';
 
 
-const GardenSquareGridView = React.createClass({
+class GardenSquareGridView extends React.Component {
+  constructor(props) {
+    super(props);
 
-  componentDidMount () {
-    // this.props.dispatchGetAllGardens()
-  },
+    this.toggle = this.toggle.bind(this);
+    this.state = {
+      dropdownOpen: false
+    };
+  }
 
-  select(item){
-    var gardenIndex = item.value
+  toggle() {
+    this.setState({
+      dropdownOpen: !this.state.dropdownOpen
+    });
+  }
+
+
+
+
+  onChange(e) {
+    this.setState({
+      value: e.target.value
+    });
+
+    var gardenIndex = e.target.value;
     console.log("About to go to the action. Garden index is: ", gardenIndex);
     this.props.dispatchGetGardenFromDropdown(gardenIndex);
     this.props.dispatchGetPlantsFromDropdown(gardenIndex);
-  },
+  }
+
+
+  componentDidMount () {
+    // this.props.dispatchGetAllGardens()
+  }
 
   getAllGardens() {
    axios.get('/api/gardens').then((res) => {
@@ -45,12 +67,6 @@ const GardenSquareGridView = React.createClass({
               dbDropdownOptions.push(dropDownObject);
             }
 
-            // console.log("Res ", res);
-            // console.log("Res.data ", dbGardenGrids);
-
-            // console.log("Db garden grids in getAllGardens: ", dbGardenGrids)
-            // console.log("Db garden grids in getAllPlants: ", dbPlantGrids)
-
             this.props.dispatchGetAllGardens(dbGardenGrids);
             this.props.dispatchGetAllPlants(dbPlantGrids);
             this.props.dispatchSetDropdown(dbDropdownOptions);
@@ -59,7 +75,7 @@ const GardenSquareGridView = React.createClass({
             console.error(err);
             console.log("Error in getGardenSquareGrid getAllGardens()")
           });
-  },
+  }
 
 
 
@@ -68,8 +84,8 @@ const GardenSquareGridView = React.createClass({
 
     this.props.dispatchSetGarden(dbGardenGrid);
 
-    return //array of {}
-  },
+    return//array of {}
+  }
 
   render () {
 
@@ -77,31 +93,20 @@ const GardenSquareGridView = React.createClass({
     let width;
     let height;
     let color;
-    let demo1 = [
-  {
-    text: "Action",
-    value: "0"
-  },
-  {
-    text: "Another action",
-    value: "1"
-  },
-  {
-    text: "Something else here",
-    value: "2"
-  },
-  {
-    text: "Separated link",
-    value: "3"
-  },
-];
+    let options = [];
 
     return (
-        <div className="text-center">
-           <Dropdown
-            title="MyDropdown"
-            items={this.props.gardenDropdown}
-            onSelect={this.select} />
+    <div className="text-center">
+      <form>
+        <label htmlFor="select1" >Select From Your Gardens</label>
+        <select value={this.state.value} onChange={this.onChange.bind(this)} className="form-control">
+          {this.props.gardenDropdown.map((dropdownOption, i) =>
+            <option key={i} value={dropdownOption.value}>{dropdownOption.text}</option>)
+          }
+        </select>
+      </form>
+
+
           <h1> Garden Square Grid </h1>
             <input ref={(node) => width = node } type="number" name="width" placeholder='Feet [width] is your garden?'/>
             <input ref={(node) => height = node } type="number" name="height" placeholder='Feet [height] is your garden?'/>
@@ -125,7 +130,7 @@ const GardenSquareGridView = React.createClass({
         </div>
     );
   }
-});
+}
 
 const mapStateToProps = (state) => {
   return {
