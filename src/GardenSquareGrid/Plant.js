@@ -27,6 +27,7 @@ class Plant extends React.Component {
     }
     handleMouseOver(){
       document.body.style.cursor = 'pointer';
+
     }
     handleMouseOut(){
       document.body.style.cursor = 'default';
