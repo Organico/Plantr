@@ -13,7 +13,7 @@ class MyCube extends React.Component {
     super(props, context);
     console.log("MYCUBE HASE BEEN CREATED");
 
-    this.cameraPosition = new THREE.Vector3(0, 0, 5);
+    this.cameraPosition = new THREE.Vector3(0, 10, 15);
 
     // construct the position vector here, because if we use 'new' within render,
     // React will think that things have changed when they have not.
@@ -64,7 +64,11 @@ class MyCube extends React.Component {
           far={1000}
 
           position={this.cameraPosition}
+          lookAt={ new THREE.Vector3(0,0,0)}
+
         />
+        <directionalLight color={0x404040} intensity={4} position={this.cameraPosition} />
+        <gridHelper size={1000} divisions={10} />
         <mesh
           rotation={this.state.cubeRotation}
         >

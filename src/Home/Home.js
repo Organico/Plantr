@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 // import axios from 'axios';
 import NewsFeed from './NewsFeed';
 
-class Home extends Component {
+class Home extends React.Component {
 
  render() {
 
