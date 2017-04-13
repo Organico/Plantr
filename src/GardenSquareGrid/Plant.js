@@ -22,7 +22,7 @@ class Plant extends React.Component {
     handleClick() {
       this.setState({
         color: Konva.Util.getRandomColor(),
-        isDragging: true
+        isDragging: this.props.isDragging
       });
     }
     handleMouseOver(){
@@ -89,7 +89,8 @@ class Plant extends React.Component {
       {
         x: this.state.posX,
         y: this.state.posY,
-        img: this.props.img
+        img: this.props.img,
+        isDraggable: false
       };
 
 
@@ -113,7 +114,7 @@ class Plant extends React.Component {
                 onClick={this.handleClick}
                 onMouseOver={this.handleMouseOver}
                 onMouseOut={this.handleMouseOut}
-                draggable={true}
+                draggable={this.props.isDraggable}
                 dragBoundFunc={this.dragBoundFunc}
                 onDragStart={this.handleMouseDragStart}
                 onDragEnd={this.handleMouseDragEnd}

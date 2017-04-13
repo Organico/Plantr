@@ -22,7 +22,8 @@ const initialGardenState = {
       {
         'x': 25,
         'y': 25,
-        'img': makeImage('https://c1.staticflickr.com/3/2909/33168957064_a7ef238410_o.png')
+        'img': makeImage('https://c1.staticflickr.com/3/2909/33168957064_a7ef238410_o.png'),
+        'isDraggable': false
       }
   ],
 
@@ -30,22 +31,26 @@ const initialGardenState = {
     {
       'x':200,
       'y':400,
-      'img': makeImage('https://c1.staticflickr.com/3/2909/33168957064_a7ef238410_o.png')
+      'img': makeImage('https://c1.staticflickr.com/3/2909/33168957064_a7ef238410_o.png'),
+      'isDraggable': true,
     },
     {
       'x':250,
       'y':400,
-      'img': makeImage('https://c1.staticflickr.com/3/2909/33168957064_a7ef238410_o.png')
+      'img': makeImage('https://c1.staticflickr.com/3/2909/33168957064_a7ef238410_o.png'),
+      'isDraggable': true
     },
     {
       'x':300,
       'y':400,
-      'img': makeImage('https://c1.staticflickr.com/3/2816/33626469550_d88657d522_o.jpg')
+      'img': makeImage('https://c1.staticflickr.com/3/2816/33626469550_d88657d522_o.jpg'),
+      'isDraggable': true
     },
     {
       'x':350,
       'y':400,
-      'img': makeImage('https://c1.staticflickr.com/3/2909/33168957064_a7ef238410_o.png')
+      'img': makeImage('https://c1.staticflickr.com/3/2909/33168957064_a7ef238410_o.png'),
+      'isDraggable': true
     }
   ],
   gardens: [],

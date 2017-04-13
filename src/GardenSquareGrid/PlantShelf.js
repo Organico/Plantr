@@ -89,6 +89,7 @@ class PlantShelf extends React.Component {
                 x={plantShelfPlant.x}
                 y={plantShelfPlant.y}
                 img={plantShelfPlant.img}
+                isDraggable={plantShelfPlant.isDraggable}
               />
             )}
           </Group>
