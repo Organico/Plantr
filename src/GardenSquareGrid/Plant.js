@@ -5,19 +5,19 @@ import { connect } from 'react-redux'
 import { addPlantToPlantGrid } from '../Actions/GardenActions.js';
 
 
+
 // import { togglePlant} from '../action'
 
 class Plant extends React.Component {
      constructor(...args) {
       super(...args);
-      // this.state = {
-      //   color: 'red',
-      //   isDragging: false
-      // };
+
+
       this.handleClick = this.handleClick.bind(this);
       this.dragBoundFunc = this.dragBoundFunc.bind(this);
       this.handleMouseDragStart = this.handleMouseDragStart.bind(this);
       this.handleMouseDragEnd = this.handleMouseDragEnd.bind(this);
+
     }
     handleClick() {
       this.setState({
@@ -31,6 +31,7 @@ class Plant extends React.Component {
     handleMouseOut(){
       document.body.style.cursor = 'default';
     }
+
     dragBoundFunc(pos) {
       var newY;
       var newY;
@@ -103,7 +104,6 @@ class Plant extends React.Component {
 
       let xOffset = (-1*this.props.x);
       let yOffset = this.props.y;
-      console.log(this.props.plantGrid.img);
         return (
             <Circle
                 x={this.props.x} y={this.props.y} width={50} height={50}
@@ -119,19 +119,18 @@ class Plant extends React.Component {
                 onDragStart={this.handleMouseDragStart}
                 onDragEnd={this.handleMouseDragEnd}
             />
+
         );
+
     }
 }
 
 
 const mapStateToProps = (state) => {
   return {
-    // x: state.plantGrid[0].x,
-    // y: state.plantGrid[0].y,
-    // color: state.plantGrid[0].color
     plantGrid: state.gardenReducer.plantGrid
-  }
-}
+  };
+};
 
 const mapDispatchToProps = (dispatch) => {
   return {

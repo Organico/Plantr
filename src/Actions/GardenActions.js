@@ -51,3 +51,10 @@ export function addPlantToPlantGrid(plant){
   console.log('action: addPlantToPlantGrid');
   return { type: 'ADD_PLANT_TO_PLANT_GRID', plant}
 }
+
+/*TOOL TIP*/
+
+export function setTooltip(misc) {
+  console.log('action: setTooltip');
+  return { type: 'SET_TOOLTIP', misc};
+}
