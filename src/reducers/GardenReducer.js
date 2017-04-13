@@ -1,7 +1,5 @@
 const initialGardenState = {
   //garden state
-  searchTerm: '',
-  todos: [],
   location: [0, 2],
   isDragging: false,
 
@@ -16,7 +14,7 @@ const initialGardenState = {
       {
         'x': 25,
         'y': 25,
-        'color': 'red'
+        'color': 'red',
       }
   ],
 
@@ -80,6 +78,8 @@ const toggleSquare = (state, action) => {
   return newState;
 }
 
+
+
 /*GARDEN*/
 const setGardenParameters = (state, action) => {
   const newState = {};
@@ -102,17 +102,17 @@ const setGardenParameters = (state, action) => {
 }
 
 
-const setGarden = (state, action) => {
+// const setGarden = (state, action) => {
 
-  const newState = {};
-  const {gardenGrid} = state;
+//   const newState = {};
+//   const {gardenGrid} = state;
 
-  Object.assign(newState, state, {gardenGrid: action.dbGardenGrid});
-  console.log('(before) state: ', state);
-  console.log('(after) state: ', newState);
+//   Object.assign(newState, state, {gardenGrid: action.dbGardenGrid});
+//   console.log('(before) state: ', state);
+//   console.log('(after) state: ', newState);
 
-  return newState;
-}
+//   return newState;
+// }
 
 
 const getAllGardens = (state, action) => {
@@ -189,11 +189,30 @@ const getPlantsFromDropdown = (state, action) => {
 
 const addPlantToPlantGrid = (state, action) => {
 
+  var plantToMove;
+  var plantToMoveIndex;
   const newState = {};
   const {plantGrid} = state;
-
   var newPlantGrid = plantGrid.slice();
-  newPlantGrid.push(action.plant);
+
+
+  for(var i = 0; i < state.plantGrid.length; i++){
+    var individualPlant = state.plantGrid[i];
+    if(individualPlant.x === action.plant.x && individualPlant.y === action.plant.y){
+      plantToMove = individualPlant
+      plantToMoveIndex = i
+    }
+  }
+
+  if(!plantToMoveIndex){
+    console.log("in normal if statement statement")
+
+    newPlantGrid.push(action.plant);
+  } else {
+    console.log("in else statement")
+    newPlantGrid[plantToMoveIndex].x = action.plant.x
+    newPlantGrid[plantToMoveIndex].y = action.plant.y
+  }
 
   Object.assign(newState, state, {plantGrid: newPlantGrid});
   console.log('(before) state: ', state);
@@ -211,8 +230,8 @@ function gardenReducer(state = initialGardenState, action) {
     return toggleSquare(state, action);
   case 'SET_GARDEN_PARAMETERS':
     return setGardenParameters(state, action);
-  case 'SET_GARDEN':
-    return setGarden(state, action);
+  // case 'SET_GARDEN':
+  //   return setGarden(state, action);
   case 'SET_DROPDOWN_OPTIONS':
     return setDropdown(state, action);
   case 'GET_ALL_GARDENS':

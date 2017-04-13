@@ -6,7 +6,6 @@ import axios from 'axios';
 // import Plant from './Plant';
 import store from './store';
 import {Provider} from 'react-redux';
-import { addTodo } from './action';
 import {Layer, Rect, Circle, Stage, Group} from 'react-konva';
 import Login from './Login.js';
 import AuthService from './config/AuthService.js';

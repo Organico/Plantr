@@ -129,7 +129,6 @@ const GardenSquareGridView = React.createClass({
 
 const mapStateToProps = (state) => {
   return {
-    searchTerm: state.gardenReducer.searchTerm,
     gardenDropdown: state.gardenReducer.gardenDropdown
   };
 };

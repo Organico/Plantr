@@ -62,7 +62,6 @@ const MakeGardenSquareGridView = React.createClass({
               <PlantGrid />
               <Layer>
                 <PlantShelf />
-                <MyRect />
               </Layer>
             </Stage>
           </div>
