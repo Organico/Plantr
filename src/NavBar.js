@@ -30,7 +30,7 @@ export default class NavBar extends React.Component {
                 <NavLink href="#creategarden">Create 2D Gardens</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="#test">Test</NavLink>
+                <NavLink href="#home">Home</NavLink>
               </NavItem>
               <NavItem>
                 <NavLink href="#profile">My Profile</NavLink>

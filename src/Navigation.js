@@ -10,7 +10,7 @@ const Navigation = ({ id, location, logout }) =>
         <Menu.Item as={Link} to="/cubes" color="green" name="cubes" active={location === '/cubes'} />
         <Menu.Item as={Link} to="/squares" color="green" name="My 2D Gardens" active={location === '/squares'} />
         <Menu.Item as={Link} to="/creategarden" color="green" name="Create 2D Garden" active={location === '/creategarden'} />
-        <Menu.Item as={Link} to="/test" color="green" name="test" active={location === '/test'} />
+        <Menu.Item as={Link} to="/home" color="green" name="test" active={location === '/home'} />
         <Menu.Item as={Link} to="/layout" name="Layout" color="green" active={location === '/layout'} />
         <Menu.Item as={Link} to="/profile" name="profile" color="green" active={location === '/profile'} />
       </Menu>
@@ -22,7 +22,7 @@ const Navigation = ({ id, location, logout }) =>
       <li className="navBarLi"><a className="active" href="#layout">Layout</a></li>
       <li className="navBarLi"><a href="#squares">My 2D Gardens</a></li>
       <li className="navBarLi"><a href="#creategarden">Create 2D Gardens</a></li>
-      <li className="navBarLi"><a href="#test">Test</a></li>
+      <li className="navBarLi"><a href="#home">Home</a></li>
       <li className="navBarLi"><a href="#profile">Profile</a></li>
     </ul>
   </div>
