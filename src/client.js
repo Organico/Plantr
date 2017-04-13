@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import '../public/style.css';
 import axios from 'axios';
-// import Plant from './Plant';
+import Home from './Home/Home'
 import store from './store';
 import {Provider} from 'react-redux';
 import {Layer, Rect, Circle, Stage, Group} from 'react-konva';
