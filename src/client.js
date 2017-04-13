@@ -18,10 +18,10 @@ import {
 import GardenSquareGridView from './GardenSquareGrid/getGardenSquareGrid';
 import MakeGardenSquareGridView from './GardenSquareGrid/makeGardenSquareGrid';
 import GardenCubeGridView from './GardenCubeGrid/getGardenCubeGrid';
-import Layout from './Layout'
-import Test from './Test'
+import Layout from './Layout';
+import Test from './Test';
 import Navigation from './Navigation';
-// import UserProfile from './UserProfile';
+import Profile from './Profile';
 // <Route path="/userprofile" component={UserProfile}></Route>
 
 
@@ -41,6 +41,7 @@ const App = React.createClass({
                 <Route path="/cubes" component={GardenCubeGridView}></Route>
                 <Route path="/squares" component={GardenSquareGridView}></Route>
                 <Route path="/creategarden" component={MakeGardenSquareGridView}></Route>
+                <Route path="/profile" component={Profile}></Route>
 
 
               </div>
