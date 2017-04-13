@@ -10,8 +10,17 @@ const Navigation = ({ id, location, logout }) =>
       <Menu.Item as={Link} to="/creategarden" color="green" name="Create 2D Garden" active={location === '/creategarden'} />
       <Menu.Item as={Link} to="/test" color="green" name="test" active={location === '/test'} />
       <Menu.Item as={Link} to="/layout" name="Layout" color="green" active={location === '/layout'} />
-      <Menu.Item as={Link} to="/userprofile" name="profile" color="green" active={location === '/userprofile'} />
+      <Menu.Item as={Link} to="/profile" name="profile" color="green" active={location === '/profile'} />
     </Menu>
+
+
+    <ul className="navBar">
+      <li className="navBarLi"><a className="active" href="#cubes">Cubes</a></li>
+      <li className="navBarLi"><a href="#squares">Squares</a></li>
+      <li className="navBarLi"><a href="#test">Test</a></li>
+      <li className="navBarLi"><a href="#layout">Layout</a></li>
+      <li className="navBarLi"><a href="#profile">Profile</a></li>
+    </ul>
   </Segment>;
 
 export default Navigation;
