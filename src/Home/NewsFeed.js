@@ -1,16 +1,20 @@
-import React from 'react';
+import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux'
 
+// const NewsFeed = (props) => {
 
 class NewsFeed extends React.Component {
-  render() {
-    let pos = {
-      marginLeft: '1000px'
-    }
 
-    let maxHeight = {
-      height: '300px'
-    }
-    return(
+  render(){
+  let pos = {
+    marginLeft: '1000px'
+  }
+
+  let maxHeight = {
+    height: '300px'
+  }
+
+    return (
         <div className="card col-xs-5" style={pos}>
             <div className="row">
               <img className="card-img" style={maxHeight} src='https://static.pexels.com/photos/296230/pexels-photo-296230.jpeg' alt="Card image" />
@@ -31,7 +35,6 @@ class NewsFeed extends React.Component {
             </div>
           </div>
         </div>
-
       )
     }
   }

@@ -2,6 +2,7 @@ import React from 'react';
 import React3 from 'react-three-renderer';
 import * as THREE from 'three';
 import MyCube from './MyCube'
+import Transform from './Transform'
 
 class MyCubeView extends React.Component {
 
@@ -11,7 +12,7 @@ class MyCubeView extends React.Component {
   }
 
   render() {
-    return (<MyCube width={500} height={500} color={"green"} />);
+    return (<Transform width={500} height={500} color={"green"} />);
   }
 }
 
