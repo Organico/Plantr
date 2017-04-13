@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 
 var plantSchema = new mongoose.Schema({
   plantId: String,
-  color: String
+  image: String
 });
 
 var Plant = mongoose.model('Plant', plantSchema);
