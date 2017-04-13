@@ -28,7 +28,7 @@ class Home extends React.Component {
             <p className="lead">This is a simple hero unit, a simple jumbotron-style component for
                             calling extra attention to featured content or information.</p>
             <hr className="my-2" style={font} />
-            <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+            <p>"Plantr is an online gardening and outdoor decor service, enabling people to create and plan their seasonal gardens based on regional variations OR local needs. Plantr was started by passionate urban farmers looking to maximize their lots while incorporating the tech to help you connect with your garden, but it is through the passion of our users that tell the story of who we are."</p>
             <p className="lead">
               <a className="btn btn-primary btn-lg" href="#" role="button">Get Started</a>
             </p>
