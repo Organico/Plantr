@@ -22,6 +22,7 @@ import Test from './Test';
 import Navigation from './Navigation';
 import Profile from './Profile';
 import NavBar from './NavBar';
+import MyCubeView from './simpleSpin/index';
 // <Route path="/userprofile" component={UserProfile}></Route>
 
 
@@ -38,6 +39,7 @@ const App = React.createClass({
 
                 <Route exact path="/" component={Layout}></Route>
                 <Route path="/home" component={Home}></Route>
+                <Route path="/test" component={MyCubeView}></Route>
                 <Route path="/layout" component={Layout}></Route>
                 <Route path="/cubes" component={GardenCubeGridView}></Route>
                 <Route path="/squares" component={GardenSquareGridView}></Route>
