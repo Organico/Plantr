@@ -308,7 +308,7 @@ class GardenCubeGridView extends ExampleBase {
 
 const mapStateToProps = (state) => {
   return {
-    gardenGrid: state.gardenGrid
+    gardenGrid: state.gardenReducer.gardenGrid
   }
 }
 

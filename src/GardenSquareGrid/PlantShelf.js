@@ -95,8 +95,8 @@ class PlantShelf extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    plantShelf: state.plantShelf,
-    plants: state.plants
+    plantShelf: state.gardenReducer.plantShelf,
+    plants: state.gardenReducer.plants
   }
 }
 

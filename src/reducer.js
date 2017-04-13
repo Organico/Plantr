@@ -1,5 +1,4 @@
 const initialState = {
-  //garden state
   searchTerm: '',
   todos: [],
   location: [0, 2],

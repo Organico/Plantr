@@ -119,7 +119,7 @@ const mapStateToProps = (state) => {
     // x: state.plantGrid[0].x,
     // y: state.plantGrid[0].y,
     // color: state.plantGrid[0].color
-    plantGrid: state.plantGrid
+    plantGrid: state.gardenReducer.plantGrid
   }
 }
 
@@ -134,6 +134,3 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(mapStateToProps, mapDispatchToProps)(Plant);
 
 
-// exxxxxxxxxxxxxxxxxport default MySquare
-
-// export default Plant;
