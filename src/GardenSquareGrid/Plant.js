@@ -4,6 +4,7 @@ import {Layer, Rect, Circle, Stage, Group} from 'react-konva';
 import { connect } from 'react-redux'
 import { addPlantToPlantGrid } from '../Actions/GardenActions.js';
 
+
 // import { togglePlant} from '../action'
 
 class Plant extends React.Component {
@@ -88,17 +89,25 @@ class Plant extends React.Component {
       {
         x: this.state.posX,
         y: this.state.posY,
-        color: this.props.color
+        img: this.props.img
       };
+
+
       this.props.dispatchAddPlantToPlantGrid(plant)
       console.log("Drag end This.props", this.props)
     }
 
     render() {
+      let image = this.props.plantGrid[0].img;
+
+      let xOffset = (-1*this.props.x);
+      let yOffset = this.props.y;
+      console.log(this.props.plantGrid.img);
         return (
             <Circle
                 x={this.props.x} y={this.props.y} width={50} height={50}
-                fill={this.props.color}
+                fillPatternImage={this.props.img}
+                fillPatternOffset= {{ x: 25, y: 25}}
                 stroke={'black'}
                 shadowBlur={10}
                 onClick={this.handleClick}

@@ -1,7 +1,15 @@
+const makeImage = function(urlsrc) {
+  var newImage = new Image();
+  newImage.src = urlsrc;
+  return newImage;
+};
+
+console.log(makeImage('https://c1.staticflickr.com/3/2909/33168957064_a7ef238410_o.png'));
 const initialGardenState = {
   //garden state
   location: [0, 2],
   isDragging: false,
+
 
   gardenGrid: [
       {
@@ -14,7 +22,7 @@ const initialGardenState = {
       {
         'x': 25,
         'y': 25,
-        'color': 'red',
+        'img': makeImage('https://c1.staticflickr.com/3/2909/33168957064_a7ef238410_o.png')
       }
   ],
 
@@ -22,22 +30,22 @@ const initialGardenState = {
     {
       'x':200,
       'y':400,
-      'color': 'yellow'
+      'img': makeImage('https://c1.staticflickr.com/3/2909/33168957064_a7ef238410_o.png')
     },
     {
       'x':250,
       'y':400,
-      'color': 'black'
+      'img': makeImage('https://c1.staticflickr.com/3/2909/33168957064_a7ef238410_o.png')
     },
     {
       'x':300,
       'y':400,
-      'color': 'green'
+      'img': makeImage('https://c1.staticflickr.com/3/2816/33626469550_d88657d522_o.jpg')
     },
     {
       'x':350,
       'y':400,
-      'color': 'green'
+      'img': makeImage('https://c1.staticflickr.com/3/2909/33168957064_a7ef238410_o.png')
     }
   ],
   gardens: [],
@@ -101,21 +109,9 @@ const setGardenParameters = (state, action) => {
   return newState;
 }
 
-
-// const setGarden = (state, action) => {
-
-//   const newState = {};
-//   const {gardenGrid} = state;
-
-//   Object.assign(newState, state, {gardenGrid: action.dbGardenGrid});
-//   console.log('(before) state: ', state);
-//   console.log('(after) state: ', newState);
-
-//   return newState;
-// }
-
-
 const getAllGardens = (state, action) => {
+  console.log(makeImage('https://c1.staticflickr.com/3/2909/33168957064_a7ef238410_o.png'));
+
   console.log('(before) state: ', state);
 
   const newState = {};

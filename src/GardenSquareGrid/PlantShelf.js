@@ -79,6 +79,7 @@ class PlantShelf extends React.Component {
     }
 
     render() {
+        console.log("The plant shelf is", this.props.plantShelf);
         return (
           <Group>
             <MyRect />
@@ -87,7 +88,7 @@ class PlantShelf extends React.Component {
                 key={i}
                 x={plantShelfPlant.x}
                 y={plantShelfPlant.y}
-                color={plantShelfPlant.color}
+                img={plantShelfPlant.img}
               />
             )}
           </Group>

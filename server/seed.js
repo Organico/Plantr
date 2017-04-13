@@ -27,10 +27,22 @@
         {"x": 50, "y": 0, "color": "brown", "size": 50 }
       ],
       "plantGrid": [
-        {"x": 0, "y": 0, "color": "green", "size": 50},
-        {"x": 50, "y": 50, "color": "yellow", "size": 50},
-        {"x": 0, "y": 50, "color": "black", "size": 50 },
-        {"x": 50, "y": 0, "color": "black", "size": 50 }
+        {"x": 0, "y": 0, "color": "yellow", "size": 50,
+          "plantId": "101",
+          "name": "sunflower",
+          "description": "A massive beast of a flower",
+          "season": "summer" ,
+          "instructions": "Cover and keep watered until seeds sprout in 7 to 10 days. When first true leaves appear (the second set of leaves); thin plants to about 2 feet apart. Depending on the variety, sunflowers will mature and develop seeds in 80 to 120 days. Sow a new row every 2 to 3 weeks to enjoy continuous blooms until the first frost.",
+          "hardinessZone": ">5",
+          "price": 5,
+          "quantity": "1 packet",
+          "sunlight": "full-sun",
+          "germination": "10-14 days",
+          "harvest": 55,
+          "rowSpacing": 1.5, //TBD
+          "extremeWarning": [60, 90],
+          "img": "https://c1.staticflickr.com/3/2909/33168957064_a7ef238410_o.png"
+        }
       ]
     },
     {

@@ -42,8 +42,8 @@ const MakeGardenSquareGridView = React.createClass({
     };
 
     return (
-        <div className="row" style={center}>
-          <h1>Create a Garden</h1>
+      <div style={center}>
+      <h1>Create a Garden</h1>
             <input ref={(node) => width = node } type="number" name="width" placeholder='Feet [width] is your garden?'/>
             <input ref={(node) => height = node } type="number" name="height" placeholder='Feet [height] is your garden?'/>
               <button className="btn btn-primary btn-sm" onClick={() => {
@@ -55,6 +55,8 @@ const MakeGardenSquareGridView = React.createClass({
                        }} type="submit">Submit Garden
             </button>
             <br></br><br></br>
+        <div className="row" style={center}>
+
           <div className="col-xs-5 col-xs-offset-1">
             <h2>Your new Garden!</h2>
             <Stage id="cat" width={600} height={600} fill="white" stroke="black" className="text-center">
@@ -62,11 +64,13 @@ const MakeGardenSquareGridView = React.createClass({
               <PlantGrid />
               <Layer>
                 <PlantShelf />
+                <MyRect />
               </Layer>
             </Stage>
           </div>
         <div className="col-xs-6">
           <CostEstimate />
+        </div>
         </div>
         </div>
     );

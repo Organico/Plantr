@@ -82,7 +82,7 @@ class GardenSquareGridView extends React.Component {
 
     this.props.dispatchSetGarden(dbGardenGrid);
 
-    return //array of {}
+    return//array of {}
   }
 
   render () {
