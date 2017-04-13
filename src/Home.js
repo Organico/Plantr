@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { setWidth, setHeight, setGardenParameters, setGarden } from './action';
+import { setGardenParameters, setGarden } from './Actions/GardenActions';
 import axios from 'axios';
 
 const Home = React.createClass({

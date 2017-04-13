@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import {Layer, Rect, Circle, Stage, Group} from 'react-konva';
 import { connect } from 'react-redux'
 import Plant from './Plant'
+import MyRect from './MyRectangle'
 
 // import { togglePlant} from '../action'
 
@@ -80,6 +81,7 @@ class PlantShelf extends React.Component {
     render() {
         return (
           <Group>
+            <MyRect />
             {this.props.plantShelf.map((plantShelfPlant, i) =>
               <Plant
                 key={i}
