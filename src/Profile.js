@@ -34,14 +34,14 @@ const Profile = React.createClass({
             </div>
         {/*<<-------------------USER RECENT DIVS----------------------->>*/}
         {/*<<-------------------ABOUT----------------------->>*/}
-            <div className="col-md-4 offset-md-0 col-sm-6 offset-sm-0 col-xs-12 right userRecent">
+            <div className="col-md-3 offset-md-0 col-sm-6 offset-sm-0 col-xs-12 right userRecent">
               <div className="userRecentSpan"> About Me </div>
               <div>
                 <p>This is a paragraph about myself. I'm so cool. Look at all this cool stuff about me!</p>
               </div>
             </div>
         {/*<<-------------------RECENT GARDENS----------------------->>*/}
-            <div className="col-md-4 col-sm-6 col-xs-12 right userRecent">
+            <div className="col-md-4 offset-md-1 col-sm-6 col-xs-12 right userRecent">
               <div className="userRecentSpan"> Recent Gardens </div>
               <div>
                 <ul>
@@ -61,7 +61,7 @@ const Profile = React.createClass({
               </div>
             </div>
         {/*<<-------------------RECENT POSTS----------------------->>*/}
-            <div className="col-md-4 col-sm-12 col-xs-12 right userRecent">
+            <div className="col-md-3 offset-md-1 col-sm-12 col-xs-12 right userRecent">
               <div className="userRecentSpan"> Recent Posts </div>
               <div>
                 <ul>
