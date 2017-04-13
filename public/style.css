@@ -1,5 +1,5 @@
 body{
-  background-color: #3f7760;
+  background-color: #03c47a
   /*background-image: url("http://www.lanlinglaurel.com/data/out/24/4091261-dark-green-wallpaper.png");*/
 }
 h1, h2, h3, h4 {
@@ -70,7 +70,7 @@ h1, h2, h3, h4 {
 }
 .userRecent {
   background-color: white;
-  border: solid 5px transparent;
+  border: solid 5px #03c47a;
   border-radius: 10px;
   color: black;
 }
