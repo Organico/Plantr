@@ -5,7 +5,7 @@ import axios from 'axios';
 import GardenGrid from './GardenGrid.js';
 import MySquare from './MySquare.js';
 import {Layer, Rect, Circle, Stage, Group} from 'react-konva';
-import Dropdown from "react-bootstrap-dropdown";
+import {DropdownButton} from "react-bootstrap-dropdown";
 import PlantGrid from './PlantGrid.js';
 import Plant from './Plant.js';
 
