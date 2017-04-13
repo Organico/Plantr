@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { Component, PropTypes } from 'react';
+import {Layer, Rect, Stage} from 'react-konva';
+import { connect } from 'react-redux'
+import axios from 'axios';
 
-
-class NewsFeed extends React.Component {
+const NewsFeed = React.Component {
   render() {
     let pos = {
       marginLeft: '1000px'

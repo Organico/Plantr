@@ -1,7 +1,8 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { setWidth, setHeight, setGardenParameters, setGarden } from '../Actions/GardenActions';
+import React, { Component, PropTypes } from 'react';
+import {Layer, Rect, Stage} from 'react-konva';
+import { connect } from 'react-redux'
 import axios from 'axios';
+import NewsFeed from './NewsFeed'
 
 const Home = React.createClass({
 
@@ -37,20 +38,20 @@ const Home = React.createClass({
 
 const mapStateToProps = (state) => {
   return {
-    searchTerm: state.searchTerm
+    // searchTerm: state.searchTerm
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
 
-    dispatchSetGardenParameters(width, height, color) {
-      dispatch(setGardenParameters(width, height, color));
-    },
-    dispatchSetGarden(dbGardenGrid) {
-      dispatch(setGarden(dbGardenGrid));
-    }
+    // dispatchSetGardenParameters(width, height, color) {
+    //   dispatch(setGardenParameters(width, height, color));
+    // },
+    // dispatchSetGarden(dbGardenGrid) {
+    //   dispatch(setGarden(dbGardenGrid));
+    // }
   };
 };
-// export default connect(mapStateToProps, mapDispatchToProps)(Home);
-export default Home;
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
+// export default Home;

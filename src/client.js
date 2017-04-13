@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Home from './Home';
+import Home from './Home/Home.js';
 import '../public/style.css';
 import axios from 'axios';
 // import Plant from './Plant';
@@ -37,7 +37,7 @@ const App = React.createClass({
                 <NavBar />
 
                 <Route exact path="/" component={Layout}></Route>
-                <Route path="/test" component={Test}></Route>
+                <Route path="/home" component={Home}></Route>
                 <Route path="/layout" component={Layout}></Route>
                 <Route path="/cubes" component={GardenCubeGridView}></Route>
                 <Route path="/squares" component={GardenSquareGridView}></Route>
