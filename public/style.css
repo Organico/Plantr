@@ -1,6 +1,7 @@
 body{
-  background-image: url("http://wallpapercave.com/wp/f2nbsPJ.jpg");
-  background-size: cover;
+ /* background-image: url("http://wallpapercave.com/wp/f2nbsPJ.jpg");
+  background-size: cover;*/
+  background-color: #2F4253;
 }
 .navBar {
     list-style-type: none;
@@ -38,10 +39,10 @@ body{
 }
 #coverPhoto {
   height: 315px;
-  border: solid 7px white;
-  border-radius: 15px;
+/*  border: solid 7px white;
+  border-radius: 15px;*/
   margin-bottom: 1px;
-  margin-top: 5px;
+/*  margin-top: 5px;*/
   background-image: url("http://www.timelinecoverbanner.com/facebook-covers/lake-scenery.jpg");
   background-size: cover;
 }
@@ -87,9 +88,10 @@ body{
 }
 
 .userRecent {
-  background-color: white;
+  background-color: #16A086;
   border: solid 5px transparent;
   border-radius: 10px;
+  color: white;
 }
 .userRecentSpan {
   text-align: center;
