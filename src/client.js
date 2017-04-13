@@ -21,6 +21,7 @@ import Layout from './Layout';
 import Test from './Test';
 import Navigation from './Navigation';
 import Profile from './Profile';
+import NavBar from './NavBar';
 // <Route path="/userprofile" component={UserProfile}></Route>
 
 
@@ -32,7 +33,8 @@ const App = React.createClass({
         <Provider store={store}>
             <Router>
               <div>
-                <Navigation />
+
+                <NavBar />
 
                 <Route exact path="/" component={Layout}></Route>
                 <Route path="/test" component={Test}></Route>
