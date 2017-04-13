@@ -19,7 +19,7 @@ const GardenGrid = React.createClass({
 
 const mapStateToProps = (state) => {
   return {
-    gardenGrid: state.gardenGrid
+    gardenGrid: state.gardenReducer.gardenGrid
   }
 }
 

@@ -18,7 +18,7 @@ const CostEstimate = React.createClass({
 
 const mapStateToProps = (state) => {
   return {
-    plantGrid: state.plantGrid
+    plantGrid: state.gardenReducer.plantGrid
   }
 }
 

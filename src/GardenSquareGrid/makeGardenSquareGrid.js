@@ -76,8 +76,8 @@ const MakeGardenSquareGridView = React.createClass({
 
 const mapStateToProps = (state) => {
   return {
-    gardenGrid: state.gardenGrid,
-    plantGrid: state.plantGrid
+    gardenGrid: state.gardenReducer.gardenGrid,
+    plantGrid: state.gardenReducer.plantGrid
   };
 };
 

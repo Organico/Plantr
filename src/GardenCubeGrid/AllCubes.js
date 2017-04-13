@@ -27,8 +27,6 @@ class AllCubes extends React.Component {
 
     const cubePositions = [];
     cubePositions.length = 4;
-    console.log("in AllCubes ============== thi", this.props.gardenGrid);
-
     cubePositions[0] = new THREE.Vector3(
       0,
       0,
