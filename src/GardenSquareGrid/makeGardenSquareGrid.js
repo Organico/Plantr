@@ -11,6 +11,7 @@ import CostEstimate from './CostEstimate.js';
 import PlantGrid from './PlantGrid.js';
 import querystring from 'querystring'
 import MyRect from './MyRectangle.js'
+import SeedPacket from '../SeedPacket/SeedPacket.js';
 
 
 
@@ -53,21 +54,22 @@ const MakeGardenSquareGridView = React.createClass({
 
     return (
       <div style={center}>
-      <h1>Create a Garden</h1>
+        <h1>Create a Garden</h1>
             <input ref={(node) => width = node } type="number" name="width" placeholder='Feet [width] is your garden?'/>
             <input ref={(node) => height = node } type="number" name="height" placeholder='Feet [height] is your garden?'/>
-              <button className="btn btn-primary btn-sm" onClick={() => {
+            <button className="btn btn-primary btn-sm" onClick={() => {
                 this.props.dispatchSetGardenParameters(+width.value, +height.value, "green");
-            }} type="submit">Set Garden Parameters
+                }} type="submit">Set Garden Parameters
             </button>
-             <button className="btn btn-primary btn-sm" onClick={() => {
-                  this.saveGarden();
-                       }} type="submit">Submit Garden
+            <button className="btn btn-primary btn-sm" onClick={() => {
+              this.saveGarden();
+              }} type="submit">Submit Garden
             </button>
             <br></br><br></br>
         <div className="row" style={center}>
-        <div className="col-1"></div>
-          <div className="col-5">
+
+
+          <div className="col-6">
             <Stage id="cat" width={600} height={600} fill="white" stroke="black" className="text-center">
               <GardenGrid />
               <PlantGrid />
@@ -77,11 +79,21 @@ const MakeGardenSquareGridView = React.createClass({
               </Layer>
             </Stage>
           </div>
-        <div className="col-6">
-          <CostEstimate />
+
+            <div className="col-md-5 offset-md-1">
+              <div className="row" id="costEstimate">
+                <div className="col-md-12">
+                  <CostEstimate />
+                </div>
+                <div className="col-md-6 offset-md-3" id="seedHolder">
+                  <SeedPacket />
+                </div>
+              </div>
         </div>
+
+
         </div>
-        </div>
+      </div>
     );
   }
 });

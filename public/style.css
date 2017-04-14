@@ -1,13 +1,16 @@
 body{
-  background-color: #03c47a
-  /*background-image: url("http://www.lanlinglaurel.com/data/out/24/4091261-dark-green-wallpaper.png");*/
+  /*background-color: #03c47a*/
+  background-image: url("https://s-media-cache-ak0.pinimg.com/736x/28/44/10/284410fb9f66a139561c55f0142e335c.jpg");
 }
-h1, h2, h3, h4 {
+/*h1, h2, h3, h4 {
   color: white;
-}
+}*/
 
 #logo {
-
+  width: 133px;
+  height: 75px;
+  margin-bottom: -30px;
+  margin-top: -30px;
 }
 
 .containerStyle {
@@ -59,4 +62,66 @@ h1, h2, h3, h4 {
 
 .userRecentUL {
   list-style: none;
+}
+
+
+/*///////////////////////////////////////SEED PACKET CSS////////////////////////////////*/
+
+.flip3D {
+  /*float: left;*/
+  /*margin: 10px;*/
+}
+.flip3D > .front{
+  position: absolute;
+  transform: perspective( 600px ) rotateY( 0deg );
+  backface-visibility: hidden;
+  transition: transform .5s linear 0s;
+}
+.flip3D > .back {
+  position: absolute;
+  transform: perspective( 600px ) rotateY( 180deg );
+  backface-visibility: hidden;
+  transition: transform .5s linear 0s;
+}
+.flip3D:hover > .front {
+  transform: perspective( 600px ) rotateY( -180deg );
+}
+.flip3D:hover > .back {
+  transform: perspective( 600px ) rotateY( 0deg );
+}
+#packetFront {
+  margin-top: 15px;
+  /*DO NOT CHANGE SEED PACKET SIZES*/
+  width: 212px;
+  height: 301px;
+  background-image: url("/seedPacketIMGs/tomatoResized.png");
+  background-repeat: no-repeat;
+  background-size: 212px 301px ;
+/*  margin-left: 50px;*/
+}
+#packetBack {
+  margin-top: 15px;
+  /*DO NOT CHANGE SEED PACKET SIZES*/
+  width: 212px;
+  height: 301px;
+  background-image: url("/seedPacketIMGs/seedBackResized.png");
+  background-repeat: no-repeat;
+  background-size: 212px 301px ;
+/*  margin-left: 50px;*/
+}
+#packetText {
+  margin-top: 50px;
+  margin-left: 20px;
+  margin-right: 20px;
+
+}
+#costEstimate {
+  align-content: center;
+}
+
+.test {
+  border: solid 2px black;
+}
+#seedHolder {
+  height: 350px;
 }
