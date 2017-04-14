@@ -56,7 +56,7 @@
         {"x": 0, "y": 100, "color": "red", "size": 50 },
         {"x": 50, "y": 100, "color": "red", "size": 50 }],
       "plantGrid": [
-        {"x": 0, "y": 0, "color": "blue", "size": 50},
+        {"x": 0, "y": 0,"img": "https://c1.staticflickr.com/3/2909/33168957064_a7ef238410_o.png", "size": 50},
         {"x": 50, "y": 50, "color": "white", "size": 50},
         {"x": 0, "y": 50, "color": "red", "size": 50 },
         {"x": 50, "y": 0, "color": "yellow", "size": 50 }

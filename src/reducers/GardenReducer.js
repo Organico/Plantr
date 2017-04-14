@@ -33,7 +33,7 @@ const initialGardenState = {
       {
         'x': 25,
         'y': 25,
-        'img': makeImage('https://c1.staticflickr.com/3/2909/33168957064_a7ef238410_o.png'),
+        'img':'https://c1.staticflickr.com/3/2909/33168957064_a7ef238410_o.png',
         'isDraggable': false
       }
   ],
@@ -42,43 +42,43 @@ const initialGardenState = {
     {
       'x':200,
       'y':400,
-      'img': makeImage('https://c1.staticflickr.com/3/2909/33168957064_a7ef238410_o.png'),
+      'img':'https://c1.staticflickr.com/3/2909/33168957064_a7ef238410_o.png',
       'isDraggable': true,
     },
     {
       'x':250,
       'y':400,
-      'img': makeImage('https://c1.staticflickr.com/3/2844/33627640530_f866a32b60_o.png'),
+      'img': 'https://c1.staticflickr.com/3/2844/33627640530_f866a32b60_o.png',
       'isDraggable': true
     },
     {
       'x':300,
       'y':400,
-      'img': makeImage('https://c1.staticflickr.com/3/2899/33972285536_46e0dbdb99_o.png'),
+      'img':'https://c1.staticflickr.com/3/2899/33972285536_46e0dbdb99_o.png',
       'isDraggable': true
     },
     {
       'x':350,
       'y':400,
-      'img': makeImage('https://c1.staticflickr.com/3/2939/33200675713_ea06c54442_o.png'),
+      'img': 'https://c1.staticflickr.com/3/2939/33200675713_ea06c54442_o.png',
       'isDraggable': true
     },
     {
       'x':400,
       'y':400,
-      'img': makeImage('https://c1.staticflickr.com/3/2884/33883916601_9c04b38e73_o.png'),
+      'img':'https://c1.staticflickr.com/3/2884/33883916601_9c04b38e73_o.png',
       'isDraggable': true
     },
     {
       'x':450,
       'y':400,
-      'img': makeImage('https://c1.staticflickr.com/3/2810/33856016232_8ed446a91d_o.png'),
+      'img':'https://c1.staticflickr.com/3/2810/33856016232_8ed446a91d_o.png',
       'isDraggable': true
     },
     {
       'x':500,
       'y':400,
-      'img': makeImage('https://c2.staticflickr.com/4/3954/33856016382_0778302b97_o.png'),
+      'img': 'https://c2.staticflickr.com/4/3954/33856016382_0778302b97_o.png',
       'isDraggable': true
     }
   ],
