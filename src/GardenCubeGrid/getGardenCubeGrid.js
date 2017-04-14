@@ -19,6 +19,7 @@ class GardenCubeGridView extends ExampleBase {
     super(props, context);
 
     console.log("LOGGING ============", this.props);
+    console.log("HEY!")
 
 
     this.state = {
@@ -42,6 +43,9 @@ class GardenCubeGridView extends ExampleBase {
     this.groundPosition = new THREE.Vector3(0, -25, 0);
     this.groundRotation = new THREE.Euler(-Math.PI / 2, 0, 0);
     this.groundRepeat = new THREE.Vector2(25, 25);
+
+
+
   }
 
   shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate;
@@ -52,6 +56,12 @@ class GardenCubeGridView extends ExampleBase {
 
   componentDidMount() {
     this.stats = new Stats();
+
+
+
+
+
+
 
     this.stats.domElement.style.position = 'absolute';
     this.stats.domElement.style.top = '0px';
@@ -199,8 +209,27 @@ class GardenCubeGridView extends ExampleBase {
       style.cursor = 'pointer';
     }
 
+
+
+
     this._cursor.hovering = hovering;
     this._cursor.dragging = dragging;
+
+
+
+        //     const sphere = React.createElement(
+        //     ReactTHREE.Mesh,
+        //     {
+        //         geometry: sphereGeometry,
+        //         material: imageMaterial,
+        //         position: new THREE.Vector3(0, 0, 0),
+        //         scale: new THREE.Vector3(1, 1, -1),
+        //         quaternion: new THREE.Quaternion()
+        //     }
+        // );
+
+
+    // console.log("Image material is: ", imageMaterial);
 
     return (<div
       ref="container"
@@ -218,6 +247,7 @@ class GardenCubeGridView extends ExampleBase {
         shadowMapType={THREE.PCFShadowMap}
         clearColor={0xf0f0f0}
       >
+
         <module
           ref="mouseInput"
           descriptor={MouseInput}

@@ -1,11 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Layer, Rect, Stage, Group} from 'react-konva';
+// import AuthService from '../config/AuthService.js'
+
+// const auth = new AuthService('vBOwXk8xIgy3kroSs5vz1TFfrYyFQNFf', 'skebaish1992.auth0.com');
+
+// console.log(auth);
 
 class MyRect extends React.Component {
     constructor(...args) {
       super(...args);
       this.handleClick = this.handleClick.bind(this);
+
+
     }
     handleClick() {
       // this.setState({

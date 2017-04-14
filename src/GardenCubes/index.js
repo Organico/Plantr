@@ -171,6 +171,7 @@ class GardenCubes extends ExampleBase {
       height,
     } = this.props;
 
+
     const {
       cameraPosition,
       cameraRotation,

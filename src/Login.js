@@ -1,29 +1,30 @@
-import React, { Component, PropTypes } from 'react'
 
-export default class Login extends Component {
+import React from 'react'
+import AuthService from '../config/AuthService.js'
+
+export class Login extends React.Component {
+
 
   render() {
-    const { errorMessage } = this.props
+    const { auth } = this.props
 
     return (
-      <div>
-        <button onClick={(event) => this.handleClick(event)} className="btn btn-primary">
-          Login
-        </button>
-
-        {errorMessage &&
-          <p style={{color:'red'}}>{errorMessage}</p>
-        }
+      <div className="container login">
+        <div className="jumbotron">
+          <div className="row align-items-center justify-contents-center">
+            <div className="w-100"></div>
+            <div className="col">
+              <img src="http://www.scienceclarified.com/photos/plant-3250.jpg" alt="Plantr logo" />
+            </div>
+            <div className="w-100"></div>
+            <div className="col">
+              <button className="btn btn-primary" onClick={auth.login.bind(this)}>Login</button>
+            </div>
+          </div>
+        </div>
       </div>
     )
   }
-
-  handleClick(event) {
-    this.props.onLoginClick()
-  }
 }
 
-Login.propTypes = {
-  onLoginClick: PropTypes.func.isRequired,
-  errorMessage: PropTypes.string
-}
+export default Login;

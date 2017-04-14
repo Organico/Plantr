@@ -5,31 +5,7 @@ body{
 h1, h2, h3, h4 {
   color: white;
 }
-/*.navBar {
-  color: white;
-  }
 
-.navBarLi {
-      float: left;
-  }
-
-.navBarLi a {
-      display: block;
-      color: white;
-      text-align: center;
-      padding: 14px 16px;
-      text-decoration: none;
-  }
-
-.navBarLi a:hover:not(.active) {
-      background-color: #138973;
-  }
-
-  .active {
-      background-color: #16A086;
-  }
-
-*/
 #logo {
 
 }

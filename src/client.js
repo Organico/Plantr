@@ -7,7 +7,7 @@ import store from './store';
 import {Provider} from 'react-redux';
 import {Layer, Rect, Circle, Stage, Group} from 'react-konva';
 import Login from './Login.js';
-import AuthService from './config/AuthService.js';
+import AuthService from '../config/AuthService.js';
 import {
   HashRouter as Router,
   Route,
@@ -23,12 +23,31 @@ import Profile from './Profile';
 import NavBar from './NavBar';
 import MyCubeView from './simpleSpin/index';
 // <Route path="/userprofile" component={UserProfile}></Route>
+const auth = new AuthService('vBOwXk8xIgy3kroSs5vz1TFfrYyFQNFf', 'skebaish1992.auth0.com');
+
+// validate authentication for private routes
+const requireAuth = (nextState, replace) => {
+  if (!auth.loggedIn()) {
+    console.log("Not logged in!")
+    replace({ pathname: '/' });
+  }
+};
 
 
 const App = React.createClass({
 
   render () {
     const { dispatch, isAuthenticated, errorMessage} = this.props;
+    console.log("The profile is", auth.getProfile(auth.idToken));
+    console.log("The toke is ", auth.idToken);
+
+    if (!auth.loggedIn()) {
+            return (
+                <div>
+                    <Login auth={auth}/>
+                </div>
+            );
+          } else {
     return (
         <Provider store={store}>
             <Router>
@@ -38,6 +57,7 @@ const App = React.createClass({
 
                 <Route exact path="/" component={Layout}></Route>
                 <Route path="/home" component={Home}></Route>
+                <Route path="/login" component={Login}></Route>
                 <Route path="/test" component={MyCubeView}></Route>
                 <Route path="/layout" component={Layout}></Route>
                 <Route path="/cubes" component={GardenCubeGridView}></Route>
@@ -51,6 +71,7 @@ const App = React.createClass({
         </Provider>
     );
   }
+}
 });
 
 ReactDOM.render(<App />,
