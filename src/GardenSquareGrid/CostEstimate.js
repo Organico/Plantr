@@ -11,6 +11,8 @@ const CostEstimate = React.createClass({
           <h1>Plantr Analytics</h1>
           <h3>Your Garden Stats</h3>
           <h4>The Cost of your Garden is: {this.props.plantGrid[0]['price']}</h4>
+          <h4>The Cost of your Garden is: {this.props.plantGrid[0]['instructions']}</h4>
+
         </div>
       );
     }

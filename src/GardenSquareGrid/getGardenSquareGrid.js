@@ -59,6 +59,7 @@ class GardenSquareGridView extends React.Component {
               var individualPlant = dbGardenGridData[i].plantGrid;
               dbGardenGrids.push(individualGarden);
               dbPlantGrids.push(individualPlant);
+              console.log(individualPlant);
 
               var dropDownObject = {
                 text: "Garden :" + i,

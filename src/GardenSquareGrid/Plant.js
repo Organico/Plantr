@@ -100,14 +100,16 @@ class Plant extends React.Component {
     }
 
     render() {
-      let image = this.props.plantGrid[0].img;
+      let newImage = new Image();
+      newImage.src = this.props.img;
+
 
       let xOffset = (-1*this.props.x);
       let yOffset = this.props.y;
         return (
             <Circle
                 x={this.props.x} y={this.props.y} width={50} height={50}
-                fillPatternImage={this.props.img}
+                fillPatternImage={newImage}
                 fillPatternOffset= {{ x: 25, y: 25}}
                 stroke={'black'}
                 shadowBlur={10}
