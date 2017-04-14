@@ -9,7 +9,8 @@
     "dev": "concurrently --kill-others \"npm run webpack-watch\" \"npm run express-server\"",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node ./server/server.js",
-    "seed": "node ./server/seed.js"
+    "seed": "node ./server/seed.js",
+    "postinstall": "npm run build"
   },
   "keywords": [],
   "author": "",
