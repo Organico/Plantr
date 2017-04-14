@@ -48,7 +48,7 @@ export default class AuthService extends EventEmitter {
   getProfile(){
     // Retrieves the profile data from localStorage
     const profile = localStorage.getItem('profile')
-    console.log(profile);
+    console.log("localStorage", localStorage);
     return profile ? JSON.parse(localStorage.profile) : {}
   }
 
