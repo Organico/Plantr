@@ -6,8 +6,8 @@ import Home from './Home/Home'
 import store from './store';
 import {Provider} from 'react-redux';
 import {Layer, Rect, Circle, Stage, Group} from 'react-konva';
-import Login from './Login.js';
-import AuthService from '../config/AuthService.js';
+import Login from './config/Login.js';
+import AuthService from './config/AuthService.js';
 import {
   HashRouter as Router,
   Route,
@@ -39,6 +39,9 @@ const App = React.createClass({
 
   render () {
     const { dispatch, isAuthenticated, errorMessage} = this.props;
+    // console.log("The profile is", auth.getProfile(auth.idToken));
+    // console.log("The toke is ", auth.idToken);
+    console.dir(auth.getProfile)
 
     if (!auth.loggedIn()) {
             return (
