@@ -31,6 +31,7 @@
     "express": "^4.15.2",
     "gulp-babel": "^6.1.2",
     "jquery": "^3.2.1",
+    "jwt-decode": "^2.2.0",
     "konva": "^1.5.0",
     "mongoose": "^4.9.1",
     "morgan": "^1.8.1",
@@ -61,7 +62,7 @@
     "webpack": "^2.3.0"
   },
   "devDependencies": {
-       "babel-cli": "^6.18.0",
+    "babel-cli": "^6.18.0",
     "babel-core": "^6.18.2",
     "babel-eslint": "^7.1.1",
     "babel-loader": "^6.2.8",
@@ -80,7 +81,7 @@
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
     "gulp-util": "^3.0.7",
-    "json-loader": "^0.5.4",
+    "json-loader": "0.5.4",
     "raw-loader": "^0.5.1",
     "react-addons-perf": "^15.4.1",
     "react-hot-loader": "^3.0.0-beta.6",
@@ -91,7 +92,6 @@
     "css-loader": "0.25.0",
     "file-loader": "^0.11.1",
     "jsdom": "9.5.0",
-    "json-loader": "0.5.4",
     "style-loader": "0.13.1",
     "url-loader": "^0.5.8"
   },

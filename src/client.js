@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import '../public/style.css';
 import axios from 'axios';
@@ -39,9 +39,6 @@ const App = React.createClass({
 
   render () {
     const { dispatch, isAuthenticated, errorMessage} = this.props;
-    // console.log("The profile is", auth.getProfile(auth.idToken));
-    // console.log("The toke is ", auth.idToken);
-    console.dir(auth.getProfile)
 
     if (!auth.loggedIn()) {
             return (
@@ -75,6 +72,8 @@ const App = React.createClass({
   }
 }
 });
+
+export default auth;
 
 ReactDOM.render(<App />,
     document.getElementById('app')

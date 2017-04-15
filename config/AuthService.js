@@ -1,11 +1,10 @@
 import { EventEmitter } from 'events'
 import Auth0Lock from 'auth0-lock'
-import { browserHistory } from 'react-router' //    "react-router": "^2.8.0"
-
+import { Redirect } from 'react-router'
 
 export default class AuthService extends EventEmitter {
   constructor(clientId, domain) {
-        super()
+    super()
 
     // Configure Auth0
     this.lock = new Auth0Lock(clientId, domain, {
@@ -22,13 +21,13 @@ export default class AuthService extends EventEmitter {
 
   _doAuthentication(authResult) {
     // Saves the user token
-    this.setToken(authResult.idToken);
+    this.setToken(authResult.accessToken);
     // navigate to the home route
-   browserHistory.replace('#')
 
-   this.lock.getUserInfo(authResult.idToken, (error, profile) => {
+   this.lock.getUserInfo(authResult.accessToken, (error, profile) => {
+    console.log('authResult', authResult)
       if (error) {
-        console.log('Error loading the Profile', error)
+        console.error('Error loading the Profile', error)
       } else {
         this.setProfile(profile)
         console.log("Your profile is", profile);
@@ -37,7 +36,7 @@ export default class AuthService extends EventEmitter {
   }
   _authorizationError(error){
     // Unexpected authentication error
-    console.log('Authentication Error', error)
+    console.error('Authentication Error', error)
   }
 
   login() {
@@ -48,7 +47,6 @@ export default class AuthService extends EventEmitter {
   getProfile(){
     // Retrieves the profile data from localStorage
     const profile = localStorage.getItem('profile')
-    console.log("localStorage", localStorage);
     return profile ? JSON.parse(localStorage.profile) : {}
   }
 
@@ -65,7 +63,6 @@ export default class AuthService extends EventEmitter {
 
   setProfile(profile){
     // Saves profile data to localStorage
-    console.log('profile', profile)
     localStorage.setItem('profile', JSON.stringify(profile))
     // Triggers profile_updated event to update the UI
     this.emit('profile_updated', profile)
@@ -79,11 +76,6 @@ export default class AuthService extends EventEmitter {
   logout() {
     // Clear user token and profile data from local storage
     localStorage.removeItem('id_token');
-
-
     this.emit('logged_out', 'bye');
-
-
-
   }
 }
