@@ -9,6 +9,7 @@ export function requestLogin(creds) {
 }
 
 export function receiveLogin(user) {
+  console.log('IN THE ACTION LOGIN SUCCESS')
   return {
     type: 'LOGIN_SUCCESS',
     isFetching: false,
