@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import '../public/style.css';
 import axios from 'axios';
@@ -27,6 +27,7 @@ const auth = new AuthService('vBOwXk8xIgy3kroSs5vz1TFfrYyFQNFf', 'skebaish1992.a
 
 // validate authentication for private routes
 const requireAuth = (nextState, replace) => {
+  console.log('nextState', nextState)
   if (!auth.loggedIn()) {
     console.log("Not logged in!")
     replace({ pathname: '/' });
@@ -38,8 +39,6 @@ const App = React.createClass({
 
   render () {
     const { dispatch, isAuthenticated, errorMessage} = this.props;
-    console.log("The profile is", auth.getProfile(auth.idToken));
-    console.log("The toke is ", auth.idToken);
 
     if (!auth.loggedIn()) {
             return (
@@ -73,6 +72,8 @@ const App = React.createClass({
   }
 }
 });
+
+export default auth;
 
 ReactDOM.render(<App />,
     document.getElementById('app')
