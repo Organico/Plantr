@@ -24,16 +24,19 @@ export default class NavBar extends React.Component {
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
               <NavItem>
-                <NavLink href="#squares">My 2D Gardens</NavLink>
+                <NavLink href="#squares">My Gardens</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="#creategarden">Create 2D Gardens</NavLink>
+                <NavLink href="#creategarden">Create Gardens</NavLink>
               </NavItem>
               <NavItem>
                 <NavLink href="#home">Home</NavLink>
               </NavItem>
               <NavItem>
                 <NavLink href="#profile">My Profile</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink href="#forum">Forum</NavLink>
               </NavItem>
             </Nav>
           </Collapse>
