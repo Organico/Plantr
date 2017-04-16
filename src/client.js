@@ -22,6 +22,7 @@ import Navigation from './Navigation';
 import Profile from './Profile';
 import NavBar from './NavBar';
 import MyCubeView from './simpleSpin/index';
+import Forum from './Forum/Forum';
 // <Route path="/userprofile" component={UserProfile}></Route>
 const auth = new AuthService('vBOwXk8xIgy3kroSs5vz1TFfrYyFQNFf', 'skebaish1992.auth0.com');
 
@@ -66,6 +67,7 @@ const App = React.createClass({
                 <Route path="/squares" component={GardenSquareGridView}></Route>
                 <Route path="/creategarden" component={MakeGardenSquareGridView}></Route>
                 <Route path="/profile" component={Profile}></Route>
+                <Route path="/forum" component={Forum}></Route>
 
 
               </div>
