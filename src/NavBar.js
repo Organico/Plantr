@@ -24,7 +24,17 @@ export default class NavBar extends React.Component {
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
               <NavItem>
+<<<<<<< HEAD
                 <NavLink href="#squares">My Gardens</NavLink>
+=======
+                <NavLink href="#test">Test</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink href="#threeTest">threeTest</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink href="#squares">My 2D Gardens</NavLink>
+>>>>>>> functioning move camera slowly
               </NavItem>
               <NavItem>
                 <NavLink href="#creategarden">Create Gardens</NavLink>
