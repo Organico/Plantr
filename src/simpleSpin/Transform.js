@@ -42,8 +42,11 @@ class Transform extends React.Component {
 
   loadThing(){
     const PATH = "https://s3-us-west-2.amazonaws.com/ryaperry-bucket/"
-    const MTL_FILE = "demo.mtl"
-    const OBJ_FILE = "demo.obj"
+    // const MTL_FILE = "demo.mtl"
+    // const OBJ_FILE = "demo.obj"
+
+    const MTL_FILE = "VG14_7.mtl"
+    const OBJ_FILE = "VG14_7.obj"
 
     var onProgress = function ( xhr ) {
       if ( xhr.lengthComputable ) {
@@ -84,11 +87,10 @@ class Transform extends React.Component {
               console.log("traversing children ", child)
               if ( child instanceof THREE.Mesh ) {
                 console.log("child thats a mesh! ", child)
-                var loader = new THREE.TextureLoader();
-                loader.crossOrigin = '*'; // Use as needed
-
-                var imgTexture = loader.load('https://s3-us-west-2.amazonaws.com/ryaperry-bucket/firstUVLayout.png');
-                child.material.map = imgTexture
+                // var loader = new THREE.TextureLoader();
+                // loader.crossOrigin = '*'; // Use as needed
+                // var imgTexture = loader.load('https://s3-us-west-2.amazonaws.com/ryaperry-bucket/firstUVLayout2.png');
+                // child.material.map = imgTexture
                 // child.material.map = THREE.ImageUtils.loadTexture('https://s3-us-west-2.amazonaws.com/ryaperry-bucket/firstUVLayout.png');
               }
             });
@@ -104,17 +106,6 @@ class Transform extends React.Component {
             // render(YourComponent, document.getElementById('your-container'));
         }, onProgress, onError);
     });
-
-
-                // var mesh = null;
-                // var loader = new THREE.JSONLoader();
-                // console.log("json loader object", loader);
-                // loader.load('https://s3-us-west-2.amazonaws.com/ryaperry-bucket/sphere2.json', function(geometry) {
-                //     console.log("heres sphere2: ===============", geometry)
-                //     mesh = new THREE.Mesh(geometry);
-                //     // scene.add(mesh);
-                //     this.refs.group.add(mesh)
-                // });
 
   }
 
