@@ -51,11 +51,6 @@ export default class AuthService extends EventEmitter {
   getProfile(){
     // Retrieves the profile data from localStorage
     const profile = localStorage.getItem('profile')
-<<<<<<< HEAD:src/config/AuthService.js
-=======
-    console.log("Local storage in AuthService.Js", localStorage);
-    console.log(profile);
->>>>>>> Added sphere:config/AuthService.js
     return profile ? JSON.parse(localStorage.profile) : {}
   }
 
