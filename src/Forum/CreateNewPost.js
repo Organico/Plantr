@@ -2,7 +2,8 @@ import React, { PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import auth from '../client.js';
-import addPost from '../actions/ForumActions';
+import { addPost } from '../Actions/ForumActions';
+
 
 
 const CreateNewPost = React.createClass({
@@ -27,7 +28,8 @@ const CreateNewPost = React.createClass({
               return;
             }
             message = JSON.stringify({title: titleInput.value, message: messageInput.value});
-            dispatch(addPost(message));
+
+            dispatchAddPost(message);
             // dispatch(addTodo(messageInput.value));
             titleInput.value = '';
             messageInput.value = '';
@@ -47,8 +49,19 @@ const CreateNewPost = React.createClass({
   }
 });
 
-CreateNewPost.propTypes = {
-  dispatch: PropTypes.func.isRequired, //need to connect dispatch
+const mapStateToProps = (state) => {
+  return {
+    posts: state.forumReducer.posts
+  };
 };
 
-export default CreateNewPost;
+const mapDispatchToProps = (dispatch) => {
+  return {
+
+    dispatchAddPost(message) {
+      dispatch(addPost(message));
+    }
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(CreateNewPost);
