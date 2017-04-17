@@ -8,6 +8,7 @@ const ForumPost = React.createClass({
 
   render() {
   const profile = auth.getProfile();
+  //create get request for original posters profile pic
   const profilePic = {
     backgroundImage: 'url(' + profile.picture + ')',
     backgroundRepeat: 'no-repeat',

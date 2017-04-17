@@ -1,10 +1,7 @@
 // here will be our Login Action folder
 
-let postId = 0;
-export const addPost = (text) => {
-  return {
-    type: 'ADD_POST',
-    id: (postId++).toString(),
-    text,
-  };
-};
+export function addPost(message){
+  console.log('action: SET_GARDEN from db called');
+
+  return {type: 'ADD_POST', message};
+}
