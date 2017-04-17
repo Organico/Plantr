@@ -84,7 +84,12 @@ class Transform extends React.Component {
               console.log("traversing children ", child)
               if ( child instanceof THREE.Mesh ) {
                 console.log("child thats a mesh! ", child)
-                child.material.map = THREE.ImageUtils.loadTexture('https://s3-us-west-2.amazonaws.com/ryaperry-bucket/firstUVLayout.png');
+                var loader = new THREE.TextureLoader();
+                loader.crossOrigin = '*'; // Use as needed
+
+                var imgTexture = loader.load('https://s3-us-west-2.amazonaws.com/ryaperry-bucket/firstUVLayout.png');
+                child.material.map = imgTexture
+                // child.material.map = THREE.ImageUtils.loadTexture('https://s3-us-west-2.amazonaws.com/ryaperry-bucket/firstUVLayout.png');
               }
             });
 
