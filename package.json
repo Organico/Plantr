@@ -50,6 +50,7 @@
     "react-router": "^4.0.0",
     "react-router-dom": "^4.0.0",
     "react-sizeme": "^2.3.1",
+    "react-swf": "^1.0.6",
     "react-three": "^0.9.7",
     "react-three-renderer": "^3.1.0",
     "react-tooltip": "^3.2.10",

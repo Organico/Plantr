@@ -3,6 +3,8 @@ import React from 'react';
 import { connect } from 'react-redux'
 import { updateWeather } from '../Actions/WeatherActions.js';
 import weatherReducer from '../reducers/WeatherReducer.js'
+import CloudAnimation from './CloudAnimation'
+
 
 const WUNDERGROUND_KEY = "b56f2c0800fdf6e4";
 
@@ -195,6 +197,9 @@ class Weather extends React.Component {
         <div>
             <div className="app">
                 {this.renderWeather()}
+            </div>
+            <div>
+              <CloudAnimation />
             </div>
         </div>
     );
