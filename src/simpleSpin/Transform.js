@@ -42,8 +42,8 @@ class Transform extends React.Component {
 
   loadThing(){
     const PATH = "https://s3-us-west-2.amazonaws.com/ryaperry-bucket/"
-    const MTL_FILE = "sphere2.mtl"
-    const OBJ_FILE = "sphere2.obj"
+    const MTL_FILE = "demo.mtl"
+    const OBJ_FILE = "demo.obj"
 
     var onProgress = function ( xhr ) {
       if ( xhr.lengthComputable ) {
@@ -68,7 +68,7 @@ class Transform extends React.Component {
         console.log("materials after preload: " , materials)
         const objLoader = new THREE.OBJLoader();
         console.log("Objloader before setting materials: ", objLoader)
-        objLoader.setMaterials(materials);
+        // objLoader.setMaterials(materials);
         console.log("Objloader after setting materials: ", objLoader)
         objLoader.setPath(PATH);
         objLoader.load(OBJ_FILE, object => {
@@ -84,7 +84,7 @@ class Transform extends React.Component {
               console.log("traversing children ", child)
               if ( child instanceof THREE.Mesh ) {
                 console.log("child thats a mesh! ", child)
-                // child.material.map = THREE.ImageUtils.loadTexture('https://s3-us-west-2.amazonaws.com/ryaperry-bucket/grasslight-big.jpg');
+                child.material.map = THREE.ImageUtils.loadTexture('https://s3-us-west-2.amazonaws.com/ryaperry-bucket/firstUVLayout.png');
               }
             });
 
