@@ -265,7 +265,6 @@ class Transform extends React.Component {
 
       </scene>
     </React3>);
->>>>>>> Added sphere
   }
 }
 export default Transform;
