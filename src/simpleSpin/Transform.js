@@ -22,7 +22,7 @@ class Transform extends React.Component {
   };
   constructor(props, context) {
     super(props, context);
-    this.cameraPosition = new THREE.Vector3(1000, 500, 1000);
+    this.cameraPosition = new THREE.Vector3(550, 500, 1000);
     this.lookAt = new THREE.Vector3(0, 200, 0)
     this.lightPosition = new THREE.Vector3(1, 1, 1)
     THREE.ImageUtils.crossOrigin = ''; //moved from render()
@@ -76,7 +76,8 @@ class Transform extends React.Component {
         objLoader.setPath(PATH);
         objLoader.load(OBJ_FILE, object => {
             console.log("in object", object)
-            object.scale.set(300, 300, 300);
+            object.scale.set(500, 500, 500);
+            object.position.set(-100, 0, -700)
 
             // for(let child of object.children) {
             //     console.log("looking at the children of object", child);
@@ -89,7 +90,7 @@ class Transform extends React.Component {
                 console.log("child thats a mesh! ", child)
                 var loader = new THREE.TextureLoader();
                 loader.crossOrigin = '*'; // Use as needed
-                var imgTexture = loader.load('https://s3-us-west-2.amazonaws.com/ryaperry-bucket/firstUVLayout2.png');
+                var imgTexture = loader.load('https://s3-us-west-2.amazonaws.com/ryaperry-bucket/firstUVLayoutHouse.png');
                 child.material.map = imgTexture
                 // child.material.map = THREE.ImageUtils.loadTexture('https://s3-us-west-2.amazonaws.com/ryaperry-bucket/firstUVLayout.png');
               }
