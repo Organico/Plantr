@@ -10,7 +10,12 @@ import MTLLoader from 'three-mtl-loader'
 import TrackballControls from '../trackball';
 import MouseInput from '../inputs/MouseInput';
 import HouseCube from './HouseCube';
+import GrassCube from './GrassCube';
 
+import EffectComposer from 'three-effectcomposer';
+console.log("EffectComposer: ", EffectComposer)
+EffectComposer(THREE);
+console.log("EffectComposer: ", EffectComposer)
 
 class Transform extends React.Component {
   static propTypes = {
@@ -56,6 +61,8 @@ class Transform extends React.Component {
     const {
       container,
       camera,
+      react3,
+      scene
     } = this.refs;
 
     container.appendChild(this.stats.domElement);
@@ -72,6 +79,17 @@ class Transform extends React.Component {
 
     this.controls = controls;
     this.controls.addEventListener('change', this._onTrackballChange);
+
+
+    console.log("REFS ============", this.refs);
+    const composer = new EffectComposer(react3, camera)
+    console.log("Composer: ", composer);
+    composer.addPass(new EffectComposer.RenderPass(scene, camera))
+
+        // Redraw with a shader
+    const effect = new EffectComposer.ShaderPass(THREE.DotScreenShader);
+    composer.addPass(effect);
+    console.log("Composer2: ", composer);
 
   }
 
@@ -178,17 +196,13 @@ class Transform extends React.Component {
           <gridHelper size={1000} divisions={10} />
           <directionalLight color={0xffffff} intensity={5} position={new THREE.Vector3(1, 1, 1)} />
 
-          <mesh>
-              <boxGeometry
-                width={100}
-                height={100}
-                depth={100}
-              />
-              <meshBasicMaterial
-                color={new THREE.Color( this.props.color )}
-                map= {THREE.ImageUtils.loadTexture('https://s3-us-west-2.amazonaws.com/ryaperry-bucket/grasslight-big.jpg')}
-              />
-          </mesh>
+          <GrassCube width={"100"}
+            height={"50"}
+            depth={"100"}
+            color={"brown"}
+            map={'https://s3-us-west-2.amazonaws.com/ryaperry-bucket/grasslight-big.jpg'}
+          />
+
           <HouseCube />
           <mesh
             position={this.groundPosition}
