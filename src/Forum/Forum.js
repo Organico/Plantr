@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom'
 import { connect } from 'react-redux';
 import ForumPost from './ForumPost';
-// import ForumPostDetails from './ForumPostDetails';
 import CreateNewPost from './CreateNewPost';
 import axios from 'axios';
 import { setPosts } from '../Actions/ForumActions';
@@ -13,8 +12,12 @@ const Forum = React.createClass({
    getPost() {
     axios.get('/api/forum')
     .then((res) => {
-      console.log('this props FORUM', this.props)
-      var dbPostData = res.data;
+      let dbPostData = res.data;
+      for (let i = 0; i<dbPostData.length; i++) {
+        let message = dbPostData[i];
+        message['isShort'] = true;
+      }
+      console.log("Db post data", dbPostData)
       this.props.dispatchSetPost(dbPostData)
     }).catch((err) => {
       console.error(err);
@@ -23,7 +26,6 @@ const Forum = React.createClass({
   },
 
   render() {
-    console.log('this props POST', this.props.posts)
     return(
         <div className="row">
           <button type="submit" onClick={ () => {

@@ -25,6 +25,28 @@ const addPost = (state, action) => {
   return newState;
 };
 
+const togglePost = (state, action) => {
+  const newState = {};
+  console.log("The id in the reducer is", action.id)
+
+  let newPosts = state.posts.slice();
+  const { posts } = state;
+
+  for (let i = 0; i<newPosts.length; i++) {
+    let individualMessage = newPosts[i];
+    let individualMessageId = individualMessage['_id'];
+    console.log("Message is: ", individualMessage, "Id is ",  individualMessageId)
+    if (individualMessageId === action.id){
+      individualMessage.isShort = !individualMessage.isShort;
+    }
+  }
+
+  Object.assign(newState, state, {posts: newPosts});
+
+  return newState;
+};
+
+
 const setPosts = (state, action) => {
   const newState = {};
   const { posts } = state;
@@ -40,11 +62,12 @@ function forumReducer(state = initialForumState, action) {
     return addPost(state, action);
   case 'SET_POSTS':
     return setPosts(state, action);
+  case 'TOGGLE_POST':
+    return togglePost(state, action);
   default:
     return state;
   }
 }
-
 
 
 export default forumReducer;
