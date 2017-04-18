@@ -11,8 +11,6 @@ class GrassCube extends React.Component {
     width: React.PropTypes.number.isRequired,
     height: React.PropTypes.number.isRequired,
     depth: React.PropTypes.number.isRequired,
-    color: React.PropTypes.string.isRequired,
-    map: React.PropTypes.string.isRequired
   };
   constructor(props, context) {
     super(props, context);
@@ -48,7 +46,7 @@ class GrassCube extends React.Component {
               />
               <meshBasicMaterial
                 color={new THREE.Color( this.props.color )}
-                map= {THREE.ImageUtils.loadTexture(this.props.map)}
+                map= {grassTexture}
               />
           </mesh>
          );

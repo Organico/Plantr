@@ -12,11 +12,12 @@ import MouseInput from '../inputs/MouseInput';
 import HouseCube from './HouseCube';
 import GrassCube from './GrassCube';
 import MyCube from './MyCube'
+import PlantModel from './PlantModel'
 
-import EffectComposer from 'three-effectcomposer';
-console.log("EffectComposer: ", EffectComposer)
-EffectComposer(THREE);
-console.log("EffectComposer: ", EffectComposer)
+// import EffectComposer from 'three-effectcomposer';
+// console.log("EffectComposer: ", EffectComposer)
+// EffectComposer(THREE);
+// console.log("EffectComposer: ", EffectComposer)
 
 class Transform extends React.Component {
   static propTypes = {
@@ -111,15 +112,15 @@ class Transform extends React.Component {
     this.controls.addEventListener('change', this._onTrackballChange);
 
 
-    console.log("REFS ============", this.refs);
-    const composer = new EffectComposer(react3, camera)
-    console.log("Composer: ", composer);
-    composer.addPass(new EffectComposer.RenderPass(scene, camera))
+    // console.log("REFS ============", this.refs);
+    // const composer = new EffectComposer(react3, camera)
+    // console.log("Composer: ", composer);
+    // composer.addPass(new EffectComposer.RenderPass(scene, camera))
 
-        // Redraw with a shader
-    const effect = new EffectComposer.ShaderPass(THREE.DotScreenShader);
-    composer.addPass(effect);
-    console.log("Composer2: ", composer);
+    //     // Redraw with a shader
+    // const effect = new EffectComposer.ShaderPass(THREE.DotScreenShader);
+    // composer.addPass(effect);
+    // console.log("Composer2: ", composer);
 
   }
 
@@ -229,7 +230,7 @@ class Transform extends React.Component {
           <GrassCube width={100}
             height={50}
             depth={100}
-            color={"brown"}
+            color={"green"}
             map={'https://s3-us-west-2.amazonaws.com/ryaperry-bucket/grasslight-big.jpg'}
           />
 
@@ -241,6 +242,7 @@ class Transform extends React.Component {
             position={this.state.cubePosition}
           />
 
+          <PlantModel objFile="VG14_7.obj" mtlFile="VG14_7.mtl" />
           <HouseCube />
           <mesh
             position={this.groundPosition}

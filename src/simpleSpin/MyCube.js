@@ -7,7 +7,6 @@ class MyCube extends React.Component {
     width: React.PropTypes.number.isRequired,
     height: React.PropTypes.number.isRequired,
     depth: React.PropTypes.number.isRequired,
-    color: React.PropTypes.string.isRequired,
 
   };
 
