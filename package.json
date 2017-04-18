@@ -59,6 +59,9 @@
     "semantic-ui-react": "^0.67.2",
     "stats.js": "^0.17.0",
     "three": "^0.84.0",
+    "three-mtl-loader": "^1.0.1",
+    "three-obj-loader": "^1.1.2",
+    "three-transformcontrols": "^0.78.1",
     "webpack": "^2.3.0"
   },
   "devDependencies": {
