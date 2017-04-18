@@ -10,7 +10,14 @@ import MTLLoader from 'three-mtl-loader'
 import TrackballControls from '../trackball';
 import MouseInput from '../inputs/MouseInput';
 import HouseCube from './HouseCube';
+import GrassCube from './GrassCube';
+import MyCube from './MyCube'
+import PlantModel from './PlantModel'
 
+// import EffectComposer from 'three-effectcomposer';
+// console.log("EffectComposer: ", EffectComposer)
+// EffectComposer(THREE);
+// console.log("EffectComposer: ", EffectComposer)
 
 class Transform extends React.Component {
   static propTypes = {
@@ -22,12 +29,16 @@ class Transform extends React.Component {
     super(props, context);
 
     this.state = {
-      cameraPosition: new THREE.Vector3(0, 500, 1000),
+      cameraPosition: new THREE.Vector3(0, 300, 1000),
       cameraRotation: new THREE.Euler(),
       mouseInput: null,
       hovering: false,
       dragging: false,
+      cubeRotation: new THREE.Euler(),
+      cubePosition: new THREE.Vector3(0,0,0)
     };
+
+
 
     // this.cameraPosition = new THREE.Vector3(0, 500, 1000);
     this.lookAt = new THREE.Vector3(0, 200, 0)
@@ -45,6 +56,31 @@ class Transform extends React.Component {
 
   _onAnimate = () => {
     this._onAnimateInternal();
+
+
+    var orbitCalculation = function(radius) {
+        return {x: (Math.sin((Date.now()%60000)/15000 * Math.PI * 2) * radius),
+                z: (Math.cos((Date.now()%60000)/15000 * Math.PI * 2) * radius)};
+    }
+
+    this.setState({
+      cubeRotation: new THREE.Euler(
+        this.state.cubeRotation.x + 0.1,
+        this.state.cubeRotation.y + 0.1,
+        0
+      ),
+    //   cubePosition: new THREE.Vector3(
+    //     this.state.cubePosition.x + 0.1,
+    //     this.state.cubePosition.y + 0.1,
+    //     0
+    //   )
+      cubePosition: new THREE.Vector3(
+        orbitCalculation(500).x,
+        0,
+        orbitCalculation(500).z
+      )
+    });
+
   };
 
   componentDidMount(){
@@ -56,6 +92,8 @@ class Transform extends React.Component {
     const {
       container,
       camera,
+      react3,
+      scene
     } = this.refs;
 
     container.appendChild(this.stats.domElement);
@@ -72,6 +110,17 @@ class Transform extends React.Component {
 
     this.controls = controls;
     this.controls.addEventListener('change', this._onTrackballChange);
+
+
+    // console.log("REFS ============", this.refs);
+    // const composer = new EffectComposer(react3, camera)
+    // console.log("Composer: ", composer);
+    // composer.addPass(new EffectComposer.RenderPass(scene, camera))
+
+    //     // Redraw with a shader
+    // const effect = new EffectComposer.ShaderPass(THREE.DotScreenShader);
+    // composer.addPass(effect);
+    // console.log("Composer2: ", composer);
 
   }
 
@@ -178,17 +227,16 @@ class Transform extends React.Component {
           <gridHelper size={1000} divisions={10} />
           <directionalLight color={0xffffff} intensity={5} position={new THREE.Vector3(1, 1, 1)} />
 
-          <mesh>
-              <boxGeometry
-                width={100}
-                height={100}
-                depth={100}
-              />
-              <meshBasicMaterial
-                color={new THREE.Color( this.props.color )}
-                map= {THREE.ImageUtils.loadTexture('https://s3-us-west-2.amazonaws.com/ryaperry-bucket/grasslight-big.jpg')}
-              />
-          </mesh>
+
+          <MyCube width={100}
+            height={100}
+            depth={100}
+            color={0x654321}
+            rotation={this.state.cubeRotation}
+            position={this.state.cubePosition}
+          />
+
+          <PlantModel objFile="VG14_7.obj" mtlFile="VG14_7.mtl" />
           <HouseCube />
           <mesh
             position={this.groundPosition}

@@ -7,7 +7,7 @@ OBJLoader(THREE);
 import MTLLoader from 'three-mtl-loader'
 
 
-class HouseCube extends React.Component {
+class PlantModel extends React.Component {
   // static propTypes = {
   //   width: React.PropTypes.number.isRequired,
   //   height: React.PropTypes.number.isRequired,
@@ -22,9 +22,11 @@ class HouseCube extends React.Component {
 
   loadThing(){
     const PATH = "https://s3-us-west-2.amazonaws.com/ryaperry-bucket/"
-    const MTL_FILE = "demo.mtl"
-    const OBJ_FILE = "demo.obj"
+    // const MTL_FILE = "demo.mtl"
+    // const OBJ_FILE = "demo.obj"
 
+    const MTL_FILE = this.props.mtlFile
+    const OBJ_FILE = this.props.objFile
     // const MTL_FILE = "VG14_7.mtl"
     // const OBJ_FILE = "VG14_7.obj"
 
@@ -56,8 +58,8 @@ class HouseCube extends React.Component {
         objLoader.setPath(PATH);
         objLoader.load(OBJ_FILE, object => {
             console.log("in object", object)
-            object.scale.set(500, 500, 500);
-            object.position.set(-150, 0, -900)
+            object.scale.set(70, 70, 70);
+            object.position.set(0, 0, 0)
 
             // for(let child of object.children) {
             //     console.log("looking at the children of object", child);
@@ -68,18 +70,18 @@ class HouseCube extends React.Component {
               console.log("traversing children ", child)
               if ( child instanceof THREE.Mesh ) {
                 console.log("child thats a mesh! ", child)
-                var loader = new THREE.TextureLoader();
-                loader.crossOrigin = '*'; // Use as needed
-                var imgTexture = loader.load('https://s3-us-west-2.amazonaws.com/ryaperry-bucket/firstUVLayoutHouse.png');
-                child.material.map = imgTexture
-                // child.material.side = THREE.BackSide
+                // var loader = new THREE.TextureLoader();
+                // loader.crossOrigin = '*'; // Use as needed
+                // var imgTexture = loader.load('https://s3-us-west-2.amazonaws.com/ryaperry-bucket/firstUVLayoutHouse.png');
+                // child.material.map = imgTexture
+                // // child.material.side = THREE.BackSide
 
               }
             });
 
             console.log("this is the object", object);
             console.log("before: this is the object that is binded to this", this);
-            this.refs.houseGroup.add(object);
+            this.refs.plantModelGroup.add(object);
             console.log("after: this is the object that is binded to this", this);
 
         }, onProgress, onError);
@@ -93,8 +95,8 @@ class HouseCube extends React.Component {
 
   render() {
     return (
-      <group ref="houseGroup" />
+      <group ref="plantModelGroup" />
     );
   }
 }
-export default HouseCube;
+export default PlantModel;
