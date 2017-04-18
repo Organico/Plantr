@@ -148,8 +148,9 @@ class Transform extends React.Component {
         mainCamera="camera" // this points to the perspectiveCamera below
         width={width}
         height={height}
+        antialias
+        sortObjects={false}
         onAnimate={this._onAnimate}
-
         shadowMapEnabled
         shadowMapType={THREE.PCFShadowMap}
         clearColor={0x7EC0EE}
