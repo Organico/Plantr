@@ -8,21 +8,21 @@ import axios from 'axios';
 
 const CreateNewPost = React.createClass({
 
-    savePost() {
-    const profile = auth.getProfile();
-    const profilePic = {
-      backgroundImage: 'url(' + profile.picture + ')',
-      backgroundRepeat: 'no-repeat',
-      backgroundSize: 'cover',
-      backgroundPosition: 'center'
-    }
-      console.log("Saving post...")
-      console.log(this.props);
+    savePost(title, message) {
+      const profile = auth.getProfile();
+      const profilePic = {
+        backgroundImage: 'url(' + profile.picture + ')',
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center'
+      }
+      console.log('this is the title: ', title)
+      console.log('this is the message: ', message)
       axios.post('/api/forum',
         {
           profile: profile.picture,
-          title: this.props.title,
-          message: this.props.message,
+          title: title,
+          message: message,
           nickname: profile.nickname
         }
       ).then((res) => {
@@ -36,32 +36,19 @@ const CreateNewPost = React.createClass({
     render() {
     let titleInput;
     let messageInput;
-    let message;
     return (
       <div>
-        <form
-          onSubmit={e => {
-            e.preventDefault();
-            if (!titleInput.value.trim()) {
-              return;
-            }
-            message = {title: titleInput.value, message: messageInput.value};
-            this.props.dispatchAddPost(message);
-            // dispatch(addTodo(messageInput.value));
-            titleInput.value = '';
-            messageInput.value = '';
-          }}
-        >
-          <input ref={node => { titleInput = node; }} />
-          <button type="submit" onClick={() => {
-              this.savePost()}}>
-            Add Post
-          </button>
-          <br />
-        <textarea rows="4" cols="50" ref={node => {messageInput = node; }}>
-
-        </textarea>
-        </form>
+      <input ref={(node) => titleInput= node } type="string" name="titleInput" placeholder='Your title'/>
+      <br />
+      <textarea  rows="4" cols="50" ref={(node) => messageInput = node } type="string" name="messageInput" placeholder='Your message'>
+      </textarea>
+      <button type="submit" onClick={() => {
+          this.savePost(titleInput.value, messageInput.value)
+          titleInput.value = '';
+          messageInput.value = '';
+        }}>
+        Add Post
+      </button>
       </div>
     );
   }
@@ -77,6 +64,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
 
     dispatchAddPost(message) {
+      console.log('dispatch message: ', message)
       dispatch(addPost(message));
     }
   };
