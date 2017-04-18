@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { updateWeather } from '../Actions/WeatherActions.js';
 import weatherReducer from '../reducers/WeatherReducer.js'
 import CloudAnimation from './CloudAnimation'
-
+//take off class names if using CloudAnmiation and homemade animations
 
 const WUNDERGROUND_KEY = "b56f2c0800fdf6e4";
 
@@ -76,6 +76,8 @@ class Weather extends React.Component {
               this.setState({
                   coordinates: pos.coords
               });
+              //***Turns into ==> this.dispatchSetCoordinates(pos.coords)
+
               this.check();
           }, () => {
               this.check();
@@ -95,7 +97,7 @@ class Weather extends React.Component {
             if (!SUPPORTED_LANGUAGES.includes(lang)) {
                 lang = "EN";
             }
-            let crd = this.state.coordinates;
+            let crd = this.state.coordinates; //***Turns into ==> this.props.coordinates
             crd = crd || {
                 latitude: +ip.loc.split(",")[0]
               , longitude: +ip.loc.split(",")[1]
@@ -107,13 +109,16 @@ class Weather extends React.Component {
         .then(c => c.json())
         .then(forecast => {
             this.setState({
-                forecast
+                forecast: forecast
             });
+
+          //***Turns into ==> this.dispatchSetForecast(forecast);
         });
   }
 
   renderWeatherToday () {
       const today = this.state.forecast.forecast.txt_forecast.forecastday[0];
+      //***Turns into this.props.forecast.forecast.txt_forecast.forecastday[0]
       const temp = getTemp(today.fcttext_metric);
 
 
@@ -162,8 +167,9 @@ class Weather extends React.Component {
 
   renderNextDays () {
       const nextDays = []
-          , data = this.state.forecast.forecast.txt_forecast.forecastday
-          ;
+          , data = this.state.forecast.forecast.txt_forecast.forecastday;
+          //***Turns into this.props.forecast.forecast.txt_forecast.forecastday
+
 
       for (var i = 2; i < data.length; i += 2) {
         nextDays.push(data[i])
@@ -178,6 +184,7 @@ class Weather extends React.Component {
 
   renderWeather () {
       if (!this.state.forecast) {
+      //***Turns into if (!this.props.forecast) {
           return (
             <div className="weather-container">
                 <p>Loading...</p>
@@ -220,13 +227,21 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-     dispatchUpdateWeather (weather) {
+     dispatchUpdateWeather(weather) {
       dispatch(updateWeather(weather))
+    },
+
+    dispatchSetCoordinates(coordinates){
+      dispatch(setCoordinates(coordinates))
+    },
+
+    dispatchSetForecast(forecast){
+      dispatch(setForecast(forecast))
     }
+
   }
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Weather);
-
 
 // export default Weather;

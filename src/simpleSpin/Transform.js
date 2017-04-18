@@ -22,7 +22,7 @@ class Transform extends React.Component {
   };
   constructor(props, context) {
     super(props, context);
-    this.cameraPosition = new THREE.Vector3(550, 500, 1000);
+    this.cameraPosition = new THREE.Vector3(0, 500, 1000);
     this.lookAt = new THREE.Vector3(0, 200, 0)
     this.lightPosition = new THREE.Vector3(1, 1, 1)
     THREE.ImageUtils.crossOrigin = ''; //moved from render()
@@ -92,6 +92,7 @@ class Transform extends React.Component {
                 loader.crossOrigin = '*'; // Use as needed
                 var imgTexture = loader.load('https://s3-us-west-2.amazonaws.com/ryaperry-bucket/firstUVLayoutHouse.png');
                 child.material.map = imgTexture
+                // child.material.side = THREE.BackSide
                 // child.material.map = THREE.ImageUtils.loadTexture('https://s3-us-west-2.amazonaws.com/ryaperry-bucket/firstUVLayout.png');
               }
             });
