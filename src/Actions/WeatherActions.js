@@ -5,3 +5,17 @@ export function updateWeather(weather) {
     weather
   }
 }
+
+export function setCoordinates(coordinates){
+  return{
+    type: 'SET_COORDINATES',
+    coordinates
+  }
+}
+
+export function setForecast(forecast){
+  return{
+    type: 'SET_FORECAST',
+    forecast
+  }
+}

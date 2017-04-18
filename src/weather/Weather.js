@@ -1,7 +1,7 @@
 import React from 'react';
 // import './App.css';
 import { connect } from 'react-redux'
-import { updateWeather } from '../Actions/WeatherActions.js';
+import { setCoordinates, setForecast } from '../Actions/WeatherActions.js';
 import weatherReducer from '../reducers/WeatherReducer.js'
 import CloudAnimation from './CloudAnimation'
 //take off class names if using CloudAnmiation and homemade animations
@@ -72,11 +72,14 @@ class Weather extends React.Component {
       };
 
       if (navigator.geolocation) {
+        console.log("THIS 23oi4uoiusndlakjsdf: ", this );
           navigator.geolocation.getCurrentPosition(pos => {
+            console.log("POS.coords: ", pos.coords);
               this.setState({
                   coordinates: pos.coords
               });
               //***Turns into ==> this.dispatchSetCoordinates(pos.coords)
+              this.props.dispatchSetCoordinates(pos.coords)
 
               this.check();
           }, () => {
@@ -108,11 +111,12 @@ class Weather extends React.Component {
         })
         .then(c => c.json())
         .then(forecast => {
+
             this.setState({
                 forecast: forecast
             });
 
-          //***Turns into ==> this.dispatchSetForecast(forecast);
+            this.props.dispatchSetForecast(forecast);
         });
   }
 
@@ -166,10 +170,14 @@ class Weather extends React.Component {
   }
 
   renderNextDays () {
+      console.log("this state right now: ", this.state)
+      console.log("this [p] right now: ", this.props)
       const nextDays = []
           , data = this.state.forecast.forecast.txt_forecast.forecastday;
           //***Turns into this.props.forecast.forecast.txt_forecast.forecastday
 
+      // console.log("TESTING EUALITY ",this.state.forecast.forecast.txt_forecast.forecastday )
+      // console.log("TESTING EUALITY ",this.props.forecast.forecast.txt_forecast.forecastday )
 
       for (var i = 2; i < data.length; i += 2) {
         nextDays.push(data[i])
@@ -217,11 +225,13 @@ class Weather extends React.Component {
 const mapStateToProps = (state) => {
   return {
   //garden state
-  temp_f: state.weatherReducer.temp_f,
-  temp_c: state.weatherReducer.temp_c,
-  weather_period_0: state.weatherReducer.weather_period_0,
-  weather_period_1: state.weatherReducer.weather_period_1,
-  weather_period_2: state.weatherReducer.weather_period_2,
+  // temp_f: state.weatherReducer.temp_f,
+  // temp_c: state.weatherReducer.temp_c,
+  // weather_period_0: state.weatherReducer.weather_period_0,
+  // weather_period_1: state.weatherReducer.weather_period_1,
+  // weather_period_2: state.weatherReducer.weather_period_2,
+  forecast: state.weatherReducer.forecast,
+  coordinates: state.weatherReducer.coordinates
   };
 };
 
