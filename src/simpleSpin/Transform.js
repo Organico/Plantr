@@ -29,7 +29,7 @@ class Transform extends React.Component {
     super(props, context);
 
     this.state = {
-      cameraPosition: new THREE.Vector3(0, 500, 1000),
+      cameraPosition: new THREE.Vector3(0, 300, 1000),
       cameraRotation: new THREE.Euler(),
       mouseInput: null,
       hovering: false,
