@@ -1,4 +1,5 @@
 import React from 'react';
+import PureRenderMixin from 'react/lib/ReactComponentWithPureRenderMixin';
 import React3 from 'react-three-renderer';
 import * as THREE from 'three';
 import Stats from 'stats.js';
@@ -11,7 +12,8 @@ import MTLLoader from 'three-mtl-loader'
 
 // import ParsedModel from './parsed_model';
 // import createMaterial from './create_material';
-
+import TrackballControls from '../trackball';
+import MouseInput from '../inputs/MouseInput';
 
 
 class Transform extends React.Component {
@@ -22,14 +24,24 @@ class Transform extends React.Component {
   };
   constructor(props, context) {
     super(props, context);
-    this.cameraPosition = new THREE.Vector3(0, 500, 1000);
+
+    this.state = {
+      cameraPosition: new THREE.Vector3(0, 500, 1000),
+      cameraRotation: new THREE.Euler(),
+      mouseInput: null,
+      hovering: false,
+      dragging: false,
+    };
+
+
+
+    // this.cameraPosition = new THREE.Vector3(0, 500, 1000);
     this.lookAt = new THREE.Vector3(0, 200, 0)
     this.lightPosition = new THREE.Vector3(1, 1, 1)
     THREE.ImageUtils.crossOrigin = ''; //moved from render()
     this.object;
 
-    this._onAnimate = () => {
-    };
+
     this.loadThing = this.loadThing.bind(this);
     this.loadedObject;
 
@@ -108,8 +120,13 @@ class Transform extends React.Component {
             // render(YourComponent, document.getElementById('your-container'));
         }, onProgress, onError);
     });
-
   }
+
+  shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate;
+
+  _onAnimate = () => {
+    this._onAnimateInternal();
+  };
 
   componentDidMount(){
     this.loadThing();
@@ -119,8 +136,72 @@ class Transform extends React.Component {
     console.log("logging the loadedObject in the comoponentDidMount", this.loadedObject)
     // this.refs.group.add(this.loadedObject);
     // this.stats = new Stats();
+    this.stats = new Stats();
+
+    this.stats.domElement.style.position = 'absolute';
+    this.stats.domElement.style.top = '0px';
+
+    const {
+      container,
+      camera,
+    } = this.refs;
+
+    container.appendChild(this.stats.domElement);
+
+    const controls = new TrackballControls(camera);
+
+    controls.rotateSpeed = 1.0;
+    controls.zoomSpeed = 1.2;
+    controls.panSpeed = 0.8;
+    controls.noZoom = false;
+    controls.noPan = false;
+    controls.staticMoving = true;
+    controls.dynamicDampingFactor = 0.3;
+
+    this.controls = controls;
+    this.controls.addEventListener('change', this._onTrackballChange);
+
+  }
+
+  _onTrackballChange = () => {
+    this.setState({
+      cameraPosition: this.refs.camera.position.clone(),
+      cameraRotation: this.refs.camera.rotation.clone(),
+    });
+  };
 
 
+ _onAnimateInternal() {
+    const {
+      mouseInput,
+      camera,
+    } = this.refs;
+
+    if (!mouseInput.isReady()) {
+      const {
+        scene,
+        container,
+      } = this.refs;
+
+      mouseInput.ready(scene, container, camera);
+      // mouseInput.restrictIntersections(this.cubes);
+      mouseInput.setActive(false);
+    }
+
+    if (this.state.mouseInput !== mouseInput) {
+      this.setState({
+        mouseInput,
+      });
+    }
+
+    if (this.state.camera !== camera) {
+      this.setState({
+        camera,
+      });
+    }
+
+    this.stats.update();
+    this.controls.update();
   }
 
   render() {
@@ -129,7 +210,30 @@ class Transform extends React.Component {
       height,
     } = this.props;
 
-    return (<React3
+
+    const {
+      cameraPosition,
+      cameraRotation,
+
+      mouseInput,
+      camera,
+
+      hovering,
+      dragging,
+    } = this.state;
+
+    const style = {};
+
+    var grassLoader = new THREE.TextureLoader();
+    grassLoader.crossOrigin = '*'; // Use as needed
+    var grassTexture = grassLoader.load('https://s3-us-west-2.amazonaws.com/ryaperry-bucket/grasslight-big.jpg');
+
+    return (
+    <div
+      ref="container"
+      style={style}
+    >
+    <React3
       mainCamera="camera" // this points to the perspectiveCamera below
       width={width}
       height={height}
@@ -141,6 +245,10 @@ class Transform extends React.Component {
 
       ref="react3"
     >
+      <module
+        ref="mouseInput"
+        descriptor={MouseInput}
+      />
       <scene ref="scene">
         <perspectiveCamera
           name="camera"
@@ -148,7 +256,8 @@ class Transform extends React.Component {
           aspect={width / height}
           near={1}
           far={3000}
-          position={this.cameraPosition}
+          ref="camera"
+          position={cameraPosition}
           lookAt={this.lookAt}
         />
         <cameraHelper name="cameraHelper"
@@ -156,7 +265,7 @@ class Transform extends React.Component {
           aspect={width / height}
           near={1}
           far={3000}
-          position={this.cameraPosition}
+          position={cameraPosition}
           lookAt={this.lookAt}/>
             <ambientLight
                 color={new THREE.Color("white")}
@@ -192,6 +301,7 @@ class Transform extends React.Component {
                     >
                       <texture
                         url={'https://s3-us-west-2.amazonaws.com/ryaperry-bucket/grasslight-big.jpg'}
+                        crossOrigin="*"
                         wrapS={THREE.RepeatWrapping}
                         wrapT={THREE.RepeatWrapping}
                         repeat={this.groundRepeat}
@@ -201,7 +311,8 @@ class Transform extends React.Component {
                   </mesh>
 
       </scene>
-    </React3>);
+    </React3>
+    </div>);
   }
 }
 export default Transform;

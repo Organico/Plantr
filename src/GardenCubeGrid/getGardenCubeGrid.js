@@ -57,12 +57,6 @@ class GardenCubeGridView extends ExampleBase {
   componentDidMount() {
     this.stats = new Stats();
 
-
-
-
-
-
-
     this.stats.domElement.style.position = 'absolute';
     this.stats.domElement.style.top = '0px';
 
