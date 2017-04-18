@@ -8,7 +8,7 @@ import forumReducer from './reducers/forumReducer';
 const rootReducer = combineReducers({
   gardenReducer,
   userProfileReducer,
-  forumReducer
+  forumReducer,
   weatherReducer
 });
 
