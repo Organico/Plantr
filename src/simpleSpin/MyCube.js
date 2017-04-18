@@ -71,6 +71,8 @@ class MyCube extends React.Component {
         <gridHelper size={1000} divisions={10} />
         <mesh
           rotation={this.state.cubeRotation}
+          castShadow
+          receiveShadow
         >
           <boxGeometry
             width={1}
@@ -78,6 +80,7 @@ class MyCube extends React.Component {
             depth={1}
           />
           <meshBasicMaterial
+            color={new THREE.Color( this.props.color )}
             color={new THREE.Color( this.props.color )}
           />
         </mesh>

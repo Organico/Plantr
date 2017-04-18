@@ -1,6 +1,16 @@
 import React from 'react';
+import PureRenderMixin from 'react/lib/ReactComponentWithPureRenderMixin';
 import React3 from 'react-three-renderer';
 import * as THREE from 'three';
+import Stats from 'stats.js';
+
+import OBJLoader from 'three-obj-loader'
+OBJLoader(THREE);
+import MTLLoader from 'three-mtl-loader'
+import TrackballControls from '../trackball';
+import MouseInput from '../inputs/MouseInput';
+import HouseCube from './HouseCube';
+
 
 class Transform extends React.Component {
   static propTypes = {
@@ -8,17 +18,102 @@ class Transform extends React.Component {
     height: React.PropTypes.number.isRequired,
     color: React.PropTypes.string.isRequired,
   };
-
   constructor(props, context) {
     super(props, context);
-    console.log("Transform HASE BEEN CREATED");
 
-    this.cameraPosition = new THREE.Vector3(1000, 500, 1000);
-    this.lookAt = new THREE.Vector3(0, 200, 0)
-
-    this._onAnimate = () => {
-
+    this.state = {
+      cameraPosition: new THREE.Vector3(0, 500, 1000),
+      cameraRotation: new THREE.Euler(),
+      mouseInput: null,
+      hovering: false,
+      dragging: false,
     };
+
+    // this.cameraPosition = new THREE.Vector3(0, 500, 1000);
+    this.lookAt = new THREE.Vector3(0, 200, 0)
+    this.lightPosition = new THREE.Vector3(1, 1, 1)
+    THREE.ImageUtils.crossOrigin = ''; //moved from render()
+    this.object;
+
+    this.groundPosition = new THREE.Vector3(0, -25, 0);
+    this.groundRotation = new THREE.Euler(-Math.PI / 2, 0, 0);
+    this.groundRepeat = new THREE.Vector2(25, 25);
+
+  }
+
+  shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate;
+
+  _onAnimate = () => {
+    this._onAnimateInternal();
+  };
+
+  componentDidMount(){
+
+    this.stats = new Stats();
+    this.stats.domElement.style.position = 'absolute';
+    this.stats.domElement.style.top = '0px';
+
+    const {
+      container,
+      camera,
+    } = this.refs;
+
+    container.appendChild(this.stats.domElement);
+
+    const controls = new TrackballControls(camera);
+
+    controls.rotateSpeed = 1.0;
+    controls.zoomSpeed = 1.2;
+    controls.panSpeed = 0.8;
+    controls.noZoom = false;
+    controls.noPan = false;
+    controls.staticMoving = true;
+    controls.dynamicDampingFactor = 0.3;
+
+    this.controls = controls;
+    this.controls.addEventListener('change', this._onTrackballChange);
+
+  }
+
+  _onTrackballChange = () => {
+    this.setState({
+      cameraPosition: this.refs.camera.position.clone(),
+      cameraRotation: this.refs.camera.rotation.clone(),
+    });
+  };
+
+
+ _onAnimateInternal() {
+    const {
+      mouseInput,
+      camera,
+    } = this.refs;
+
+    if (!mouseInput.isReady()) {
+      const {
+        scene,
+        container,
+      } = this.refs;
+
+      mouseInput.ready(scene, container, camera);
+      // mouseInput.restrictIntersections(this.cubes);
+      mouseInput.setActive(false);
+    }
+
+    if (this.state.mouseInput !== mouseInput) {
+      this.setState({
+        mouseInput,
+      });
+    }
+
+    if (this.state.camera !== camera) {
+      this.setState({
+        camera,
+      });
+    }
+
+    this.stats.update();
+    this.controls.update();
   }
 
   render() {
@@ -26,65 +121,101 @@ class Transform extends React.Component {
       width,
       height,
     } = this.props;
- const imageMaterial =  new THREE.MeshBasicMaterial({
-    map: THREE.ImageUtils.loadTexture('https://static.pexels.com/photos/166651/pexels-photo-166651.jpeg')
-    });
 
-  var sphere = React.createElement(
-            React3.Mesh,
-            {
-                geometry: new THREE.SphereGeometry(100, 32, 32),
-                material: imageMaterial,
-                position: new THREE.Vector3(0, 0, 0),
-                scale: new THREE.Vector3(1, 1, -1),
-                quaternion: new THREE.Quaternion()
-            }
-        );
+    const {
+      cameraPosition,
+      cameraRotation,
 
- console.log("The color is ", this.props.color)
-    // or you can use:
-    // width = window.innerWidth
-    // height = window.innerHeight
+      mouseInput,
+      camera,
 
-    return (<React3
-      mainCamera="camera" // this points to the perspectiveCamera below
-      width={width}
-      height={height}
+      hovering,
+      dragging,
+    } = this.state;
 
-      onAnimate={this._onAnimate}
+    const style = {};
+
+    var grassLoader = new THREE.TextureLoader();
+    grassLoader.crossOrigin = '*'; // Use as needed
+    var grassTexture = grassLoader.load('https://s3-us-west-2.amazonaws.com/ryaperry-bucket/grasslight-big.jpg');
+
+    return (
+    <div
+      ref="container"
+      style={style}
     >
-      <scene>
-        <perspectiveCamera
-          name="camera"
-          fov={70}
-          aspect={width / height}
-          near={1}
-          far={3000}
+      <React3
+        mainCamera="camera" // this points to the perspectiveCamera below
+        width={width}
+        height={height}
+        antialias
+        sortObjects={false}
+        onAnimate={this._onAnimate}
+        shadowMapEnabled
+        shadowMapType={THREE.PCFShadowMap}
+        clearColor={0x7EC0EE}
 
-          position={this.cameraPosition}
-          lookAt={this.lookAt}
-
+        ref="react3"
+      >
+        <module
+          ref="mouseInput"
+          descriptor={MouseInput}
         />
-        <gridHelper size={1000} divisions={10} />
-        <directionalLight color={0xffffff} intensity={2} position={(1,1,1)} />
-
-
-         <mesh
-        >
-          <boxGeometry
-            width={200}
-            height={200}
-            depth={200}
+        <scene ref="scene">
+          <perspectiveCamera
+            name="camera"
+            fov={70}
+            aspect={width / height}
+            near={1}
+            far={3000}
+            ref="camera"
+            position={cameraPosition}
+            lookAt={this.lookAt}
           />
-          <meshBasicMaterial
-            color={new THREE.Color( this.props.color )}
-            map= {new THREE.ImageUtils.loadTexture('https://static.pexels.com/photos/166651/pexels-photo-166651.jpeg')}
+          <ambientLight
+            color={new THREE.Color("white")}
           />
-        </mesh>
+          <gridHelper size={1000} divisions={10} />
+          <directionalLight color={0xffffff} intensity={5} position={new THREE.Vector3(1, 1, 1)} />
 
-      </scene>
-    </React3>);
+          <mesh>
+              <boxGeometry
+                width={100}
+                height={100}
+                depth={100}
+              />
+              <meshBasicMaterial
+                color={new THREE.Color( this.props.color )}
+                map= {THREE.ImageUtils.loadTexture('https://s3-us-west-2.amazonaws.com/ryaperry-bucket/grasslight-big.jpg')}
+              />
+          </mesh>
+          <HouseCube />
+          <mesh
+            position={this.groundPosition}
+            rotation={this.groundRotation}
+            receiveShadow
+          >
+              <planeBufferGeometry
+                width={20000}
+                height={20000}
+              />
+              <meshPhongMaterial
+                color={0xffffff}
+                specular={0x111111}
+              >
+                <texture
+                  url={'https://s3-us-west-2.amazonaws.com/ryaperry-bucket/grasslight-big.jpg'}
+                  crossOrigin="*"
+                  wrapS={THREE.RepeatWrapping}
+                  wrapT={THREE.RepeatWrapping}
+                  repeat={this.groundRepeat}
+                  anisotropy={16}
+                />
+              </meshPhongMaterial>
+          </mesh>
+        </scene>
+      </React3>
+    </div>);
   }
 }
-
 export default Transform;

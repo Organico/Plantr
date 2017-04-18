@@ -12,7 +12,7 @@ class MyCubeView extends React.Component {
   }
 
   render() {
-    return (<Transform width={500} height={500} color={"green"} />);
+    return (<Transform width={800} height={800} color={"white"} />);
   }
 }
 

@@ -17,13 +17,12 @@ import GardenSquareGridView from './GardenSquareGrid/getGardenSquareGrid';
 import MakeGardenSquareGridView from './GardenSquareGrid/makeGardenSquareGrid';
 import GardenCubeGridView from './GardenCubeGrid/getGardenCubeGrid';
 import Layout from './Layout';
-import Test from './Test';
-import Navigation from './Navigation';
 import Profile from './Profile';
 import NavBar from './NavBar';
-import MyCubeView from './simpleSpin/index';
+import MyCubeView from './SimpleSpin/index';
 import Forum from './Forum/Forum';
 // <Route path="/userprofile" component={UserProfile}></Route>
+import Weather from './weather/Weather'
 const auth = new AuthService('vBOwXk8xIgy3kroSs5vz1TFfrYyFQNFf', 'skebaish1992.auth0.com');
 
 // validate authentication for private routes
@@ -61,13 +60,14 @@ const App = React.createClass({
                 <Route exact path="/" component={Layout}></Route>
                 <Route path="/home" component={Home}></Route>
                 <Route path="/login" component={Login}></Route>
-                <Route path="/test" component={MyCubeView}></Route>
+                <Route path="/plant" component={MyCubeView}></Route>
                 <Route path="/layout" component={Layout}></Route>
                 <Route path="/cubes" component={GardenCubeGridView}></Route>
                 <Route path="/squares" component={GardenSquareGridView}></Route>
                 <Route path="/creategarden" component={MakeGardenSquareGridView}></Route>
                 <Route path="/profile" component={Profile}></Route>
                 <Route path="/forum" component={Forum}></Route>
+                <Route path="/weather" component={Weather}></Route>
 
 
               </div>

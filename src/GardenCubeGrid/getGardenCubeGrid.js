@@ -7,7 +7,6 @@ import ExampleBase from '../ExampleBase';
 import TrackballControls from '../trackball';
 import MouseInput from '../inputs/MouseInput';
 import AllCubes from './AllCubes';
-import Navigation from '../Navigation';
 import sizeMe from 'react-sizeme';
 
 import { connect } from 'react-redux'
@@ -56,12 +55,6 @@ class GardenCubeGridView extends ExampleBase {
 
   componentDidMount() {
     this.stats = new Stats();
-
-
-
-
-
-
 
     this.stats.domElement.style.position = 'absolute';
     this.stats.domElement.style.top = '0px';

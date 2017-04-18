@@ -12,6 +12,7 @@ import PlantGrid from './PlantGrid.js';
 import querystring from 'querystring'
 import MyRect from './MyRectangle.js'
 import SeedPacket from '../SeedPacket/SeedPacket.js';
+// import CloudAnimation from '../weather/CloudAnimation'
 
 
 
@@ -67,7 +68,9 @@ const MakeGardenSquareGridView = React.createClass({
             </button>
             <br></br><br></br>
         <div className="row" style={center}>
+        <div>
 
+        </div>
 
           <div className="col-6">
             <Stage id="cat" width={600} height={600} fill="white" stroke="black" className="text-center">
