@@ -17,11 +17,9 @@ import GardenSquareGridView from './GardenSquareGrid/getGardenSquareGrid';
 import MakeGardenSquareGridView from './GardenSquareGrid/makeGardenSquareGrid';
 import GardenCubeGridView from './GardenCubeGrid/getGardenCubeGrid';
 import Layout from './Layout';
-import Test from './Test';
-import Navigation from './Navigation';
 import Profile from './Profile';
 import NavBar from './NavBar';
-import MyCubeView from './simpleSpin/index';
+import MyCubeView from './SimpleSpin/index';
 import Forum from './Forum/Forum';
 // <Route path="/userprofile" component={UserProfile}></Route>
 import Weather from './weather/Weather'

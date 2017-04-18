@@ -7,7 +7,6 @@ import ExampleBase from '../ExampleBase';
 import TrackballControls from '../trackball';
 import MouseInput from '../inputs/MouseInput';
 import AllCubes from './AllCubes';
-import Navigation from '../Navigation';
 import sizeMe from 'react-sizeme';
 
 import { connect } from 'react-redux'
