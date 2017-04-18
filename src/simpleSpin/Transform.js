@@ -227,12 +227,6 @@ class Transform extends React.Component {
           <gridHelper size={1000} divisions={10} />
           <directionalLight color={0xffffff} intensity={5} position={new THREE.Vector3(1, 1, 1)} />
 
-          <GrassCube width={100}
-            height={50}
-            depth={100}
-            color={"green"}
-            map={'https://s3-us-west-2.amazonaws.com/ryaperry-bucket/grasslight-big.jpg'}
-          />
 
           <MyCube width={100}
             height={100}
