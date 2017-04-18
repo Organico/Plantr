@@ -138,7 +138,8 @@ app.post('/api/forum', (req, res, next) => {
     profile: req.body.profile,
     title: req.body.title,
     message: req.body.message,
-    nickname: req.body.nickname
+    nickname: req.body.nickname,
+    email: req.body.email
   });
   forum.save({}, (err)=> {
     if (err) {

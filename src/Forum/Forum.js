@@ -2,22 +2,20 @@ import React from 'react';
 import ReactDOM from 'react-dom'
 import { connect } from 'react-redux';
 import ForumPost from './ForumPost';
+// import ForumPostDetails from './ForumPostDetails';
 import CreateNewPost from './CreateNewPost';
 import axios from 'axios';
 import { setPosts } from '../Actions/ForumActions';
 
-// import axios from 'axios';
-// import { setUserParameters } from '../action';
-// import GardenGrid from './GardenSquareGrid/GardenGrid';
 
 const Forum = React.createClass({
 
    getPost() {
     axios.get('/api/forum')
     .then((res) => {
+      console.log('this props FORUM', this.props)
       var dbPostData = res.data;
       this.props.dispatchSetPost(dbPostData)
-      console.log("setPostCalled ", res);
     }).catch((err) => {
       console.error(err);
       console.log("Error in Forum()");
@@ -25,7 +23,7 @@ const Forum = React.createClass({
   },
 
   render() {
-    console.log('this.props', this.props)
+    console.log('this props POST', this.props.posts)
     return(
         <div className="row">
           <button type="submit" onClick={ () => {
@@ -36,8 +34,7 @@ const Forum = React.createClass({
           </div>
           <div className="col-md-6">
             {this.props.posts.map((post, i) =>
-              <ForumPost key={i} title={post.title.split(" ").slice(0, 20).join(" ")
-            } message={post.message.split(" ").slice(0, 100).join(" ") + "..."}/>
+                <ForumPost key={i} post={post} nickname={post.nickname} title={post.title} message={post.message} />
             )}
           </div>
         </div>
@@ -47,7 +44,8 @@ const Forum = React.createClass({
 
 const mapStateToProps = (state) => {
   return {
-    posts: state.forumReducer.posts
+    posts: state.forumReducer.posts,
+    currentPost: state.forumReducer.currentPost
   };
 };
 
