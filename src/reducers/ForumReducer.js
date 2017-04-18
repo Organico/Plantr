@@ -1,45 +1,40 @@
 const initialForumState = {
-     subject: "",
-     body: "",
-     subscriberIds: [""],
-     altTopicId: ""
+     // // subject: "",
+     // // body: "",
+     // // subscriberIds: [""],
+     // // altTopicId: ""
+     // currentPost: {
+     //   id: "",
+     //   text: "",
+     //   completed: true
+     // },
+     posts: []
 }
 
-const post = (state, action) => {
-  switch (action.type) {
-    case 'ADD_POST':
-      return {
-        id: action.id,
-        text: action.text,
-        completed: false,
-      };
-    case 'TOGGLE_TODO':
-      if (state.id !== action.id) {
-        return state;
-      }
-      return {
-        ...state,
-        completed: !state.completed,
-      };
-    default:
-      return state;
-  }
+
+const addPost = (state, action) => {
+  var postToAdd = action.message;
+  var newPosts = state.posts.slice();
+  newPosts.push(postToAdd);
+  var newState = {};
+
+  Object.assign(newState, state, {posts: newPosts});
+
+  console.log('(before) state: ', state);
+  console.log('(after) state: ', newState);
+  return newState;
 };
 
-const posts = (state = [], action) => {
+function forumReducer(state = initialForumState, action) {
   switch (action.type) {
     case 'ADD_POST':
-      return [
-        ...state,
-        todo(undefined, action),
-      ];
-    case 'TOGGLE_TODO':
-      return state.map(t =>
-        todo(t, action)
-      );
-    default:
-      return state;
-  }
-};
+  return addPost(state, action);
 
-export default posts;
+  default:
+    return state;
+  }
+}
+
+
+
+export default forumReducer;

@@ -125,3 +125,7 @@ body{
 #seedHolder {
   height: 350px;
 }
+
+.forumTitle {
+  font-weight: bold;
+}

@@ -127,14 +127,18 @@ app.post('/api/plants', (req, res, next) => {
 
 app.post('/api/forum', (req, res, next) => {
   let forum = new Forum({
-    category: req.body.category,
-    subjectLine: req.body.subjectLine,
+    // category: req.body.category,
+    // subjectLine: req.body.subjectLine,
+    // message: req.body.message,
+    // tags: req.body.tags,
+    // region: req.body.region,
+    // replies: req.body.replies,
+    // voteCount: req.body.voteCount,
+    // userId: req.body.userId,
+    profile: req.body.profile,
+    title: req.body.title,
     message: req.body.message,
-    tags: req.body.tags,
-    region: req.body.region,
-    replies: req.body.replies,
-    voteCount: req.body.voteCount,
-    userId: req.body.userId,
+    nickname: req.body.nickname
   });
   forum.save({}, (err)=> {
     if (err) {

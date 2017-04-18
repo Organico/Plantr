@@ -2,12 +2,13 @@ import React, { PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import auth from '../client.js';
-import addPost from '../actions/ForumActions';
+import { addPost } from '../Actions/ForumActions';
+import axios from 'axios';
 
 
 const CreateNewPost = React.createClass({
 
-    render() {
+    savePost() {
     const profile = auth.getProfile();
     const profilePic = {
       backgroundImage: 'url(' + profile.picture + ')',
@@ -15,6 +16,24 @@ const CreateNewPost = React.createClass({
       backgroundSize: 'cover',
       backgroundPosition: 'center'
     }
+      console.log("Saving post...")
+      console.log(this.props);
+      axios.post('/api/forum',
+        {
+          profile: profile.picture,
+          title: this.props.title,
+          message: this.props.message,
+          nickname: profile.nickname
+        }
+      ).then((res) => {
+        console.log("Successful post");
+      }).catch((err) => {
+        console.error(err);
+        console.log("Error in savePost()");
+      });
+    },
+
+    render() {
     let titleInput;
     let messageInput;
     let message;
@@ -26,15 +45,16 @@ const CreateNewPost = React.createClass({
             if (!titleInput.value.trim()) {
               return;
             }
-            message = JSON.stringify({title: titleInput.value, message: messageInput.value});
-            dispatch(addPost(message));
+            message = {title: titleInput.value, message: messageInput.value};
+            this.props.dispatchAddPost(message);
             // dispatch(addTodo(messageInput.value));
             titleInput.value = '';
             messageInput.value = '';
           }}
         >
           <input ref={node => { titleInput = node; }} />
-          <button type="submit">
+          <button type="submit" onClick={() => {
+              this.savePost()}}>
             Add Post
           </button>
           <br />
@@ -47,8 +67,19 @@ const CreateNewPost = React.createClass({
   }
 });
 
-CreateNewPost.propTypes = {
-  dispatch: PropTypes.func.isRequired, //need to connect dispatch
+const mapStateToProps = (state) => {
+  return {
+    posts: state.forumReducer.posts
+  };
 };
 
-export default CreateNewPost;
+const mapDispatchToProps = (dispatch) => {
+  return {
+
+    dispatchAddPost(message) {
+      dispatch(addPost(message));
+    }
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(CreateNewPost);
