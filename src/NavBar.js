@@ -23,8 +23,19 @@ export default class NavBar extends React.Component {
           <NavbarBrand href="/" src="/logo.png"><img id="logo" src="/logo.png"/></NavbarBrand>
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
+
+
               <NavItem>
-                <NavLink href="#squares">My Gardens</NavLink>
+                <NavLink href="#plant">Plant Test Env</NavLink>
+              </NavItem>
+
+              <NavItem>
+                <NavLink href="#cubes">My 3d Gardens</NavLink>
+              </NavItem>
+
+
+              <NavItem>
+                <NavLink href="#squares">My 2d Gardens</NavLink>
               </NavItem>
               <NavItem>
                 <NavLink href="#creategarden">Create Gardens</NavLink>
