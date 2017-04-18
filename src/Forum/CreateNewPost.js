@@ -16,16 +16,16 @@ const CreateNewPost = React.createClass({
         backgroundSize: 'cover',
         backgroundPosition: 'center'
       }
-      console.log('this is the title: ', title)
-      console.log('this is the message: ', message)
       axios.post('/api/forum',
         {
           profile: profile.picture,
           title: title,
           message: message,
-          nickname: profile.nickname
+          nickname: profile.nickname,
+          email: profile.email
         }
       ).then((res) => {
+        console.log('res', res)
         console.log("Successful post");
       }).catch((err) => {
         console.error(err);
@@ -64,7 +64,6 @@ const mapDispatchToProps = (dispatch) => {
   return {
 
     dispatchAddPost(message) {
-      console.log('dispatch message: ', message)
       dispatch(addPost(message));
     }
   };

@@ -17,16 +17,11 @@ const initialForumState = {
 
 
 const addPost = (state, action) => {
-  console.log('this is your state in addPostFORUM: ', state)
-  console.log('this is your brain on drugs');
-  console.log('this is your action in addPostFORUM: ', action)
   const newState = {};
   const newPost = { title: action.message.title, message: action.message.message };
 
   Object.assign(newState, state, {currentPost: newPost});
 
-  console.log('(before) state: ', state);
-  console.log('(after) state: ', newState);
   return newState;
 };
 
@@ -36,8 +31,6 @@ const setPosts = (state, action) => {
 
   Object.assign(newState, state, {posts: action.message});
 
-  console.log('(before) state: ', state);
-  console.log('(after) state: ', newState);
   return newState;
 };
 
