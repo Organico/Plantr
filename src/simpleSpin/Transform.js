@@ -11,6 +11,7 @@ import TrackballControls from '../trackball';
 import MouseInput from '../inputs/MouseInput';
 import HouseCube from './HouseCube';
 import GrassCube from './GrassCube';
+import MyCube from './MyCube'
 
 import EffectComposer from 'three-effectcomposer';
 console.log("EffectComposer: ", EffectComposer)
@@ -32,7 +33,11 @@ class Transform extends React.Component {
       mouseInput: null,
       hovering: false,
       dragging: false,
+      cubeRotation: new THREE.Euler(),
+      cubePosition: new THREE.Vector3(0,0,0)
     };
+
+
 
     // this.cameraPosition = new THREE.Vector3(0, 500, 1000);
     this.lookAt = new THREE.Vector3(0, 200, 0)
@@ -50,6 +55,31 @@ class Transform extends React.Component {
 
   _onAnimate = () => {
     this._onAnimateInternal();
+
+
+    var orbitCalculation = function(radius) {
+        return {x: (Math.sin((Date.now()%60000)/15000 * Math.PI * 2) * radius),
+                z: (Math.cos((Date.now()%60000)/15000 * Math.PI * 2) * radius)};
+    }
+
+    this.setState({
+      cubeRotation: new THREE.Euler(
+        this.state.cubeRotation.x + 0.1,
+        this.state.cubeRotation.y + 0.1,
+        0
+      ),
+    //   cubePosition: new THREE.Vector3(
+    //     this.state.cubePosition.x + 0.1,
+    //     this.state.cubePosition.y + 0.1,
+    //     0
+    //   )
+      cubePosition: new THREE.Vector3(
+        orbitCalculation(500).x,
+        0,
+        orbitCalculation(500).z
+      )
+    });
+
   };
 
   componentDidMount(){
@@ -196,11 +226,19 @@ class Transform extends React.Component {
           <gridHelper size={1000} divisions={10} />
           <directionalLight color={0xffffff} intensity={5} position={new THREE.Vector3(1, 1, 1)} />
 
-          <GrassCube width={"100"}
-            height={"50"}
-            depth={"100"}
+          <GrassCube width={100}
+            height={50}
+            depth={100}
             color={"brown"}
             map={'https://s3-us-west-2.amazonaws.com/ryaperry-bucket/grasslight-big.jpg'}
+          />
+
+          <MyCube width={100}
+            height={100}
+            depth={100}
+            color={0x654321}
+            rotation={this.state.cubeRotation}
+            position={this.state.cubePosition}
           />
 
           <HouseCube />

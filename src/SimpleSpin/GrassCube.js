@@ -10,7 +10,7 @@ class GrassCube extends React.Component {
   static propTypes = {
     width: React.PropTypes.number.isRequired,
     height: React.PropTypes.number.isRequired,
-    depth: React.PropTypes.string.isRequired,
+    depth: React.PropTypes.number.isRequired,
     color: React.PropTypes.string.isRequired,
     map: React.PropTypes.string.isRequired
   };
