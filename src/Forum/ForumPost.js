@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import auth from '../client.js';
-import { addPost } from '../Actions/ForumActions';
+import { togglePost } from '../Actions/ForumActions';
 
 const ForumPost = React.createClass({
 
@@ -15,28 +15,34 @@ const ForumPost = React.createClass({
     backgroundSize: 'cover',
     backgroundPosition: 'center'
   }
-  let titleShort = this.props.title.split(" ").slice(0, 20).join(" ");
-  let messageShort = this.props.message.split(" ").slice(0, 100).join(" ") + "...";
+
+  var postType = this.props.post.isShort;
+  console.log("Here is the post type, ", postType)
+  let message;
+  let title;
+
+  if (postType) {
+    message = this.props.message.split(" ").slice(0, 100).join(" ") + "...Click to Expand";
+    title = this.props.title.split(" ").slice(0, 20).join(" ");
+  } else {
+    message = this.props.message;
+    title = this.props.title;
+  }
+
+
     return(
         <div className="row" onClick = {() => {
-            if (titleShort == this.props.title.split(" ").slice(0, 20).join(" ")) { titleShort = this.props.title; }
-            else { titleShort = this.props.title.split(" ").slice(0, 20).join(" "); }
-            if (messageShort == this.props.message.split(" ").slice(0, 100).join(" ") + "...") { messageShort = this.props.message; }
-            else { messageShort = this.props.message.split(" ").slice(0, 100).join(" ") + "..." }
-            let message = {title: titleShort, message: messageShort}
-            this.props.dispatchAddPost(message);
-            // { title: action.message.title, message: action.message.message };
-            // this.props.addPost(message);
+            this.props.dispatchTogglePost(this.props.post._id);
             }} >
           <div className="col-md-1" style={profilePic}>
           { this.props.nickname }
           </div>
           <div className="col-md-11 offset-md-0">
             <div className="row">
-              <span className="forumTitle">{ titleShort }</span>
+              <span className="forumTitle">{ title }</span>
             </div>
             <div className="row">
-              { messageShort }
+              { message }
             </div>
           </div>
         </div>
@@ -54,8 +60,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
 
-    dispatchAddPost(message) {
-      dispatch(addPost(message));
+    dispatchTogglePost(id) {
+      dispatch(togglePost(id));
     }
   };
 };
