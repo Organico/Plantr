@@ -26,6 +26,10 @@ export default class NavBar extends React.Component {
 
 
               <NavItem>
+                <NavLink href="#weather">Weather</NavLink>
+              </NavItem>
+
+              <NavItem>
                 <NavLink href="#plant">Plant Test Env</NavLink>
               </NavItem>
 

@@ -24,6 +24,7 @@ import NavBar from './NavBar';
 import MyCubeView from './simpleSpin/index';
 import Forum from './Forum/Forum';
 // <Route path="/userprofile" component={UserProfile}></Route>
+import Weather from './weather/Weather'
 const auth = new AuthService('vBOwXk8xIgy3kroSs5vz1TFfrYyFQNFf', 'skebaish1992.auth0.com');
 
 // validate authentication for private routes
@@ -68,6 +69,7 @@ const App = React.createClass({
                 <Route path="/creategarden" component={MakeGardenSquareGridView}></Route>
                 <Route path="/profile" component={Profile}></Route>
                 <Route path="/forum" component={Forum}></Route>
+                <Route path="/weather" component={Weather}></Route>
 
 
               </div>

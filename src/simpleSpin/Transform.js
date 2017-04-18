@@ -119,71 +119,6 @@ class Transform extends React.Component {
     // this.refs.group.add(this.loadedObject);
     // this.stats = new Stats();
 
-    // const {
-    //   scene
-    // } = this.refs;
-    // console.log("ref scenein comoponent did mount", scene);
-    // console.log("ref scene", this.refs);
-    // var cat
-
-
-    // var onProgress = function ( xhr ) {
-    //   if ( xhr.lengthComputable ) {
-    //     var percentComplete = xhr.loaded / xhr.total * 100;
-    //     console.log( Math.round(percentComplete, 2) + '% downloaded' );
-    //   }
-    // };
-    // var onError = function ( xhr ) {
-    //   console.log("error", xhr)
-    // };
-    // console.log("on progress mounted")
-
-    // var manager = new THREE.LoadingManager();
-    // manager.onProgress = function ( item, loaded, total ) {
-    //    console.log( item, loaded, total );
-    // };
-    // console.log("manager mounted")
-
-    // var texture = new THREE.Texture();
-    // var loader = new THREE.ImageLoader( manager );
-    // loader.load( 'https://s3-us-west-2.amazonaws.com/ryaperry-bucket/demo.mtl', function ( image ) {
-
-    //   texture.image = image;
-    //   texture.needsUpdate = true;
-
-    // } );
-
-    // var loader = new THREE.OBJLoader( manager );
-    // loader.load( 'https://s3-us-west-2.amazonaws.com/ryaperry-bucket/demo.obj', function ( object ) {
-
-    //   object.traverse( function ( child ) {
-    //     if ( child instanceof THREE.Mesh ) {
-    //       child.material.map = texture;
-    //     }
-    //   });
-
-    //   object.position.y = - 95;
-    //   console.log("THIS IS YOUR OBJECT HOMIE (insides)", object)
-    //   console.log("THIS IS YOUR OBJECT HOMIE (whats the scene tho)", scene)
-    //   scene.add(object);
-    //   console.log("THIS IS YOUR OBJECT HOMIE (whats the scene after tho)", scene)
-    //   cat = object;
-
-    // }, onProgress, onError );
-
-    // var matLoader = new MTLLoader();
-    // matLoader.load('https://s3-us-west-2.amazonaws.com/ryaperry-bucket/demo.mtl', function(materials){
-    //   materials.preload();
-    //   console.log("im in the mat loader", materials)
-
-    //   var objLoader = new THREE.OBJLoader();
-    //   objLoader.setMaterials(materials);
-    //   objLoader.load('https://s3-us-west-2.amazonaws.com/ryaperry-bucket/demo.obj', function(obj){
-    //     console.log("im in the obj loader", obj);
-
-    //     scene.add(obj);
-    //   })
-    // });
 
   }
 
@@ -230,9 +165,9 @@ class Transform extends React.Component {
          <mesh
         >
           <boxGeometry
-            width={1}
-            height={1}
-            depth={1}
+            width={100}
+            height={100}
+            depth={100}
           />
           <meshBasicMaterial
             color={new THREE.Color( this.props.color )}
