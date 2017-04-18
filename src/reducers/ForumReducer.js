@@ -1,34 +1,15 @@
 const initialForumState = {
-     // subject: "",
-     // body: "",
-     // subscriberIds: [""],
-     // altTopicId: ""
-     currentPost: {
-       id: "",
-       text: "",
-       completed: true
-     },
+     // // subject: "",
+     // // body: "",
+     // // subscriberIds: [""],
+     // // altTopicId: ""
+     // currentPost: {
+     //   id: "",
+     //   text: "",
+     //   completed: true
+     // },
      posts: []
 }
-
-
-// const posts = (state = [], action) => {
-//   switch (action.type) {
-//     case 'ADD_POST':
-//       return [
-//         ...state,
-//         todo(undefined, action),
-//       ];
-//     case 'TOGGLE_TODO':
-//       return state.map(t =>
-//         todo(t, action)
-//       );
-//     default:
-//       return state;
-//   }
-// };
-
-
 
 
 const addPost = (state, action) => {

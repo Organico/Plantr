@@ -11,17 +11,38 @@ import CreateNewPost from './CreateNewPost';
 const Forum = React.createClass({
 
   render() {
+    console.log("forumJS", this.props.post);
     return(
-      <div className="container">
-        {/*map posts to forum*/}
-        <ForumPost />
+
+
         <div className="row">
-          <CreateNewPost />
+          <div className="col-md-6">
+            <CreateNewPost />
+          </div>
+          <div className="col-md-6">
+            {this.props.posts.map((post, i) =>
+              <ForumPost key={i} title={post.title.split(" ").slice(0, 20).join(" ")
+            } message={post.message.split(" ").slice(0, 100).join(" ") + "..."}/>
+            )}
+          </div>
         </div>
-      </div>
     )
   }
 })
 
+const mapStateToProps = (state) => {
+  return {
+    posts: state.forumReducer.posts
+  };
+};
 
-export default Forum;
+const mapDispatchToProps = (dispatch) => {
+  return {
+
+    dispatchAddPost(message) {
+      dispatch(addPost(message));
+    }
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Forum);
