@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom'
 import { connect } from 'react-redux';
 import ForumPost from './ForumPost';
 import CreateNewPost from './CreateNewPost';
+import axios from 'axios';
+import { setPosts } from '../Actions/ForumActions';
 
 // import axios from 'axios';
 // import { setUserParameters } from '../action';
@@ -10,12 +12,25 @@ import CreateNewPost from './CreateNewPost';
 
 const Forum = React.createClass({
 
+   getPost() {
+    axios.get('/api/forum')
+    .then((res) => {
+      var dbPostData = res.data;
+      this.props.dispatchSetPost(dbPostData)
+      console.log("setPostCalled ", res);
+    }).catch((err) => {
+      console.error(err);
+      console.log("Error in Forum()");
+    });
+  },
+
   render() {
-    console.log("forumJS", this.props.post);
+    console.log('this.props', this.props)
     return(
-
-
         <div className="row">
+          <button type="submit" onClick={ () => {
+            this.getPost();
+          }} >Get Request Here</button>
           <div className="col-md-6">
             <CreateNewPost />
           </div>
@@ -39,8 +54,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
 
-    dispatchAddPost(message) {
-      dispatch(addPost(message));
+    dispatchSetPost(message) {
+      dispatch(setPosts(message));
     }
   };
 };
