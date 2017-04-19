@@ -50,7 +50,7 @@ const setDropdown = (state, action) => {
 
 const setCoordinates = (state, action) => {
   console.log("In WeatherReducer - setCoordinates state: ", state)
-  console.log("In WeatherReducer - setCoordinates action: ", action.forecast)
+  console.log("In WeatherReducer - setCoordinates action: ", action)
   console.log('(before) state: ', state);
 
   const newState = {};
@@ -64,7 +64,7 @@ const setCoordinates = (state, action) => {
     coordinates,
   } = state
 
-  var newCoordinates = action.coordinates;
+  var newCoordinates = action;
 
   Object.assign(newState, state, {coordinates: newCoordinates});
   console.log('(before) state: ', state);
@@ -74,7 +74,7 @@ const setCoordinates = (state, action) => {
 
 const setForecast = (state, action) => {
   console.log("In WeatherReducer - setForecast state: ", state)
-  console.log("In WeatherReducer - setForecast action: ", action.forecast)
+  console.log("In WeatherReducer - setForecast action: ", action)
   console.log('(before) state: ', state);
 
   const newState = {};
