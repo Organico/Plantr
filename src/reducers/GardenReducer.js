@@ -238,7 +238,7 @@ const initialGardenState = {
       'type': 'vegetable',
       'x':300,
       'y':50,
-      'img': 'https://c1.staticflickr.com/3/2834/34139043705_a53c29483f_o.png',
+      'img': 'https://c1.staticflickr.com/3/2919/34013204631_519165ee45_o.png',
       'isDraggable': false,
       'packetImg' : '/seedPacketIMGs/genericResized.png',
        'price': 10,

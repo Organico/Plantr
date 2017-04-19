@@ -86,7 +86,10 @@ const MakeGardenSquareGridView = React.createClass({
                 </div>
                 <div className="col-md-12 userRecentSpan">
                 <HarvestGraph />
-                                <HarvestGraph />
+
+                </div>
+                <div className="col-md-12 userRecentSpan">
+                <HarvestGraph />
 
                 </div>
 

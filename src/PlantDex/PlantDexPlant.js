@@ -163,7 +163,6 @@ class PlantDexPlant extends React.Component {
                 plant={this.props.plant}
                 fillPatternImage={newImage}
                 fillPatternOffset= {{ x: 25, y: 25}}
-                stroke={'black'}
                 shadowBlur={10}
                 onClick={this.handleClick}
                 onMouseOver={this.handleMouseOver}

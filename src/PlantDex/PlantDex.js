@@ -2,7 +2,7 @@ import React from 'react';
 import { TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTitle, CardText, Row, Col } from 'reactstrap';
 import classnames from 'classnames';
 import FruitDex from './FruitDex'
-import VegiDex from './VegiDex'
+import VegiDex from './VegiDex';
 
 export default class PlantDex extends React.Component {
   constructor(props) {
