@@ -95,6 +95,17 @@ class WeatherTest extends React.Component {
     });
   }
 
+
+  getForecastedWeatherData(location){
+    // http://api.openweathermap.org/data/2.5/forecast?appid=b625bae7d54136d7e2d33c6a3f383f9e&units=metric&q=San%20Francisco
+
+    //change url to "forecast" instead of weather
+    //returns a list of weather forecasts for 3 hour intervales for five days
+      //needs to have a function to increment by 3 hours in timestamp form
+    //same format as getWeatherdata so maybe reformat functions to not be so specific
+
+  }
+
   getWeatherData(location){
     const OPEN_WEATHER_MAP_URL = 'http://api.openweathermap.org/data/2.5/weather?&appid=b625bae7d54136d7e2d33c6a3f383f9e&units=metric';
 
