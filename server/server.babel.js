@@ -68,8 +68,6 @@ app.get('/api/plants', function(req, res, next) {
 
 app.get('/api/forum', function(req, res, next) {
   let email = req.query
-  console.log('your email is ', req)
-  console.log('/api/forum/')
   Forum.find({}, (err, data) => {
     if (err) {
       console.error(err);
@@ -80,9 +78,6 @@ app.get('/api/forum', function(req, res, next) {
 });
 
 app.get('/api/forum/:email', function(req, res, next) {
-  let email = req.params
-  console.log('your email is ', email)
-  console.log('/api/forum/:email')
   Forum.find({}, (err, data) => {
     if (err) {
       console.error(err);
@@ -177,19 +172,17 @@ app.put('/api/forum', (req, res, next) => {
           if (err) {
             console.log('error')
           } else {
-            console.log("result ----------------------------->", searchResult)
-            // console.log(req.body.replies);
-                searchResult.replies.push(req.body.replies);
-                searchResult.save(function(err) {
-              if (err) {
-                console.log('error');
-              }
-              else {
-                res.send(200, searchResult);
-                console.log(searchResult);
-              }
-            });
-          }
+            searchResult.replies.push(req.body.replies);
+            searchResult.save(function(err) {
+            if (err) {
+              console.error('error');
+            }
+            else {
+              res.send(200, searchResult);
+              console.log(searchResult);
+            }
+          });
+        }
 
     });
 });
