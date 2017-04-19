@@ -11,7 +11,8 @@ const initialForumState = {
      posts: [],
      currentPost: {
       title: '',
-      message: ''
+      message: '',
+      replies: []
      }
 }
 
@@ -56,6 +57,16 @@ const setPosts = (state, action) => {
   return newState;
 };
 
+const setReplies = (state, action) => {
+  const newState = {};
+  const { replies } = state;
+
+  Object.assign(newState, state, {replies: action.message});
+
+  return newState;
+};
+
+
 function forumReducer(state = initialForumState, action) {
   switch (action.type) {
   case 'ADD_POST':
@@ -64,6 +75,8 @@ function forumReducer(state = initialForumState, action) {
     return setPosts(state, action);
   case 'TOGGLE_POST':
     return togglePost(state, action);
+  case 'ADD_REPLY':
+    return addReply(state, action);
   default:
     return state;
   }

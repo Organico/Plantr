@@ -22,7 +22,8 @@ const CreateNewPost = React.createClass({
           title: title,
           message: message,
           nickname: profile.nickname,
-          email: profile.email
+          email: profile.email,
+          replies: []
         }
       ).then((res) => {
         console.log('res', res)
