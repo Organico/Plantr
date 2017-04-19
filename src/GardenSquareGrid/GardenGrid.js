@@ -10,7 +10,7 @@ const GardenGrid = React.createClass({
       return (
         <Layer >
           {this.props.gardenGrid.map((gardenSquare, i) =>
-            <MySquare key={i} x={gardenSquare.x} y={gardenSquare.y} color={gardenSquare.color} />)
+            <MySquare key={i} x={gardenSquare.x} y={gardenSquare.y} img={gardenSquare.img} />)
           }
         </Layer>
       )

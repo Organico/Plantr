@@ -2,13 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Layer, Rect, Circle, Stage, Group} from 'react-konva';
 import { connect } from 'react-redux'
-import { addPlantToPlantGrid, setSeedPacket } from '../Actions/GardenActions.js';
+import { addPlantToPlantGrid, setSeedPacket, addToShelf} from '../Actions/GardenActions.js';
 
 
 
 // import { togglePlant} from '../action'
 
-class Plant extends React.Component {
+class PlantDexPlant extends React.Component {
      constructor(...args) {
       super(...args);
 
@@ -22,11 +22,9 @@ class Plant extends React.Component {
 
     }
     handleClick(e) {
-      this.setState({
-        color: Konva.Util.getRandomColor(),
-        isDragging: this.props.isDragging,
-        dispatchSetSeedPacket: this.props.dispatchSetSeedPacket
-      });
+
+
+
 
     console.log("Event attributes are: ", e)
     var seedObject = {
@@ -38,11 +36,17 @@ class Plant extends React.Component {
         'sunlight': e.target.attrs.plant.sunlight,
         'harvest': e.target.attrs.plant.harvest,
         'extremeWarning': e.target.attrs.plant.extremeWarning,
-        'packetImg' : e.target.attrs.plant.packetImg
+        'packetImg' : e.target.attrs.plant.packetImg,
+        'img': e.target.attrs.plant.img,
+        'isDraggable': true
+    }
+    this.props.dispatchAddToShelf(seedObject)
+    this.props.dispatchSetSeedPacket(seedObject);
     }
 
-     this.props.dispatchSetSeedPacket(seedObject);
-    }
+
+
+
     handleMouseOver(e){
       console.log("Mouse over!!", e)
       console.log(e.target)
@@ -155,7 +159,6 @@ class Plant extends React.Component {
 
         return (
             <Circle
-                id={"tooltip"}
                 x={this.props.x} y={this.props.y} width={50} height={50}
                 plant={this.props.plant}
                 fillPatternImage={newImage}
@@ -191,10 +194,13 @@ const mapDispatchToProps = (dispatch) => {
     },
     dispatchSetSeedPacket (packet) {
       dispatch(setSeedPacket(packet))
+    },
+    dispatchAddToShelf(shelfObject) {
+      dispatch(addToShelf(shelfObject))
     }
   }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Plant);
+export default connect(mapStateToProps, mapDispatchToProps)(PlantDexPlant);
 
 

@@ -12,7 +12,9 @@ import PlantGrid from './PlantGrid.js';
 import querystring from 'querystring'
 import MyRect from './MyRectangle.js'
 import SeedPacket from '../SeedPacket/SeedPacket.js';
-// import CloudAnimation from '../weather/CloudAnimation'
+import HarvestGraph from '../Analytics/HarvestGraph.js';
+import PlantDex from '../PlantDex/PlantDex.js'
+
 
 
 
@@ -33,11 +35,6 @@ const MakeGardenSquareGridView = React.createClass({
       console.error(err);
       console.log("Error in getGardenSquareGrid getAllGardens()")
     });
-  },
-
-  toggleTip(misc){
-       console.log("toggleTip called!")
-    this.props.dispatchSetTooltip(misc);
   },
 
 
@@ -68,12 +65,10 @@ const MakeGardenSquareGridView = React.createClass({
             </button>
             <br></br><br></br>
         <div className="row" style={center}>
-        <div>
 
-        </div>
 
-          <div className="col-6">
-            <Stage id="cat" width={600} height={600} fill="white" stroke="black" className="text-center">
+          <div className="col-6 userRecentSpan">
+            <Stage id="cat" width={800} height={650} fill="white" stroke="black" className="text-center">
               <GardenGrid />
               <PlantGrid />
               <Layer>
@@ -81,16 +76,21 @@ const MakeGardenSquareGridView = React.createClass({
                 <MyRect />
               </Layer>
             </Stage>
+            <PlantDex />
           </div>
 
             <div className="col-md-5 offset-md-1">
               <div className="row" id="costEstimate">
-                <div className="col-md-12">
-                  <CostEstimate />
-                </div>
-                <div className="col-md-6 offset-md-3" id="seedHolder">
+              <div className="col-md-6 offset-md-3 userRecentSpan" id="seedHolder">
                   <SeedPacket />
                 </div>
+                <div className="col-md-12 userRecentSpan">
+                <HarvestGraph />
+                                <HarvestGraph />
+
+                </div>
+
+
               </div>
         </div>
 

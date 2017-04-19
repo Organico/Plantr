@@ -7,12 +7,14 @@ import Plant from './Plant'
 
 const PlantGrid = React.createClass({
     render() {
+      console.log("in plant grid", this.props.plantGrid)
       return (
         <Layer >
           {this.props.plantGrid.map((plantSquare, i) =>
-            <Plant key={i} x={plantSquare.x} y={plantSquare.y} img={plantSquare.img} isDraggable={plantSquare.isDraggable}/>)
+            <Plant key={i} x={plantSquare.x} y={plantSquare.y} img={plantSquare.img} plantStats ={plantSquare} isDraggable={plantSquare.isDraggable}/>)
           }
         </Layer>
+
       )
     }
 })

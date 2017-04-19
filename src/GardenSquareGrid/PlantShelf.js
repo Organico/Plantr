@@ -31,30 +31,11 @@ class PlantShelf extends React.Component {
       var newY;
       var newX;
 
-      if(pos.y < 50){
-        newY = 25;
-      } else if(pos.y < 100){
-        newY = 75;
-      } else if(pos.y < 150){
-        newY = 125
-      } else if(pos.y < 200){
-        newY = 175
-      } else {
-        newY = pos.y;
-      }
+      var roundedPosY= Math.round(pos.y/50)*50-25
+      var roundedPosX= Math.round(pos.x/50)*50-25
 
-      if(pos.x < 50){
-        newX = 25;
-      } else if(pos.x < 100){
-        newX = 75
-      } else if(pos.x < 150){
-        newX = 125
-      } else if(pos.x < 200){
-        newX = 175
-      } else {
-        newX = pos.x;
-      }
-
+      newY = roundedPosY;
+      newX = roundedPosX;
       return {
         x: newX,
         y: newY
@@ -84,6 +65,8 @@ class PlantShelf extends React.Component {
                 y={plantShelfPlant.y}
                 img={plantShelfPlant.img}
                 isDraggable={plantShelfPlant.isDraggable}
+                plant={plantShelfPlant}
+
               />
             )}
           </Group>

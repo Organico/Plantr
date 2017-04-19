@@ -6,81 +6,499 @@ const makeImage = function(urlsrc) {
 
 console.log(makeImage('https://c1.staticflickr.com/3/2909/33168957064_a7ef238410_o.png'));
 const initialGardenState = {
-  //garden state
   location: [0, 2],
   isDragging: false,
   tooltipOpen: false,
-
-  gardenStats: {
-    'Estimated Cost': 0,
-    'Number of Vegetables': 0,
-    'Number of Fruits': 0,
-    'Estimated Daily Water Consumption': 0,
-    'Current Garden Square Footage': 0,
-    'Peak Harvest Time': "Month",
-    'Harvest Times': [{}],
-    'Temperature ranges': []
+  gardenXYCoordinates:[],
+  seedPacket:{
+    'price': 0,
+    'quantity': 5,
+    'season': "Spring",
+    'description': "Initial State",
+    'instructions': "Take good care of me",
+    'sunlight': "Full-sun",
+    'harvest':50,
+    'extremeWarning':[0,45],
+    'packetImg': '/seedPacketIMGs/tomatoResized.png'
   },
-
   gardenGrid: [
-      {
-        'x':0,
-        'y':0,
-        'color': 'green'
-      }
   ],
   plantGrid: [
-      {
-        'x': 25,
-        'y': 25,
-        'img':'https://c1.staticflickr.com/3/2909/33168957064_a7ef238410_o.png',
-        'isDraggable': false
-      }
   ],
 
   plantShelf: [
     {
-      'x':200,
-      'y':400,
+      'name': 'sunflower',
+      'type': 'flower',
+      'x':50,
+      'y':600,
       'img':'https://c1.staticflickr.com/3/2909/33168957064_a7ef238410_o.png',
       'isDraggable': true,
+       'packetImg' : '/seedPacketIMGs/KaleResized.png',
+       'price': 10,
+      'quantity': 10,
+      'season': "Spring",
+      'description': "After Start State",
+      'instructions': "Take great care of me",
+      'sunlight': "Full-sun",
+      'harvest':40,
+      'extremeWarning':[0,45]
     },
     {
-      'x':250,
-      'y':400,
+      'name': 'potato',
+      'type': 'vegetable',
+      'x':100,
+      'y':600,
       'img': 'https://c1.staticflickr.com/3/2844/33627640530_f866a32b60_o.png',
-      'isDraggable': true
+      'isDraggable': true,
+       'packetImg' : '/seedPacketIMGs/KaleResized.png',
+      'price': 10,
+      'quantity': 10,
+      'season': "Spring",
+      'description': "After Start State",
+      'instructions': "Take great care of me",
+      'sunlight': "Full-sun",
+      'harvest':40,
+      'extremeWarning':[0,45]
     },
-    {
-      'x':300,
-      'y':400,
+    { 'name': 'tomato',
+      'type': 'fruit',
+      'x':150,
+      'y':600,
       'img':'https://c1.staticflickr.com/3/2899/33972285536_46e0dbdb99_o.png',
-      'isDraggable': true
+      'isDraggable': true,
+      'packetImg' : '/seedPacketIMGs/KaleResized.png',
+       'price': 10,
+      'quantity': 10,
+      'season': "Spring",
+      'description': "After Start State",
+      'instructions': "Take great care of me",
+      'sunlight': "Full-sun",
+      'harvest':40,
+      'extremeWarning':[0,45]
     },
     {
-      'x':350,
-      'y':400,
+      'name': 'green bean',
+      'type': 'vegetable',
+      'x':200,
+      'y':600,
       'img': 'https://c1.staticflickr.com/3/2939/33200675713_ea06c54442_o.png',
-      'isDraggable': true
+      'isDraggable': true,
+      'packetImg' : '/seedPacketIMGs/KaleResized.png',
+       'price': 10,
+      'quantity': 10,
+      'season': "Spring",
+      'description': "After Start State",
+      'instructions': "Take great care of me",
+      'sunlight': "Full-sun",
+      'harvest':40,
+      'extremeWarning':[0,45]
+
     },
     {
-      'x':400,
-      'y':400,
+      'name': 'onion',
+      'type': 'vegetable',
+      'x':250,
+      'y':600,
       'img':'https://c1.staticflickr.com/3/2884/33883916601_9c04b38e73_o.png',
-      'isDraggable': true
+      'isDraggable': true,
+      'packetImg' : '/seedPacketIMGs/KaleResized.png',
+       'price': 10,
+      'quantity': 10,
+      'season': "Spring",
+      'description': "After Start State",
+      'instructions': "Take great care of me",
+      'sunlight': "Full-sun",
+      'harvest':40,
+      'extremeWarning':[0,45]
     },
     {
-      'x':450,
-      'y':400,
+      'name': 'okra',
+      'type': 'vegetable',
+      'x':300,
+      'y':600,
       'img':'https://c1.staticflickr.com/3/2810/33856016232_8ed446a91d_o.png',
-      'isDraggable': true
+      'isDraggable': true,
+      'packetImg' : '/seedPacketIMGs/KaleResized.png',
+       'price': 10,
+      'quantity': 10,
+      'season': "Spring",
+      'description': "After Start State",
+      'instructions': "Take great care of me",
+      'sunlight': "Full-sun",
+      'harvest':40,
+      'extremeWarning':[0,45]
+    },
+    { 'name': 'strawberry',
+      'type': 'fruit',
+      'x':350,
+      'y':600,
+      'img': 'https://c2.staticflickr.com/4/3954/33856016382_0778302b97_o.png',
+      'isDraggable': true,
+      'packetImg' : '/seedPacketIMGs/genericResized.png',
+       'price': 10,
+      'quantity': 10,
+      'season': "Spring",
+      'description': "After Start State",
+      'instructions': "Take great care of me",
+      'sunlight': "Full-sun",
+      'harvest':40,
+      'extremeWarning':[0,45]
+    }
+  ],
+
+  vegiDex: [
+    {
+      'name': 'okra',
+      'type': 'vegetable',
+      'x':50,
+      'y':50,
+      'img':'https://c1.staticflickr.com/3/2810/33856016232_8ed446a91d_o.png',
+      'isDraggable': false,
+      'packetImg' : '/seedPacketIMGs/GenericResized.png',
+       'price': 10,
+      'quantity': 10,
+      'season': "Spring",
+      'description': "After Start State",
+      'instructions': "Take great care of me",
+      'sunlight': "Full-sun",
+      'harvest':40,
+      'extremeWarning':[0,45]
     },
     {
-      'x':500,
-      'y':400,
-      'img': 'https://c2.staticflickr.com/4/3954/33856016382_0778302b97_o.png',
-      'isDraggable': true
+      'name': 'onion',
+      'type': 'vegetable',
+      'x':100,
+      'y':50,
+      'img':'https://c1.staticflickr.com/3/2884/33883916601_9c04b38e73_o.png',
+      'isDraggable': false,
+      'packetImg' : '/seedPacketIMGs/OnionResized.png',
+       'price': 10,
+      'quantity': 10,
+      'season': "Spring",
+      'description': "After Start State",
+      'instructions': "Take great care of me",
+      'sunlight': "Full-sun",
+      'harvest':40,
+      'extremeWarning':[0,45]
+    },
+    {
+      'name': 'green bean',
+      'type': 'vegetable',
+      'x':150,
+      'y':50,
+      'img': 'https://c1.staticflickr.com/3/2939/33200675713_ea06c54442_o.png',
+      'isDraggable': false,
+      'packetImg' : '/seedPacketIMGs/beansResized.png',
+       'price': 10,
+      'quantity': 10,
+      'season': "Spring",
+      'description': "After Start State",
+      'instructions': "Take great care of me",
+      'sunlight': "Full-sun",
+      'harvest':40,
+      'extremeWarning':[0,45]
+    },
+    {
+      'name': 'carrots',
+      'type': 'vegetable',
+      'x':200,
+      'y':50,
+      'img': 'https://c1.staticflickr.com/3/2869/33327563643_a7ffb81e43_o.png',
+      'isDraggable': false,
+      'packetImg' : '/seedPacketIMGs/carrotResized.png',
+       'price': 10,
+      'quantity': 10,
+      'season': "Spring",
+      'description': "After Start State",
+      'instructions': "Take great care of me",
+      'sunlight': "Full-sun",
+      'harvest':40,
+      'extremeWarning':[0,45]
+    },
+    {
+      'name': 'kale',
+      'type': 'vegetable',
+      'x':250,
+      'y':50,
+      'img': 'https://c2.staticflickr.com/4/3937/33296262464_4c75638658_o.png',
+      'isDraggable': false,
+      'packetImg' : '/seedPacketIMGs/KaleResized.png',
+       'price': 10,
+      'quantity': 10,
+      'season': "Spring",
+      'description': "After Start State",
+      'instructions': "Take great care of me",
+      'sunlight': "Full-sun",
+      'harvest':40,
+      'extremeWarning':[0,45]
+    },
+    {
+      'name': 'snappeas',
+      'type': 'vegetable',
+      'x':300,
+      'y':50,
+      'img': 'https://c1.staticflickr.com/3/2834/34139043705_a53c29483f_o.png',
+      'isDraggable': false,
+      'packetImg' : '/seedPacketIMGs/genericResized.png',
+       'price': 10,
+      'quantity': 10,
+      'season': "Spring",
+      'description': "After Start State",
+      'instructions': "Take great care of me",
+      'sunlight': "Full-sun",
+      'harvest':40,
+      'extremeWarning':[0,45]
+    },
+    {
+      'name': 'potato',
+      'type': 'vegetable',
+      'x':350,
+      'y':50,
+      'img': 'https://c1.staticflickr.com/3/2844/33627640530_f866a32b60_o.png',
+      'isDraggable': false,
+       'packetImg' : '/seedPacketIMGs/KaleResized.png',
+      'price': 10,
+      'quantity': 10,
+      'season': "Spring",
+      'description': "After Start State",
+      'instructions': "Take great care of me",
+      'sunlight': "Full-sun",
+      'harvest':40,
+      'extremeWarning':[0,45]
+    },
+      {
+      'name': 'corn',
+      'type': 'vegetable',
+      'x':400,
+      'y':50,
+      'img': 'https://c2.staticflickr.com/4/3937/33984681002_35a872f2f2_o.png',
+      'isDraggable': false,
+       'packetImg' : '/seedPacketIMGs/cornResized.png',
+      'price': 10,
+      'quantity': 10,
+      'season': "Spring",
+      'description': "After Start State",
+      'instructions': "Take great care of me",
+      'sunlight': "Full-sun",
+      'harvest':40,
+      'extremeWarning':[0,45]
+    },
+      {
+      'name': 'pumpkin',
+      'type': 'vegetable',
+      'x':450,
+      'y':50,
+      'img': 'https://c1.staticflickr.com/3/2878/33299363694_29057af863_o.png',
+      'isDraggable': false,
+       'packetImg' : '/seedPacketIMGs/PumpkinResized.png',
+      'price': 10,
+      'quantity': 10,
+      'season': "Spring",
+      'description': "After Start State",
+      'instructions': "Take great care of me",
+      'sunlight': "Full-sun",
+      'harvest':40,
+      'extremeWarning':[0,45]
+    },
+     {
+      'name': 'chili pepper',
+      'type': 'vegetable',
+      'x':50,
+      'y':100,
+      'img': 'https://c1.staticflickr.com/3/2847/33984618022_9fb8c0250c_o.png',
+      'isDraggable': false,
+       'packetImg' : '/seedPacketIMGs/hotPeppersResized.png',
+      'price': 10,
+      'quantity': 10,
+      'season': "Spring",
+      'description': "After Start State",
+      'instructions': "Take great care of me",
+      'sunlight': "Full-sun",
+      'harvest':40,
+      'extremeWarning':[0,45]
+    },
+     {
+      'name': 'cucumber',
+      'type': 'vegetable',
+      'x':100,
+      'y':100,
+      'img': 'https://c1.staticflickr.com/3/2830/33757226270_b439776485_o.jpg',
+      'isDraggable': false,
+       'packetImg' : '/seedPacketIMGs/genericResized.png',
+      'price': 10,
+      'quantity': 10,
+      'season': "Spring",
+      'description': "After Start State",
+      'instructions': "Take great care of me",
+      'sunlight': "Full-sun",
+      'harvest':40,
+      'extremeWarning':[0,45]
+    },
+     {
+      'name': 'cucumber',
+      'type': 'vegetable',
+      'x':150,
+      'y':100,
+      'img': 'https://c1.staticflickr.com/3/2820/33984617052_066c5379e9_o.png',
+      'isDraggable': false,
+       'packetImg' : '/seedPacketIMGs/genericResized.png',
+      'price': 10,
+      'quantity': 10,
+      'season': "Spring",
+      'description': "After Start State",
+      'instructions': "Take great care of me",
+      'sunlight': "Full-sun",
+      'harvest':40,
+      'extremeWarning':[0,45]
     }
+
+
+
+
+
+
+
+  ],
+
+
+
+  fruitDex: [
+   { 'name': 'strawberry',
+      'type': 'fruit',
+      'x':50,
+      'y':50,
+      'img': 'https://c2.staticflickr.com/4/3954/33856016382_0778302b97_o.png',
+      'isDraggable': false,
+      'packetImg' : '/seedPacketIMGs/genericResized.png',
+       'price': 10,
+      'quantity': 10,
+      'season': "Spring",
+      'description': "After Start State",
+      'instructions': "Take great care of me",
+      'sunlight': "Full-sun",
+      'harvest':40,
+      'extremeWarning':[0,45]
+    },
+    { 'name': 'tomato',
+      'type': 'fruit',
+      'x':100,
+      'y':50,
+      'img':'https://c1.staticflickr.com/3/2899/33972285536_46e0dbdb99_o.png',
+      'isDraggable': true,
+      'packetImg' : '/seedPacketIMGs/KaleResized.png',
+       'price': 10,
+      'quantity': 10,
+      'season': "Spring",
+      'description': "After Start State",
+      'instructions': "Take great care of me",
+      'sunlight': "Full-sun",
+      'harvest':40,
+      'extremeWarning':[0,45]
+      },
+      {
+      'name': 'pineapple',
+      'type': 'fruit',
+      'x':150,
+      'y':50,
+      'img':'https://c1.staticflickr.com/3/2850/33754040130_3aef5cfda7_o.png',
+      'isDraggable': false,
+      'packetImg' : '/seedPacketIMGs/genericResized.png',
+       'price': 10,
+      'quantity': 10,
+      'season': "Spring",
+      'description': "After Start State",
+      'instructions': "Take great care of me",
+      'sunlight': "Full-sun",
+      'harvest':40,
+      'extremeWarning':[0,45]
+    },
+    {
+      'name': 'orange',
+      'type': 'fruit',
+      'x': 200,
+      'y':50,
+      'img': 'https://c1.staticflickr.com/3/2813/33754040170_f89bbcf2d6_o.png',
+      'isDraggable': false,
+      'packetImg' : '/seedPacketIMGs/genericResized.png',
+       'price': 10,
+      'quantity': 10,
+      'season': "Spring",
+      'description': "After Start State",
+      'instructions': "Take great care of me",
+      'sunlight': "Full-sun",
+      'harvest':40,
+      'extremeWarning':[0,45]
+    },
+     {
+      'name': 'apple',
+      'type': 'fruit',
+      'x': 250,
+      'y':50,
+      'img': 'https://c1.staticflickr.com/3/2839/33296406404_4e33cb289d_o.png',
+      'isDraggable': false,
+      'packetImg' : '/seedPacketIMGs/genericResized.png',
+       'price': 10,
+      'quantity': 10,
+      'season': "Spring",
+      'description': "After Start State",
+      'instructions': "Take great care of me",
+      'sunlight': "Full-sun",
+      'harvest':40,
+      'extremeWarning':[0,45]
+    },
+    {
+      'name': 'grapes',
+      'type': 'fruit',
+      'x': 300,
+      'y':50,
+      'img': 'https://c2.staticflickr.com/4/3942/33296407624_dcf0cc66f7_o.png',
+      'isDraggable': false,
+      'packetImg' : '/seedPacketIMGs/genericResized.png',
+       'price': 10,
+      'quantity': 10,
+      'season': "Spring",
+      'description': "After Start State",
+      'instructions': "Take great care of me",
+      'sunlight': "Full-sun",
+      'harvest':40,
+      'extremeWarning':[0,45]
+    },
+    {
+      'name': 'watermelon',
+      'type': 'fruit',
+      'x': 350,
+      'y':50,
+      'img': 'https://c1.staticflickr.com/3/2912/33754040210_6c36b8074b_o.png',
+      'isDraggable': false,
+      'packetImg' : '/seedPacketIMGs/genericResized.png',
+       'price': 10,
+      'quantity': 10,
+      'season': "Spring",
+      'description': "After Start State",
+      'instructions': "Take great care of me",
+      'sunlight': "Full-sun",
+      'harvest':40,
+      'extremeWarning':[0,45]
+    },
+    {
+      'name': 'canteloupe',
+      'type': 'fruit',
+      'x': 400,
+      'y':50,
+      'img': 'https://c1.staticflickr.com/3/2873/33327563603_5715bcf622_o.png',
+      'isDraggable': false,
+      'packetImg' : '/seedPacketIMGs/genericResized.png',
+       'price': 10,
+      'quantity': 10,
+      'season': "Spring",
+      'description': "After Start State",
+      'instructions': "Take great care of me",
+      'sunlight': "Full-sun",
+      'harvest':40,
+      'extremeWarning':[0,45]
+    },
+
   ],
   gardens: [],
   plants: [],
@@ -101,14 +519,24 @@ const toggleSquare = (state, action) => {
     }
   }
 
-  var squareToToggleColor = squareToToggle.color;
-  var colorToToggleTo = "green";
-  if (squareToToggleColor === "green") {
-    colorToToggleTo = "brown";
+
+  var squareToToggleImg = squareToToggle.img;
+    console.log("HERE", squareToToggleImg);
+
+  var tileToToggleTo = "https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg";
+  if (squareToToggleImg === "https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg") {
+    tileToToggleTo = "https://c1.staticflickr.com/3/2923/33742489190_3e30fca5f7_o.jpg";
+  } else if (squareToToggleImg === "https://c1.staticflickr.com/3/2923/33742489190_3e30fca5f7_o.jpg") {
+    tileToToggleTo = 'https://c1.staticflickr.com/3/2888/33316224483_1c8a775cf0_o.jpg'
+  } else if (squareToToggleImg === 'https://c1.staticflickr.com/3/2888/33316224483_1c8a775cf0_o.jpg') {
+    tileToToggleTo = 'https://c1.staticflickr.com/3/2865/33285295564_e948bbe297_o.jpg'
+  } else if (squareToToggleImg === 'https://c1.staticflickr.com/3/2865/33285295564_e948bbe297_o.jpg') {
+    tileToToggleTo = 'https://c1.staticflickr.com/3/2832/33285295044_f9354e513e_o.png'
   }
 
+
   var gardenCopy = state.gardenGrid.slice();
-  gardenCopy[squareToToggleIndex].color = colorToToggleTo;
+  gardenCopy[squareToToggleIndex].img = tileToToggleTo
 
   const {gardenGrid} = state;
   const newState = {};
@@ -130,14 +558,17 @@ const setGardenParameters = (state, action) => {
   var idCounter = 0;
 
   var gardenGridArray = [];
+  var newGardenXYCoordinates=[];
   for (var i = 1; i < action.height + 1; i++ ) {
     for (var j =1; j < action.width + 1; j++) {
       var squareCounter = "square" + idCounter;
-      gardenGridArray.push({'x': i * 50, 'y': j * 50, 'color': action.color});
+      gardenGridArray.push({'x': i * 50, 'y': j * 50, 'img': "https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg"});
+      newGardenXYCoordinates.push({'x': i * 50, 'y': j * 50})
       idCounter++;
     }
   }
-  Object.assign(newState, state, {gardenGrid: gardenGridArray});
+  Object.assign(newState, state, {gardenGrid: gardenGridArray,
+    gardenXYCoordinates: newGardenXYCoordinates});
   console.log('(before) state: ', state);
   console.log('(after) state: ', newState);
   return newState;
@@ -261,6 +692,61 @@ const setTooltip = (state, action) => {
   return newState;
 };
 
+const setSeedPacket= (state, action) => {
+  var newPacket = action.packet
+    const newState = {};
+
+
+  Object.assign(newState, state, {seedPacket: newPacket});
+
+  console.log('(before) state: ', state);
+  console.log('(after) state: ', newState);
+  return newState;
+};
+
+
+const addToShelf= (state, action) => {
+  var newShelfObject = action.shelfObject
+  var plantShelfCopy = state.plantShelf.slice();
+
+  if (plantShelfCopy.length>8){
+    plantShelfCopy.shift();
+    for (var i = 0; i<plantShelfCopy.length; i++){
+      plantShelfCopy[i]['x'] = plantShelfCopy[i]['x']-50
+    }
+  }
+
+  console.log("New shelf before changes", newShelfObject)
+
+  var lastObject = plantShelfCopy[plantShelfCopy.length-1];
+  var lastObjectX = lastObject['x'];
+  var lastObjectY = lastObject['y'];
+
+  var newShelfX = lastObjectX+50;
+  var newShelfY = lastObjectY;
+
+  newShelfObject['x'] = newShelfX;
+  newShelfObject['y']= newShelfY;
+
+  console.log("New shelf after coordinate change", newShelfObject);
+
+
+  const newState = {};
+
+
+  plantShelfCopy.push(newShelfObject)
+
+
+  Object.assign(newState, state, {plantShelf: plantShelfCopy});
+
+  console.log('(before) state: ', state);
+  console.log('(after) state: ', newState);
+  return newState;
+};
+
+
+
+
 function gardenReducer(state = initialGardenState, action) {
   console.log('GardenReducer.js - Reducer called');
   console.log('current action: ', action);
@@ -285,6 +771,10 @@ function gardenReducer(state = initialGardenState, action) {
     return addPlantToPlantGrid(state, action);
   case 'SET_USER_PARAMETERS':
     return userProfile(state, action);
+  case 'SET_SEED_PACKET':
+    return setSeedPacket(state, action)
+  case 'ADD_TO_SHELF':
+    return addToShelf(state, action)
   default:
     return state;
   }

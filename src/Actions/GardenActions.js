@@ -38,6 +38,16 @@ export function setDropdown(dbDropdownOptions) {
   return { type: 'SET_DROPDOWN_OPTIONS', dbDropdownOptions};
 }
 
+export function setSeedPacket(packet) {
+  console.log('action: seeePacket');
+  return { type: 'SET_SEED_PACKET', packet};
+}
+
+export function addToShelf(shelfObject) {
+  console.log('action: adding to shelf '. shelfObject);
+  return { type: 'ADD_TO_SHELF', shelfObject};
+}
+
 
 /*MY SQUARE*/
 
