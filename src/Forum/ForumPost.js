@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import auth from '../client.js';
 import { togglePost } from '../Actions/ForumActions';
 import ReplyPost from './ReplyPost';
+
 const ForumPost = React.createClass({
 
   render() {

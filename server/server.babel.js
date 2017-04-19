@@ -67,6 +67,22 @@ app.get('/api/plants', function(req, res, next) {
 });
 
 app.get('/api/forum', function(req, res, next) {
+  let email = req.query
+  console.log('your email is ', req)
+  console.log('/api/forum/')
+  Forum.find({}, (err, data) => {
+    if (err) {
+      console.error(err);
+    }
+    res.status(200).send(data);
+    next();
+  })
+});
+
+app.get('/api/forum/:email', function(req, res, next) {
+  let email = req.params
+  console.log('your email is ', email)
+  console.log('/api/forum/:email')
   Forum.find({}, (err, data) => {
     if (err) {
       console.error(err);
