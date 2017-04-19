@@ -36,7 +36,7 @@ const Forum = React.createClass({
           </div>
           <div className="col-md-6">
             {this.props.posts.map((post, i) =>
-                <ForumPost key={i} post={post} nickname={post.nickname} title={post.title} message={post.message} />
+                <ForumPost key={i} post={post} nickname={post.nickname} title={post.title} message={post.message} replies={post.replies} />
             )}
           </div>
         </div>

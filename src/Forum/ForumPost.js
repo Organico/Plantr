@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import auth from '../client.js';
 import { togglePost } from '../Actions/ForumActions';
-
+import ReplyPost from './ReplyPost';
 const ForumPost = React.createClass({
 
   render() {
@@ -31,6 +31,7 @@ const ForumPost = React.createClass({
 
 
     return(
+      <div>
         <div className="row" onClick = {() => {
             this.props.dispatchTogglePost(this.props.post._id);
             }} >
@@ -46,6 +47,10 @@ const ForumPost = React.createClass({
             </div>
           </div>
         </div>
+          <div>
+            <ReplyPost post={this.props.post}/>
+          </div>
+      </div>
     )
   }
 })

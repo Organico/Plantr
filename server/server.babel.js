@@ -139,7 +139,8 @@ app.post('/api/forum', (req, res, next) => {
     title: req.body.title,
     message: req.body.message,
     nickname: req.body.nickname,
-    email: req.body.email
+    email: req.body.email,
+    replies: req.body.replies
   });
   forum.save({}, (err)=> {
     if (err) {
@@ -148,6 +149,36 @@ app.post('/api/forum', (req, res, next) => {
     res.send(200, 'Posted to Forum');
   });
 });
+
+
+/*--------------------PUT REQUEST-----------------------------------------*/
+app.put('/api/forum', (req, res, next) => {
+
+  // db.collection.update(Forum.findById(req.body.id), {replies: req.body.replies})
+
+
+    Forum.findById(req.body.id, function(err, searchResult) {
+          if (err) {
+            console.log('error')
+          } else {
+            console.log("result ----------------------------->", searchResult)
+            // console.log(req.body.replies);
+                searchResult.replies.push(req.body.replies);
+                searchResult.save(function(err) {
+              if (err) {
+                console.log('error');
+              }
+              else {
+                res.send(200, searchResult);
+                console.log(searchResult);
+              }
+            });
+          }
+
+    });
+});
+
+
 
 /*--------------------DELETE REQUEST-----------------------------------------*/
 
