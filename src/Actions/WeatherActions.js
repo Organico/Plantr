@@ -6,6 +6,20 @@ export function updateWeather(weather) {
   }
 }
 
+// export function setCoordinates(coordinates){
+//   return{
+//     type: 'SET_COORDINATES',
+//     coordinates
+//   }
+// }
+
+export function setForecast(forecast){
+  return{
+    type: 'SET_FORECAST',
+    forecast
+  }
+}
+
 export function setCoordinates(coordinates){
   return{
     type: 'SET_COORDINATES',
@@ -13,9 +27,15 @@ export function setCoordinates(coordinates){
   }
 }
 
-export function setForecast(forecast){
+export function setDescription(description){
   return{
-    type: 'SET_FORECAST',
-    forecast
+    type: 'SET_DESCRIPTION',
+    description
+  }
+}
+export function setTemperature(temperature){
+  return{
+    type: 'SET_TEMPERATURE',
+    temperature
   }
 }

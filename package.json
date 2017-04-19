@@ -54,6 +54,7 @@
     "react-three": "^0.9.7",
     "react-three-renderer": "^3.1.0",
     "react-tooltip": "^3.2.10",
+    "react-weather": "^0.1.3",
     "reactstrap": "^4.5.0",
     "recharts": "^0.22.3",
     "redux": "^3.6.0",
