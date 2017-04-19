@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import auth from '../client.js';
 import { togglePost } from '../Actions/ForumActions';
 import ReplyPost from './ReplyPost';
+import Replies from './Replies';
 
 const ForumPost = React.createClass({
 
@@ -23,13 +24,22 @@ const ForumPost = React.createClass({
   let title;
 
   if (postType) {
-    message = this.props.message.split(" ").slice(0, 100).join(" ") + "...Click to Expand";
-    title = this.props.title.split(" ").slice(0, 20).join(" ");
+    if (this.props.message.split(" ").length < 100) {
+       if (this.props.replies.length) {
+        message = this.props.message.split(" ").slice(0, 100).join(" ") + "...Click to see replies";
+        title = this.props.title.split(" ").slice(0, 20).join(" ");
+      } else {
+        title = this.props.title;
+        message = this.props.message;
+      }
+    } else {
+      message = this.props.message.split(" ").slice(0, 100).join(" ") + "...Click to Expand";
+      title = this.props.title.split(" ").slice(0, 20).join(" ");
+    }
   } else {
     message = this.props.message;
     title = this.props.title;
   }
-
 
     return(
       <div>
@@ -49,6 +59,14 @@ const ForumPost = React.createClass({
           </div>
         </div>
           <div>
+            <div>
+              {this.props.replies.map((reply, i) => {
+                if (!postType) {
+                   return <Replies key={i} reply={reply} />
+                }
+              }
+              )}
+            </div>
             <ReplyPost post={this.props.post}/>
           </div>
       </div>

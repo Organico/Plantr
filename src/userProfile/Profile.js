@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom'
 import { connect } from 'react-redux';
-import CoverPhoto from './userProfile/CoverPhoto';
-import ProfilePic from './userProfile/ProfilePic';
-import About from './userProfile/About';
-import RecentGardens from './userProfile/RecentGardens';
-import RecentPosts from './userProfile/RecentPosts';
+import CoverPhoto from './CoverPhoto';
+import ProfilePic from './ProfilePic';
+import About from './About';
+import RecentGardens from './RecentGardens';
+import RecentPosts from './RecentPosts';
 // import axios from 'axios';
 // import { setUserParameters } from '../action';
 // import GardenGrid from './GardenSquareGrid/GardenGrid';
