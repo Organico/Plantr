@@ -22,7 +22,7 @@ class MyRect extends React.Component {
     render() {
         return (
             <Rect
-                x={150} y={430} width={400} height={20}
+                x={20} y={630} width={450} height={20}
                 fill={"brown"}
                 shadowBlur={10}
                 onClick={this.handleClick}
