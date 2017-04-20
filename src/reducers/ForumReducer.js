@@ -28,7 +28,6 @@ const addPost = (state, action) => {
 
 const togglePost = (state, action) => {
   const newState = {};
-  console.log("The id in the reducer is", action.id)
 
   let newPosts = state.posts.slice();
   const { posts } = state;
@@ -36,7 +35,7 @@ const togglePost = (state, action) => {
   for (let i = 0; i<newPosts.length; i++) {
     let individualMessage = newPosts[i];
     let individualMessageId = individualMessage['_id'];
-    console.log("Message is: ", individualMessage, "Id is ",  individualMessageId)
+
     if (individualMessageId === action.id){
       individualMessage.isShort = !individualMessage.isShort;
     }

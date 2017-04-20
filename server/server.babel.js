@@ -164,34 +164,55 @@ app.post('/api/forum', (req, res, next) => {
 
 /*--------------------PUT REQUEST-----------------------------------------*/
 app.put('/api/forum', (req, res, next) => {
-
-  // db.collection.update(Forum.findById(req.body.id), {replies: req.body.replies})
-
-
-    Forum.findById(req.body.id, function(err, searchResult) {
-          if (err) {
-            console.log('error')
-          } else {
-            searchResult.replies.push(req.body.replies);
-            searchResult.save(function(err) {
-            if (err) {
-              console.error('error');
-            }
-            else {
-              res.send(200, searchResult);
-              console.log(searchResult);
-            }
-          });
+  Forum.findById(req.body.id, function(err, searchResult) {
+      if (err) {
+        console.log('error')
+      } else {
+        searchResult.replies.push(req.body.replies);
+        searchResult.save(function(err) {
+        if (err) {
+          console.error('error');
         }
-
-    });
+        else {
+          res.send(200, searchResult);
+          console.log(searchResult);
+        }
+      });
+    }
+  });
 });
-
-
+  //delete a snippet by id
+  // app.delete('/api/snippets/:id', snippetsController.delete);
 
 /*--------------------DELETE REQUEST-----------------------------------------*/
 
-app.delete('/api/gardens/:id', function(req, res, next) {
+app.delete('/api/forum/:email', function(req, res, next) {
+  //   Forum.find({}, (err, data) => {
+  //   if (err) {
+  //     console.error(err);
+  //   }
+  //   res.status(200).send(data);
+  //   next();
+  // })
+  //       db.Snippet.destroy({where: { id: Number(req.params.id)}})
+  //     .then(function(res) {
+  //       res.status(200).send('Snippet deleted successfully');
+  //     })
+  //     .catch(function(err) {
+  //       res.status(400).send(err);
+  //     });
+  //         router.get('/deleteuser/:id', function(req, res) {
+
+    var db = req.db;
+
+    var uid = req.params.id.toString();
+    var collection = db.get('usercollection');
+
+    collection.remove({"_id":uid}, function(err, result) {
+        res.send( (result === 1) ? { msg: 'Deleted' } : { msg: 'error: '+ err } );
+    });
+
+});
   // Todo.findOne({_id: req.params.id}).exec(function (err, item) {
   //   if (err || !item) {
   //     console.log('error finding record to delete', err);
@@ -203,7 +224,7 @@ app.delete('/api/gardens/:id', function(req, res, next) {
   //     res.send('deleted successfully');
   //   });
   // });
-});
+
 
 app.use(function(err, req, res, next){
   console.log('Something failed');

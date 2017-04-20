@@ -9,7 +9,6 @@ import Replies from './Replies';
 const ForumPost = React.createClass({
 
   render() {
-    console.log('KEEEEEEEEY', this.props.post._id)
   //create get request for original posters profile pic
   let profilePic = {
     backgroundImage: 'url(' + this.props.post.profile + ')',
@@ -17,9 +16,8 @@ const ForumPost = React.createClass({
     backgroundSize: 'cover',
     backgroundPosition: 'center'
   }
-
-  var postType = this.props.post.isShort;
-  console.log("Here is the post type, ", postType)
+  let props = this.props;
+  let postType = this.props.post.isShort;
   let message;
   let title;
 
@@ -62,12 +60,20 @@ const ForumPost = React.createClass({
             <div>
               {this.props.replies.map((reply, i) => {
                 if (!postType) {
-                   return <Replies key={i} reply={reply} />
+                  return <Replies key={i} reply={reply} />
+                     {/*<ReplyPost post={this.props.post}/> <--NEEDS WORK*/}
                 }
               }
               )}
             </div>
-            <ReplyPost post={this.props.post}/>
+
+              { (function() {
+                if (!postType) {
+                  return <ReplyPost post={props.post}/>
+                }
+              }())
+              }
+
           </div>
       </div>
     )
