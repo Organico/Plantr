@@ -37,9 +37,12 @@ class GrassCube extends React.Component {
 
 
   render() {
-
     return (
-          <mesh>
+          <mesh
+            position={this.props.position}
+            castShadow
+            receiveShadow
+          >
               <boxGeometry
                 width={this.props.width}
                 height={this.props.height}

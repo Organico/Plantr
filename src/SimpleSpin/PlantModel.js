@@ -59,7 +59,15 @@ class PlantModel extends React.Component {
         objLoader.load(OBJ_FILE, object => {
             console.log("in object", object)
             object.scale.set(70, 70, 70);
-            object.position.set(0, 0, 0)
+            // object.position.set(
+            //   0,
+            //   0,
+            //   0)
+           object.position.set(
+              this.props.position.x,
+              this.props.position.y,
+              this.props.position.z
+            )
 
             // for(let child of object.children) {
             //     console.log("looking at the children of object", child);

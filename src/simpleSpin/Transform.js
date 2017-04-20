@@ -228,7 +228,8 @@ class Transform extends React.Component {
           <directionalLight color={0xffffff} intensity={5} position={new THREE.Vector3(1, 1, 1)} />
 
 
-          <MyCube width={100}
+          <MyCube
+            width={100}
             height={100}
             depth={100}
             color={0x654321}
@@ -236,13 +237,19 @@ class Transform extends React.Component {
             position={this.state.cubePosition}
           />
 
-          <GrassCube width={100}
+          <GrassCube
+            width={100}
             height={100}
             depth={100}
             map={"https://s3-us-west-2.amazonaws.com/ryaperry-bucket/grasslight-big.jpg"}
+            position={new THREE.Vector3(-10,200,0)}
           />
 
-          <PlantModel objFile="VG14_7.obj" mtlFile="VG14_7.mtl" />
+          <PlantModel
+            objFile="VG14_7.obj"
+            mtlFile="VG14_7.mtl"
+            position={new THREE.Vector3(0,0,0)}
+            />
           <HouseCube />
           <mesh
             position={this.groundPosition}
