@@ -40,7 +40,9 @@ const ReplyPost = React.createClass({
         <textarea  rows="4" cols="50" ref={(node) => replyMessage = node } type="string" name="messageInput" placeholder='Your message'>
         </textarea>
         <button type="submit" onClick={() => {
+          replyMessage.value = JSON.stringify(replyMessage.value);
           this.replyPost(replyMessage.value);
+          replyMessage.value = '';
         }}>submit</button>
       </div>
     )

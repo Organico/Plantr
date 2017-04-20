@@ -25,7 +25,7 @@ mongoose.connect('mongodb://test:test@ds015750.mlab.com:15750/plantrdb', functio
   }
 });
 
-// db = mongoose.connection;
+const db = mongoose.connection;
 
 
 /*--------------------GET REQUEST---------------------------------------------*/
@@ -38,12 +38,6 @@ app.get('/api/users', function(req, res, next) {
     next();
   })
 });
-
-
-// axios.get('/api/users')
-//   .then( (response) => {
-//     console.log("in response", response.data)
-//   })
 
 app.get('/api/gardens', function(req, res, next) {
   console.log("Server side: ", req);
@@ -186,7 +180,19 @@ app.put('/api/forum', (req, res, next) => {
 
 /*--------------------DELETE REQUEST-----------------------------------------*/
 
-app.delete('/api/forum/:email', function(req, res, next) {
+app.get('/api/forum/:id', function(req, res, next) {
+  console.log("THE DELETE IS REACHING SERVERBABEL");
+  Forum.find({}, function(err, result) {
+    console.log('HERE IS THE RESULT', result)
+      if (err) {
+        console.error('error');
+      } else {
+        result.remove({"_id":req.body.id}, function(err, result) {
+        res.send( (result === 1) ? { msg: 'Deleted' } : { msg: 'error: '+ err } );
+    });
+    }
+  });
+});
   //   Forum.find({}, (err, data) => {
   //   if (err) {
   //     console.error(err);
@@ -203,16 +209,6 @@ app.delete('/api/forum/:email', function(req, res, next) {
   //     });
   //         router.get('/deleteuser/:id', function(req, res) {
 
-    var db = req.db;
-
-    var uid = req.params.id.toString();
-    var collection = db.get('usercollection');
-
-    collection.remove({"_id":uid}, function(err, result) {
-        res.send( (result === 1) ? { msg: 'Deleted' } : { msg: 'error: '+ err } );
-    });
-
-});
   // Todo.findOne({_id: req.params.id}).exec(function (err, item) {
   //   if (err || !item) {
   //     console.log('error finding record to delete', err);

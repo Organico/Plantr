@@ -12,12 +12,22 @@ const Replies = React.createClass({
     backgroundSize: 'cover',
     backgroundPosition: 'center'
   }
+  let username = {
+    color: 'white',
+    fontSize: '16px',
+    fontWeight: 'bold',
+    textShadow: '-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black',
+    marginTop: '50%'
+  }
 
     return(
       <div>
         <div className="row">
           <div className="col-md-1" style={profilePic}>
-          { this.props.reply.replyUser.nickname }
+          <br/>
+          <div style={username}>
+            { this.props.reply.replyUser.nickname }
+          </div>
           </div>
           <div className="col-md-11 offset-md-0">
             <div className="row">

@@ -2,13 +2,31 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import auth from '../client.js';
-import { togglePost } from '../Actions/ForumActions';
+import { setPosts, togglePost } from '../Actions/ForumActions';
 import ReplyPost from './ReplyPost';
 import Replies from './Replies';
+import axios from 'axios';
 
 const ForumPost = React.createClass({
 
+  deletePost() {
+    const profile = auth.getProfile();
+    axios.delete('/api/forum/:' + profile.email)
+    .then((res) => {
+      let dbPostData = res.data;
+      for (let i = 0; i<dbPostData.length; i++) {
+        let message = dbPostData[i];
+        message['isShort'] = true;
+      }
+      console.log("Db post data", dbPostData)
+      this.props.dispatchSetPost(dbPostData)
+    }).catch((err) => {
+      console.error(err);
+    });
+  },
+
   render() {
+  const profile = auth.getProfile();
   //create get request for original posters profile pic
   let profilePic = {
     backgroundImage: 'url(' + this.props.post.profile + ')',
@@ -23,7 +41,7 @@ const ForumPost = React.createClass({
 
   if (postType) {
     if (this.props.message.split(" ").length < 100) {
-       if (this.props.replies.length) {
+      if (this.props.replies.length) {
         message = this.props.message.split(" ").slice(0, 100).join(" ") + "...Click to see replies";
         title = this.props.title.split(" ").slice(0, 20).join(" ");
       } else {
@@ -39,13 +57,24 @@ const ForumPost = React.createClass({
     title = this.props.title;
   }
 
+  let username = {
+    color: 'white',
+    fontSize: '16px',
+    fontWeight: 'bold',
+    textShadow: '-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black',
+    marginTop: '50%'
+  }
+
     return(
       <div className="container-fluid">
         <div className="row" onClick = {() => {
             this.props.dispatchTogglePost(this.props.post._id);
             }} >
           <div className="col-md-1" style={profilePic}>
+          <br/>
+          <div style={username}>
           { this.props.nickname }
+          </div>
           </div>
           <div className="col-md-10 offset-md-1">
             <div className="row">
@@ -60,8 +89,18 @@ const ForumPost = React.createClass({
             <div>
               {this.props.replies.map((reply, i) => {
                 if (!postType) {
-                  return <Replies key={i} reply={reply} />
-                     {/*<ReplyPost post={this.props.post}/> <--NEEDS WORK*/}
+                  if (profile.email === reply.replyUser.email) {
+                  return <div>
+                    <Replies key={i} reply={reply} />
+                      <div className="col-md-10 offset-md-1">
+                        <button type="submit" className="glyphicon glyphicon-remove-circle" onClick={ () => {
+                      this.deletePost();
+                    }}>delete</button>
+                    </div>
+                  </div>
+                   } else {
+                    return <Replies key={i} reply={reply} />
+                   }
                 }
               }
               )}
@@ -92,6 +131,9 @@ const mapDispatchToProps = (dispatch) => {
 
     dispatchTogglePost(id) {
       dispatch(togglePost(id));
+    },
+    dispatchSetPost(message) {
+      dispatch(setPosts(message));
     }
   };
 };

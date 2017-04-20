@@ -44,6 +44,8 @@ const CreateNewPost = React.createClass({
       <textarea  rows="4" cols="50" ref={(node) => messageInput = node } type="string" name="messageInput" placeholder='Your message'>
       </textarea>
       <button type="submit" onClick={() => {
+          titleInput.value = JSON.stringify(titleInput.value);
+          messageInput.value = JSON.stringify(messageInput.value);
           this.savePost(titleInput.value, messageInput.value)
           titleInput.value = '';
           messageInput.value = '';
