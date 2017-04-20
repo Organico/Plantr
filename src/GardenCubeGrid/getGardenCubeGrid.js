@@ -43,8 +43,6 @@ class GardenCubeGridView extends ExampleBase {
     this.groundRotation = new THREE.Euler(-Math.PI / 2, 0, 0);
     this.groundRepeat = new THREE.Vector2(25, 25);
 
-
-
   }
 
   shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate;
@@ -137,10 +135,8 @@ class GardenCubeGridView extends ExampleBase {
 
   componentWillUnmount() {
     this.controls.removeEventListener('change', this._onTrackballChange);
-
     this.controls.dispose();
     delete this.controls;
-
     delete this.stats;
   }
 
