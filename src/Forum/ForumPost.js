@@ -40,7 +40,7 @@ const ForumPost = React.createClass({
   }
 
     return(
-      <div>
+      <div className="container-fluid">
         <div className="row" onClick = {() => {
             this.props.dispatchTogglePost(this.props.post._id);
             }} >
