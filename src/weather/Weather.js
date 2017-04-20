@@ -104,6 +104,12 @@ class WeatherTest extends React.Component {
       //needs to have a function to increment by 3 hours in timestamp form
     //same format as getWeatherdata so maybe reformat functions to not be so specific
 
+
+
+    //http://api.openweathermap.org/data/2.5/forecast/daily?appid=b625bae7d54136d7e2d33c6a3f383f9e&units=metric&q=San%20Francisco
+    //change url to "forecast/daily" instead of weather
+      //returns a list of weather forecast for the next 16 days by day
+
   }
 
   getWeatherData(location){

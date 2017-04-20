@@ -236,6 +236,12 @@ class Transform extends React.Component {
             position={this.state.cubePosition}
           />
 
+          <GrassCube width={100}
+            height={100}
+            depth={100}
+            map={"https://s3-us-west-2.amazonaws.com/ryaperry-bucket/grasslight-big.jpg"}
+          />
+
           <PlantModel objFile="VG14_7.obj" mtlFile="VG14_7.mtl" />
           <HouseCube />
           <mesh
