@@ -17,7 +17,12 @@ class SeedPacket extends Component {
           <div className="col-md-12 flip3D">
               <div id="packetBack" className="back">
                 <div id="packetText" >
-                 <p>Price: {this.props.seedPacket.price}<br></br>Quantity: {this.props.seedPacket.quantity} seeds<br></br></p>
+                   <p>Name: {this.props.seedPacket.name}<br></br>
+                  Price: {this.props.seedPacket.price}<br></br>Quantity: {this.props.seedPacket.quantity} seeds<br></br> Season: {this.props.seedPacket.season}<br></br>
+
+
+
+                  </p>
 
                 </div>
               </div>

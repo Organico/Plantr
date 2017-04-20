@@ -16,6 +16,7 @@ const initialGardenState = {
   futurePlantGrideStates: [],
 
   seedPacket:{
+    'name': 'tomato',
     'price': 0,
     'quantity': 5,
     'season': "Spring",
@@ -26,6 +27,12 @@ const initialGardenState = {
     'extremeWarning':[0,45],
     'packetImg': '/seedPacketIMGs/tomatoResized.png'
   },
+  plantGrowthGraph: [
+      {name: 'Start Seedlings', uv: 0},
+      {name: 'Sow', uv: 20},
+      {name: 'Harvest', uv:45},
+      {name: 'End', uv: 60}
+],
   gardenGrid: [
   ],
   plantGrid: [
@@ -47,7 +54,14 @@ const initialGardenState = {
       'instructions': "Take great care of me",
       'sunlight': "Full-sun",
       'harvest':40,
-      'extremeWarning':[0,45]
+      'extremeWarning':[0,45],
+      'growthGraph': [
+        {name: 'Sow', uv: 0},
+        {name: 'Seedlings Emerge', uv: 7},
+        {name: 'Bloom Start', uv: 45},
+        {name: 'Harvest', uv: 50},
+        {name: 'End', uv: 65}
+      ],
     },
     {
       'name': 'potato',
@@ -64,7 +78,14 @@ const initialGardenState = {
       'instructions': "Take great care of me",
       'sunlight': "Full-sun",
       'harvest':40,
-      'extremeWarning':[0,45]
+      'extremeWarning':[0,45],
+      'growthGraph': [
+        {name: 'Sow', uv: 0},
+        {name: 'Seedlings \r Emerge', uv: 7},
+        {name: 'Bloom \r Start', uv: 45},
+        {name: 'Harvest', uv: 50},
+        {name: 'Harvest \r End', uv: 65}
+      ],
     },
     { 'name': 'tomato',
       'type': 'fruit',
@@ -80,7 +101,14 @@ const initialGardenState = {
       'instructions': "Take great care of me",
       'sunlight': "Full-sun",
       'harvest':40,
-      'extremeWarning':[0,45]
+      'extremeWarning':[0,45],
+      'growthGraph': [
+        {name: 'Sow', uv: 0},
+        {name: 'Seedlings \r Emerge', uv: 7},
+        {name: 'Bloom \r Start', uv: 45},
+        {name: 'Harvest', uv: 50},
+        {name: 'Harvest \r End', uv: 65}
+      ]
     },
     {
       'name': 'green bean',
@@ -97,7 +125,14 @@ const initialGardenState = {
       'instructions': "Take great care of me",
       'sunlight': "Full-sun",
       'harvest':40,
-      'extremeWarning':[0,45]
+      'extremeWarning':[0,45],
+      'growthGraph': [
+        {name: 'Sow', uv: 0},
+        {name: 'Seedlings \r Emerge', uv: 7},
+        {name: 'Bloom \r Start', uv: 45},
+        {name: 'Harvest', uv: 50},
+        {name: 'Harvest \r End', uv: 65}
+      ]
 
     },
     {
@@ -115,7 +150,14 @@ const initialGardenState = {
       'instructions': "Take great care of me",
       'sunlight': "Full-sun",
       'harvest':40,
-      'extremeWarning':[0,45]
+      'extremeWarning':[0,45],
+      'growthGraph': [
+        {name: 'Sow', uv: 0},
+        {name: 'Seedlings \r Emerge', uv: 7},
+        {name: 'Bloom \r Start', uv: 45},
+        {name: 'Harvest', uv: 50},
+        {name: 'Harvest \r End', uv: 65}
+      ],
     },
     {
       'name': 'okra',
@@ -132,7 +174,14 @@ const initialGardenState = {
       'instructions': "Take great care of me",
       'sunlight': "Full-sun",
       'harvest':40,
-      'extremeWarning':[0,45]
+      'extremeWarning':[0,45],
+      'growthGraph': [
+        {name: 'Sow', uv: 0},
+        {name: 'Seedlings \r Emerge', uv: 7},
+        {name: 'Bloom \r Start', uv: 45},
+        {name: 'Harvest', uv: 50},
+        {name: 'Harvest \r End', uv: 65}
+      ],
     },
     { 'name': 'strawberry',
       'type': 'fruit',
@@ -148,7 +197,14 @@ const initialGardenState = {
       'instructions': "Take great care of me",
       'sunlight': "Full-sun",
       'harvest':40,
-      'extremeWarning':[0,45]
+      'extremeWarning':[0,45],
+      'growthGraph': [
+        {name: 'Sow', uv: 0},
+        {name: 'Seedlings \r Emerge', uv: 7},
+        {name: 'Bloom \r Start', uv: 45},
+        {name: 'Harvest', uv: 50},
+        {name: 'Harvest \r End', uv: 65}
+      ],
     }
   ],
 
@@ -168,7 +224,14 @@ const initialGardenState = {
       'instructions': "Take great care of me",
       'sunlight': "Full-sun",
       'harvest':40,
-      'extremeWarning':[0,45]
+      'extremeWarning':[0,45],
+      'growthGraph': [
+        {name: 'Sow', uv: 0},
+        {name: 'Seedlings \r Emerge', uv: 7},
+        {name: 'Bloom \r Start', uv: 45},
+        {name: 'Harvest', uv: 50},
+        {name: 'Harvest \r End', uv: 65}
+      ],
     },
     {
       'name': 'onion',
@@ -185,7 +248,14 @@ const initialGardenState = {
       'instructions': "Take great care of me",
       'sunlight': "Full-sun",
       'harvest':40,
-      'extremeWarning':[0,45]
+      'extremeWarning':[0,45],
+      'growthGraph': [
+        {name: 'Sow', uv: 0},
+        {name: 'Seedlings \r Emerge', uv: 7},
+        {name: 'Bloom \r Start', uv: 45},
+        {name: 'Harvest', uv: 50},
+        {name: 'Harvest \r End', uv: 65}
+      ]
     },
     {
       'name': 'green bean',
@@ -202,7 +272,14 @@ const initialGardenState = {
       'instructions': "Take great care of me",
       'sunlight': "Full-sun",
       'harvest':40,
-      'extremeWarning':[0,45]
+      'extremeWarning':[0,45],
+      'growthGraph': [
+        {name: 'Sow', uv: 0},
+        {name: 'Seedlings \r Emerge', uv: 7},
+        {name: 'Bloom \r Start', uv: 45},
+        {name: 'Harvest', uv: 50},
+        {name: 'Harvest \r End', uv: 65}
+      ]
     },
     {
       'name': 'carrots',
@@ -219,7 +296,14 @@ const initialGardenState = {
       'instructions': "Take great care of me",
       'sunlight': "Full-sun",
       'harvest':40,
-      'extremeWarning':[0,45]
+      'extremeWarning':[0,45],
+      'growthGraph': [
+        {name: 'Sow', uv: 0},
+        {name: 'Seedlings \r Emerge', uv: 7},
+        {name: 'Bloom \r Start', uv: 45},
+        {name: 'Harvest', uv: 50},
+        {name: 'Harvest \r End', uv: 65}
+      ]
     },
     {
       'name': 'kale',
@@ -236,7 +320,14 @@ const initialGardenState = {
       'instructions': "Take great care of me",
       'sunlight': "Full-sun",
       'harvest':40,
-      'extremeWarning':[0,45]
+      'extremeWarning':[0,45],
+      'growthGraph': [
+        {name: 'Sow', uv: 0},
+        {name: 'Seedlings \r Emerge', uv: 7},
+        {name: 'Bloom \r Start', uv: 45},
+        {name: 'Harvest', uv: 50},
+        {name: 'Harvest \r End', uv: 65}
+      ],
     },
     {
       'name': 'snappeas',
@@ -253,7 +344,14 @@ const initialGardenState = {
       'instructions': "Take great care of me",
       'sunlight': "Full-sun",
       'harvest':40,
-      'extremeWarning':[0,45]
+      'extremeWarning':[0,45],
+      'growthGraph': [
+        {name: 'Sow', uv: 0},
+        {name: 'Seedlings \r Emerge', uv: 7},
+        {name: 'Bloom \r Start', uv: 45},
+        {name: 'Harvest', uv: 50},
+        {name: 'Harvest \r End', uv: 65}
+      ],
     },
     {
       'name': 'potato',
@@ -270,7 +368,14 @@ const initialGardenState = {
       'instructions': "Take great care of me",
       'sunlight': "Full-sun",
       'harvest':40,
-      'extremeWarning':[0,45]
+      'extremeWarning':[0,45],
+      'growthGraph': [
+        {name: 'Sow', uv: 0},
+        {name: 'Seedlings \r Emerge', uv: 7},
+        {name: 'Bloom \r Start', uv: 45},
+        {name: 'Harvest', uv: 50},
+        {name: 'Harvest \r End', uv: 65}
+      ],
     },
       {
       'name': 'corn',
@@ -287,7 +392,14 @@ const initialGardenState = {
       'instructions': "Take great care of me",
       'sunlight': "Full-sun",
       'harvest':40,
-      'extremeWarning':[0,45]
+      'extremeWarning':[0,45],
+      'growthGraph': [
+        {name: 'Sow', uv: 0},
+        {name: 'Seedlings \r Emerge', uv: 7},
+        {name: 'Bloom \r Start', uv: 45},
+        {name: 'Harvest', uv: 50},
+        {name: 'Harvest \r End', uv: 65}
+      ],
     },
       {
       'name': 'pumpkin',
@@ -304,7 +416,14 @@ const initialGardenState = {
       'instructions': "Take great care of me",
       'sunlight': "Full-sun",
       'harvest':40,
-      'extremeWarning':[0,45]
+      'extremeWarning':[0,45],
+      'growthGraph': [
+        {name: 'Sow', uv: 0},
+        {name: 'Seedlings \r Emerge', uv: 7},
+        {name: 'Bloom \r Start', uv: 45},
+        {name: 'Harvest', uv: 50},
+        {name: 'Harvest \r End', uv: 65}
+      ],
     },
      {
       'name': 'chili pepper',
@@ -321,7 +440,14 @@ const initialGardenState = {
       'instructions': "Take great care of me",
       'sunlight': "Full-sun",
       'harvest':40,
-      'extremeWarning':[0,45]
+      'extremeWarning':[0,45],
+      'growthGraph': [
+        {name: 'Sow', uv: 0},
+        {name: 'Seedlings \r Emerge', uv: 7},
+        {name: 'Bloom \r Start', uv: 45},
+        {name: 'Harvest', uv: 50},
+        {name: 'Harvest \r End', uv: 65}
+      ],
     },
      {
       'name': 'cucumber',
@@ -338,7 +464,14 @@ const initialGardenState = {
       'instructions': "Take great care of me",
       'sunlight': "Full-sun",
       'harvest':40,
-      'extremeWarning':[0,45]
+      'extremeWarning':[0,45],
+      'growthGraph': [
+        {name: 'Sow', uv: 0},
+        {name: 'Seedlings \r Emerge', uv: 7},
+        {name: 'Bloom \r Start', uv: 45},
+        {name: 'Harvest', uv: 50},
+        {name: 'Harvest \r End', uv: 65}
+      ],
     },
      {
       'name': 'cucumber',
@@ -355,7 +488,14 @@ const initialGardenState = {
       'instructions': "Take great care of me",
       'sunlight': "Full-sun",
       'harvest':40,
-      'extremeWarning':[0,45]
+      'extremeWarning':[0,45],
+      'growthGraph': [
+        {name: 'Sow', uv: 0},
+        {name: 'Seedlings \r Emerge', uv: 7},
+        {name: 'Bloom \r Start', uv: 45},
+        {name: 'Harvest', uv: 50},
+        {name: 'Harvest \r End', uv: 65}
+      ],
     }
 
 
@@ -383,7 +523,14 @@ const initialGardenState = {
       'instructions': "Take great care of me",
       'sunlight': "Full-sun",
       'harvest':40,
-      'extremeWarning':[0,45]
+      'extremeWarning':[0,45],
+      'growthGraph': [
+        {name: 'Sow', uv: 0},
+        {name: 'Seedlings \r Emerge', uv: 7},
+        {name: 'Bloom \r Start', uv: 45},
+        {name: 'Harvest', uv: 50},
+        {name: 'Harvest \r End', uv: 65}
+      ],
     },
     { 'name': 'tomato',
       'type': 'fruit',
@@ -399,7 +546,14 @@ const initialGardenState = {
       'instructions': "Take great care of me",
       'sunlight': "Full-sun",
       'harvest':40,
-      'extremeWarning':[0,45]
+      'extremeWarning':[0,45],
+      'growthGraph': [
+        {name: 'Sow', uv: 0},
+        {name: 'Seedlings \r Emerge', uv: 7},
+        {name: 'Bloom \r Start', uv: 45},
+        {name: 'Harvest', uv: 50},
+        {name: 'Harvest \r End', uv: 65}
+      ],
       },
       {
       'name': 'pineapple',
@@ -416,7 +570,14 @@ const initialGardenState = {
       'instructions': "Take great care of me",
       'sunlight': "Full-sun",
       'harvest':40,
-      'extremeWarning':[0,45]
+      'extremeWarning':[0,45],
+      'growthGraph': [
+        {name: 'Sow', uv: 0},
+        {name: 'Seedlings \r Emerge', uv: 7},
+        {name: 'Bloom \r Start', uv: 45},
+        {name: 'Harvest', uv: 50},
+        {name: 'Harvest \r End', uv: 65}
+      ],
     },
     {
       'name': 'orange',
@@ -433,7 +594,14 @@ const initialGardenState = {
       'instructions': "Take great care of me",
       'sunlight': "Full-sun",
       'harvest':40,
-      'extremeWarning':[0,45]
+      'extremeWarning':[0,45],
+      'growthGraph': [
+        {name: 'Sow', uv: 0},
+        {name: 'Seedlings \r Emerge', uv: 7},
+        {name: 'Bloom \r Start', uv: 45},
+        {name: 'Harvest', uv: 50},
+        {name: 'Harvest \r End', uv: 65}
+      ],
     },
      {
       'name': 'apple',
@@ -450,7 +618,14 @@ const initialGardenState = {
       'instructions': "Take great care of me",
       'sunlight': "Full-sun",
       'harvest':40,
-      'extremeWarning':[0,45]
+      'extremeWarning':[0,45],
+      'growthGraph': [
+        {name: 'Sow', uv: 0},
+        {name: 'Seedlings \r Emerge', uv: 7},
+        {name: 'Bloom \r Start', uv: 45},
+        {name: 'Harvest', uv: 50},
+        {name: 'Harvest \r End', uv: 65}
+      ],
     },
     {
       'name': 'grapes',
@@ -467,7 +642,14 @@ const initialGardenState = {
       'instructions': "Take great care of me",
       'sunlight': "Full-sun",
       'harvest':40,
-      'extremeWarning':[0,45]
+      'extremeWarning':[0,45],
+      'growthGraph': [
+        {name: 'Sow', uv: 0},
+        {name: 'Seedlings \r Emerge', uv: 7},
+        {name: 'Bloom \r Start', uv: 45},
+        {name: 'Harvest', uv: 50},
+        {name: 'Harvest \r End', uv: 65}
+      ],
     },
     {
       'name': 'watermelon',
@@ -484,7 +666,14 @@ const initialGardenState = {
       'instructions': "Take great care of me",
       'sunlight': "Full-sun",
       'harvest':40,
-      'extremeWarning':[0,45]
+      'extremeWarning':[0,45],
+      'growthGraph': [
+        {name: 'Sow', uv: 0},
+        {name: 'Seedlings \r Emerge', uv: 7},
+        {name: 'Bloom \r Start', uv: 45},
+        {name: 'Harvest', uv: 50},
+        {name: 'Harvest \r End', uv: 65}
+      ],
     },
     {
       'name': 'canteloupe',
@@ -501,7 +690,14 @@ const initialGardenState = {
       'instructions': "Take great care of me",
       'sunlight': "Full-sun",
       'harvest':40,
-      'extremeWarning':[0,45]
+      'extremeWarning':[0,45],
+      'growthGraph': [
+        {name: 'Sow', uv: 0},
+        {name: 'Seedlings \r Emerge', uv: 7},
+        {name: 'Bloom \r Start', uv: 45},
+        {name: 'Harvest', uv: 50},
+        {name: 'Harvest \r End', uv: 65}
+      ]
     },
   ],
   tileDex: [
@@ -512,7 +708,7 @@ const initialGardenState = {
       'stroke': 'black'
     },
     { 'name': 'grass',
-      'x':102,
+      'x':104,
       'y':50,
       'img':"https://c1.staticflickr.com/3/2923/33742489190_3e30fca5f7_o.jpg",
       'stroke': 'black'
@@ -520,7 +716,7 @@ const initialGardenState = {
       },
       {
       'name': 'rocks',
-      'x':154,
+      'x':158,
       'y':50,
       'img':'https://c1.staticflickr.com/3/2888/33316224483_1c8a775cf0_o.jpg',
       'stroke': 'black'
@@ -528,7 +724,7 @@ const initialGardenState = {
     },
     {
       'name': 'gardenTile',
-      'x': 206,
+      'x': 212,
       'y':50,
       'img': 'https://c1.staticflickr.com/3/2865/33285295564_e948bbe297_o.jpg',
       'stroke': 'black'
@@ -536,7 +732,7 @@ const initialGardenState = {
     },
     {
       'name': 'gnome',
-      'x': 258,
+      'x': 266,
       'y':50,
       'img': 'https://c1.staticflickr.com/3/2832/33285295044_f9354e513e_o.png',
       'stroke': 'black'
@@ -686,6 +882,7 @@ const addPlantToPlantGrid = (state, action) => {
   var plantToMoveIndex;
   const newState = {};
   const {plantGrid} = state;
+  var oldPlantGrid = plantGrid.slice();
   var newPlantGrid = plantGrid.slice();
 
 
@@ -701,14 +898,17 @@ const addPlantToPlantGrid = (state, action) => {
     console.log("SAMY IN FIRST")
     console.log("THIS IS THE PLANT!!!", action.plant)
     newPlantGrid.push(action.plant);
+  Object.assign(newState, state, {pastPlantGridStates: oldPlantGrid, plantGrid: newPlantGrid});
   } else {
-    console.log("SAMY IN SECOND")
-    console.log("THIS IS THE PLANT THAT SHOULDN'T BE ADDED", action.plant)
-    // newPlantGrid[plantToMoveIndex].x = action.plant.x
-    // newPlantGrid[plantToMoveIndex].y = action.plant.y
+    Object.assign(newState, state, {plantGrid: newPlantGrid});
   }
 
-  Object.assign(newState, state, {plantGrid: newPlantGrid});
+
+
+
+
+
+
   console.log('(before) state: ', state);
   console.log('(after) state: ', newState);
 
@@ -754,6 +954,7 @@ const setTile = (state, action) => {
 
 const setSeedPacket= (state, action) => {
   var newPacket = action.packet
+
   const newState = {};
 
 
@@ -804,7 +1005,44 @@ const addToShelf= (state, action) => {
   return newState;
 };
 
+const undo= (state, action) => {
+  const newState = {};
+  var futurePlantGrid = state.plantGrid.slice();
+  var oldPlantGrid = state.pastPlantGridStates.slice();
+  var oldOldPlantGrid =state.pastPlantGridStates.slice();
+  oldOldPlantGrid.pop();
 
+
+
+
+  Object.assign(newState, state, {plantGrid: oldPlantGrid , pastPlantGridStates: oldOldPlantGrid, futurePlantGrideStates: futurePlantGrid});
+
+  console.log('(before) state: ', state);
+  console.log('(after) state: ', newState);
+  return newState;
+};
+
+const clear = (state, action) => {
+  const newState = {};
+
+  Object.assign(newState, state, {plantGrid: [], pastPlantGridStates: [], futurePlantGrideStates: []});
+
+  console.log('(before) state: ', state);
+  console.log('(after) state: ', newState);
+  return newState;
+};
+
+const setGrowthGraph = (state, action) => {
+  console.log("INSIDE THE GROWTH GRAPHHHHHHH", action.graph)
+  const newState = {};
+  const newGraph = action.graph;
+
+  Object.assign(newState, state, {plantGrowthGraph: action.graph});
+
+  console.log('(before) state: ', state);
+  console.log('(after) state: ', newState);
+  return newState;
+}
 
 
 function gardenReducer(state = initialGardenState, action) {
@@ -843,6 +1081,8 @@ function gardenReducer(state = initialGardenState, action) {
     return redo(state, action)
   case 'CLEAR':
     return clear(state, action)
+  case 'SET_GROWTH_GRAPH':
+    return setGrowthGraph(state, action);
   default:
     return state;
   }

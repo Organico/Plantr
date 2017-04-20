@@ -44,14 +44,15 @@ export function setSeedPacket(packet) {
 }
 
 export function addToShelf(shelfObject) {
-  console.log('action: adding to shelf '. shelfObject);
+  console.log('action: adding to shelf ', shelfObject);
   return { type: 'ADD_TO_SHELF', shelfObject};
 }
 
+export function setGrowthGraph(graph) {
+  console.log('action: adding to shelf');
+  return { type: 'SET_GROWTH_GRAPH', graph};
+}
 
-
-
-/*MY SQUARE*/
 
 export function toggleSquare(x,y){
   console.log('action: toggleSquare called');

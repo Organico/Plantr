@@ -181,17 +181,38 @@ app.put('/api/forum', (req, res, next) => {
 /*--------------------DELETE REQUEST-----------------------------------------*/
 
 app.get('/api/forum/:id', function(req, res, next) {
-  console.log("THE DELETE IS REACHING SERVERBABEL");
-  Forum.find({}, function(err, result) {
-    console.log('HERE IS THE RESULT', result)
-      if (err) {
-        console.error('error');
-      } else {
-        result.remove({"_id":req.body.id}, function(err, result) {
-        res.send( (result === 1) ? { msg: 'Deleted' } : { msg: 'error: '+ err } );
-    });
+  console.log("THE PARAMS ARE: ", req.params)
+
+  let reqId = req.params['id']
+  console.log("THE REQ ID IS ", reqId)
+  // console.log("THE QUERY IS:  ", req.query)
+  // console.log("THE DELETE IS REACHING SERVERBABEL");
+  // Forum.find({ id: }).remove().exec();
+  // Forum.findOneAndRemove({id: reqId}, function(err, result) {
+  //     if (err) {
+  //       console.log('error why :( ');
+  //     } else {
+  //       res.send(200, "HEY WE DID IT! DELETED!")
+  //   }
+  // });
+
+  console.log("THE FORUM IS: ", Forum)
+
+  Forum.findByIdAndRemove(reqId, function(err) {
+    if (err) {
+      console.log("GREAT Great ERROR!")
     }
-  });
+    else {
+      console.log("GREAT Great SUCCESS")
+    }
+});
+  // Forum.findByIdAndRemove( reqId, function(err, result) {
+  //     if (err) {
+  //       console.log('error why :( ');
+  //     } else {
+  //       res.send(200, "HEY WE DID IT! DELETED!")
+  //   }
+  // });
 });
   //   Forum.find({}, (err, data) => {
   //   if (err) {
