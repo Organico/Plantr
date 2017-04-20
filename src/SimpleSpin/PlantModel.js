@@ -59,17 +59,33 @@ class PlantModel extends React.Component {
         objLoader.load(OBJ_FILE, object => {
             console.log("in object", object)
             object.scale.set(70, 70, 70);
-            object.position.set(0, 0, 0)
+            // object.position.set(
+            //   0,
+            //   0,
+            //   0)
+           object.position.set(
+              this.props.position.x,
+              this.props.position.y,
+              this.props.position.z
+            )
 
             // for(let child of object.children) {
             //     console.log("looking at the children of object", child);
             //     // child.material.side = THREE.DoubleSide
             // }
 
+            var that = this
+
             object.traverse( function ( child ) {
               console.log("traversing children ", child)
               if ( child instanceof THREE.Mesh ) {
                 console.log("child thats a mesh! ", child)
+                console.log("that inside of the object travers for the plant model: ", that)
+                child.rotation.set(
+                  that.props.rotation.x,
+                  that.props.rotation.y,
+                  that.props.rotation.z
+                )
                 // var loader = new THREE.TextureLoader();
                 // loader.crossOrigin = '*'; // Use as needed
                 // var imgTexture = loader.load('https://s3-us-west-2.amazonaws.com/ryaperry-bucket/firstUVLayoutHouse.png');

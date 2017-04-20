@@ -131,6 +131,14 @@ class Transform extends React.Component {
     });
   };
 
+  componentWillUnmount() {
+    this.controls.removeEventListener('change', this._onTrackballChange);
+
+    this.controls.dispose();
+    delete this.controls;
+
+    delete this.stats;
+  }
 
  _onAnimateInternal() {
     const {
@@ -227,8 +235,8 @@ class Transform extends React.Component {
           <gridHelper size={1000} divisions={10} />
           <directionalLight color={0xffffff} intensity={5} position={new THREE.Vector3(1, 1, 1)} />
 
-
-          <MyCube width={100}
+          <MyCube
+            width={100}
             height={100}
             depth={100}
             color={0x654321}
@@ -236,8 +244,23 @@ class Transform extends React.Component {
             position={this.state.cubePosition}
           />
 
-          <PlantModel objFile="VG14_7.obj" mtlFile="VG14_7.mtl" />
-          <HouseCube />
+          <GrassCube
+            width={100}
+            height={100}
+            depth={100}
+            map={"https://s3-us-west-2.amazonaws.com/ryaperry-bucket/grasslight-big.jpg"}
+            position={new THREE.Vector3(-10,200,0)}
+          />
+
+          <PlantModel
+            objFile="VG14_7.obj"
+            mtlFile="VG14_7.mtl"
+            rotation={new THREE.Vector3(0,270,0)}
+            position={new THREE.Vector3(0,0,0)}
+          />
+          <HouseCube
+            position={new THREE.Vector3(-150,0,-900)}
+          />
           <mesh
             position={this.groundPosition}
             rotation={this.groundRotation}

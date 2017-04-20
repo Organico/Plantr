@@ -1,247 +1,188 @@
 import React from 'react';
-// import './App.css';
 import { connect } from 'react-redux'
-import { updateWeather } from '../Actions/WeatherActions.js';
+import { setCoordinates, setDescription, setTemperature } from '../Actions/WeatherActions.js';
 import weatherReducer from '../reducers/WeatherReducer.js'
-import CloudAnimation from './CloudAnimation'
-//take off class names if using CloudAnmiation and homemade animations
 
-const WUNDERGROUND_KEY = "b56f2c0800fdf6e4";
+import {getTemp, getCoordinates, getWeatherDescription} from './OpenWeatherMap'
+import axios from 'axios'
 
-const ICON_SET = {
-    chancesleet: "snowy",
-    chancesnow: "snowy",
-    clear: "sunny",
-    flurries: "snowy",
-    fog: "cloudy",
-    hazy: "cloudy",
-    rain: "rainy",
-    chancerain: "rainy",
-    sleet: "snowy",
-    snow: "snowy",
-    chanceflurries: "snowy",
-    tstorms: "stormy",
-    chancetstorms: "stormy",
-    sunny: "sunny",
-    mostlysunny: "sunny",
-    partlysunny: "sunny",
-    partlycloudy: "cloudy",
-    mostlycloudy: "cloudy",
-    cloudy: "cloudy"
-};
+class WeatherTest extends React.Component {
 
-const SUPPORTED_LANGUAGES = [
-    "AF", "AL", "AR", "HY", "AZ",
-    "EU", "BY", "BU", "LI", "MY",
-    "CA", "CN", "TW", "CR", "CZ",
-    "DK", "DV", "NL", "EN", "EO",
-    "ET", "FA", "FI", "FR", "FC",
-    "GZ", "DL", "KA", "GR", "GU",
-    "HT", "IL", "HI", "HU", "IS",
-    "IO", "ID", "IR", "IT", "JP",
-    "JW", "KM", "KR", "KU", "LA",
-    "LV", "LT", "ND", "MK", "MT",
-    "GM", "MI", "MR", "MN", "NO",
-    "OC", "PS", "GN", "PL", "BR",
-    "PA", "RO", "RU", "SR", "SK",
-    "SL", "SP", "SI", "SW", "CH",
-    "TL", "TT", "TH", "TR", "TK",
-    "UA", "UZ", "VU", "CY", "SN",
-    "JI", "YI"
-];
+  constructor(props){
+    super(props)
 
-function getIcon(icon) {
-    return ICON_SET[icon];
-}
-
-function getTemp (text) {
-    return (text.match(/(\-?[0-9]+)/) || [])[1];
-}
-
-
-class Weather extends React.Component {
-
-  constructor (props) {
-      super(props);
-      this.state = {};
-
-      var options = {
-    enableHighAccuracy: true,
-    timeout: 5000,
-    maximumAge: 0
-      };
-
-      if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(pos => {
-              this.setState({
-                  coordinates: pos.coords
-              });
-              //***Turns into ==> this.dispatchSetCoordinates(pos.coords)
-
-              this.check();
-          }, () => {
-              this.check();
-          }, options);
-      }
-
-      this.check();
-
-      setInterval(() => this.check(), 10 * 60 * 1000);
   }
 
-  check () {
-      fetch("https://ipinfo.io/json")
-        .then(res => res.json())
-        .then(ip => {
-            let lang = ip.country;
-            if (!SUPPORTED_LANGUAGES.includes(lang)) {
-                lang = "EN";
-            }
-            let crd = this.state.coordinates; //***Turns into ==> this.props.coordinates
-            crd = crd || {
-                latitude: +ip.loc.split(",")[0]
-              , longitude: +ip.loc.split(",")[1]
-            }
-            const query = [crd.latitude, crd.longitude].join(",");
-            const WUNDERGROUND_URL = `https://api.wunderground.com/api/${WUNDERGROUND_KEY}/forecast/lang:${lang}/q/${query}.json`;
-            return fetch(WUNDERGROUND_URL)
-        })
-        .then(c => c.json())
-        .then(forecast => {
-            this.setState({
-                forecast: forecast
-            });
-
-          //***Turns into ==> this.dispatchSetForecast(forecast);
-        });
+  getTempData(requestUrl){
+    var temperature;
+    var that = this;
+    axios.get(requestUrl).then(
+      function(res) {
+        if (res.data.cod && res.data.message){
+          throw new Error(res.data.message);
+        } else {
+          // console.log("return data from axios request: ", res.data)
+          // console.log("this when the axios  data from axios request: ", this)
+          // console.log("that when the axios  data from axios request: ", that)
+          temperature = res.data.main.temp;
+          return res.data.main.temp;
+        }
+      },
+      function(res) {
+        throw new Error(res.data.message);
+      }
+    ).then(
+      function(){
+        // console.log("this in the second then .... ", this)
+        // console.log("that in the second then .|||... ", that)
+        // console.log("test in the second then .... ", temperature)
+        // console.log("props in the second then ||... ", that.props)
+        that.props.dispatchSetTemperature(temperature)
+    });
   }
 
-  renderWeatherToday () {
-      const today = this.state.forecast.forecast.txt_forecast.forecastday[0];
-      //***Turns into this.props.forecast.forecast.txt_forecast.forecastday[0]
-      const temp = getTemp(today.fcttext_metric);
-
-
-      let icon = getIcon(today.icon);
-      let hours = new Date().getHours();
-      if ((icon === "sunny" || icon === "clear") && (hours > 20 || hours < 7)) {
-          icon = "starry";
+  getDescriptionData(requestUrl){
+    var description;
+    var that = this;
+    axios.get(requestUrl).then(
+      function(res) {
+        if (res.data.cod && res.data.message){
+          throw new Error(res.data.message);
+        } else {
+          // console.log("return data from axios request setDecription: ", res.data)
+          // console.log("this when the axios  data from axios request: ", this)
+          description = res.data.weather[0].description;
+          return res.data.weather[0].description;
+        }
+      },
+      function(res) {
+        throw new Error(res.data.message);
       }
-
-
-      if (temp) {
-          var tempElm = <div className="big-temp">{temp}</div>;
-      }
-
-      return (
-          <div className="weather-today">
-            <div className="icon-wrapper">
-                <div className={`icon-big ${icon}`}>
-                </div>
-                {tempElm}
-            </div>
-            <p className="icon-description">{today.fcttext_metric}</p>
-          </div>
-      );
+    ).then(
+      function(){
+        // console.log("this in the second then .... ", this)
+        // console.log("that in the second then .|||... ", that)
+        // console.log("test in the second then .... ", description)
+        // console.log("props in the second then ||... ", that.props)
+        that.props.dispatchSetDescription(description)
+    });
   }
 
-  renderDay (day, index) {
-      const temp = getTemp(day.fcttext_metric);
-      if (temp) {
-          var tempElm = <div className="small-temp">{temp}</div>;
+  getCoordinatesData(requestUrl){
+    var coordinates;
+    var that = this;
+    axios.get(requestUrl).then(
+      function(res) {
+        if (res.data.cod && res.data.message){
+          throw new Error(res.data.message);
+        } else {
+          console.log("return data from axios request prefilter: ", res.data)
+          // console.log("this when the axios  data from axios request: ", this)
+          coordinates = res.data.coord;
+          return res.data.coord;
+        }
+      },
+      function(res) {
+        throw new Error(res.data.message);
       }
-
-      return (
-            <div className="day" key={index}>
-                <div className="day-description">
-                    {day.fcttext_metric}
-                </div>
-                <div className="icon-wrapper">
-                    <div className={`icon-small ${getIcon(day.icon)}`}>
-                    </div>
-                    {tempElm}
-                </div>
-            </div>
-      );
+    ).then(
+      function(){
+        // console.log("this in the second then .... ", this)
+        // console.log("that in the second then .|||... ", that)
+        // console.log("test in the second then .... ", coordinates)
+        // console.log("props in the second then ||... ", that.props)
+        that.props.dispatchSetCoordinates(coordinates)
+    });
   }
 
-  renderNextDays () {
-      const nextDays = []
-          , data = this.state.forecast.forecast.txt_forecast.forecastday;
-          //***Turns into this.props.forecast.forecast.txt_forecast.forecastday
+
+  getForecastedWeatherData(location){
+    // http://api.openweathermap.org/data/2.5/forecast?appid=b625bae7d54136d7e2d33c6a3f383f9e&units=metric&q=San%20Francisco
+
+    //change url to "forecast" instead of weather
+    //returns a list of weather forecasts for 3 hour intervales for five days
+      //needs to have a function to increment by 3 hours in timestamp form
+    //same format as getWeatherdata so maybe reformat functions to not be so specific
 
 
-      for (var i = 2; i < data.length; i += 2) {
-        nextDays.push(data[i])
-      }
 
-      return (
-          <div className="weather-next-days">
-            {nextDays.map((c, i) => this.renderDay(c, i))}
-          </div>
-      );
+    //http://api.openweathermap.org/data/2.5/forecast/daily?appid=b625bae7d54136d7e2d33c6a3f383f9e&units=metric&q=San%20Francisco
+    //change url to "forecast/daily" instead of weather
+      //returns a list of weather forecast for the next 16 days by day
+
   }
 
-  renderWeather () {
-      if (!this.state.forecast) {
-      //***Turns into if (!this.props.forecast) {
-          return (
-            <div className="weather-container">
-                <p>Loading...</p>
-            </div>
-          );
-      }
-      return (
-        <div className="weather-container">
-            {this.renderWeatherToday()}
-            {this.renderNextDays()}
-        </div>
-      );
+  getWeatherData(location){
+    const OPEN_WEATHER_MAP_URL = 'http://api.openweathermap.org/data/2.5/weather?&appid=b625bae7d54136d7e2d33c6a3f383f9e&units=metric';
+
+    var encodedLocation = encodeURIComponent(location);
+    console.log("Encoded Location: ", encodedLocation)
+
+    var requestUrl = `${OPEN_WEATHER_MAP_URL}&q=${encodedLocation}`;
+    console.log("requestUrl : ", requestUrl)
+
+    this.getTempData(requestUrl);
+    this.getDescriptionData(requestUrl);
+    this.getCoordinatesData(requestUrl);
+  }
+
+  componentDidMount(){
+    this.getWeatherData("San Francisco");
   }
 
   render() {
-    return (
-        <div>
-            <div className="app">
-                {this.renderWeather()}
-            </div>
-            <div>
-              <CloudAnimation />
-            </div>
-        </div>
+
+    // function renderMessage () {
+    //   if (isLoading) {
+    //     return <h3 className="text-center">fetching weather...</h3>;
+    //   } else if (temp && location) {
+    //     return <WeatherMessage location={location} temp={temp}/>;
+    //   }
+    // }
+
+    // function renderError () {
+    //   if (typeof errorMessage === 'string') {
+    //     return (
+    //       <ErrorModal message={errorMessage}/>
+    //     );
+    //   }
+    // }
+
+    return(
+      <div>
+        <h1>Get Weather</h1>
+        <div><p>{this.props.temperature} </p></div>
+        <div><p>{this.props.description} </p></div>
+      </div>
     );
   }
-}
-
+};
 
 const mapStateToProps = (state) => {
   return {
-  //garden state
-  temp_f: state.weatherReducer.temp_f,
-  temp_c: state.weatherReducer.temp_c,
-  weather_period_0: state.weatherReducer.weather_period_0,
-  weather_period_1: state.weatherReducer.weather_period_1,
-  weather_period_2: state.weatherReducer.weather_period_2,
+    coordinates: state.weatherReducer.coordinates,
+    description: state.weatherReducer.description,
+    temperature: state.weatherReducer.temperature,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-     dispatchUpdateWeather(weather) {
-      dispatch(updateWeather(weather))
-    },
 
+    dispatchSetDescription(description){
+      dispatch(setDescription(description))
+    },
     dispatchSetCoordinates(coordinates){
       dispatch(setCoordinates(coordinates))
     },
-
-    dispatchSetForecast(forecast){
-      dispatch(setForecast(forecast))
+    dispatchSetTemperature(temperature){
+      dispatch(setTemperature(temperature))
     }
 
   }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Weather);
+export default connect(mapStateToProps, mapDispatchToProps)(WeatherTest);
 
-// export default Weather;
+
+

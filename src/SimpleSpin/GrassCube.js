@@ -23,31 +23,34 @@ class GrassCube extends React.Component {
 
 
   _onAnimate = () => {
+
   };
 
   componentDidMount(){
+    var grassLoader = new THREE.TextureLoader();
+    grassLoader.crossOrigin = '*'; // Use as needed
+    var grassTexture = grassLoader.load(this.props.map);
+    THREE.ImageUtils.crossOrigin = '';
 
+    this.refs.grassCubeMaterial.map = grassTexture;
   }
 
 
   render() {
-
-
-    var grassLoader = new THREE.TextureLoader();
-    grassLoader.crossOrigin = '*'; // Use as needed
-    var grassTexture = grassLoader.load(this.props.map);
-
     return (
-          <mesh>
+          <mesh
+            position={this.props.position}
+            castShadow
+            receiveShadow
+          >
               <boxGeometry
                 width={this.props.width}
                 height={this.props.height}
                 depth={this.props.depth}
               />
-              <meshBasicMaterial
-                color={new THREE.Color( this.props.color )}
-                map= {grassTexture}
+              <meshBasicMaterial ref="grassCubeMaterial"
               />
+
           </mesh>
          );
   }
