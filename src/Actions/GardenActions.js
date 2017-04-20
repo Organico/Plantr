@@ -49,11 +49,18 @@ export function addToShelf(shelfObject) {
 }
 
 
+
+
 /*MY SQUARE*/
 
 export function toggleSquare(x,y){
   console.log('action: toggleSquare called');
   return {type: 'TOGGLE_SQUARE', x, y};
+}
+
+export function setTile(name){
+  console.log('action: set tile called');
+  return {type: 'SET_TILE', name};
 }
 
 /*PLANT GRID*/
@@ -62,9 +69,19 @@ export function addPlantToPlantGrid(plant){
   return { type: 'ADD_PLANT_TO_PLANT_GRID', plant}
 }
 
-/*TOOL TIP*/
 
-export function setTooltip(misc) {
-  console.log('action: setTooltip');
-  return { type: 'SET_TOOLTIP', misc};
+export function undo() {
+  console.log('UNDO CALLED');
+  return { type: 'UNDO'};
 }
+
+export function redo() {
+  console.log('REDO CALLED');
+  return { type: 'REDO'};
+}
+
+export function clear() {
+  console.log('CLEAR CALLED');
+  return { type: 'CLEAR'};
+}
+

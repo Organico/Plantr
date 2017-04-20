@@ -2,7 +2,8 @@ import React from 'react';
 import { TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTitle, CardText, Row, Col } from 'reactstrap';
 import classnames from 'classnames';
 import FruitDex from './FruitDex'
-import VegiDex from './VegiDex'
+import VegiDex from './VegiDex';
+import TileDex from './TileDex';
 
 export default class PlantDex extends React.Component {
   constructor(props) {
@@ -50,16 +51,27 @@ export default class PlantDex extends React.Component {
               Flowers
             </NavLink>
           </NavItem>
+           <NavItem>
+            <NavLink
+              className={classnames({ active: this.state.activeTab === '4' })}
+              onClick={() => { this.toggle('4'); }}
+            >
+              Tiles
+            </NavLink>
+          </NavItem>
         </Nav>
         <TabContent activeTab={this.state.activeTab}>
           <TabPane tabId="1">
             <VegiDex/>
           </TabPane>
           <TabPane tabId="2">
-            <VegiDex />
+            <FruitDex />
           </TabPane>
           <TabPane tabId="3">
             <FruitDex />
+        </TabPane>
+        <TabPane tabId="4">
+            <TileDex />
         </TabPane>
         </TabContent>
       </div>

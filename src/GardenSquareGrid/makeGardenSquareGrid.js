@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { setWidth, setHeight, setGardenParameters, setGarden, setTooltip} from '../Actions/GardenActions.js';
+import {setGardenParameters, setGarden, undo, redo, clear} from '../Actions/GardenActions.js';
 import axios from 'axios';
 import GardenGrid from './GardenGrid.js';
 import MySquare from './MySquare.js';
@@ -65,10 +65,11 @@ const MakeGardenSquareGridView = React.createClass({
             </button>
             <br></br><br></br>
         <div className="row" style={center}>
-
-
           <div className="col-6 userRecentSpan">
-            <Stage id="cat" width={800} height={650} fill="white" stroke="black" className="text-center">
+            <button>Undo</button>
+            <button>Redo</button>
+            <button>Clear</button>
+            <Stage id="cat" width={800} height={670} fill="white" stroke="black" className="text-center">
               <GardenGrid />
               <PlantGrid />
               <Layer>
@@ -86,7 +87,10 @@ const MakeGardenSquareGridView = React.createClass({
                 </div>
                 <div className="col-md-12 userRecentSpan">
                 <HarvestGraph />
-                                <HarvestGraph />
+
+                </div>
+                <div className="col-md-12 userRecentSpan">
+                <HarvestGraph />
 
                 </div>
 
@@ -118,8 +122,14 @@ const mapDispatchToProps = (dispatch) => {
     dispatchSetGarden(dbGardenGrid) {
       dispatch(setGarden(dbGardenGrid));
     },
-    dispatchSetTooltip(misc){
-      dispatch(setTooltip);
+    dispatchUndo() {
+      dispatch(undo());
+    },
+    dispatchRedo() {
+      dispatch(redo());
+    },
+    dispatchClear() {
+      dispatch(clear());
     }
   };
 };
