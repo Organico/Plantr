@@ -16,14 +16,16 @@ const Profile = React.createClass({
     return(
       <div>
         <div className="container-fluid containerStyle">
+
           <div className="row">
-            <CoverPhoto />
-          </div>
-          <div className="row">
-            <ProfilePic />
-            <About />
-            <RecentGardens />
-            <RecentPosts />
+            <div className="col-md-6">
+              <About />
+              <RecentGardens />
+              <RecentPosts />
+            </div>
+            <div className="col-md-6">
+              <ProfilePic />
+            </div>
           </div>
         </div>
       </div>
