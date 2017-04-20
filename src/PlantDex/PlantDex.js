@@ -25,7 +25,7 @@ export default class PlantDex extends React.Component {
   render() {
     return (
       <div>
-        <Nav tabs>
+        <Nav tabs className="plantDex">
           <NavItem>
             <NavLink
               className={classnames({ active: this.state.activeTab === '1' })}

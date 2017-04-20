@@ -7,12 +7,14 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid } from 'recharts';
 const HarvestGraph = React.createClass({
     render() {
       return (
-  <LineChart width={500} height={300} data={this.props.plantGrowthGraph}>
-    <XAxis dataKey="name"/>
-    <YAxis/>
-    <CartesianGrid stroke="#eee" strokeDasharray="5 5"/>
-    <Line type="monotone" dataKey="uv" stroke="#8884d8" />
-  </LineChart>
+        <div className="lineChart">
+          <LineChart width={500} height={300} data={this.props.plantGrowthGraph}>
+            <XAxis dataKey="name"/>
+            <YAxis/>
+            <CartesianGrid stroke="#eee" strokeDasharray="5 5"/>
+            <Line type="monotone" dataKey="uv" stroke="#8884d8" />
+          </LineChart>
+        </div>
       );
     }
 })
