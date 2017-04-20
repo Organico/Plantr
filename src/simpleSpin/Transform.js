@@ -13,6 +13,8 @@ import HouseCube from './HouseCube';
 import GrassCube from './GrassCube';
 import MyCube from './MyCube'
 import PlantModel from './PlantModel'
+import MonkeyModel from './MonkeyModel'
+import ColladaLoader from 'three-collada-loader';
 
 // import EffectComposer from 'three-effectcomposer';
 // console.log("EffectComposer: ", EffectComposer)
@@ -110,6 +112,53 @@ class Transform extends React.Component {
 
     this.controls = controls;
     this.controls.addEventListener('change', this._onTrackballChange);
+
+
+
+
+
+
+
+              var colladaLoader = new ColladaLoader()
+              colladaLoader.options.convertUpAxis = true;
+              colladaLoader.load("https://s3-us-west-2.amazonaws.com/ryaperry-bucket/monkey.dae", function(collada){
+                console.log("collada Loader loded successfully !!!!!", collada)
+                var dae = collada.scene;
+                dae.scale.x = dae.scale.y = dae.scale.z = 300
+
+                console.log("Resulting DAE!!!!! ", dae)
+
+                // dae.traverse(function(child){
+                //   if (child.colladaId == "Suzanne"){
+                //       // child.traverse(function(e){
+                //       //     e.castShadow = true;
+                //       //     e.receiveShadow = true;
+                //           // if(e.material instanceof THREE.MeshPhongMaterial){
+                //           //     e.material.needsUpdate = true;
+                //           //     console.log("e.material in travers", e.material)
+                //           // }
+                //       // })
+                //       scene.add(child);
+                //   }
+
+                //   else if ( child. colladaId == "Plane"){
+                //       // child.traverse(function(e){
+                //       //     e.castShadow = true;
+                //       //     e.receiveShadow = true;
+                //       // })
+                //       console.
+                //   }
+                // })
+
+                // dae.updateMatrix()
+                console.log("dae children of 2: ", dae.children[2])
+                var child = dae.children[2]
+                child.children[0].scale.set(30,30,30)
+                scene.add(child)
+              })
+
+
+
 
 
     // console.log("REFS ============", this.refs);

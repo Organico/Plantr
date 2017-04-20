@@ -42,8 +42,33 @@ class MonkeyModel extends React.Component {
     };
 
     var colladaLoader = new ColladaLoader()
+    colladaLoader.options.convertUpAxis = true;
     colladaLoader.load("https://s3-us-west-2.amazonaws.com/ryaperry-bucket/monkey.dae", function(collada){
       console.log("collada Loader loded successfully !!!!!", collada)
+      dae = collada.scene;
+      dae.scale.x = dae.scale.y = dae.scale.z = 300
+
+      dae.traverse(function(child){
+        if (child.colladaId == "Suzanne"){
+            child.traverse(function(e){
+                e.castShadow = true;
+                e.receiveShadow = true;
+                // if(e.material instanceof THREE.MeshPhongMaterial){
+                //     e.material.needsUpdate = true;
+                //     console.log("e.material in travers", e.material)
+                // }
+            })
+        }
+
+        else if ( child. colladaId == "Plane"){
+            child.traverse(function(e){
+                e.castShadow = true;
+                e.receiveShadow = true;
+            })
+        }
+      })
+
+      dae.updateMatrix()
     })
 
     // const mtlLoader = new MTLLoader();
