@@ -53,9 +53,15 @@ const App = React.createClass({
     return (
         <Provider store={store}>
             <Router>
-              <div>
+              <div className="container site">
+              <div className="spacer"></div>
+                <div className="row test" id="navBarHolder">
 
-                <NavBar />
+
+                  <div className="col-md-10 offset-md-3 test">
+                    <NavBar />
+                  </div>
+                </div>
 
                 <Route exact path="/" component={Layout}></Route>
                 <Route path="/home" component={Home}></Route>

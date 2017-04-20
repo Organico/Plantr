@@ -1,6 +1,6 @@
 body{
   /*background-color: #03c47a*/
-  background-image: url("https://s-media-cache-ak0.pinimg.com/736x/28/44/10/284410fb9f66a139561c55f0142e335c.jpg");
+  background-image: url("/background.png");
 }
 /*h1, h2, h3, h4 {
   color: white;
@@ -21,9 +21,53 @@ body{
   background-image: url("http://www.woodlandwalk.co.uk/images/Garden-Tools-cover.jpg");
   background-size: cover;
 }
-#profilePic {
+
+.spacer {
+  border: solid 2px transparent;
+  border-radius: 2px;
+}
+.test {
+ /* border: solid 2px black;
+  border-radius: 2px;*/
+}
+.nav {
+  height: 20px;
+  margin-top: 130px;
+  color: white;
+}
+.navText {
+  color: #E7E1D5;
+  font-family: "Lobster";
+}
+
+@font-face {
+    font-family: Lobster;
+    src: url("/Lobster.otf") format("opentype");
+}
+
+.site {
+  margin-top: 30px;
+  margin-bottom: 50px;
+  border-radius: 2px;
+  background-color: #E7E1D5;
+  padding-left: 0px;
+  padding-right: 0px;
+  box-shadow: 10px 10px 5px #62544B;
+}
+#navBarHolder {
+  background-repeat: no-repeat;
+  background-size: 100%;
+  margin-top: -40px;
+  margin-left: -42px;
+  margin-right: -47px;
   height: 250px;
-  margin-top: -200px;
+  background-image: url("/navbar.png");
+}
+#profilePic {
+  height: 500px;
+  background-image: url("/profilebackground.png");
+  background-repeat: no-repeat;
+  background-size: 100%;
 }
 #innerProfile {
 }
@@ -32,26 +76,22 @@ body{
   font-weight: bold;
   font-size: 25px;
   color: white;
+  margin-bottom: 20px;
   text-shadow:
     -1px -1px 0 #000,
     1px -1px 0 #000,
     -1px 1px 0 #000,
     1px 1px 0 #000;
 }
-/*#innerProfilePic {
-  margin: auto;
-  border: solid 5px #cccdce;
-  border-radius: 50%;
-  width: 190px;
-  height: 190px;
-  background-image: url("http://www.clipartbest.com/cliparts/4Tb/6oR/4Tb6oR9ac.gif");
-  background-size: cover;
-}*/
+#innerProfilePic {
+  /*border: solid 2px red;*/
+}
 .userRecent {
   background-color: white;
-  border: solid 5px #03c47a;
+  border: solid 5px white;
   border-radius: 10px;
   color: black;
+  margin-top: 10px;
 }
 .userRecentSpan {
   text-align: center;
@@ -64,6 +104,15 @@ body{
   list-style: none;
 }
 
+.tape {
+  background-image: url("/tapeRight.png");
+  background-repeat: no-repeat;
+  background-size: 100%;
+  height: 50px;
+  width: 100px;
+  margin-top: -15px;
+  margin-left: 80px;
+}
 
 /*///////////////////////////////////////SEED PACKET CSS////////////////////////////////*/
 
@@ -119,9 +168,6 @@ body{
   align-content: center;
 }
 
-.test {
-  border: solid 2px black;
-}
 #seedHolder {
   height: 350px;
 }
@@ -138,10 +184,10 @@ body{
     box-sizing: border-box;
 }
 
-body {
+/*body {
     background: #2980b9;
     font-family: 'Arsenal', sans-serif;
-}
+}*/
 
 .app {
     width: 600px;

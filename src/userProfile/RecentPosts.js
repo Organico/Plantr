@@ -28,19 +28,21 @@ const RecentPosts = React.createClass({
   render() {
     const profile = auth.getProfile();
     return (
-      <div className="col-md-3 offset-md-1 col-sm-12 col-xs-12 right userRecent">
-        <div className="userRecentSpan"> Recent Posts </div>
-        <button type="submit" onClick={ () => {
-            this.getPost();
-          }} >Get Request Here</button>
-        <div>
-         <div className="col-md-6">
-            {this.props.posts.map((post, i) => {
-              if (post.email === profile.email) {
-                return <ForumPost key={i} post={post} nickname={post.nickname} title={post.title} message={post.message} replies={post.replies} />
+      <div className="row">
+        <div className="col-md-6 offset-md-3 right userRecent">
+          <div className="userRecentSpan"> Recent Posts </div>
+          <button type="submit" onClick={ () => {
+              this.getPost();
+            }} >Get Request Here</button>
+          <div>
+           <div className="col-md-6">
+              {this.props.posts.map((post, i) => {
+                if (post.email === profile.email) {
+                  return <ForumPost key={i} post={post} nickname={post.nickname} title={post.title} message={post.message} replies={post.replies} />
+                }
               }
-            }
-            )}
+              )}
+            </div>
           </div>
         </div>
       </div>
