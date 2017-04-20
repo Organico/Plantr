@@ -131,6 +131,14 @@ class Transform extends React.Component {
     });
   };
 
+  componentWillUnmount() {
+    this.controls.removeEventListener('change', this._onTrackballChange);
+
+    this.controls.dispose();
+    delete this.controls;
+
+    delete this.stats;
+  }
 
  _onAnimateInternal() {
     const {
