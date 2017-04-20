@@ -2,10 +2,10 @@
 import React, { Component, PropTypes } from 'react';
 import {Layer, Rect, Stage} from 'react-konva';
 import { connect } from 'react-redux';
-import { toggleSquare} from '../Actions/GardenActions.js';
+import {setTile} from '../Actions/GardenActions.js';
 
 
-const MySquare = React.createClass({
+const TileSquare = React.createClass({
 
     handleMouseOver(){
       document.body.style.cursor = 'pointer';
@@ -25,20 +25,22 @@ const MySquare = React.createClass({
       console.log("the square properties are ", e)
       console.log("event: ", e.target.attrs.x);
 
-     this.props.dispatchToggleSquare(e.target.attrs.x, e.target.attrs.y)
+     this.props.dispatchSetTile(e.target.attrs.name)
 
     },
 
     render() {
       let newImage = new Image();
       newImage.src = this.props.img
+      console.log(this.props);
         return (
             <Rect
                 x={this.props.x} y={this.props.y} width={50} height={50}
                 fillPatternImage={newImage}
                 fillPatternOffset= {{ x: 0, y: 0}}
-                stroke={'black'}
+                stroke={this.props.stroke}
                 shadowBlur={10}
+                name={this.props.name}
                 onClick={this.handleClick}
                 onMouseOver={this.handleMouseOver}
                 onMouseOut={this.handleMouseOut}
@@ -67,16 +69,14 @@ const mapDispatchToProps = (dispatch) => {
     // dispatchMovePiece (location) {
     //   dispatch(movePiece(location))
     // }
-    dispatchToggleSquare(x, y){
-      dispatch(toggleSquare(x,y))
+    dispatchSetTile(name){
+      dispatch(setTile(name))
     }
   }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(MySquare)
+export default connect(mapStateToProps, mapDispatchToProps)(TileSquare)
 
-
-// export default MySquare
 
 
 

@@ -10,6 +10,11 @@ const initialGardenState = {
   isDragging: false,
   tooltipOpen: false,
   gardenXYCoordinates:[],
+  selectedTitle: "https://c1.staticflickr.com/3/2923/33742489190_3e30fca5f7_o.jpg",
+
+  pastPlantGridStates: [],
+  futurePlantGrideStates: [],
+
   seedPacket:{
     'price': 0,
     'quantity': 5,
@@ -498,7 +503,45 @@ const initialGardenState = {
       'harvest':40,
       'extremeWarning':[0,45]
     },
+  ],
+  tileDex: [
+   { 'name': 'soil',
+      'x':50,
+      'y':50,
+      'img': "https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg",
+      'stroke': 'black'
+    },
+    { 'name': 'grass',
+      'x':102,
+      'y':50,
+      'img':"https://c1.staticflickr.com/3/2923/33742489190_3e30fca5f7_o.jpg",
+      'stroke': 'black'
 
+      },
+      {
+      'name': 'rocks',
+      'x':154,
+      'y':50,
+      'img':'https://c1.staticflickr.com/3/2888/33316224483_1c8a775cf0_o.jpg',
+      'stroke': 'black'
+
+    },
+    {
+      'name': 'gardenTile',
+      'x': 206,
+      'y':50,
+      'img': 'https://c1.staticflickr.com/3/2865/33285295564_e948bbe297_o.jpg',
+      'stroke': 'black'
+
+    },
+    {
+      'name': 'gnome',
+      'x': 258,
+      'y':50,
+      'img': 'https://c1.staticflickr.com/3/2832/33285295044_f9354e513e_o.png',
+      'stroke': 'black'
+
+    }
   ],
   gardens: [],
   plants: [],
@@ -523,16 +566,7 @@ const toggleSquare = (state, action) => {
   var squareToToggleImg = squareToToggle.img;
     console.log("HERE", squareToToggleImg);
 
-  var tileToToggleTo = "https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg";
-  if (squareToToggleImg === "https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg") {
-    tileToToggleTo = "https://c1.staticflickr.com/3/2923/33742489190_3e30fca5f7_o.jpg";
-  } else if (squareToToggleImg === "https://c1.staticflickr.com/3/2923/33742489190_3e30fca5f7_o.jpg") {
-    tileToToggleTo = 'https://c1.staticflickr.com/3/2888/33316224483_1c8a775cf0_o.jpg'
-  } else if (squareToToggleImg === 'https://c1.staticflickr.com/3/2888/33316224483_1c8a775cf0_o.jpg') {
-    tileToToggleTo = 'https://c1.staticflickr.com/3/2865/33285295564_e948bbe297_o.jpg'
-  } else if (squareToToggleImg === 'https://c1.staticflickr.com/3/2865/33285295564_e948bbe297_o.jpg') {
-    tileToToggleTo = 'https://c1.staticflickr.com/3/2832/33285295044_f9354e513e_o.png'
-  }
+  var tileToToggleTo = state.selectedTitle;
 
 
   var gardenCopy = state.gardenGrid.slice();
@@ -569,8 +603,6 @@ const setGardenParameters = (state, action) => {
   }
   Object.assign(newState, state, {gardenGrid: gardenGridArray,
     gardenXYCoordinates: newGardenXYCoordinates});
-  console.log('(before) state: ', state);
-  console.log('(after) state: ', newState);
   return newState;
 }
 
@@ -666,13 +698,14 @@ const addPlantToPlantGrid = (state, action) => {
   }
 
   if(!plantToMoveIndex){
-    console.log("in normal if statement statement")
-
+    console.log("SAMY IN FIRST")
+    console.log("THIS IS THE PLANT!!!", action.plant)
     newPlantGrid.push(action.plant);
   } else {
-    console.log("in else statement")
-    newPlantGrid[plantToMoveIndex].x = action.plant.x
-    newPlantGrid[plantToMoveIndex].y = action.plant.y
+    console.log("SAMY IN SECOND")
+    console.log("THIS IS THE PLANT THAT SHOULDN'T BE ADDED", action.plant)
+    // newPlantGrid[plantToMoveIndex].x = action.plant.x
+    // newPlantGrid[plantToMoveIndex].y = action.plant.y
   }
 
   Object.assign(newState, state, {plantGrid: newPlantGrid});
@@ -692,9 +725,36 @@ const setTooltip = (state, action) => {
   return newState;
 };
 
+
+const setTile = (state, action) => {
+  var newTile;
+  var indexOfTile;
+  const newState = {};
+
+  for (var i = 0; i<state.tileDex.length; i++)  {
+    state.tileDex[i]['stroke'] = 'black'
+    if (action.name === state.tileDex[i]['name']) {
+      console.log("I FOUND YOU")
+      newTile = state.tileDex[i]['img'];
+      indexOfTile = i;
+    }
+  }
+
+  var tileDexCopy = state.tileDex.slice();
+  tileDexCopy[indexOfTile]['stroke'] = 'yellow'
+
+  console.log("THE TILE NAME IS", action.name);
+
+  Object.assign(newState, state, {selectedTitle: newTile, tileDex: tileDexCopy});
+
+  console.log('(before) state: ', state);
+  console.log('(after) state: ', newState);
+  return newState;
+};
+
 const setSeedPacket= (state, action) => {
   var newPacket = action.packet
-    const newState = {};
+  const newState = {};
 
 
   Object.assign(newState, state, {seedPacket: newPacket});
@@ -773,8 +833,16 @@ function gardenReducer(state = initialGardenState, action) {
     return userProfile(state, action);
   case 'SET_SEED_PACKET':
     return setSeedPacket(state, action)
+  case 'SET_TILE':
+    return setTile(state, action)
   case 'ADD_TO_SHELF':
     return addToShelf(state, action)
+  case 'UNDO':
+    return undo(state, action)
+  case 'REDO':
+    return redo(state, action)
+  case 'CLEAR':
+    return clear(state, action)
   default:
     return state;
   }

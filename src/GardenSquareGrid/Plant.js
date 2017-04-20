@@ -28,7 +28,6 @@ class Plant extends React.Component {
         dispatchSetSeedPacket: this.props.dispatchSetSeedPacket
       });
 
-    console.log("Event attributes are: ", e)
     var seedObject = {
         'price': e.target.attrs.plant.price,
         'quantity':e.target.attrs.plant.quantity,
@@ -44,8 +43,6 @@ class Plant extends React.Component {
      this.props.dispatchSetSeedPacket(seedObject);
     }
     handleMouseOver(e){
-      console.log("Mouse over!!", e)
-      console.log(e.target)
       document.body.style.cursor = 'pointer';
 
     }
@@ -57,9 +54,7 @@ class Plant extends React.Component {
       var newY;
       var newY;
       var newX;
-      console.log("Pos in dragBoundFunc", pos);
 
-      console.log("Pos of y is ", pos.y)
 
       var roundedPosY= Math.round(pos.y/50)*50-25
       var roundedPosX= Math.round(pos.x/50)*50-25
@@ -80,9 +75,8 @@ class Plant extends React.Component {
     }
 
     handleMouseDragStart(pos, e){
-      console.log("begin dragging", "x: ", pos.evt.x, "y: ", pos.evt.y);
+
       this.setState({isDragging: true})
-      console.log("ROARRRRRRRRRRRRRRRRRRRRRR: ",pos)
     var seedObject = {
         'price': pos.target.attrs.plant.price,
         'quantity':pos.target.attrs.plant.quantity,
@@ -102,7 +96,6 @@ class Plant extends React.Component {
     }
 
    handleMouseDragEnd(pos){
-      console.log("end dragging", "x: ", pos.evt.x, "y: ", pos.evt.y);
 
     var coordinates = this.props.gardenXYCoordinates;
     console.log("coordinates are ", coordinates)
@@ -111,14 +104,11 @@ class Plant extends React.Component {
 
     for (var i = 0; i<coordinates.length; i++){
       var coordinateToCheck = coordinates[i];
-      console.log("CHECK THIS COORDINATE", coordinateToCheck['x']+25)
 
       var coordinateToCheckX = coordinateToCheck['x']+25;
-      console.log("State is ", this.state.posX)
       var coordinateToCheckY = coordinateToCheck['y']+25;
 
       if (this.state.posX ===coordinateToCheckX && this.state.posY === coordinateToCheckY) {
-        console.log("It is within the Grid!")
         isWithinGridBounds = true;
         break;
       }
@@ -138,7 +128,6 @@ class Plant extends React.Component {
 
 
       this.props.dispatchAddPlantToPlantGrid(plant)
-      console.log("Drag end This.props", this.props)
     }
 
     render() {
