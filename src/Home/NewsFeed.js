@@ -12,7 +12,7 @@ class NewsFeed extends React.Component {
   }
 
   let maxHeight = {
-    height: '275px',
+    height: '200px',
     borderRadius: '10px'
     // borderWidth: '10px',
     // borderStyle: 'hidden'
@@ -28,28 +28,27 @@ class NewsFeed extends React.Component {
   }
 
     return (
-      <div className="container-fluid">
         <div className="row justify-content-md-end">
-          <div className="card col-xs-12 col-md-3" style={pos}>
+          <div className="card col-xs-3 col-md-3" style={pos}>
               <div className="row">
 
                 <img className="card-img" style={maxHeight} src='https://static.pexels.com/photos/296230/pexels-photo-296230.jpeg' alt="Card image" />
-                <p style={text}>I'm text that has a background image!</p>
+                <p style={text}>“The ultimate goal of farming is not the growing of crops, but the cultivation and perfection of human beings.”
+                    ― Masanobu Fukuoka,</p>
               </div>
               <br />
               <div className="row">
                 <img className="card-img" style={maxHeight} src='https://static.pexels.com/photos/169523/pexels-photo-169523.jpeg' alt="Card image" />
-                <p style={text}>I'm text that has a background image!</p>
+                <p style={text}>"Look deep into nature, and then you will understand everything better" ― Albert Einstein</p>
               </div>
               <br />
               <div className="row">
                 <img className="card-img" style={maxHeight} src='https://static.pexels.com/photos/136183/pexels-photo-136183.jpeg' alt="Card image" />
-                <p style={text}>I'm text that has a background image!</p>
+                <p style={text}>"Just living is not enough...one must have sunshine, freedom, and a little flower" ― Hans Christian ANdersen</p>
             </div>
             <br />
           </div>
         </div>
-      </div>
       )
     }
   }
