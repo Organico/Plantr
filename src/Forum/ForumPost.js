@@ -47,7 +47,7 @@ const ForumPost = React.createClass({
           <div className="col-md-1" style={profilePic}>
           { this.props.nickname }
           </div>
-          <div className="col-md-11 offset-md-0">
+          <div className="col-md-10 offset-md-1">
             <div className="row">
               <span className="forumTitle">{ title }</span>
             </div>
