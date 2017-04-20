@@ -27,7 +27,7 @@ body{
   border-radius: 2px;
 }
 .test {
- /* border: solid 2px black;
+  /*border: solid 2px black;
   border-radius: 2px;*/
 }
 .nav {
@@ -59,9 +59,19 @@ body{
   background-size: 100%;
   margin-top: -40px;
   margin-left: -42px;
-  margin-right: -42px;
+  margin-right: -46px;
   height: 250px;
   background-image: url("/navbar.png");
+}
+.plantDex {
+  margin-top: -10px;
+  margin-left: 20px;
+}
+.plantShelf {
+  margin-left: 10px;
+}
+.lineChart {
+  margin-left: -100px;
 }
 #profilePic {
   height: 500px;
