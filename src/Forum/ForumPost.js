@@ -10,7 +10,8 @@ import axios from 'axios';
 const ForumPost = React.createClass({
 
   deletePost() {
-    axios.delete('/api/forum/')
+    const profile = auth.getProfile();
+    axios.delete('/api/forum/:' + profile.email)
     .then((res) => {
       let dbPostData = res.data;
       for (let i = 0; i<dbPostData.length; i++) {
@@ -88,8 +89,6 @@ const ForumPost = React.createClass({
             <div>
               {this.props.replies.map((reply, i) => {
                 if (!postType) {
-                  console.log('PROFILE EMAIL', profile.email);
-                  console.log('REPLY EMAIL', reply)
                   if (profile.email === reply.replyUser.email) {
                   return <div>
                     <Replies key={i} reply={reply} />
