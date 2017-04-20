@@ -35,7 +35,7 @@ class Home extends React.Component {
               <hr className="my-2"/>
               <p style={font}>From customization to cost and weather integration, Plantr gives you the tools to make gardening quick and easy. Sign up to join our community of local growers to find out how you can take your gardening skills to the next level! </p>
               <p className="lead">
-                <a className="btn btn-primary btn-lg" href="#" role="button">Get Started</a>
+                 <button className="btn btn-primary" onClick={auth.login.bind(this)}>Getting Started</button>
               </p>
             </div>
           </div>

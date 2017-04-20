@@ -54,7 +54,7 @@ const Forum = React.createClass({
               if (profile.email === post.email) {
                return <div>
                <ForumPost key={i} post={post} nickname={post.nickname} title={post.title} message={post.message} replies={post.replies} />
-                <button type="submit" onClick={ () => {
+                <button type="submit" className="glyphicon glyphicon-remove-circle" onClick={ () => {
                   this.deletePost();
                 }}>delete</button>
                </div>
