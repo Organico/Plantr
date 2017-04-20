@@ -57,7 +57,7 @@ class HouseCube extends React.Component {
         objLoader.load(OBJ_FILE, object => {
             console.log("in object", object)
             object.scale.set(500, 500, 500);
-            object.position.set(-150, 0, -900)
+            // object.position.set(-150, 0, -900)
             object.position.set(
               this.props.position.x,
               this.props.position.y,

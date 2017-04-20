@@ -247,6 +247,7 @@ class Transform extends React.Component {
           <PlantModel
             objFile="VG14_7.obj"
             mtlFile="VG14_7.mtl"
+            rotation={new THREE.Vector3(0,270,0)}
             position={new THREE.Vector3(0,0,0)}
           />
           <HouseCube
