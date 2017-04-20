@@ -28,6 +28,7 @@ class PlantDexPlant extends React.Component {
 
     console.log("Event attributes are: ", e)
     var seedObject = {
+        'name': e.target.attrs.plant.name,
         'price': e.target.attrs.plant.price,
         'quantity':e.target.attrs.plant.quantity,
         'season': e.target.attrs.plant.season,
@@ -88,6 +89,7 @@ class PlantDexPlant extends React.Component {
       this.setState({isDragging: true})
       console.log("ROARRRRRRRRRRRRRRRRRRRRRR: ",pos)
     var seedObject = {
+        'name': pos.target.attrs.plant.name,
         'price': pos.target.attrs.plant.price,
         'quantity':pos.target.attrs.plant.quantity,
         'season': pos.target.attrs.plant.season,

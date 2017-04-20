@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Layer, Rect, Circle, Stage, Group} from 'react-konva';
 import { connect } from 'react-redux'
-import { addPlantToPlantGrid, setSeedPacket } from '../Actions/GardenActions.js';
+import { addPlantToPlantGrid, setSeedPacket, setGrowthGraph } from '../Actions/GardenActions.js';
 
 
 
@@ -29,6 +29,7 @@ class Plant extends React.Component {
       });
 
     var seedObject = {
+        'name': e.target.attrs.plant.name,
         'price': e.target.attrs.plant.price,
         'quantity':e.target.attrs.plant.quantity,
         'season': e.target.attrs.plant.season,
@@ -39,6 +40,9 @@ class Plant extends React.Component {
         'extremeWarning': e.target.attrs.plant.extremeWarning,
         'packetImg' : e.target.attrs.plant.packetImg
     }
+     let seedGraph = e.target.attrs.plant.growthGraph;
+    console.log("**********THIS IS THE GROWTH GRAPH", seedObject)
+         this.props.dispatchSetGrowthGraph(seedGraph);
 
      this.props.dispatchSetSeedPacket(seedObject);
     }
@@ -74,10 +78,11 @@ class Plant extends React.Component {
 
     }
 
-    handleMouseDragStart(pos, e){
+    handleMouseDragStart(pos){
 
       this.setState({isDragging: true})
-    var seedObject = {
+  var seedObject = {
+        'name': pos.target.attrs.plant.name,
         'price': pos.target.attrs.plant.price,
         'quantity':pos.target.attrs.plant.quantity,
         'season': pos.target.attrs.plant.season,
@@ -88,8 +93,12 @@ class Plant extends React.Component {
         'extremeWarning': pos.target.attrs.plant.extremeWarning,
         'packetImg' : pos.target.attrs.plant.packetImg
     }
-
+    let seedGraph = pos.target.attrs.plant.growthGraph;
+    console.log("**********THIS IS THE GROWTH GRAPH", seedObject)
      this.props.dispatchSetSeedPacket(seedObject);
+     this.props.dispatchSetGrowthGraph(seedGraph);
+     // this.props.dispatchSetSeedPacket(seedObject);
+
 
 
 
@@ -113,8 +122,6 @@ class Plant extends React.Component {
         break;
       }
     }
-
-
 
 
     if(isWithinGridBounds) {
@@ -179,6 +186,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     dispatchSetSeedPacket (packet) {
       dispatch(setSeedPacket(packet))
+    },
+    dispatchSetGrowthGraph (graph) {
+      dispatch(setGrowthGraph(graph))
     }
   }
 };

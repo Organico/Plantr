@@ -50,6 +50,7 @@ const MakeGardenSquareGridView = React.createClass({
 
 
 
+
     return (
       <div style={center}>
         <h1>Create a Garden</h1>
@@ -65,11 +66,14 @@ const MakeGardenSquareGridView = React.createClass({
             </button>
             <br></br><br></br>
         <div className="row" style={center}>
-          <div className="col-6 userRecentSpan">
-            <button>Undo</button>
-            <button>Redo</button>
-            <button>Clear</button>
+          <div className="col-6">
+            <button onClick={() => {
+                this.props.dispatchUndo();}}>Undo</button>
+            <button onClick={() => {
+                this.props.dispatchClear();}}>Clear</button>
+            <div className="row">
             <Stage id="cat" width={800} height={670} fill="white" stroke="black" className="text-center">
+
               <GardenGrid />
               <PlantGrid />
               <Layer>
@@ -77,7 +81,10 @@ const MakeGardenSquareGridView = React.createClass({
                 <MyRect />
               </Layer>
             </Stage>
+            </div>
+            <div className="row">
             <PlantDex />
+            </div>
           </div>
 
             <div className="col-md-5 offset-md-1">
@@ -85,13 +92,8 @@ const MakeGardenSquareGridView = React.createClass({
               <div className="col-md-6 offset-md-3 userRecentSpan" id="seedHolder">
                   <SeedPacket />
                 </div>
-                <div className="col-md-12 userRecentSpan">
+                <div className="col-md-12">
                 <HarvestGraph />
-
-                </div>
-                <div className="col-md-12 userRecentSpan">
-                <HarvestGraph />
-
                 </div>
 
 
