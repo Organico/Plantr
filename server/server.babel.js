@@ -182,7 +182,7 @@ app.put('/api/forum', (req, res, next) => {
   });
 });
   //delete a snippet by id
-  app.delete('/api/snippets/:id', snippetsController.delete);
+  // app.delete('/api/snippets/:id', snippetsController.delete);
 
 /*--------------------DELETE REQUEST-----------------------------------------*/
 
@@ -224,7 +224,7 @@ app.delete('/api/forum/:email', function(req, res, next) {
   //     res.send('deleted successfully');
   //   });
   // });
-});
+
 
 app.use(function(err, req, res, next){
   console.log('Something failed');
