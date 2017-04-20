@@ -17,31 +17,26 @@ const Forum = React.createClass({
         let message = dbPostData[i];
         message['isShort'] = true;
       }
-      console.log("Db post data", dbPostData)
       this.props.dispatchSetPost(dbPostData)
     }).catch((err) => {
-      console.error(err);
+      console.error('There has been a clientside error in getting the post in ForumJS ', err);
     });
   },
 
    deletePost(id) {
     const profile = auth.getProfile();
-    console.log('THIS IS THE ID FORUM',  id)
-    axios.get('/api/forum/:' + id, {
+    axios.delete('/api/forum/' + id, {
       id: id
     })
     .then((res) => {
-      console.log('RES IN FORUMJS', res)
       let dbPostData = res.data;
       for (let i = 0; i<dbPostData.length; i++) {
         let message = dbPostData[i];
         message['isShort'] = true;
       }
-      console.log("Db post data", dbPostData)
       this.props.dispatchSetPost(dbPostData)
     }).catch((err) => {
-      console.log('THE ERROR IS IN FORUMJS')
-      console.error(err);
+      console.error('There has been a clientside error in deleting the post in ForumJS ', err);
     });
   },
 
@@ -62,8 +57,8 @@ const Forum = React.createClass({
                  <ForumPost key={i} post={post} nickname={post.nickname} title={post.title} message={post.message} replies={post.replies} />
                     <div>
                       <button type="submit" className="glyphicon glyphicon-remove-circle" onClick={ () => {
-                        console.log('WHAT IS POST FORUM', post);
                     this.deletePost(post._id);
+                    this.getPost();
                   }}>delete</button>
                   </div>
                </div>

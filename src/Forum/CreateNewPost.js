@@ -2,12 +2,27 @@ import React, { PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import auth from '../client.js';
-import { addPost } from '../Actions/ForumActions';
+import { setPosts, addPost } from '../Actions/ForumActions';
 import axios from 'axios';
 
 
 const CreateNewPost = React.createClass({
 
+   getPost() {
+    axios.get('/api/forum')
+    .then((res) => {
+      console.log('IN THE RESPONSE FOR FORUMJS')
+      let dbPostData = res.data;
+      for (let i = 0; i<dbPostData.length; i++) {
+        let message = dbPostData[i];
+        message['isShort'] = true;
+      }
+      console.log("Db post data", dbPostData)
+      this.props.dispatchSetPost(dbPostData)
+    }).catch((err) => {
+      console.error('ERROR IN FORUMJS ', err);
+    });
+  },
     savePost(title, message) {
       const profile = auth.getProfile();
       const profilePic = {
@@ -49,6 +64,7 @@ const CreateNewPost = React.createClass({
           this.savePost(titleInput.value, messageInput.value)
           titleInput.value = '';
           messageInput.value = '';
+          this.getPost();
         }}>
         Add Post
       </button>
@@ -68,6 +84,9 @@ const mapDispatchToProps = (dispatch) => {
 
     dispatchAddPost(message) {
       dispatch(addPost(message));
+    },
+    dispatchSetPost(message) {
+      dispatch(setPosts(message));
     }
   };
 };

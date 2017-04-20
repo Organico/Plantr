@@ -180,68 +180,16 @@ app.put('/api/forum', (req, res, next) => {
 
 /*--------------------DELETE REQUEST-----------------------------------------*/
 
-app.get('/api/forum/:id', function(req, res, next) {
-  console.log("THE PARAMS ARE: ", req.params)
-
-  let reqId = req.params['id']
-  console.log("THE REQ ID IS ", reqId)
-  // console.log("THE QUERY IS:  ", req.query)
-  // console.log("THE DELETE IS REACHING SERVERBABEL");
-  // Forum.find({ id: }).remove().exec();
-  // Forum.findOneAndRemove({id: reqId}, function(err, result) {
-  //     if (err) {
-  //       console.log('error why :( ');
-  //     } else {
-  //       res.send(200, "HEY WE DID IT! DELETED!")
-  //   }
-  // });
-
-  console.log("THE FORUM IS: ", Forum)
-
-  Forum.findByIdAndRemove(reqId, function(err) {
+app.delete('/api/forum/:id', function(req, res, next) {
+  Forum.findByIdAndRemove(req.params.id, function(err, result) {
     if (err) {
-      console.log("GREAT Great ERROR!")
+      console.error('There was an error deleting your post: ', err)
     }
     else {
-      console.log("GREAT Great SUCCESS")
+      res.send(200, 'You have successfully deleted the post');
     }
+  });
 });
-  // Forum.findByIdAndRemove( reqId, function(err, result) {
-  //     if (err) {
-  //       console.log('error why :( ');
-  //     } else {
-  //       res.send(200, "HEY WE DID IT! DELETED!")
-  //   }
-  // });
-});
-  //   Forum.find({}, (err, data) => {
-  //   if (err) {
-  //     console.error(err);
-  //   }
-  //   res.status(200).send(data);
-  //   next();
-  // })
-  //       db.Snippet.destroy({where: { id: Number(req.params.id)}})
-  //     .then(function(res) {
-  //       res.status(200).send('Snippet deleted successfully');
-  //     })
-  //     .catch(function(err) {
-  //       res.status(400).send(err);
-  //     });
-  //         router.get('/deleteuser/:id', function(req, res) {
-
-  // Todo.findOne({_id: req.params.id}).exec(function (err, item) {
-  //   if (err || !item) {
-  //     console.log('error finding record to delete', err);
-  //     return next(new Error(err));
-  //   }
-  //   item.remove(function (err, success, next) {
-  //     if (err) return next(err);
-  //     console.log('deleted successfully', item);
-  //     res.send('deleted successfully');
-  //   });
-  // });
-
 
 app.use(function(err, req, res, next){
   console.log('Something failed');
