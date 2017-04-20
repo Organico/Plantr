@@ -49,14 +49,16 @@ const Forum = React.createClass({
           <div className="col-md-6">
             <CreateNewPost />
           </div>
-          <div className="col-md-6">
+          <div className="col-md-12">
             {this.props.posts.map((post, i) => {
               if (profile.email === post.email) {
                return <div>
                <ForumPost key={i} post={post} nickname={post.nickname} title={post.title} message={post.message} replies={post.replies} />
-                <button type="submit" className="glyphicon glyphicon-remove-circle" onClick={ () => {
+                  <div className="col-md-10 offset-md-1">
+                    <button type="submit" className="glyphicon glyphicon-remove-circle" onClick={ () => {
                   this.deletePost();
                 }}>delete</button>
+                </div>
                </div>
               } else {
                return <ForumPost key={i} post={post} nickname={post.nickname} title={post.title} message={post.message} replies={post.replies} />
