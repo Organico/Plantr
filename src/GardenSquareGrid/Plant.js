@@ -129,9 +129,11 @@ class Plant extends React.Component {
         x: this.state.posX,
         y: this.state.posY,
         img: this.props.img,
+        model: this.props.model,
         isDraggable: false
       };
     }
+      console.log("PLANT GOING INTO dispatchAddPlantToPlantGrid", plant)
 
 
       this.props.dispatchAddPlantToPlantGrid(plant)

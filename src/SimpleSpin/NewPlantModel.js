@@ -45,6 +45,8 @@ class NewPlantModel extends React.Component {
       position
     } = this.props
 
+    console.log("Logging props of this specific NewPlantModel: ", this.props)
+
     var colladaLoader = new ColladaLoader()
     colladaLoader.options.convertUpAxis = true;
     colladaLoader.load(FILE, function(collada){

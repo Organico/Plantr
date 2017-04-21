@@ -251,12 +251,6 @@ class Transform extends React.Component {
 
 
 
-
-
-
-
-
-
           <MaterialGrid />
           <ThreePlantGrid />
 
@@ -277,7 +271,7 @@ class Transform extends React.Component {
 
           <NewPlantModel
             position= {new THREE.Vector3(100,0,0)}
-            daeFile = {"https://s3-us-west-2.amazonaws.com/ryaperry-bucket/sectionize_sunflower5.dae"}
+            daeFile = {"https://s3-us-west-2.amazonaws.com/ryaperry-bucket/tomatoeTest.dae"}
           />
 
           <HouseCube

@@ -64,9 +64,9 @@ class PlantDexPlant extends React.Component {
       var newY;
       var newY;
       var newX;
-      console.log("Pos in dragBoundFunc", pos);
+      // console.log("Pos in dragBoundFunc", pos);
 
-      console.log("Pos of y is ", pos.y)
+      // console.log("Pos of y is ", pos.y)
 
       var roundedPosY= Math.round(pos.y/50)*50-25
       var roundedPosX= Math.round(pos.x/50)*50-25
@@ -87,10 +87,8 @@ class PlantDexPlant extends React.Component {
     }
 
     handleMouseDragStart(pos, e){
-      console.log("begin dragging", "x: ", pos.evt.x, "y: ", pos.evt.y);
       this.setState({isDragging: true})
-      console.log("ROARRRRRRRRRRRRRRRRRRRRRR: ",pos)
-    var seedObject = {
+      var seedObject = {
         'name': pos.target.attrs.plant.name,
         'price': pos.target.attrs.plant.price,
         'quantity':pos.target.attrs.plant.quantity,

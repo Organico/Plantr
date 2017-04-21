@@ -15,6 +15,7 @@ class ThreePlantGrid extends React.Component {
       this.plantGrid = store.getState().gardenReducer.plantGrid
     }
 
+    //daeFile = {"https://s3-us-west-2.amazonaws.com/ryaperry-bucket/sectionize_sunflower5.dae"}
 
     render() {
       return (
@@ -26,7 +27,7 @@ class ThreePlantGrid extends React.Component {
                 0,
                 newPlantModel.y * 2 - 500
               )}
-              daeFile = {"https://s3-us-west-2.amazonaws.com/ryaperry-bucket/sectionize_sunflower5.dae"}
+              daeFile = {newPlantModel.model}
             />
           )}
         </group>
