@@ -19,6 +19,9 @@ import GardenCubeGridView from './GardenCubeGrid/getGardenCubeGrid';
 import Layout from './Layout';
 import Profile from './userProfile/Profile';
 import NavBar from './NavBar';
+
+
+
 import MyCubeView from './SimpleSpin/index';
 import Forum from './Forum/Forum';
 // <Route path="/userprofile" component={UserProfile}></Route>
