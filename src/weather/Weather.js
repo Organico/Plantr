@@ -5,6 +5,7 @@ import weatherReducer from '../reducers/WeatherReducer.js'
 
 import {getTemp, getCoordinates, getWeatherDescription} from './OpenWeatherMap'
 import axios from 'axios'
+import CloudAnimation from './CloudAnimation'
 
 class WeatherTest extends React.Component {
 
@@ -127,7 +128,7 @@ class WeatherTest extends React.Component {
   }
 
   componentDidMount(){
-    this.getWeatherData("San Francisco");
+    this.getWeatherData("Fishers");
   }
 
   render() {
@@ -153,6 +154,7 @@ class WeatherTest extends React.Component {
         <h1>Get Weather</h1>
         <div><p>{this.props.temperature} </p></div>
         <div><p>{this.props.description} </p></div>
+        <CloudAnimation />
       </div>
     );
   }

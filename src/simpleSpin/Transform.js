@@ -115,18 +115,44 @@ class Transform extends React.Component {
 
 
 
+        // load ascii model
 
+        // var jsonLoader = new THREE.JSONLoader();
+        // jsonLoader.load( "https://s3-us-west-2.amazonaws.com/ryaperry-bucket/sunflower.json", createScene );
+
+        // // load binary model
+
+        // // var binLoader = new THREE.BinaryLoader();
+        // // binLoader.load( "Model_bin.js", createScene );
+
+        // function createScene( geometry, materials ) {
+        //   console.log("in createScene......................")
+
+        //     var mesh = new THREE.Mesh( geometry, new THREE.MultiMaterial( materials ) );
+        //   console.log("in createScene......................", mesh)
+        //   console.log("in createScene......................", geometry)
+
+        //   // scene.add(geometry);
+        //   scene.add(mesh);
+        //   console.log("scene after adding mesh", scene)
+
+        // }
+
+        // console.log("jsonLoader ================= ", jsonLoader)
 
 
 
               var colladaLoader = new ColladaLoader()
               colladaLoader.options.convertUpAxis = true;
-              colladaLoader.load("https://s3-us-west-2.amazonaws.com/ryaperry-bucket/monkey.dae", function(collada){
+              // colladaLoader.load("https://s3-us-west-2.amazonaws.com/ryaperry-bucket/firstTree/firstTree1.dae", function(collada){
+              colladaLoader.load("https://s3-us-west-2.amazonaws.com/ryaperry-bucket/sectionize_sunflower2.dae", function(collada){
                 console.log("collada Loader loded successfully !!!!!", collada)
                 var dae = collada.scene;
-                dae.scale.x = dae.scale.y = dae.scale.z = 300
+                console.log("Resulting DAE!Before!!!! ", dae)
 
-                console.log("Resulting DAE!!!!! ", dae)
+                // dae.scale.x = dae.scale.y = dae.scale.z = 300
+
+                console.log("Resulting DAE!!adsf!!! ", dae)
 
                 // dae.traverse(function(child){
                 //   if (child.colladaId == "Suzanne"){
@@ -152,12 +178,61 @@ class Transform extends React.Component {
 
                 // dae.updateMatrix()
                 console.log("dae children of 2: ", dae.children[2])
-                var child = dae.children[2]
-                child.children[0].scale.set(30,30,30)
+                var child = dae.children[4]
+                var child2 = dae.children[6]
+                child.scale.set(40,40,40)
+                child2.scale.set(40,40,40)
+                // // child.children[0].scale.set(30,30,30)
                 scene.add(child)
+                scene.add(child2)
               })
 
+              // var jsonLoader = new THREE.JSONLoader()
+              // jsonLoader.load("https://s3-us-west-2.amazonaws.com/ryaperry-bucket/monkey.json", function(jsonResponse){
+              //   console.log("jsonResponse Loader loded successfully !!!!!", jsonResponse)
 
+              //   console.log("Resulting JSON!!!!! ", jsonResponse)
+
+              // var objLoader = new THREE.ObjectLoader();
+              // loader.load("https://s3-us-west-2.amazonaws.com/ryaperry-bucket/monkey.json", function( obj ){
+              //   console.log("inside of obj json loader: ", obj);
+              //   // scene.add( obj );
+              // });
+
+                // objLoader.setPath("https://s3-us-west-2.amazonaws.com/ryaperry-bucket/");
+                // objLoader.load("https://s3-us-west-2.amazonaws.com/ryaperry-bucket/monkey2.json", object => {
+                //     console.log("in object", object)
+                //   }
+                // )
+
+                // dae.traverse(function(child){
+                //   if (child.colladaId == "Suzanne"){
+                //       // child.traverse(function(e){
+                //       //     e.castShadow = true;
+                //       //     e.receiveShadow = true;
+                //           // if(e.material instanceof THREE.MeshPhongMaterial){
+                //           //     e.material.needsUpdate = true;
+                //           //     console.log("e.material in travers", e.material)
+                //           // }
+                //       // })
+                //       scene.add(child);
+                //   }
+
+                //   else if ( child. colladaId == "Plane"){
+                //       // child.traverse(function(e){
+                //       //     e.castShadow = true;
+                //       //     e.receiveShadow = true;
+                //       // })
+                //       console.
+                //   }
+                // })
+
+                // dae.updateMatrix()
+                // console.log("dae children of 2: ", dae.children[2])
+                // var child = dae.children[2]
+                // child.children[0].scale.set(30,30,30)
+                // scene.add(child)
+              // })
 
 
 
@@ -301,12 +376,7 @@ class Transform extends React.Component {
             position={new THREE.Vector3(-10,200,0)}
           />
 
-          <PlantModel
-            objFile="VG14_7.obj"
-            mtlFile="VG14_7.mtl"
-            rotation={new THREE.Vector3(0,270,0)}
-            position={new THREE.Vector3(0,0,0)}
-          />
+
           <HouseCube
             position={new THREE.Vector3(-150,0,-900)}
           />
