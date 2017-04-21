@@ -22,9 +22,9 @@ const MaterialGrid = React.createClass({
               height={100}
               depth={100}
               position={new THREE.Vector3(
-                materialCube.x,
+                materialCube.x - 500,
                 0,
-                materialCube.y
+                materialCube.y - 500
               )}
               map={"https://s3-us-west-2.amazonaws.com/ryaperry-bucket/grasslight-big.jpg"}
             />
@@ -61,36 +61,29 @@ export default MaterialGrid
 
 //     constructor(props, context) {
 //       super(props, context);
+//       this.gardenGrid = store.getState().gardenReducer.gardenGrid
+
 //     }
 
+
 //     render() {
-//       // const {
-//       //   store
-//       // } = this.props
-//       // console.log("here is the the this.props in MAterial Greid: ", this.props)
-//       console.log("this,asdfas", this)
-//       // return (
-//       //   <group>
-//       //     {this.props.gardenGrid.map((materialCube, i) =>
-//       //       <MaterialCube key={i}
-//       //         width={100}
-//       //         height={100}
-//       //         depth={100}
-//       //         position={new THREE.Vector3(
-//       //           materialCube.x,
-//       //           0,
-//       //           materialCube.y
-//       //         )}
-//       //         map={"https://s3-us-west-2.amazonaws.com/ryaperry-bucket/grasslight-big.jpg"}
-//       //       />
-//       //     )}
-//       //   </group>
-//       // )
-//       return(
-//         <div>
-//         <h2>THIS WORKS</h2>
-//         </div>
-//         )
+//       return (
+//         <group>
+//           {this.gardenGrid.map((materialCube, i) =>
+//             <MaterialCube key={i}
+//               width={100}
+//               height={100}
+//               depth={100}
+//               position={new THREE.Vector3(
+//                 materialCube.x,
+//                 0,
+//                 materialCube.y
+//               )}
+//               map={"https://s3-us-west-2.amazonaws.com/ryaperry-bucket/grasslight-big.jpg"}
+//             />
+//           )}
+//         </group>
+//       )
 //     }
 // }
 

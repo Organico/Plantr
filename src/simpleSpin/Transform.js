@@ -174,6 +174,15 @@ class Transform extends React.Component {
     this.controls.update();
   }
 
+          //   <MyCube
+          //   width={100}
+          //   height={100}
+          //   depth={100}
+          //   color={0x654321}
+          //   rotation={this.state.cubeRotation}
+          //   position={this.state.cubePosition}
+          // />
+
   render() {
     const {
       width,
@@ -196,6 +205,7 @@ class Transform extends React.Component {
     var grassLoader = new THREE.TextureLoader();
     grassLoader.crossOrigin = '*'; // Use as needed
     var grassTexture = grassLoader.load('https://s3-us-west-2.amazonaws.com/ryaperry-bucket/grasslight-big.jpg');
+
 
     return (
     <div
@@ -248,14 +258,7 @@ class Transform extends React.Component {
           <MaterialGrid />
 
 
-          <MyCube
-            width={100}
-            height={100}
-            depth={100}
-            color={0x654321}
-            rotation={this.state.cubeRotation}
-            position={this.state.cubePosition}
-          />
+
 
           <MaterialCube
             width={100}
