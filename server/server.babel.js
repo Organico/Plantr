@@ -158,18 +158,18 @@ app.post('/api/forum', (req, res, next) => {
 
 /*--------------------PUT REQUEST-----------------------------------------*/
 app.put('/api/forum', (req, res, next) => {
-  Forum.findById(req.body.id, function(err, searchResult) {
+  Forum.findById(req.body.id, function(err, result) {
       if (err) {
         console.log('error')
       } else {
-        searchResult.replies.push(req.body.replies);
-        searchResult.save(function(err) {
+        result.replies.push(req.body.replies);
+        result.save(function(err) {
         if (err) {
           console.error('error');
         }
         else {
-          res.send(200, searchResult);
-          console.log(searchResult);
+          res.send(200, result);
+          console.log(result);
         }
       });
     }
@@ -180,67 +180,42 @@ app.put('/api/forum', (req, res, next) => {
 
 /*--------------------DELETE REQUEST-----------------------------------------*/
 
-app.get('/api/forum/:id', function(req, res, next) {
-  console.log("THE PARAMS ARE: ", req.params)
-
-  let reqId = req.params['id']
-  console.log("THE REQ ID IS ", reqId)
-  // console.log("THE QUERY IS:  ", req.query)
-  // console.log("THE DELETE IS REACHING SERVERBABEL");
-  // Forum.find({ id: }).remove().exec();
-  // Forum.findOneAndRemove({id: reqId}, function(err, result) {
-  //     if (err) {
-  //       console.log('error why :( ');
-  //     } else {
-  //       res.send(200, "HEY WE DID IT! DELETED!")
-  //   }
-  // });
-
-  console.log("THE FORUM IS: ", Forum)
-
-  Forum.findByIdAndRemove(reqId, function(err) {
+app.delete('/api/forum/:id', function(req, res, next) {
+  Forum.findByIdAndRemove(req.params.id, function(err, result) {
     if (err) {
-      console.log("GREAT Great ERROR!")
+      console.error('There was an error deleting your post: ', err)
+    } else {
+      res.send(200, 'You have successfully deleted the post');
     }
-    else {
-      console.log("GREAT Great SUCCESS")
-    }
+  });
 });
-  // Forum.findByIdAndRemove( reqId, function(err, result) {
-  //     if (err) {
-  //       console.log('error why :( ');
-  //     } else {
-  //       res.send(200, "HEY WE DID IT! DELETED!")
-  //   }
-  // });
-});
-  //   Forum.find({}, (err, data) => {
-  //   if (err) {
-  //     console.error(err);
-  //   }
-  //   res.status(200).send(data);
-  //   next();
-  // })
-  //       db.Snippet.destroy({where: { id: Number(req.params.id)}})
-  //     .then(function(res) {
-  //       res.status(200).send('Snippet deleted successfully');
-  //     })
-  //     .catch(function(err) {
-  //       res.status(400).send(err);
-  //     });
-  //         router.get('/deleteuser/:id', function(req, res) {
 
-  // Todo.findOne({_id: req.params.id}).exec(function (err, item) {
-  //   if (err || !item) {
-  //     console.log('error finding record to delete', err);
-  //     return next(new Error(err));
-  //   }
-  //   item.remove(function (err, success, next) {
-  //     if (err) return next(err);
-  //     console.log('deleted successfully', item);
-  //     res.send('deleted successfully');
-  //   });
-  // });
+//ACTUALLY DELETING
+app.put('/api/forum/:id/:replyId', function(req, res, next) {
+  var deleteId;
+  Forum.findById(req.params.id, function(err, result) {
+    console.log('FOUND THE USERID ', result.replies.length)
+    if (err) {
+      console.error('There was an error deleting your post: ', err)
+    } else {
+      result.replies.forEach( (key, i) => {
+        if (key['replyUser']['clientID'] === req.params.replyId) {
+          deleteId = i;
+        }
+      });
+      result.replies.splice(deleteId, 1);
+      result.save(function(err) {
+        if (err) {
+          console.error('error deleting SERVER: ', err);
+        }
+        else {
+          res.send(200, result);
+          console.log('SUCCESSFULLY DELETED');
+        }
+      });
+    }
+  });
+});
 
 
 app.use(function(err, req, res, next){

@@ -19,6 +19,7 @@ const ReplyPost = React.createClass({
         {
           id: this.props.post._id,
           replies: {
+            belongsToId: this.props.post._id,
             message: replyMessage,
             replyUser: profile
           }

@@ -36,6 +36,17 @@ const requireAuth = (nextState, replace) => {
 
 
 const App = React.createClass({
+  // constructor() {
+  //   super()
+  //   this.state = {
+  //     profile: '',
+
+  //   }
+  //   auth.on('profile_updated', function(profile) {
+  //     this.setState({profile: profile})
+  //   })
+  // }
+
 
   render () {
     const { dispatch, isAuthenticated, errorMessage} = this.props;
