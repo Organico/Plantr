@@ -24,7 +24,6 @@ const Forum = React.createClass({
   },
 
    deletePost(id) {
-    const profile = auth.getProfile();
     axios.delete('/api/forum/' + id, {
       id: id
     })

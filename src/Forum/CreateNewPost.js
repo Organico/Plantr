@@ -23,6 +23,7 @@ const CreateNewPost = React.createClass({
       console.error('ERROR IN FORUMJS ', err);
     });
   },
+
     savePost(title, message) {
       const profile = auth.getProfile();
       const profilePic = {
