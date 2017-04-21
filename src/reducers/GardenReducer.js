@@ -46,9 +46,9 @@ const initialGardenState = {
       'y':600,
       'img':'https://c1.staticflickr.com/3/2909/33168957064_a7ef238410_o.png',
       'isDraggable': true,
-       'packetImg' : '/seedPacketIMGs/KaleResized.png',
-       'price': 10,
-      'quantity': 10,
+       'packetImg' : '/seedPacketIMGs/genericResized.png',
+       'price': 20,
+      'quantity': 5,
       'season': "Spring",
       'description': "After Start State",
       'instructions': "Take great care of me",
@@ -70,9 +70,9 @@ const initialGardenState = {
       'y':600,
       'img': 'https://c1.staticflickr.com/3/2844/33627640530_f866a32b60_o.png',
       'isDraggable': true,
-       'packetImg' : '/seedPacketIMGs/KaleResized.png',
-      'price': 10,
-      'quantity': 10,
+       'packetImg' : '/seedPacketIMGs/genericResized.png',
+      'price': 15,
+      'quantity': 20,
       'season': "Spring",
       'description': "After Start State",
       'instructions': "Take great care of me",
@@ -81,10 +81,9 @@ const initialGardenState = {
       'extremeWarning':[0,45],
       'growthGraph': [
         {name: 'Sow', uv: 0},
-        {name: 'Seedlings \r Emerge', uv: 7},
-        {name: 'Bloom \r Start', uv: 45},
-        {name: 'Harvest', uv: 50},
-        {name: 'Harvest \r End', uv: 65}
+        {name: 'Seedlings \r Emerge', uv: 6},
+        {name: 'Harvest', uv: 42},
+        {name: 'Harvest \r End', uv: 54}
       ],
     },
     { 'name': 'tomato',
@@ -105,7 +104,6 @@ const initialGardenState = {
       'growthGraph': [
         {name: 'Sow', uv: 0},
         {name: 'Seedlings \r Emerge', uv: 7},
-        {name: 'Bloom \r Start', uv: 45},
         {name: 'Harvest', uv: 50},
         {name: 'Harvest \r End', uv: 65}
       ]
@@ -118,8 +116,8 @@ const initialGardenState = {
       'img': 'https://c1.staticflickr.com/3/2939/33200675713_ea06c54442_o.png',
       'isDraggable': true,
       'packetImg' : '/seedPacketIMGs/KaleResized.png',
-       'price': 10,
-      'quantity': 10,
+       'price': 12,
+      'quantity': 32,
       'season': "Spring",
       'description': "After Start State",
       'instructions': "Take great care of me",
@@ -128,10 +126,9 @@ const initialGardenState = {
       'extremeWarning':[0,45],
       'growthGraph': [
         {name: 'Sow', uv: 0},
-        {name: 'Seedlings \r Emerge', uv: 7},
-        {name: 'Bloom \r Start', uv: 45},
-        {name: 'Harvest', uv: 50},
-        {name: 'Harvest \r End', uv: 65}
+        {name: 'Seedlings \r Emerge', uv: 8},
+        {name: 'Harvest', uv: 53},
+        {name: 'Harvest \r End', uv: 68}
       ]
 
     },
@@ -402,7 +399,7 @@ const initialGardenState = {
       ],
     },
       {
-      'name': 'pumpkin',
+      'name': 'Pumpkin',
       'type': 'vegetable',
       'x':450,
       'y':50,
@@ -411,18 +408,17 @@ const initialGardenState = {
        'packetImg' : '/seedPacketIMGs/PumpkinResized.png',
       'price': 10,
       'quantity': 10,
-      'season': "Spring",
-      'description': "After Start State",
+      'season': "Summer",
+      'description': "David Pumpkins",
       'instructions': "Take great care of me",
       'sunlight': "Full-sun",
       'harvest':40,
       'extremeWarning':[0,45],
       'growthGraph': [
         {name: 'Sow', uv: 0},
-        {name: 'Seedlings \r Emerge', uv: 7},
-        {name: 'Bloom \r Start', uv: 45},
-        {name: 'Harvest', uv: 50},
-        {name: 'Harvest \r End', uv: 65}
+        {name: 'Seedlings \r Emerge', uv: 12},
+        {name: 'Harvest', uv: 100},
+        {name: 'Harvest \r End', uv: 120}
       ],
     },
      {
@@ -732,11 +728,45 @@ const initialGardenState = {
     },
     {
       'name': 'gnome',
-      'x': 266,
-      'y':50,
+      'x': 104,
+      'y':150,
       'img': 'https://c1.staticflickr.com/3/2832/33285295044_f9354e513e_o.png',
       'stroke': 'black'
-
+    },
+    {
+      'name': 'RyanGnome',
+      'x': 50,
+      'y':100,
+      'img': 'https://c1.staticflickr.com/3/2936/34033385761_c776af67f7_o.png',
+      'stroke': 'black'
+    },
+    {
+      'name': 'ArielGnome',
+      'x': 104,
+      'y':100,
+      'img': 'https://c1.staticflickr.com/3/2838/33779524940_77d4e0b1c5_o.png',
+      'stroke': 'black'
+    },
+    {
+      'name': 'NathanGnome',
+      'x': 158,
+      'y':100,
+      'img': 'https://c1.staticflickr.com/3/2920/33353040833_da5d00443d_o.png',
+      'stroke': 'black'
+    }
+    ,{
+      'name': 'SamyGnome',
+      'x': 212,
+      'y':100,
+      'img': 'https://c1.staticflickr.com/3/2910/34164510815_2e26ff97cd_o.png',
+      'stroke': 'black'
+    },
+    {
+      'name': 'TreGnome',
+      'x': 50,
+      'y':150,
+      'img': 'https://c1.staticflickr.com/3/2816/33353374503_0dca33c3ba_o.png',
+      'stroke': 'black'
     }
   ],
   gardens: [],

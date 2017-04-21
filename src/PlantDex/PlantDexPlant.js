@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Layer, Rect, Circle, Stage, Group} from 'react-konva';
 import { connect } from 'react-redux'
-import { addPlantToPlantGrid, setSeedPacket, addToShelf} from '../Actions/GardenActions.js';
+import { addPlantToPlantGrid, setSeedPacket, addToShelf, setGrowthGraph} from '../Actions/GardenActions.js';
 
 
 
@@ -43,6 +43,8 @@ class PlantDexPlant extends React.Component {
     }
     this.props.dispatchAddToShelf(seedObject)
     this.props.dispatchSetSeedPacket(seedObject);
+    let seedGraph = e.target.attrs.plant.growthGraph;
+    this.props.dispatchSetGrowthGraph(seedGraph);
     }
 
 
@@ -198,6 +200,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     dispatchAddToShelf(shelfObject) {
       dispatch(addToShelf(shelfObject))
+    },
+     dispatchSetGrowthGraph (graph) {
+      dispatch(setGrowthGraph(graph))
     }
   }
 };
