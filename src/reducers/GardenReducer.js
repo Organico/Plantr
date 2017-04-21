@@ -706,7 +706,7 @@ const initialGardenState = {
     { 'name': 'grass',
       'x':104,
       'y':50,
-      'img':"https://s3-us-west-2.amazonaws.com/ryaperry-bucket/gardenTextures/grasslight-big.jpg",
+      'img':"https://s3-us-west-2.amazonaws.com/ryaperry-bucket/gardenTextures/grassTexture.jpg",
       'stroke': 'black'
 
       },
