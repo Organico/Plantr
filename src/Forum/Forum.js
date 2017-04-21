@@ -5,7 +5,7 @@ import ForumPost from './ForumPost';
 import EditPost from './EditPost';
 import CreateNewPost from './CreateNewPost';
 import axios from 'axios';
-import { setPosts } from '../Actions/ForumActions';
+import { setPosts, setEditing } from '../Actions/ForumActions';
 import auth from '../client.js';
 
 const Forum = React.createClass({
@@ -47,7 +47,7 @@ const Forum = React.createClass({
           </div>
           <div className="col-md-8 offset-md-2">
             {this.props.posts.map((post, i) => {
-              if (profile.email === post.email) {
+              if (profile.email === post.email && !this.props.editing) {
                return <div className="post">
                  <ForumPost key={i} post={post} nickname={post.nickname} title={post.title} message={post.message} replies={post.replies} />
                     <div>
@@ -56,11 +56,19 @@ const Forum = React.createClass({
                         this.getPost();
                       }}>delete</button>
                       <button type="submit" onClick={ () => {
-                        console.log('post.id', post._id, 'message', post.message, 'title', post.title);
-                        return <EditPost message={post.message} title={post.title} />
+                        this.props.dispatchSetEditing(post.message);
                       }}>edit</button>
                   </div>
                </div>
+              } else if (profile.email === post.email && this.props.editing && (post.message === this.props.messageToEdit)) {
+                  return <div className="post">
+                    <EditPost message={post.message} title={post.title} />
+                    <button type="submit" onClick={ () => {
+                      this.props.dispatchSetEditing();
+                      this.deletePost(post._id);
+                      this.getPost();
+                    }}>delete</button>
+                  </div>
               } else {
                return <div className="post"><ForumPost key={i} post={post} nickname={post.nickname} title={post.title} message={post.message} replies={post.replies} /></div>
               }
@@ -74,8 +82,10 @@ const Forum = React.createClass({
 
 const mapStateToProps = (state) => {
   return {
+    messageToEdit: state.forumReducer.messageToEdit,
     posts: state.forumReducer.posts,
-    currentPost: state.forumReducer.currentPost
+    currentPost: state.forumReducer.currentPost,
+    editing: state.forumReducer.editing
   };
 };
 
@@ -84,6 +94,9 @@ const mapDispatchToProps = (dispatch) => {
 
     dispatchSetPost(message) {
       dispatch(setPosts(message));
+    },
+    dispatchSetEditing(editing) {
+      dispatch(setEditing(editing));
     }
   };
 };
