@@ -26,10 +26,10 @@ body{
   border: solid 2px transparent;
   border-radius: 2px;
 }
-.test {
+/*.test {
   border: solid 1px black;
   border-radius: 2px;
-}
+}*/
 .nav {
   height: 20px;
   margin-top: 130px;
