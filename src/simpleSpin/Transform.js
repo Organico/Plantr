@@ -231,6 +231,8 @@ class Transform extends React.Component {
           <gridHelper size={1000} divisions={10} />
           <directionalLight color={0xffffff} intensity={5} position={new THREE.Vector3(1, 1, 1)} />
 
+
+
           <MyCube
             width={100}
             height={100}
@@ -257,6 +259,9 @@ class Transform extends React.Component {
             rotation={new THREE.Vector3(0,0,0)}
             position={new THREE.Vector3(-150,0,-900)}
           />
+
+
+
           <mesh
             position={this.groundPosition}
             rotation={this.groundRotation}
@@ -280,6 +285,9 @@ class Transform extends React.Component {
                 />
               </meshPhongMaterial>
           </mesh>
+
+
+
         </scene>
       </React3>
     </div>);
