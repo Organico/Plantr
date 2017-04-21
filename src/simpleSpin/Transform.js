@@ -11,12 +11,12 @@ import TrackballControls from '../trackball';
 import MouseInput from '../inputs/MouseInput';
 import HouseCube from './HouseCube';
 
-import GrassCube from './GrassCube';
+// import GrassCube from './GrassCube';
 import MaterialCube from './MaterialCube';
 import NewPlantModel from './NewPlantModel'
 
 import MyCube from './MyCube'
-import PlantModel from './PlantModel'
+// import PlantModel from './PlantModel'
 import MonkeyModel from './MonkeyModel'
 import ColladaLoader from 'three-collada-loader';
 
@@ -251,7 +251,6 @@ class Transform extends React.Component {
           <NewPlantModel
             position= {new THREE.Vector3(100,0,0)}
             daeFile = {"https://s3-us-west-2.amazonaws.com/ryaperry-bucket/sectionize_sunflower5.dae"}
-
           />
 
           <HouseCube
