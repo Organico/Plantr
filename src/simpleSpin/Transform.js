@@ -16,7 +16,9 @@ import HouseCube from './HouseCube';
 // import GrassCube from './GrassCube';
 import MaterialCube from './MaterialCube';
 import MaterialGrid from './MaterialGrid';
+
 import NewPlantModel from './NewPlantModel'
+import ThreePlantGrid from './ThreePlantGrid'
 
 import MyCube from './MyCube'
 // import PlantModel from './PlantModel'
@@ -256,7 +258,7 @@ class Transform extends React.Component {
 
 
           <MaterialGrid />
-
+          <ThreePlantGrid />
 
 
 
