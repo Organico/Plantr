@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { togglePost } from '../Actions/ForumActions';
 import auth from '../client.js';
 import axios from 'axios';
+
 const ReplyPost = React.createClass({
 
   replyPost(replyMessage) {

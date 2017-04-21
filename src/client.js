@@ -35,26 +35,23 @@ const requireAuth = (nextState, replace) => {
 };
 
 
-const App = React.createClass({
-  // constructor() {
-  //   super()
-  //   this.state = {
-  //     profile: '',
-
-  //   }
-  //   auth.on('profile_updated', function(profile) {
-  //     this.setState({profile: profile})
-  //   })
-  // }
+class App extends Component {
+  constructor() {
+    super()
+    this.state = {
+      profile: ''
+    }
+    auth.on('profile_updated', (profile) => {
+      this.setState({profile: profile});
+    })
+  }
 
 
   render () {
     const { dispatch, isAuthenticated, errorMessage} = this.props;
     // console.log("The profile is", auth.getProfile(auth.idToken));
     // console.log("The toke is ", auth.idToken);
-    console.dir(auth.getProfile)
-
-    if (!auth.loggedIn()) {
+    if (!this.state.profile) {
             return (
                 <div>
                     <Login auth={auth}/>
@@ -93,7 +90,7 @@ const App = React.createClass({
     );
   }
 }
-});
+};
 
 export default auth;
 

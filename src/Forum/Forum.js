@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom'
 import { connect } from 'react-redux';
 import ForumPost from './ForumPost';
+import EditPost from './EditPost';
 import CreateNewPost from './CreateNewPost';
 import axios from 'axios';
 import { setPosts } from '../Actions/ForumActions';
@@ -34,23 +35,6 @@ const Forum = React.createClass({
     });
   },
 
-   editPost(id, message, title) {
-    const profile = auth.getProfile();
-    axios.put('/api/forum/' + id,
-      {
-        id: id,
-        message: message,
-        title: title
-      }
-    ).then((res) => {
-      console.log('res', res)
-      console.log("Successful post");
-    }).catch((err) => {
-      console.error(err);
-      console.log("Error in savePost()");
-    });
-  },
-
   render() {
     const profile = auth.getProfile();
     return(
@@ -72,8 +56,8 @@ const Forum = React.createClass({
                         this.getPost();
                       }}>delete</button>
                       <button type="submit" onClick={ () => {
-                        this.editPost(post._id, post.message, post.title);
-                        this.getPost();
+                        console.log('post.id', post._id, 'message', post.message, 'title', post.title);
+                        return <EditPost message={post.message} title={post.title} />
                       }}>edit</button>
                   </div>
                </div>
