@@ -23,17 +23,13 @@ const ForumPost = React.createClass({
      });
    },
 
-  deletePost(id) {
-    axios.delete('/api/forum/' + id, {
-      id: id
+  deletePost(id, replyId) {
+    axios.put('/api/forum/' + id + '/' + replyId, {
+      userId: id,
+      replyId: replyId
     })
     .then((res) => {
-      let dbPostData = res.data;
-      for (let i = 0; i<dbPostData.length; i++) {
-        let message = dbPostData[i];
-        message['isShort'] = true;
-      }
-      this.props.dispatchSetPost(dbPostData)
+      console.log('GREAT SUCCESS')
     }).catch((err) => {
       console.error('There has been a clientside error in deleting the post in ForumJS ', err);
     });
@@ -109,7 +105,7 @@ const ForumPost = React.createClass({
                     <Replies key={i} reply={reply} />
                       <div className="col-md-10">
                         <button type="submit" className="glyphicon glyphicon-remove-circle" onClick={ () => {
-                      this.deletePost(reply.replyUser.clientID);
+                      this.deletePost(reply.belongsToId, reply.replyUser.clientID);
                       this.getPost();
                     }}>delete</button>
                     </div>
@@ -121,7 +117,6 @@ const ForumPost = React.createClass({
               }
               )}
             </div>
-
               { (function() {
                 if (!postType) {
                   return <ReplyPost post={props.post}/>
