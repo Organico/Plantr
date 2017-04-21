@@ -46,11 +46,13 @@ class App extends Component {
     })
   }
 
+  componentDidMount() {
+    this.setState({profile: auth.loggedIn()});
+  }
 
   render () {
     const { dispatch, isAuthenticated, errorMessage} = this.props;
-    // console.log("The profile is", auth.getProfile(auth.idToken));
-    // console.log("The toke is ", auth.idToken);
+
     if (!this.state.profile) {
             return (
                 <div>
