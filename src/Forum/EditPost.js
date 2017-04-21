@@ -9,7 +9,6 @@ const EditPost = React.createClass({
 
  editPost(id, message, title) {
   console.log('ID IN EDIT POST', id);
-  const profile = auth.getProfile();
   axios.put('/api/forum/' + id,
     {
       id: id,
@@ -17,7 +16,6 @@ const EditPost = React.createClass({
       title: title
     }
   ).then((res) => {
-    console.log('res', res)
     console.log("Successful post");
   }).catch((err) => {
     console.error(err);
@@ -26,13 +24,32 @@ const EditPost = React.createClass({
 },
 
 render() {
-  console.log('PROPS IN EDITPOST ', this.props)
+  const profile = auth.getProfile();
+  let profilePic = {
+    backgroundImage: 'url(' + profile.picture + ')',
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center'
+  }
+  let username = {
+    color: 'white',
+    fontSize: '16px',
+    fontWeight: 'bold',
+    textShadow: '-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black',
+    marginTop: '50%'
+  }
+  console.log('PROPS IN EDITPOST ', this.props);
   return(
-    <div className="row" >
-      <input ref={(node) => title = node } type="string" name="title"/>
-      <input ref={(node) => message = node } type="string" name="message"/>
+    <div className="row">
+      <div className="col-md-1" style={profilePic}>
+        <div style={username}>
+          { profile.nickname }
+        </div>
+      </div>
+      <input ref={(node) => title = node } type="string" name="title" value={this.props.title}/>
+      <input ref={(node) => message = node } type="string" name="message" value={this.props.message}/>
       <button type="submit" onClick ={ () => {
-        this.editPost(this.props.id, title.value, message.value)
+        this.editPost(this.props.id, message.value, title.value)
       }}>submit</button>
     </div>
     )
