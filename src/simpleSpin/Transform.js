@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux'
+
 import PureRenderMixin from 'react/lib/ReactComponentWithPureRenderMixin';
 import React3 from 'react-three-renderer';
 import * as THREE from 'three';
@@ -13,12 +15,15 @@ import HouseCube from './HouseCube';
 
 // import GrassCube from './GrassCube';
 import MaterialCube from './MaterialCube';
+import MaterialGrid from './MaterialGrid';
 import NewPlantModel from './NewPlantModel'
 
 import MyCube from './MyCube'
 // import PlantModel from './PlantModel'
 import MonkeyModel from './MonkeyModel'
 import ColladaLoader from 'three-collada-loader';
+
+
 
 // import EffectComposer from 'three-effectcomposer';
 // console.log("EffectComposer: ", EffectComposer)
@@ -233,6 +238,16 @@ class Transform extends React.Component {
 
 
 
+
+
+
+
+
+
+
+          <MaterialGrid />
+
+
           <MyCube
             width={100}
             height={100}
@@ -247,8 +262,13 @@ class Transform extends React.Component {
             height={100}
             depth={100}
             map={"https://s3-us-west-2.amazonaws.com/ryaperry-bucket/grasslight-big.jpg"}
-            position={new THREE.Vector3(-10,200,0)}
+            position={new THREE.Vector3(
+              -10,
+              200,
+              0
+            )}
           />
+
 
           <NewPlantModel
             position= {new THREE.Vector3(100,0,0)}
@@ -259,6 +279,15 @@ class Transform extends React.Component {
             rotation={new THREE.Vector3(0,0,0)}
             position={new THREE.Vector3(-150,0,-900)}
           />
+
+
+
+
+
+
+
+
+
 
 
 
@@ -293,4 +322,25 @@ class Transform extends React.Component {
     </div>);
   }
 }
+
+// const mapStateToProps = (state) => {
+//   return {
+//     gardenGrid: state.gardenReducer.gardenGrid
+//   }
+// }
+
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     // dispatchMovePiece (location) {
+//     //   dispatch(movePiece(location))
+//     // }
+//   }
+// };
+
+
+// export default connect(mapStateToProps, mapDispatchToProps)(Transform)
+
 export default Transform;
+
+
+
