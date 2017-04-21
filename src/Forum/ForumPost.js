@@ -36,9 +36,7 @@ const ForumPost = React.createClass({
   },
 
   render() {
-    console.log('PROPS IN FORUMPOST', this.props)
   const profile = auth.getProfile();
-  //create get request for original posters profile pic
   let profilePic = {
     backgroundImage: 'url(' + this.props.post.profile + ')',
     backgroundRepeat: 'no-repeat',
@@ -98,16 +96,15 @@ const ForumPost = React.createClass({
           <div>
             <div className="col-md-8 offset-md-2 test">
               {this.props.replies.map((reply, i) => {
-                console.log('CHECKING THE REPLY SIDE TO DELETE ', reply.replyUser)
                 if (!postType) {
                   if (profile.email === reply.replyUser.email) {
                   return <div>
                     <Replies key={i} reply={reply} />
                       <div className="col-md-10">
-                        <button type="submit" className="glyphicon glyphicon-remove-circle" onClick={ () => {
-                      this.deletePost(reply.belongsToId, reply.replyUser.clientID);
-                      this.getPost();
-                    }}>delete</button>
+                        <button type="submit" onClick={ () => {
+                          this.deletePost(reply.belongsToId, reply.replyUser.clientID);
+                          this.getPost();
+                        }}>delete</button>
                     </div>
                   </div>
                    } else {

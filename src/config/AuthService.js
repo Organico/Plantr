@@ -32,10 +32,6 @@ export default class AuthService extends EventEmitter {
       } else {
         this.setProfile(profile);
       }
-      // This if statement is when we became PROGRAMMERS
-      if (this.getProfile().email_verified) {
-        console.log('AuthService needs to refresh or redirect here')
-      }
     })
   }
   _authorizationError(error){

@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom'
 import { connect } from 'react-redux';
 import ForumPost from './ForumPost';
+import EditPost from './EditPost';
 import CreateNewPost from './CreateNewPost';
 import axios from 'axios';
 import { setPosts } from '../Actions/ForumActions';
@@ -28,12 +29,7 @@ const Forum = React.createClass({
       id: id
     })
     .then((res) => {
-      let dbPostData = res.data;
-      for (let i = 0; i<dbPostData.length; i++) {
-        let message = dbPostData[i];
-        message['isShort'] = true;
-      }
-      this.props.dispatchSetPost(dbPostData)
+      console.log('Successfully deleted user post');
     }).catch((err) => {
       console.error('There has been a clientside error in deleting the post in ForumJS ', err);
     });
@@ -55,10 +51,14 @@ const Forum = React.createClass({
                return <div className="post">
                  <ForumPost key={i} post={post} nickname={post.nickname} title={post.title} message={post.message} replies={post.replies} />
                     <div>
-                      <button type="submit" className="glyphicon glyphicon-remove-circle" onClick={ () => {
-                    this.deletePost(post._id);
-                    this.getPost();
-                  }}>delete</button>
+                      <button type="submit" onClick={ () => {
+                        this.deletePost(post._id);
+                        this.getPost();
+                      }}>delete</button>
+                      <button type="submit" onClick={ () => {
+                        console.log('post.id', post._id, 'message', post.message, 'title', post.title);
+                        return <EditPost message={post.message} title={post.title} />
+                      }}>edit</button>
                   </div>
                </div>
               } else {
