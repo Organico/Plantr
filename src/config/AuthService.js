@@ -14,7 +14,6 @@ export default class AuthService extends EventEmitter {
         responseType: 'token'
       }
     })
-    console.dir(Redirect)
     // Add callback for lock `authenticated` event
     this.lock.on('authenticated', this._doAuthentication.bind(this));
     // binds login functions to keep this context
@@ -59,7 +58,6 @@ export default class AuthService extends EventEmitter {
     // Saves user token to local storage
     localStorage.setItem('id_token', idToken)
   }
-
 
   setProfile(profile){
     // Saves profile data to localStorage
