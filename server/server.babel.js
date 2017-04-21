@@ -175,8 +175,26 @@ app.put('/api/forum', (req, res, next) => {
     }
   });
 });
-  //delete a snippet by id
-  // app.delete('/api/snippets/:id', snippetsController.delete);
+
+app.put('/api/forum/:id', (req, res, next) => {
+  Forum.findById(req.body.id, function(err, result) {
+      if (err) {
+        console.log('error')
+      } else {
+        console.log('UPDATING RESULT ON SERVER: ', result);
+      //   result.replies.push(req.body.replies);
+      //   result.save(function(err) {
+      //   if (err) {
+      //     console.error('error');
+      //   }
+      //   else {
+      //     res.send(200, result);
+      //     console.log(result);
+      //   }
+      // });
+    }
+  });
+});
 
 /*--------------------DELETE REQUEST-----------------------------------------*/
 
@@ -190,7 +208,7 @@ app.delete('/api/forum/:id', function(req, res, next) {
   });
 });
 
-//ACTUALLY DELETING
+//Deleting reply posts
 app.put('/api/forum/:id/:replyId', function(req, res, next) {
   var deleteId;
   Forum.findById(req.params.id, function(err, result) {

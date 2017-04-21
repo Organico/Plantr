@@ -7,31 +7,22 @@ import axios from 'axios';
 const ReplyPost = React.createClass({
 
   replyPost(replyMessage) {
-    console.log(this.props.post._id);
-      const profile = auth.getProfile();
-      // const profilePic = {
-      //   backgroundImage: 'url(' + profile.picture + ')',
-      //   backgroundRepeat: 'no-repeat',
-      //   backgroundSize: 'cover',
-      //   backgroundPosition: 'center'
-      // }
-      axios.put('/api/forum',
-        {
-          id: this.props.post._id,
-          replies: {
-            belongsToId: this.props.post._id,
-            message: replyMessage,
-            replyUser: profile
-          }
+    const profile = auth.getProfile();
+    axios.put('/api/forum',
+      {
+        id: this.props.post._id,
+        replies: {
+          belongsToId: this.props.post._id,
+          message: replyMessage,
+          replyUser: profile
         }
-      ).then((res) => {
-        console.log('res', res)
-        console.log("Successful post");
-      }).catch((err) => {
-        console.error(err);
-        console.log("Error in savePost()");
-      });
-    },
+      }
+    ).then((res) => {
+      console.log("Successfully posted a reply");
+    }).catch((err) => {
+      console.error("Error in submitting a reply - replyPost: ", err);
+    });
+  },
 
   render() {
     let replyMessage;
