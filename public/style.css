@@ -26,10 +26,10 @@ body{
   border: solid 2px transparent;
   border-radius: 2px;
 }
-.test {
-  /*border: solid 2px black;
-  border-radius: 2px;*/
-}
+/*.test {
+  border: solid 1px black;
+  border-radius: 2px;
+}*/
 .nav {
   height: 20px;
   margin-top: 130px;
@@ -185,8 +185,27 @@ body{
 .forumTitle {
   font-weight: bold;
 }
+.post {
+  border: solid 5px #3b6338;
+  border-radius: 10px;
+  margin-top: 20px;
+}
 
+.replyText {
+    resize: none;
+    overflow: hidden;
+    min-height: 50px;
+    max-height: 100px;
+}
+/*.reply {
+  border: solid 2px green;
+  margin-top: 10px;
+}*/
 
+#addReply {
+  margin-top: 10px;
+  margin-left: -100px;
+}
 @import url('https://fonts.googleapis.com/css?family=Arsenal');
 /*@import url("./icons.css");
 */
@@ -199,7 +218,7 @@ body{
     font-family: 'Arsenal', sans-serif;
 }*/
 
-.app {
+/*.app {
     width: 600px;
     max-width: 100%;
     background: #3498db;
@@ -211,7 +230,7 @@ body{
     color: #fff;
     transform: translate(-50%, -50%);
     box-shadow: 0 3px 5px rgba(0, 0, 0, 0.19);
-}
+}*/
 
 .weather-today {
     height: 300px;

@@ -52,23 +52,23 @@ const Forum = React.createClass({
           <button type="submit" onClick={ () => {
             this.getPost();
           }} >Get Request Here</button>
-          <div className="col-md-6">
+          <div className="col-md-6 offset-md-2">
             <CreateNewPost />
           </div>
-          <div className="col-md-12">
+          <div className="col-md-8 offset-md-2">
             {this.props.posts.map((post, i) => {
               if (profile.email === post.email) {
-               return <div>
-               <ForumPost key={i} post={post} nickname={post.nickname} title={post.title} message={post.message} replies={post.replies} />
-                  <div className="col-md-10 offset-md-1">
-                    <button type="submit" className="glyphicon glyphicon-remove-circle" onClick={ () => {
-                      console.log('WHAT IS POST FORUM', post);
-                  this.deletePost(post._id);
-                }}>delete</button>
-                </div>
+               return <div className="post">
+                 <ForumPost key={i} post={post} nickname={post.nickname} title={post.title} message={post.message} replies={post.replies} />
+                    <div>
+                      <button type="submit" className="glyphicon glyphicon-remove-circle" onClick={ () => {
+                        console.log('WHAT IS POST FORUM', post);
+                    this.deletePost(post._id);
+                  }}>delete</button>
+                  </div>
                </div>
               } else {
-               return <ForumPost key={i} post={post} nickname={post.nickname} title={post.title} message={post.message} replies={post.replies} />
+               return <div className="post"><ForumPost key={i} post={post} nickname={post.nickname} title={post.title} message={post.message} replies={post.replies} /></div>
               }
             }
             )}

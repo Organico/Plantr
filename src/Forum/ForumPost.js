@@ -71,12 +71,11 @@ const ForumPost = React.createClass({
             this.props.dispatchTogglePost(this.props.post._id);
             }} >
           <div className="col-md-1" style={profilePic}>
-          <br/>
           <div style={username}>
-          { this.props.nickname }
+            { this.props.nickname }
           </div>
           </div>
-          <div className="col-md-10 offset-md-1">
+          <div className="col-md-8 offset-md-1">
             <div className="row">
               <span className="forumTitle">{ title }</span>
             </div>
@@ -86,13 +85,13 @@ const ForumPost = React.createClass({
           </div>
         </div>
           <div>
-            <div>
+            <div className="col-md-8 offset-md-2 test">
               {this.props.replies.map((reply, i) => {
                 if (!postType) {
                   if (profile.email === reply.replyUser.email) {
                   return <div>
                     <Replies key={i} reply={reply} />
-                      <div className="col-md-10 offset-md-1">
+                      <div className="col-md-10">
                         <button type="submit" className="glyphicon glyphicon-remove-circle" onClick={ () => {
                       this.deletePost();
                     }}>delete</button>
