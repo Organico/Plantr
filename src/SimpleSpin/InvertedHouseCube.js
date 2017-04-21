@@ -7,7 +7,7 @@ OBJLoader(THREE);
 import MTLLoader from 'three-mtl-loader'
 
 
-class PlantModel extends React.Component {
+class InvertedHouseCube extends React.Component {
   // static propTypes = {
   //   width: React.PropTypes.number.isRequired,
   //   height: React.PropTypes.number.isRequired,
@@ -22,11 +22,9 @@ class PlantModel extends React.Component {
 
   loadThing(){
     const PATH = "https://s3-us-west-2.amazonaws.com/ryaperry-bucket/"
-    // const MTL_FILE = "demo.mtl"
-    // const OBJ_FILE = "demo.obj"
+    const MTL_FILE = "demo.mtl"
+    const OBJ_FILE = "demo.obj"
 
-    const MTL_FILE = this.props.mtlFile
-    const OBJ_FILE = this.props.objFile
     // const MTL_FILE = "VG14_7.mtl"
     // const OBJ_FILE = "VG14_7.obj"
 
@@ -58,15 +56,17 @@ class PlantModel extends React.Component {
         objLoader.setPath(PATH);
         objLoader.load(OBJ_FILE, object => {
             console.log("in object", object)
-            object.scale.set(70, 70, 70);
-            // object.position.set(
-            //   0,
-            //   0,
-            //   0)
-           object.position.set(
+            object.scale.set(500, 500, 500);
+            // object.position.set(-150, 0, -900)
+            object.position.set(
               this.props.position.x,
               this.props.position.y,
               this.props.position.z
+            )
+            object.rotation.set(
+              this.props.rotation.x,
+              this.props.rotation.y,
+              this.props.rotation.z
             )
 
             // for(let child of object.children) {
@@ -74,30 +74,22 @@ class PlantModel extends React.Component {
             //     // child.material.side = THREE.DoubleSide
             // }
 
-            var that = this
-
             object.traverse( function ( child ) {
               console.log("traversing children ", child)
               if ( child instanceof THREE.Mesh ) {
                 console.log("child thats a mesh! ", child)
-                console.log("that inside of the object travers for the plant model: ", that)
-                child.rotation.set(
-                  that.props.rotation.x,
-                  that.props.rotation.y,
-                  that.props.rotation.z
-                )
-                // var loader = new THREE.TextureLoader();
-                // loader.crossOrigin = '*'; // Use as needed
-                // var imgTexture = loader.load('https://s3-us-west-2.amazonaws.com/ryaperry-bucket/firstUVLayoutHouse.png');
-                // child.material.map = imgTexture
-                // // child.material.side = THREE.BackSide
+                var loader = new THREE.TextureLoader();
+                loader.crossOrigin = '*'; // Use as needed
+                var imgTexture = loader.load('https://s3-us-west-2.amazonaws.com/ryaperry-bucket/firstUVLayoutHouse.png');
+                child.material.map = imgTexture
+                child.material.side = THREE.BackSide ////////// Only difference between this and house cube currently
 
               }
             });
 
             console.log("this is the object", object);
             console.log("before: this is the object that is binded to this", this);
-            this.refs.plantModelGroup.add(object);
+            this.refs.houseGroup.add(object);
             console.log("after: this is the object that is binded to this", this);
 
         }, onProgress, onError);
@@ -111,8 +103,8 @@ class PlantModel extends React.Component {
 
   render() {
     return (
-      <group ref="plantModelGroup" />
+      <group ref="houseGroup" />
     );
   }
 }
-export default PlantModel;
+export default InvertedHouseCube;

@@ -10,9 +10,15 @@ import MTLLoader from 'three-mtl-loader'
 import TrackballControls from '../trackball';
 import MouseInput from '../inputs/MouseInput';
 import HouseCube from './HouseCube';
-import GrassCube from './GrassCube';
+
+// import GrassCube from './GrassCube';
+import MaterialCube from './MaterialCube';
+import NewPlantModel from './NewPlantModel'
+
 import MyCube from './MyCube'
-import PlantModel from './PlantModel'
+// import PlantModel from './PlantModel'
+import MonkeyModel from './MonkeyModel'
+import ColladaLoader from 'three-collada-loader';
 
 // import EffectComposer from 'three-effectcomposer';
 // console.log("EffectComposer: ", EffectComposer)
@@ -111,16 +117,6 @@ class Transform extends React.Component {
     this.controls = controls;
     this.controls.addEventListener('change', this._onTrackballChange);
 
-
-    // console.log("REFS ============", this.refs);
-    // const composer = new EffectComposer(react3, camera)
-    // console.log("Composer: ", composer);
-    // composer.addPass(new EffectComposer.RenderPass(scene, camera))
-
-    //     // Redraw with a shader
-    // const effect = new EffectComposer.ShaderPass(THREE.DotScreenShader);
-    // composer.addPass(effect);
-    // console.log("Composer2: ", composer);
 
   }
 
@@ -235,6 +231,8 @@ class Transform extends React.Component {
           <gridHelper size={1000} divisions={10} />
           <directionalLight color={0xffffff} intensity={5} position={new THREE.Vector3(1, 1, 1)} />
 
+
+
           <MyCube
             width={100}
             height={100}
@@ -244,7 +242,7 @@ class Transform extends React.Component {
             position={this.state.cubePosition}
           />
 
-          <GrassCube
+          <MaterialCube
             width={100}
             height={100}
             depth={100}
@@ -252,15 +250,18 @@ class Transform extends React.Component {
             position={new THREE.Vector3(-10,200,0)}
           />
 
-          <PlantModel
-            objFile="VG14_7.obj"
-            mtlFile="VG14_7.mtl"
-            rotation={new THREE.Vector3(0,270,0)}
-            position={new THREE.Vector3(0,0,0)}
+          <NewPlantModel
+            position= {new THREE.Vector3(100,0,0)}
+            daeFile = {"https://s3-us-west-2.amazonaws.com/ryaperry-bucket/sectionize_sunflower5.dae"}
           />
+
           <HouseCube
+            rotation={new THREE.Vector3(0,0,0)}
             position={new THREE.Vector3(-150,0,-900)}
           />
+
+
+
           <mesh
             position={this.groundPosition}
             rotation={this.groundRotation}
@@ -284,6 +285,9 @@ class Transform extends React.Component {
                 />
               </meshPhongMaterial>
           </mesh>
+
+
+
         </scene>
       </React3>
     </div>);

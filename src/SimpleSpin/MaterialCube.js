@@ -6,7 +6,7 @@ import TrackballControls from '../trackball';
 import MouseInput from '../inputs/MouseInput';
 
 
-class GrassCube extends React.Component {
+class MaterialCube extends React.Component {
   static propTypes = {
     width: React.PropTypes.number.isRequired,
     height: React.PropTypes.number.isRequired,
@@ -32,7 +32,7 @@ class GrassCube extends React.Component {
     var grassTexture = grassLoader.load(this.props.map);
     THREE.ImageUtils.crossOrigin = '';
 
-    this.refs.grassCubeMaterial.map = grassTexture;
+    this.refs.material.map = grassTexture;
   }
 
 
@@ -48,11 +48,11 @@ class GrassCube extends React.Component {
                 height={this.props.height}
                 depth={this.props.depth}
               />
-              <meshBasicMaterial ref="grassCubeMaterial"
+              <meshBasicMaterial ref="material"
               />
 
           </mesh>
          );
   }
 }
-export default GrassCube;
+export default MaterialCube;

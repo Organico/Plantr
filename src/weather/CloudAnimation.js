@@ -43,6 +43,8 @@ class CloudAnimation extends React.Component {
           width={100}
           height={100}
           wmode={'transparent'}
+          play={false}
+          menu={false}
 
         ref={c => this._swfPlayerNode = c}
         id={SWF_ID_PREFIX + this._uid}
