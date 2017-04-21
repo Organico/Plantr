@@ -145,7 +145,7 @@ class Transform extends React.Component {
               var colladaLoader = new ColladaLoader()
               colladaLoader.options.convertUpAxis = true;
               // colladaLoader.load("https://s3-us-west-2.amazonaws.com/ryaperry-bucket/firstTree/firstTree1.dae", function(collada){
-              colladaLoader.load("https://s3-us-west-2.amazonaws.com/ryaperry-bucket/sectionize_sunflower2.dae", function(collada){
+              colladaLoader.load("https://s3-us-west-2.amazonaws.com/ryaperry-bucket/sectionize_sunflower5.dae", function(collada){
                 console.log("collada Loader loded successfully !!!!!", collada)
                 var dae = collada.scene;
                 console.log("Resulting DAE!Before!!!! ", dae)
@@ -177,14 +177,39 @@ class Transform extends React.Component {
                 // })
 
                 // dae.updateMatrix()
-                console.log("dae children of 2: ", dae.children[2])
-                var child = dae.children[4]
-                var child2 = dae.children[6]
-                child.scale.set(40,40,40)
+                // console.log("dae children of 2: ", dae.children[2])
+                var child0 = dae.children[0]
+                var child1 = dae.children[1]
+                var child2 = dae.children[2]
+                var child3 = dae.children[3]
+                var child4 = dae.children[4]
+                var child5 = dae.children[5]
+                var child6 = dae.children[6]
+
+                console.log("Child0: ", child0)
+                console.log("Child1: ", child1)
+                console.log("Child2: ", child2)
+                console.log("Child3: ", child3)
+                console.log("Child4: ", child4)
+                console.log("Child4: ", child5)
+                console.log("Child4: ", child6)
+                // console.log("Child5: ", child)
+
+                child0.scale.set(40,40,40)
+                child1.scale.set(40,40,40)
                 child2.scale.set(40,40,40)
+                child3.scale.set(40,40,40)
+                child4.scale.set(40,40,40)
+                child5.scale.set(40,40,40)
+                child6.scale.set(40,40,40)
                 // // child.children[0].scale.set(30,30,30)
-                scene.add(child)
+                scene.add(child0)
+                scene.add(child1)
                 scene.add(child2)
+                scene.add(child3)
+                scene.add(child4)
+                scene.add(child5)
+                scene.add(child6)
               })
 
               // var jsonLoader = new THREE.JSONLoader()
