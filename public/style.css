@@ -26,10 +26,10 @@ body{
   border: solid 2px transparent;
   border-radius: 2px;
 }
-/*.test {
-  border: solid 1px black;
-  border-radius: 2px;
-}*/
+.test {
+/*  border: solid 1px black;
+  border-radius: 2px;*/
+}
 .nav {
   height: 20px;
   margin-top: 130px;
@@ -69,6 +69,10 @@ body{
 }
 .plantShelf {
   margin-left: 10px;
+}
+.reply {
+  border: solid 5px #3B6338;
+  border-radius: 10px;
 }
 .lineChart {
   margin-left: -100px;
@@ -186,10 +190,11 @@ body{
   font-weight: bold;
 }
 .post {
-  border: solid 5px #3b6338;
-  border-radius: 10px;
-  margin-top: 20px;
-}
+  border: solid 1px #725746;
+  background-color: #f2e8d5
+  /*border-radius: 10px;*/
+/*  margin-top: 1px;
+*/}
 
 .replyText {
     resize: none;

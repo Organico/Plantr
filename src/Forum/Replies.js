@@ -23,13 +23,13 @@ const Replies = React.createClass({
     return(
       <div className="reply">
         <div className="row">
-          <div className="col-md-1" style={profilePic}>
+          <div className="col-md-1 offset-md-1" style={profilePic}>
           <br/>
           <div style={username}>
             { this.props.reply.replyUser.nickname }
           </div>
           </div>
-          <div className="col-md-11">
+          <div className="col-md-10">
             <div className="row">
               { this.props.reply.message }
             </div>
