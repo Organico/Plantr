@@ -63,6 +63,11 @@ class HouseCube extends React.Component {
               this.props.position.y,
               this.props.position.z
             )
+            object.rotation.set(
+              this.props.rotation.x,
+              this.props.rotation.y,
+              this.props.rotation.z
+            )
 
             // for(let child of object.children) {
             //     console.log("looking at the children of object", child);

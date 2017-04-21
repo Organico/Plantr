@@ -8,6 +8,84 @@ import MTLLoader from 'three-mtl-loader'
 import ColladaLoader from 'three-collada-loader';
 
 
+
+              // var jsonLoader = new THREE.JSONLoader()
+              // jsonLoader.load("https://s3-us-west-2.amazonaws.com/ryaperry-bucket/monkey.json", function(jsonResponse){
+              //   console.log("jsonResponse Loader loded successfully !!!!!", jsonResponse)
+
+              //   console.log("Resulting JSON!!!!! ", jsonResponse)
+
+              // var objLoader = new THREE.ObjectLoader();
+              // loader.load("https://s3-us-west-2.amazonaws.com/ryaperry-bucket/monkey.json", function( obj ){
+              //   console.log("inside of obj json loader: ", obj);
+              //   // scene.add( obj );
+              // });
+
+                // objLoader.setPath("https://s3-us-west-2.amazonaws.com/ryaperry-bucket/");
+                // objLoader.load("https://s3-us-west-2.amazonaws.com/ryaperry-bucket/monkey2.json", object => {
+                //     console.log("in object", object)
+                //   }
+                // )
+
+                // dae.traverse(function(child){
+                //   if (child.colladaId == "Suzanne"){
+                //       // child.traverse(function(e){
+                //       //     e.castShadow = true;
+                //       //     e.receiveShadow = true;
+                //           // if(e.material instanceof THREE.MeshPhongMaterial){
+                //           //     e.material.needsUpdate = true;
+                //           //     console.log("e.material in travers", e.material)
+                //           // }
+                //       // })
+                //       scene.add(child);
+                //   }
+
+                //   else if ( child. colladaId == "Plane"){
+                //       // child.traverse(function(e){
+                //       //     e.castShadow = true;
+                //       //     e.receiveShadow = true;
+                //       // })
+                //       console.
+                //   }
+                // })
+
+                // dae.updateMatrix()
+                // console.log("dae children of 2: ", dae.children[2])
+                // var child = dae.children[2]
+                // child.children[0].scale.set(30,30,30)
+                // scene.add(child)
+              // })
+
+
+
+    // console.log("REFS ============", this.refs);
+    // const composer = new EffectComposer(react3, camera)
+    // console.log("Composer: ", composer);
+    // composer.addPass(new EffectComposer.RenderPass(scene, camera))
+
+    //     // Redraw with a shader
+    // const effect = new EffectComposer.ShaderPass(THREE.DotScreenShader);
+    // composer.addPass(effect);
+    // console.log("Composer2: ", composer);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 class MonkeyModel extends React.Component {
   // static propTypes = {
   //   width: React.PropTypes.number.isRequired,

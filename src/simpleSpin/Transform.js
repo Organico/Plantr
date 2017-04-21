@@ -10,7 +10,11 @@ import MTLLoader from 'three-mtl-loader'
 import TrackballControls from '../trackball';
 import MouseInput from '../inputs/MouseInput';
 import HouseCube from './HouseCube';
+
 import GrassCube from './GrassCube';
+import MaterialCube from './MaterialCube';
+import NewPlantModel from './NewPlantModel'
+
 import MyCube from './MyCube'
 import PlantModel from './PlantModel'
 import MonkeyModel from './MonkeyModel'
@@ -113,163 +117,6 @@ class Transform extends React.Component {
     this.controls = controls;
     this.controls.addEventListener('change', this._onTrackballChange);
 
-
-
-        // load ascii model
-
-        // var jsonLoader = new THREE.JSONLoader();
-        // jsonLoader.load( "https://s3-us-west-2.amazonaws.com/ryaperry-bucket/sunflower.json", createScene );
-
-        // // load binary model
-
-        // // var binLoader = new THREE.BinaryLoader();
-        // // binLoader.load( "Model_bin.js", createScene );
-
-        // function createScene( geometry, materials ) {
-        //   console.log("in createScene......................")
-
-        //     var mesh = new THREE.Mesh( geometry, new THREE.MultiMaterial( materials ) );
-        //   console.log("in createScene......................", mesh)
-        //   console.log("in createScene......................", geometry)
-
-        //   // scene.add(geometry);
-        //   scene.add(mesh);
-        //   console.log("scene after adding mesh", scene)
-
-        // }
-
-        // console.log("jsonLoader ================= ", jsonLoader)
-
-
-
-              var colladaLoader = new ColladaLoader()
-              colladaLoader.options.convertUpAxis = true;
-              // colladaLoader.load("https://s3-us-west-2.amazonaws.com/ryaperry-bucket/firstTree/firstTree1.dae", function(collada){
-              colladaLoader.load("https://s3-us-west-2.amazonaws.com/ryaperry-bucket/sectionize_sunflower5.dae", function(collada){
-                console.log("collada Loader loded successfully !!!!!", collada)
-                var dae = collada.scene;
-                console.log("Resulting DAE!Before!!!! ", dae)
-
-                // dae.scale.x = dae.scale.y = dae.scale.z = 300
-
-                console.log("Resulting DAE!!adsf!!! ", dae)
-
-                // dae.traverse(function(child){
-                //   if (child.colladaId == "Suzanne"){
-                //       // child.traverse(function(e){
-                //       //     e.castShadow = true;
-                //       //     e.receiveShadow = true;
-                //           // if(e.material instanceof THREE.MeshPhongMaterial){
-                //           //     e.material.needsUpdate = true;
-                //           //     console.log("e.material in travers", e.material)
-                //           // }
-                //       // })
-                //       scene.add(child);
-                //   }
-
-                //   else if ( child. colladaId == "Plane"){
-                //       // child.traverse(function(e){
-                //       //     e.castShadow = true;
-                //       //     e.receiveShadow = true;
-                //       // })
-                //       console.
-                //   }
-                // })
-
-                // dae.updateMatrix()
-                // console.log("dae children of 2: ", dae.children[2])
-                var child0 = dae.children[0]
-                var child1 = dae.children[1]
-                var child2 = dae.children[2]
-                var child3 = dae.children[3]
-                var child4 = dae.children[4]
-                var child5 = dae.children[5]
-                var child6 = dae.children[6]
-
-                console.log("Child0: ", child0)
-                console.log("Child1: ", child1)
-                console.log("Child2: ", child2)
-                console.log("Child3: ", child3)
-                console.log("Child4: ", child4)
-                console.log("Child4: ", child5)
-                console.log("Child4: ", child6)
-                // console.log("Child5: ", child)
-
-                child0.scale.set(40,40,40)
-                child1.scale.set(40,40,40)
-                child2.scale.set(40,40,40)
-                child3.scale.set(40,40,40)
-                child4.scale.set(40,40,40)
-                child5.scale.set(40,40,40)
-                child6.scale.set(40,40,40)
-                // // child.children[0].scale.set(30,30,30)
-                scene.add(child0)
-                scene.add(child1)
-                scene.add(child2)
-                scene.add(child3)
-                scene.add(child4)
-                scene.add(child5)
-                scene.add(child6)
-              })
-
-              // var jsonLoader = new THREE.JSONLoader()
-              // jsonLoader.load("https://s3-us-west-2.amazonaws.com/ryaperry-bucket/monkey.json", function(jsonResponse){
-              //   console.log("jsonResponse Loader loded successfully !!!!!", jsonResponse)
-
-              //   console.log("Resulting JSON!!!!! ", jsonResponse)
-
-              // var objLoader = new THREE.ObjectLoader();
-              // loader.load("https://s3-us-west-2.amazonaws.com/ryaperry-bucket/monkey.json", function( obj ){
-              //   console.log("inside of obj json loader: ", obj);
-              //   // scene.add( obj );
-              // });
-
-                // objLoader.setPath("https://s3-us-west-2.amazonaws.com/ryaperry-bucket/");
-                // objLoader.load("https://s3-us-west-2.amazonaws.com/ryaperry-bucket/monkey2.json", object => {
-                //     console.log("in object", object)
-                //   }
-                // )
-
-                // dae.traverse(function(child){
-                //   if (child.colladaId == "Suzanne"){
-                //       // child.traverse(function(e){
-                //       //     e.castShadow = true;
-                //       //     e.receiveShadow = true;
-                //           // if(e.material instanceof THREE.MeshPhongMaterial){
-                //           //     e.material.needsUpdate = true;
-                //           //     console.log("e.material in travers", e.material)
-                //           // }
-                //       // })
-                //       scene.add(child);
-                //   }
-
-                //   else if ( child. colladaId == "Plane"){
-                //       // child.traverse(function(e){
-                //       //     e.castShadow = true;
-                //       //     e.receiveShadow = true;
-                //       // })
-                //       console.
-                //   }
-                // })
-
-                // dae.updateMatrix()
-                // console.log("dae children of 2: ", dae.children[2])
-                // var child = dae.children[2]
-                // child.children[0].scale.set(30,30,30)
-                // scene.add(child)
-              // })
-
-
-
-    // console.log("REFS ============", this.refs);
-    // const composer = new EffectComposer(react3, camera)
-    // console.log("Composer: ", composer);
-    // composer.addPass(new EffectComposer.RenderPass(scene, camera))
-
-    //     // Redraw with a shader
-    // const effect = new EffectComposer.ShaderPass(THREE.DotScreenShader);
-    // composer.addPass(effect);
-    // console.log("Composer2: ", composer);
 
   }
 
@@ -393,7 +240,7 @@ class Transform extends React.Component {
             position={this.state.cubePosition}
           />
 
-          <GrassCube
+          <MaterialCube
             width={100}
             height={100}
             depth={100}
@@ -401,8 +248,14 @@ class Transform extends React.Component {
             position={new THREE.Vector3(-10,200,0)}
           />
 
+          <NewPlantModel
+            position= {new THREE.Vector3(100,0,0)}
+            daeFile = {"https://s3-us-west-2.amazonaws.com/ryaperry-bucket/sectionize_sunflower5.dae"}
+
+          />
 
           <HouseCube
+            rotation={new THREE.Vector3(0,0,0)}
             position={new THREE.Vector3(-150,0,-900)}
           />
           <mesh
