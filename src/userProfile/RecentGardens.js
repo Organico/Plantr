@@ -5,7 +5,7 @@ class RecentGardens extends Component {
   render() {
     return (
       <div className="row">
-        <div className="col-md-6 offset-md-3 right userRecent">
+        <div className="col-md-12 offset-md-2 right userRecent">
           <div className="userRecentSpan"> Recent Gardens </div>
           <div>
             <ul>

@@ -24,7 +24,6 @@ class ProfilePic extends Component {
           </div>
           <div className="row">
             <div style={profPic} className="col-md-6  col-sm-6 offset-sm-3">
-              <div className="tape"></div>
               <div id="innerProfilePic"></div>
             </div>
           </div>

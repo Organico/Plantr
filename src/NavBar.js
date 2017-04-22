@@ -17,42 +17,40 @@ export default class NavBar extends React.Component {
   }
   render() {
     return (
-      <div className="nav">
-        <Navbar color="transparent" light toggleable>
-          <NavbarToggler right onClick={this.toggle} />
-          {/*<NavbarBrand href="/" src="/logo.png"><img id="logo" src="/logo.png"/></NavbarBrand>*/}
-          <Collapse isOpen={this.state.isOpen} navbar>
-            <Nav navbar>
-
-
-              <NavItem>
-                <NavLink href="#home"><span className="navText">Home</span></NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink href="#weather"><span className="navText">Weather</span></NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink href="#plant"><span className="navText">Plant Test Env</span></NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink href="#cubes"><span className="navText">My 3d Gardens</span></NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink href="#squares"><span className="navText">My 2d Gardens</span></NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink href="#creategarden"><span className="navText">Create Gardens</span></NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink href="#profile"><span className="navText">My Profile</span></NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink href="#forum"><span className="navText">Forum</span></NavLink>
-              </NavItem>
-            </Nav>
-          </Collapse>
-        </Navbar>
-      </div>
+      <nav className="navbar navbar-toggleable-md navbar-light bg-faded">
+        <button className="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span className="navbar-toggler-icon"></span>
+        </button>
+        <a className="navbar-brand" href="#home"><span id="navbrand">Plantr</span></a>
+        <div className="collapse navbar-collapse" id="navbarNav">
+          <ul className="navbar-nav">
+            <li className="nav-item">
+              <a className="nav-link" href="#home">Home</a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link" href="#weather">Weather</a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link" href="#plant">Plant Test Env</a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link" href="#cubes">My 3D Gardens</a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link" href="#squares">My 2D Gardens</a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link" href="#creategarden">Create A Garden</a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link" href="#profile">My Profile</a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link" href="#forum">Forum</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
     );
   }
 }
