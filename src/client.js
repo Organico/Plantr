@@ -66,16 +66,8 @@ class App extends Component {
     return (
         <Provider store={store}>
             <Router>
-              <div className="container site">
-              <div className="spacer"></div>
-                <div className="row test" id="navBarHolder">
-
-
-                  <div className="col-md-10 offset-md-3 test">
-                    <NavBar />
-                  </div>
-                </div>
-
+              <div className="container-fluid">
+                <NavBar />
                 <Route exact path="/" component={Layout}></Route>
                 <Route path="/home" component={Home}></Route>
                 <Route path="/login" component={Login}></Route>
@@ -87,8 +79,6 @@ class App extends Component {
                 <Route path="/profile" component={Profile}></Route>
                 <Route path="/forum" component={Forum}></Route>
                 <Route path="/weather" component={Weather}></Route>
-
-
               </div>
             </Router>
         </Provider>
