@@ -25,6 +25,7 @@ import MyCube from './MyCube'
 import MonkeyModel from './MonkeyModel'
 import ColladaLoader from 'three-collada-loader';
 
+import Ground from './Ground'
 import CubeMapTest from './CubeMapTest'
 
 
@@ -279,39 +280,6 @@ class Transform extends React.Component {
 
 
 
-
-
-
-
-
-
-
-          <mesh
-            position={this.groundPosition}
-            rotation={this.groundRotation}
-            receiveShadow
-          >
-              <planeBufferGeometry
-                width={20000}
-                height={20000}
-              />
-              <meshPhongMaterial
-                color={0xffffff}
-                specular={0x111111}
-              >
-                <texture
-                  url={'https://s3-us-west-2.amazonaws.com/ryaperry-bucket/grasslight-big.jpg'}
-                  crossOrigin="*"
-                  wrapS={THREE.RepeatWrapping}
-                  wrapT={THREE.RepeatWrapping}
-                  repeat={this.groundRepeat}
-                  anisotropy={16}
-                />
-              </meshPhongMaterial>
-          </mesh>
-
-
-
         </scene>
       </React3>
     </div>);
@@ -343,3 +311,10 @@ export default Transform;
           //   position={new THREE.Vector3(-150,0,-900)}
           // />
 
+          // <Ground
+          //   position={this.groundPosition}
+          //   rotation={this.groundRotation}
+          //   width={10000}
+          //   height={10000}
+          //   url={'https://s3-us-west-2.amazonaws.com/ryaperry-bucket/grasslight-big.jpg'}
+          // />
