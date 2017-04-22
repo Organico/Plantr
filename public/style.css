@@ -1,5 +1,5 @@
 body{
-  background-image: url("/background.png");
+  background-color: #EAE0CC;
 }
 
 #logo {
@@ -31,23 +31,32 @@ body{
     background-size: cover;
 }
 
+.textHolder {
 
+}
+
+.logoHolder {
+  background-color: white;
+  margin-top: 100px;
+  margin-bottom: 20px;
+  border-radius: 50px;
+}
 .videoText {
   text-align: center;
   font-size: 20px;
   letter-spacing: 3px;
-  color: #aaa;
+  color: white;
   background-color: rgba(0,0,0,0.3);
 }
 .postUsername {
-  font-family: "Fizz";
+  font-family: "Above";
   font-weight: bold;
   font-size: 20px;
 }
 .postPicture {
 }
 .test {
-
+  border: solid 5px red;
 }
 .nav {
   height: 20px;
@@ -63,7 +72,10 @@ body{
     font-family: Lobster;
     src: url("/Lobster.otf") format("opentype");
 }
-
+@font-face {
+    font-family: Above;
+    src: url("/Above.ttf");
+}
 @font-face {
     font-family: Fizz;
     src: url("/Fizz.otf") format("opentype");
@@ -77,8 +89,9 @@ body{
   margin-left: 10px;
 }
 .reply {
-  border: solid 1px #3B6338;
-  border-radius: 10px;
+  border: solid 1px #89C83B;
+
+  margin-top: 10px;
 }
 .lineChart {
   margin-left: -100px;
@@ -182,13 +195,13 @@ body{
 }
 
 .forumTitle {
-  font-family: "Fizz";
+  font-family: "Above";
   font-weight: bold;
   font-size: 30px;
 }
 .post {
-  border: solid 1px #725746;
-  background-color: #f2e8d5;
+  border: solid 1px #694118;
+  background-color: white;
 }
 
 .replyText {

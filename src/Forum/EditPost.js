@@ -45,13 +45,7 @@ render() {
     backgroundSize: 'cover',
     backgroundPosition: 'center'
   }
-  let username = {
-    color: 'white',
-    fontSize: '16px',
-    fontWeight: 'bold',
-    textShadow: '-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black',
-    marginTop: '50%'
-  }
+
 
   let id = this.props.id;
   let newMessage;
@@ -59,7 +53,7 @@ render() {
   return(
     <div className="row">
       <div className="col-md-1" style={profilePic}>
-        <div style={username}>
+        <div>
           { profile.nickname }
         </div>
       </div>
