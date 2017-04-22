@@ -17,3 +17,7 @@ export function addReply(message) {
 export function setEditing(editing) {
   return {type: 'SET_EDITING', editing};
 }
+
+// export function setReplyEditing(editing) {
+//   return {type: 'SET_REPLY_EDITING', editing};
+// }
