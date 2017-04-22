@@ -7,8 +7,21 @@ import auth from '../client.js';
 
 const EditPost = React.createClass({
 
+  getPost() {
+    axios.get('/api/forum')
+    .then((res) => {
+      let dbPostData = res.data;
+      for (let i = 0; i<dbPostData.length; i++) {
+        let message = dbPostData[i];
+        message['isShort'] = true;
+      }
+      this.props.dispatchSetPost(dbPostData)
+    }).catch((err) => {
+      console.error('There has been a clientside error in getting the post in ForumJS ', err);
+    });
+  },
+
  editPost(id, message, title) {
-  console.log('ID IN EDIT POST', id);
   axios.put('/api/forum/' + id,
     {
       id: id,
@@ -16,10 +29,9 @@ const EditPost = React.createClass({
       title: title
     }
   ).then((res) => {
-    console.log("Successful post");
+    console.log("Post has been successfully updated on EditPost");
   }).catch((err) => {
-    console.error(err);
-    console.log("Error in savePost()");
+    console.error("Post has not updated on EditPost: ", err);
   });
 },
 
@@ -38,7 +50,10 @@ render() {
     textShadow: '-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black',
     marginTop: '50%'
   }
-  console.log('PROPS IN EDITPOST ', this.props);
+
+  let id = this.props.id;
+  let newMessage;
+  let newTitle;
   return(
     <div className="row">
       <div className="col-md-1" style={profilePic}>
@@ -46,10 +61,15 @@ render() {
           { profile.nickname }
         </div>
       </div>
-      <input ref={(node) => title = node } type="string" name="title" value={this.props.title}/>
-      <input ref={(node) => message = node } type="string" name="message" value={this.props.message}/>
+      <input ref={(title) => newTitle = title } type="string" name="newTitle" defaultValue={JSON.parse(this.props.title)}/>
+      <input ref={(message) => newMessage = message } type="string" name="newMessage" defaultValue={JSON.parse(this.props.message)}/>
       <button type="submit" onClick ={ () => {
-        this.editPost(this.props.id, message.value, title.value)
+        newMessage.value = JSON.stringify(newMessage.value);
+        newTitle.value = JSON.stringify(newTitle.value);
+        this.editPost(id, newMessage.value, newTitle.value);
+        newMessage.value = '';
+        newTitle.value = '';
+        this.getPost();
       }}>submit</button>
     </div>
     )

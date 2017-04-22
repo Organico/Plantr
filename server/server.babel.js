@@ -160,7 +160,7 @@ app.post('/api/forum', (req, res, next) => {
 app.put('/api/forum', (req, res, next) => {
   Forum.findById(req.body.id, function(err, result) {
       if (err) {
-        console.log('error')
+        console.error('There has been a serverside error updating the replies: ', err)
       } else {
         result.replies.push(req.body.replies);
         result.save(function(err) {
@@ -179,19 +179,19 @@ app.put('/api/forum', (req, res, next) => {
 app.put('/api/forum/:id', (req, res, next) => {
   Forum.findById(req.body.id, function(err, result) {
       if (err) {
-        console.log('error')
+        console.error('There has been a serverside error updating the posts: ', err)
       } else {
-        console.log('UPDATING RESULT ON SERVER: ', result);
-      //   result.replies.push(req.body.replies);
-      //   result.save(function(err) {
-      //   if (err) {
-      //     console.error('error');
-      //   }
-      //   else {
-      //     res.send(200, result);
-      //     console.log(result);
-      //   }
-      // });
+        result.message = req.body.message;
+        result.title = req.body.title;
+        result.save(function(err) {
+        if (err) {
+          console.error('error');
+        }
+        else {
+          res.send(200, result);
+          console.log('Successfully updated the post on the server');
+        }
+      });
     }
   });
 });

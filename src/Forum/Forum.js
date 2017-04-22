@@ -62,7 +62,7 @@ const Forum = React.createClass({
                </div>
               } else if (profile.email === post.email && this.props.editing && (post.message === this.props.messageToEdit)) {
                   return <div className="post">
-                    <EditPost message={post.message} title={post.title} />
+                    <EditPost id={post._id} message={post.message} title={post.title} />
                     <button type="submit" onClick={ () => {
                       this.props.dispatchSetEditing();
                       this.deletePost(post._id);
