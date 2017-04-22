@@ -25,6 +25,8 @@ import MyCube from './MyCube'
 import MonkeyModel from './MonkeyModel'
 import ColladaLoader from 'three-collada-loader';
 
+import CubeMapTest from './CubeMapTest'
+
 
 
 // import EffectComposer from 'three-effectcomposer';
@@ -254,7 +256,7 @@ class Transform extends React.Component {
           <MaterialGrid />
           <ThreePlantGrid />
 
-
+          <CubeMapTest />
 
           <MaterialCube
             width={100}
@@ -273,12 +275,6 @@ class Transform extends React.Component {
             position= {new THREE.Vector3(100,0,0)}
             daeFile = {"https://s3-us-west-2.amazonaws.com/ryaperry-bucket/tomatoeTest.dae"}
           />
-
-          <HouseCube
-            rotation={new THREE.Vector3(0,0,0)}
-            position={new THREE.Vector3(-150,0,-900)}
-          />
-
 
 
 
@@ -342,4 +338,8 @@ class Transform extends React.Component {
 export default Transform;
 
 
+          // <HouseCube
+          //   rotation={new THREE.Vector3(0,0,0)}
+          //   position={new THREE.Vector3(-150,0,-900)}
+          // />
 
