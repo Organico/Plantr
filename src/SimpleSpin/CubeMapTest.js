@@ -23,13 +23,16 @@ class CubeMapTest extends React.Component {
               var textureLoader = new THREE.TextureLoader();
               textureLoader.crossOrigin = '*'; // Use as needed
 
+              // var PATH = "https://s3-us-west-2.amazonaws.com/ryaperry-bucket/homeCubeMapNegZ37-NegZ2.4/"
+              // var PATH = "https://s3-us-west-2.amazonaws.com/ryaperry-bucket/homeCubeMapNegZ33-NegZ2.4/" //Good!
+              var PATH = "https://s3-us-west-2.amazonaws.com/ryaperry-bucket/homeCubeMapNegZ33-NegZ2.6-Y5.7/" //Great!
 
-              var texture0 = textureLoader.load( 'https://s3-us-west-2.amazonaws.com/ryaperry-bucket/cubeMapTest/0004.png' );
-              var texture1 = textureLoader.load( 'https://s3-us-west-2.amazonaws.com/ryaperry-bucket/cubeMapTest/0002.png' );
-              var texture2 = textureLoader.load( 'https://s3-us-west-2.amazonaws.com/ryaperry-bucket/cubeMapTest/0006.png' );
-              var texture3 = textureLoader.load( 'https://s3-us-west-2.amazonaws.com/ryaperry-bucket/cubeMapTest/0005.png' );
-              var texture4 = textureLoader.load( 'https://s3-us-west-2.amazonaws.com/ryaperry-bucket/cubeMapTest/0001.png' );
-              var texture5 = textureLoader.load( 'https://s3-us-west-2.amazonaws.com/ryaperry-bucket/cubeMapTest/0003.png' );
+              var texture0 = textureLoader.load( PATH + '0004.png' );
+              var texture1 = textureLoader.load( PATH + '0002.png' );
+              var texture2 = textureLoader.load( PATH + '0006.png' );
+              var texture3 = textureLoader.load( PATH + '0005.png' );
+              var texture4 = textureLoader.load( PATH + '0001.png' );
+              var texture5 = textureLoader.load( PATH + '0003.png' );
 
               var materials = [
                   new THREE.MeshBasicMaterial( { map: texture0, side: THREE.BackSide } ),
