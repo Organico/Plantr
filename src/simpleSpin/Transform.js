@@ -257,7 +257,16 @@ class Transform extends React.Component {
           <MaterialGrid />
           <ThreePlantGrid />
 
-          <CubeMapTest />
+          <CubeMapTest
+            width={1000}
+            height={1000}
+            depth={1000}
+            position={new THREE.Vector3(
+              0,
+              500,
+              0
+            )}
+           />
 
           <MaterialCube
             width={100}

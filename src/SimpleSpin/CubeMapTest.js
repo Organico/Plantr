@@ -20,31 +20,6 @@ class CubeMapTest extends React.Component {
 
   loadThing(){
 
-                // var loader = new THREE.TextureLoader();
-
-                // var texture1 = loader.load('texture1.jpg');
-                // var texture2 = loader.load('texture2.jpg');
-
-                // var urls = [
-                //   'https://s3-us-west-2.amazonaws.com/ryaperry-bucket/cubeMapTest/0004.png',
-                //   'https://s3-us-west-2.amazonaws.com/ryaperry-bucket/cubeMapTest/0002.png',
-                //   'https://s3-us-west-2.amazonaws.com/ryaperry-bucket/cubeMapTest/0006.png',
-                //   'https://s3-us-west-2.amazonaws.com/ryaperry-bucket/cubeMapTest/0005.png',
-                //   'https://s3-us-west-2.amazonaws.com/ryaperry-bucket/cubeMapTest/0001.png',
-                //   'https://s3-us-west-2.amazonaws.com/ryaperry-bucket/cubeMapTest/0003.png'
-                // ]
-
-                // // wrap it up into the object that we need
-                // var cubemap = THREE.ImageUtils.loadTextureCube(urls);
-                // // set the format, likely RGB unless you've gone crazy
-                // cubemap.format = THREE.RGBFormat;
-
-                // var material = new THREE.MeshLambertMaterial({
-                //   color: 0xffffff,
-                //   envMap: cubemap
-                // });
-
-
               var textureLoader = new THREE.TextureLoader();
               textureLoader.crossOrigin = '*'; // Use as needed
 
@@ -66,9 +41,18 @@ class CubeMapTest extends React.Component {
               ];
 
               var faceMaterial = new THREE.MeshFaceMaterial( materials );
+              var geometry = new THREE.BoxGeometry(
+                this.props.width,
+                this.props.depth,
+                this.props.height
+              );
 
-              var geometry = new THREE.BoxGeometry( 1000, 1000, 1000 );
               var boxMesh = new THREE.Mesh( geometry, faceMaterial );
+              boxMesh.position.set(
+                this.props.position.x,
+                this.props.position.y,
+                this.props.position.z
+              )
 
             console.log("before: this is the object that is binded to this", this);
             console.log("Boxmesh: ===================== ", boxMesh);
