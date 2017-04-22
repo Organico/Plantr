@@ -21,15 +21,18 @@ const EditPost = React.createClass({
     });
   },
 
- editPost(id, replyId, message) {
-  axios.put('/api/forum/' + id + '/' + replyId,
-    {
+ editPost(id, replyId, message, oldMessage) {
+  axios.put('/api/forum/' + id + '/' + replyId, {
+    params: {
       id: id,
       replyId: replyId,
       message: message,
+      oldMessage: oldMessage
+     }
     }
   ).then((res) => {
     console.log("Post has been successfully updated on EditPost");
+    this.getPost();
   }).catch((err) => {
     console.error("Post has not updated on EditPost: ", err);
   });
@@ -64,9 +67,8 @@ render() {
       <input ref={(message) => newMessage = message } type="string" name="newMessage" defaultValue={JSON.parse(this.props.message)}/>
       <button type="submit" onClick ={ () => {
         newMessage.value = JSON.stringify(newMessage.value);
-        this.editPost(id, replyId, newMessage.value);
+        this.editPost(id, replyId, newMessage.value, this.props.message);
         newMessage.value = '';
-        this.getPost();
       }}>submit</button>
     </div>
     )

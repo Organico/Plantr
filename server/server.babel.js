@@ -170,7 +170,7 @@ app.put('/api/forum', (req, res, next) => {
         }
         else {
           res.send(200, result);
-          console.log(result);
+          console.log('Successfully posted a reply on the server');
         }
       });
     }
@@ -200,34 +200,28 @@ app.put('/api/forum/:id', (req, res, next) => {
 
 // updating replies on the server
 app.put('/api/forum/:id/:replyId', function(req, res, next) {
-  console.log('THE PUT REQUEST IN ITS FIRST STAGE')
   let modifiedId;
   Forum.findById(req.params.id, function(err, result) {
-    console.log('FOUND THE ID, here is the result: ', result.replies);
     if (err) {
       console.error('There was an error deleting your post: ', err)
     } else {
       result.replies.forEach((key, i) => {
-        console.log('HERE IS THE KEY USER: ', key.replyUser)
-      })
-      console.log('THERE WAS NO ERROR!!!!');
-      // result.replies.forEach( (key, i) => {
-      // IF STATEMENT NEEDS TO BE ABOUT CLIENT AND MESSAGE
-      //   if (key['replyUser']['clientID'] === req.params.replyId ) {
-      //     // modifiedId = i;
-      //     console.log('THE IF STATEMENT IS TRUE')
-      //   }
-      // });
-      // // result.replies(modifiedId, 1);
-      // result.save(function(err) {
-      //   if (err) {
-      //     console.error('There was an error deleting your post from the server: ', err);
-      //   }
-      //   else {
-      //     res.send(200, result);
-      //     console.log('successfully deleted post on the serverside');
-      //   }
-      // });
+        if (key.message === req.body.params.oldMessage) {
+          modifiedId = i;
+        }
+      });
+      let newMessage = result.replies[modifiedId];
+      newMessage['message'] = req.body.params.message;
+      result.replies.splice(modifiedId, 1, newMessage)
+      result.save(function(err) {
+        if (err) {
+          console.error('There was an error updating your response from the server: ', err);
+        }
+        else {
+          res.send(200, result);
+          console.log('successfully updated response on the server');
+        }
+      });
     }
   });
 });

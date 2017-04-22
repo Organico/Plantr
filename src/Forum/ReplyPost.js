@@ -1,11 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
-import { togglePost } from '../Actions/ForumActions';
+import { setPosts, togglePost, setEditing } from '../Actions/ForumActions';
 import auth from '../client.js';
 import axios from 'axios';
 
 const ReplyPost = React.createClass({
+
+   getPost() {
+    axios.get('/api/forum')
+    .then((res) => {
+      let dbPostData = res.data;
+      for (let i = 0; i<dbPostData.length; i++) {
+        let message = dbPostData[i];
+        message['isShort'] = true;
+      }
+      this.props.dispatchSetPost(dbPostData)
+    }).catch((err) => {
+      console.error('there has been an error in rerendering on ReplyPost ', err);
+    });
+  },
 
   replyPost(replyMessage) {
     const profile = auth.getProfile();
@@ -20,6 +34,7 @@ const ReplyPost = React.createClass({
       }
     ).then((res) => {
       console.log("Successfully posted a reply");
+      this.getPost();
     }).catch((err) => {
       console.error("Error in submitting a reply - replyPost: ", err);
     });
@@ -55,7 +70,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-
+    dispatchSetPost(message) {
+      dispatch(setPosts(message));
+    },
     dispatchReplyPost(message) {
       dispatch(replyPost(message));
     }

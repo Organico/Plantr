@@ -11,13 +11,11 @@ const CreateNewPost = React.createClass({
    getPost() {
     axios.get('/api/forum')
     .then((res) => {
-      console.log('IN THE RESPONSE FOR FORUMJS')
       let dbPostData = res.data;
       for (let i = 0; i<dbPostData.length; i++) {
         let message = dbPostData[i];
         message['isShort'] = true;
       }
-      console.log("Db post data", dbPostData)
       this.props.dispatchSetPost(dbPostData)
     }).catch((err) => {
       console.error('ERROR IN FORUMJS ', err);
@@ -42,11 +40,11 @@ const CreateNewPost = React.createClass({
           replies: []
         }
       ).then((res) => {
-        console.log('res', res)
-        console.log("Successful post");
+        console.log("Successful posted on the client side of CreateNewPost");
+        this.getPost();
       }).catch((err) => {
         console.error(err);
-        console.log("Error in savePost()");
+        console.log("Error in creating a new post on CreateNewPost");
       });
     },
 
@@ -65,7 +63,6 @@ const CreateNewPost = React.createClass({
           this.savePost(titleInput.value, messageInput.value)
           titleInput.value = '';
           messageInput.value = '';
-          this.getPost();
         }}>
         Add Post
       </button>
