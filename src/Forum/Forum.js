@@ -8,6 +8,8 @@ import CreateNewPost from './CreateNewPost';
 import axios from 'axios';
 import { setPosts, setEditing } from '../Actions/ForumActions';
 import auth from '../client.js';
+import WeatherTest from '../weather/Weather';
+import {getTemp, getCoordinates, getWeatherDescription} from '../weather/OpenWeatherMap'
 
 const customStyles = {
   content : {
@@ -76,6 +78,8 @@ class Forum extends Component {
   }
 
   render() {
+    // need to find out how to get the set the location
+    console.log('trying to get the coordinates: ', getCoordinates())
     const profile = auth.getProfile();
     return(
         <div className="row">
