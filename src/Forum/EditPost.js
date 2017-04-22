@@ -30,6 +30,7 @@ const EditPost = React.createClass({
     }
   ).then((res) => {
     console.log("Post has been successfully updated on EditPost");
+    this.getPost();
   }).catch((err) => {
     console.error("Post has not updated on EditPost: ", err);
   });
@@ -69,7 +70,6 @@ render() {
         this.editPost(id, newMessage.value, newTitle.value);
         newMessage.value = '';
         newTitle.value = '';
-        this.getPost();
       }}>submit</button>
     </div>
     )

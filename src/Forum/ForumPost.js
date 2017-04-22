@@ -31,6 +31,7 @@ const ForumPost = React.createClass({
     })
     .then((res) => {
       console.log('Successfully deleted the reply from ForumPost');
+      this.getPost();
     }).catch((err) => {
       console.error('There has been a clientside error in deleting the post in ForumJS ', err);
     });
@@ -104,7 +105,6 @@ const ForumPost = React.createClass({
                       <div className="col-md-10">
                         <button type="submit" onClick={ () => {
                           this.deletePost(reply.belongsToId, reply.replyUser.clientID);
-                          this.getPost();
                         }}>delete</button>
                         <button type="submit" onClick={ () => {
                           this.props.dispatchSetEditing(reply.message);
