@@ -41,6 +41,8 @@ const ForumPost = React.createClass({
   render() {
   const profile = auth.getProfile();
   let profilePic = {
+    height: '50px',
+    width: '50px',
     backgroundImage: 'url(' + this.props.post.profile + ')',
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
@@ -69,25 +71,26 @@ const ForumPost = React.createClass({
     title = this.props.title;
   }
 
-  let username = {
-    color: 'white',
-    fontSize: '16px',
-    fontWeight: 'bold',
-    textShadow: '-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black',
-    marginTop: '50%'
-  }
+  // let username = {
+  //   color: 'white',
+  //   fontSize: '16px',
+  //   fontWeight: 'bold',
+  //   textShadow: '-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black',
+  //   marginTop: '50%'
+  // }
 
     return(
       <div className="container-fluid">
         <div className="row" onClick = {() => {
             this.props.dispatchTogglePost(this.props.post._id);
             }} >
-          <div className="col-md-1" style={profilePic}>
-          <div style={username}>
-            { this.props.nickname }
+          <div className="col-md-1">
+            <div className="row postPicture" style={profilePic}></div>
+            <div className="row postUsername">
+              { this.props.nickname }
+            </div>
           </div>
-          </div>
-          <div className="col-md-8 offset-md-1">
+          <div className="col-md-8 offset-md-2">
             <div className="row">
               <span className="forumTitle">{ title }</span>
             </div>
@@ -97,7 +100,7 @@ const ForumPost = React.createClass({
           </div>
         </div>
           <div>
-            <div className="col-md-8 offset-md-2 test">
+            <div className="col-md-8 offset-md-2">
               {this.props.replies.map((reply, i) => {
                 if (!postType) {
                   if (profile.email === reply.replyUser.email && !this.props.editing) {

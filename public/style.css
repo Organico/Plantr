@@ -26,9 +26,17 @@ body{
   border: solid 2px transparent;
   border-radius: 2px;
 }
+
+.postUsername {
+  font-family: "Fizz";
+  font-weight: bold;
+  font-size: 20px;
+}
+.postPicture {
+}
 .test {
-/*  border: solid 1px black;
-  border-radius: 2px;*/
+  border: solid 1px black;
+  border-radius: 2px;
 }
 .nav {
   height: 20px;
@@ -43,6 +51,11 @@ body{
 @font-face {
     font-family: Lobster;
     src: url("/Lobster.otf") format("opentype");
+}
+
+@font-face {
+    font-family: Fizz;
+    src: url("/Fizz.otf") format("opentype");
 }
 
 .site {
@@ -71,7 +84,7 @@ body{
   margin-left: 10px;
 }
 .reply {
-  border: solid 5px #3B6338;
+  border: solid 1px #3B6338;
   border-radius: 10px;
 }
 .lineChart {
@@ -187,7 +200,9 @@ body{
 }
 
 .forumTitle {
+  font-family: "Fizz";
   font-weight: bold;
+  font-size: 30px;
 }
 .post {
   border: solid 1px #725746;
@@ -202,10 +217,7 @@ body{
     min-height: 50px;
     max-height: 100px;
 }
-/*.reply {
-  border: solid 2px green;
-  margin-top: 10px;
-}*/
+
 
 #addReply {
   margin-top: 10px;
