@@ -9,19 +9,27 @@ import Stats from 'stats.js';
 import OBJLoader from 'three-obj-loader'
 OBJLoader(THREE);
 import MTLLoader from 'three-mtl-loader'
+
 import TrackballControls from '../trackball';
+import PointerLockControls from 'three-pointerlock';
+
 import MouseInput from '../inputs/MouseInput';
 import HouseCube from './HouseCube';
 
 // import GrassCube from './GrassCube';
 import MaterialCube from './MaterialCube';
 import MaterialGrid from './MaterialGrid';
+
 import NewPlantModel from './NewPlantModel'
+import ThreePlantGrid from './ThreePlantGrid'
 
 import MyCube from './MyCube'
 // import PlantModel from './PlantModel'
 import MonkeyModel from './MonkeyModel'
 import ColladaLoader from 'three-collada-loader';
+
+import Ground from './Ground'
+import CubeMapTest from './CubeMapTest'
 
 
 
@@ -41,6 +49,8 @@ class Transform extends React.Component {
 
     this.state = {
       cameraPosition: new THREE.Vector3(0, 300, 1000),
+      // cameraPosition: new THREE.Vector3(0, 10, 0),
+
       cameraRotation: new THREE.Euler(),
       mouseInput: null,
       hovering: false,
@@ -89,8 +99,18 @@ class Transform extends React.Component {
         orbitCalculation(500).x,
         0,
         orbitCalculation(500).z
-      )
+      ),
+
+      // cameraPosition: new THREE.Vector3(
+      //   this.state.cameraPosition.x + 0.1,
+      //   this.state.cameraPosition.y + 0.1,
+      //   0
+      // )
+
+
+
     });
+
 
   };
 
@@ -122,7 +142,61 @@ class Transform extends React.Component {
     this.controls = controls;
     this.controls.addEventListener('change', this._onTrackballChange);
 
+    var raycaster = new THREE.Raycaster();
+    console.log("THIS IS YOUR RAYCASTER: =======", raycaster)
+    var mouse = new THREE.Vector2()
+    raycaster.setFromCamera(mouse, camera)
+    console.log("THIS IS YOUR RAYCASTER setFromCamera: =======", raycaster)
 
+    this.arrowControls = new PointerLockControls( camera );
+    console.log("Arrow Controls : ", this.arrowControls)
+    document.addEventListener('keydown', this._onKeyDown, false)
+
+    scene.add(this.arrowControls.getObject());
+
+  }
+
+  _onKeyDown = (event) => {
+    // console.log("a key is down my friend", event)
+    var speed = 5
+
+    if(event.key == "w"){
+      console.log("Move in the negative Z direction", this)
+      // this.setState({
+      //   cameraPosition: new THREE.Vector3(
+      //     0,
+      //     0,
+      //     this.state.cameraPosition.z - speed
+      //   )
+      // });
+    } else if ( event.key == "s") {
+      console.log("Move in the positive Z direction ")
+      //       this.setState({
+      //   cameraPosition: new THREE.Vector3(
+      //     0,
+      //     0,
+      //     this.state.cameraPosition.z + speed
+      //   )
+      // });
+    } else if ( event.key == "a") {
+      console.log("Move in the negative x direction")
+      // this.setState({
+      //   cameraPosition: new THREE.Vector3(
+      //     this.state.cameraPosition.x - speed,
+      //     0,
+      //     0
+      //   )
+      // });
+    } else if (event.key == "d") {
+      console.log("move in the positive x direction")
+      // this.setState({
+      //   cameraPosition: new THREE.Vector3(
+      //     this.state.cameraPosition.x + speed,
+      //     0,
+      //     0
+      //   )
+      // });
+    }
   }
 
   _onTrackballChange = () => {
@@ -172,6 +246,9 @@ class Transform extends React.Component {
 
     this.stats.update();
     this.controls.update();
+    this.arrowControls.update()
+    console.log(this.arrowControls)
+
   }
 
           //   <MyCube
@@ -238,7 +315,7 @@ class Transform extends React.Component {
             far={3000}
             ref="camera"
             position={cameraPosition}
-            lookAt={this.lookAt}
+            // lookAt={this.lookAt}
           />
           <ambientLight
             color={new THREE.Color("white")}
@@ -247,77 +324,19 @@ class Transform extends React.Component {
           <directionalLight color={0xffffff} intensity={5} position={new THREE.Vector3(1, 1, 1)} />
 
 
-
-
-
-
-
-
-
-
           <MaterialGrid />
+          <ThreePlantGrid />
 
-
-
-
-          <MaterialCube
-            width={100}
-            height={100}
-            depth={100}
-            map={"https://s3-us-west-2.amazonaws.com/ryaperry-bucket/grasslight-big.jpg"}
+          <CubeMapTest
+            width={1000}
+            height={1000}
+            depth={1000}
             position={new THREE.Vector3(
-              -10,
-              200,
+              0,
+              500,
               0
             )}
-          />
-
-
-          <NewPlantModel
-            position= {new THREE.Vector3(100,0,0)}
-            daeFile = {"https://s3-us-west-2.amazonaws.com/ryaperry-bucket/sectionize_sunflower5.dae"}
-          />
-
-          <HouseCube
-            rotation={new THREE.Vector3(0,0,0)}
-            position={new THREE.Vector3(-150,0,-900)}
-          />
-
-
-
-
-
-
-
-
-
-
-
-
-          <mesh
-            position={this.groundPosition}
-            rotation={this.groundRotation}
-            receiveShadow
-          >
-              <planeBufferGeometry
-                width={20000}
-                height={20000}
-              />
-              <meshPhongMaterial
-                color={0xffffff}
-                specular={0x111111}
-              >
-                <texture
-                  url={'https://s3-us-west-2.amazonaws.com/ryaperry-bucket/grasslight-big.jpg'}
-                  crossOrigin="*"
-                  wrapS={THREE.RepeatWrapping}
-                  wrapT={THREE.RepeatWrapping}
-                  repeat={this.groundRepeat}
-                  anisotropy={16}
-                />
-              </meshPhongMaterial>
-          </mesh>
-
+           />
 
 
         </scene>
@@ -346,4 +365,32 @@ class Transform extends React.Component {
 export default Transform;
 
 
+          // <HouseCube
+          //   rotation={new THREE.Vector3(0,0,0)}
+          //   position={new THREE.Vector3(-150,0,-900)}
+          // />
 
+          // <Ground
+          //   position={this.groundPosition}
+          //   rotation={this.groundRotation}
+          //   width={10000}
+          //   height={10000}
+          //   url={'https://s3-us-west-2.amazonaws.com/ryaperry-bucket/grasslight-big.jpg'}
+          // />
+
+          // <MaterialCube
+          //  width={100}
+          //  height={100}
+          //  depth={100}
+          //  map={"https://s3-us-west-2.amazonaws.com/ryaperry-bucket/grasslight-big.jpg"}
+          //  position={new THREE.Vector3(
+          //    -10,
+          //    200,
+          //    0
+          //  )}
+          // />
+
+          // <NewPlantModel
+          //  position= {new THREE.Vector3(100,0,0)}
+          //  daeFile = {"https://s3-us-west-2.amazonaws.com/ryaperry-bucket/tomatoeTest.dae"}
+          // />

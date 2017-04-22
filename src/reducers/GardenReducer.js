@@ -45,6 +45,7 @@ const initialGardenState = {
       'x':50,
       'y':600,
       'img':'https://c1.staticflickr.com/3/2909/33168957064_a7ef238410_o.png',
+      'model':'https://s3-us-west-2.amazonaws.com/ryaperry-bucket/plantModels/sunflowerModel.dae',
       'isDraggable': true,
        'packetImg' : '/seedPacketIMGs/genericResized.png',
        'price': 20,
@@ -69,6 +70,7 @@ const initialGardenState = {
       'x':100,
       'y':600,
       'img': 'https://c1.staticflickr.com/3/2844/33627640530_f866a32b60_o.png',
+      'model':'https://s3-us-west-2.amazonaws.com/ryaperry-bucket/plantModels/tomatoeModel.dae',
       'isDraggable': true,
        'packetImg' : '/seedPacketIMGs/genericResized.png',
       'price': 15,
@@ -91,6 +93,7 @@ const initialGardenState = {
       'x':150,
       'y':600,
       'img':'https://s3-us-west-2.amazonaws.com/ryaperry-bucket/plantImages/tomatoePlant.png',
+      'model':'https://s3-us-west-2.amazonaws.com/ryaperry-bucket/plantModels/tomatoeModel.dae',
       'isDraggable': true,
       'packetImg' : '/seedPacketIMGs/KaleResized.png',
        'price': 10,
@@ -706,7 +709,7 @@ const initialGardenState = {
     { 'name': 'grass',
       'x':104,
       'y':50,
-      'img':"https://s3-us-west-2.amazonaws.com/ryaperry-bucket/gardenTextures/grasslight-big.jpg",
+      'img':"https://s3-us-west-2.amazonaws.com/ryaperry-bucket/gardenTextures/grassTexture.jpg",
       'stroke': 'black'
 
       },

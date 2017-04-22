@@ -11,7 +11,14 @@ const PlantGrid = React.createClass({
       return (
         <Layer >
           {this.props.plantGrid.map((plantSquare, i) =>
-            <Plant key={i} x={plantSquare.x} y={plantSquare.y} img={plantSquare.img} plantStats ={plantSquare} isDraggable={plantSquare.isDraggable}/>)
+            <Plant key={i}
+              x={plantSquare.x}
+              y={plantSquare.y}
+              img={plantSquare.img}
+              model={plantSquare.model}
+              plantStats ={plantSquare}
+              isDraggable={plantSquare.isDraggable}
+              />)
           }
         </Layer>
 
