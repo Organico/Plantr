@@ -406,7 +406,7 @@ const initialGardenState = {
       'type': 'vegetable',
       'x':450,
       'y':50,
-      'img': 'https://c1.staticflickr.com/3/2878/33299363694_29057af863_o.png',
+      'img': 'https://c1.staticflickr.com/3/2946/34142450326_098f303eca_o.png',
       'isDraggable': false,
        'packetImg' : '/seedPacketIMGs/PumpkinResized.png',
       'price': 10,
