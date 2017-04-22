@@ -45,6 +45,7 @@
     "react-dnd-html5-backend": "^2.3.0",
     "react-dom": "^15.5.4",
     "react-konva": "^1.1.1",
+    "react-modal": "^1.7.7",
     "react-portal-tooltip": "^1.1.5",
     "react-redux": "^5.0.3",
     "react-router": "^4.0.0",
