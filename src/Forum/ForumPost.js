@@ -2,8 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import auth from '../client.js';
-import { setPosts, togglePost } from '../Actions/ForumActions';
+import { setPosts, togglePost, setEditing } from '../Actions/ForumActions';
 import ReplyPost from './ReplyPost';
+import EditReply from './EditReply';
 import Replies from './Replies';
 import axios from 'axios';
 
@@ -24,12 +25,12 @@ const ForumPost = React.createClass({
    },
 
   deletePost(id, replyId) {
-    axios.put('/api/forum/' + id + '/' + replyId, {
+    axios.delete('/api/forum/' + id + '/' + replyId, {
       userId: id,
       replyId: replyId
     })
     .then((res) => {
-      console.log('GREAT SUCCESS')
+      console.log('Successfully deleted the reply from ForumPost');
     }).catch((err) => {
       console.error('There has been a clientside error in deleting the post in ForumJS ', err);
     });
@@ -97,7 +98,7 @@ const ForumPost = React.createClass({
             <div className="col-md-8 offset-md-2 test">
               {this.props.replies.map((reply, i) => {
                 if (!postType) {
-                  if (profile.email === reply.replyUser.email) {
+                  if (profile.email === reply.replyUser.email && !this.props.editing) {
                   return <div>
                     <Replies key={i} reply={reply} />
                       <div className="col-md-10">
@@ -105,9 +106,16 @@ const ForumPost = React.createClass({
                           this.deletePost(reply.belongsToId, reply.replyUser.clientID);
                           this.getPost();
                         }}>delete</button>
+                        <button type="submit" onClick={ () => {
+                          this.props.dispatchSetEditing(reply.message);
+                        }}>edit</button>
                     </div>
                   </div>
-                   } else {
+                   } else if (profile.email === reply.replyUser.email && this.props.editing && (reply.message === this.props.messageToEdit)) {
+                    return <div className="post">
+                      <EditReply replyId={reply.replyUser.clientID} id={reply.belongsToId} message={reply.message} />
+                    </div>
+                   }else {
                     return <Replies key={i} reply={reply} />
                    }
                 }
@@ -129,11 +137,12 @@ const ForumPost = React.createClass({
 
 const mapStateToProps = (state) => {
   return {
+    messageToEdit: state.forumReducer.messageToEdit,
     posts: state.forumReducer.posts,
-    currentPost: state.forumReducer.currentPost
+    currentPost: state.forumReducer.currentPost,
+    editing: state.forumReducer.editing
   };
 };
-
 const mapDispatchToProps = (dispatch) => {
   return {
 
@@ -142,6 +151,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     dispatchSetPost(message) {
       dispatch(setPosts(message));
+    },
+    dispatchSetEditing(editing) {
+      dispatch(setEditing(editing));
     }
   };
 };

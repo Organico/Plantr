@@ -157,10 +157,11 @@ app.post('/api/forum', (req, res, next) => {
 
 
 /*--------------------PUT REQUEST-----------------------------------------*/
+// posting replies on the server
 app.put('/api/forum', (req, res, next) => {
   Forum.findById(req.body.id, function(err, result) {
       if (err) {
-        console.log('error')
+        console.error('There has been a serverside error updating the replies: ', err)
       } else {
         result.replies.push(req.body.replies);
         result.save(function(err) {
@@ -176,20 +177,55 @@ app.put('/api/forum', (req, res, next) => {
   });
 });
 
+// updating posts on the server
 app.put('/api/forum/:id', (req, res, next) => {
   Forum.findById(req.body.id, function(err, result) {
       if (err) {
-        console.log('error')
+        console.error('There has been a serverside error updating the posts: ', err)
       } else {
-        console.log('UPDATING RESULT ON SERVER: ', result);
-      //   result.replies.push(req.body.replies);
-      //   result.save(function(err) {
+        result.message = req.body.message;
+        result.title = req.body.title;
+        result.save(function(err) {
+        if (err) {
+          console.error('error');
+        }
+        else {
+          res.send(200, result);
+          console.log('Successfully updated the post on the server');
+        }
+      });
+    }
+  });
+});
+
+// updating replies on the server
+app.put('/api/forum/:id/:replyId', function(req, res, next) {
+  console.log('THE PUT REQUEST IN ITS FIRST STAGE')
+  let modifiedId;
+  Forum.findById(req.params.id, function(err, result) {
+    console.log('FOUND THE ID, here is the result: ', result.replies);
+    if (err) {
+      console.error('There was an error deleting your post: ', err)
+    } else {
+      result.replies.forEach((key, i) => {
+        console.log('HERE IS THE KEY USER: ', key.replyUser)
+      })
+      console.log('THERE WAS NO ERROR!!!!');
+      // result.replies.forEach( (key, i) => {
+      // IF STATEMENT NEEDS TO BE ABOUT CLIENT AND MESSAGE
+      //   if (key['replyUser']['clientID'] === req.params.replyId ) {
+      //     // modifiedId = i;
+      //     console.log('THE IF STATEMENT IS TRUE')
+      //   }
+      // });
+      // // result.replies(modifiedId, 1);
+      // result.save(function(err) {
       //   if (err) {
-      //     console.error('error');
+      //     console.error('There was an error deleting your post from the server: ', err);
       //   }
       //   else {
       //     res.send(200, result);
-      //     console.log(result);
+      //     console.log('successfully deleted post on the serverside');
       //   }
       // });
     }
@@ -197,7 +233,7 @@ app.put('/api/forum/:id', (req, res, next) => {
 });
 
 /*--------------------DELETE REQUEST-----------------------------------------*/
-
+// deleting posts made by users
 app.delete('/api/forum/:id', function(req, res, next) {
   Forum.findByIdAndRemove(req.params.id, function(err, result) {
     if (err) {
@@ -208,11 +244,10 @@ app.delete('/api/forum/:id', function(req, res, next) {
   });
 });
 
-//Deleting reply posts
-app.put('/api/forum/:id/:replyId', function(req, res, next) {
-  var deleteId;
+// deleting replies made by users
+app.delete('/api/forum/:id/:replyId', function(req, res, next) {
+  let deleteId;
   Forum.findById(req.params.id, function(err, result) {
-    console.log('FOUND THE USERID ', result.replies.length)
     if (err) {
       console.error('There was an error deleting your post: ', err)
     } else {
@@ -224,11 +259,11 @@ app.put('/api/forum/:id/:replyId', function(req, res, next) {
       result.replies.splice(deleteId, 1);
       result.save(function(err) {
         if (err) {
-          console.error('error deleting SERVER: ', err);
+          console.error('There was an error deleting your post from the server: ', err);
         }
         else {
           res.send(200, result);
-          console.log('SUCCESSFULLY DELETED');
+          console.log('successfully deleted post on the serverside');
         }
       });
     }

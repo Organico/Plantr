@@ -21,12 +21,12 @@ const EditPost = React.createClass({
     });
   },
 
- editPost(id, message, title) {
-  axios.put('/api/forum/' + id,
+ editPost(id, replyId, message) {
+  axios.put('/api/forum/' + id + '/' + replyId,
     {
       id: id,
+      replyId: replyId,
       message: message,
-      title: title
     }
   ).then((res) => {
     console.log("Post has been successfully updated on EditPost");
@@ -50,10 +50,10 @@ render() {
     textShadow: '-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black',
     marginTop: '50%'
   }
-
+  console.log('THIS PROPS IN EDITREPLY ', this.props);
   let id = this.props.id;
+  let replyId = this.props.replyId
   let newMessage;
-  let newTitle;
   return(
     <div className="row">
       <div className="col-md-1" style={profilePic}>
@@ -61,14 +61,11 @@ render() {
           { profile.nickname }
         </div>
       </div>
-      <input ref={(title) => newTitle = title } type="string" name="newTitle" defaultValue={JSON.parse(this.props.title)}/>
       <input ref={(message) => newMessage = message } type="string" name="newMessage" defaultValue={JSON.parse(this.props.message)}/>
       <button type="submit" onClick ={ () => {
         newMessage.value = JSON.stringify(newMessage.value);
-        newTitle.value = JSON.stringify(newTitle.value);
-        this.editPost(id, newMessage.value, newTitle.value);
+        this.editPost(id, replyId, newMessage.value);
         newMessage.value = '';
-        newTitle.value = '';
         this.getPost();
       }}>submit</button>
     </div>

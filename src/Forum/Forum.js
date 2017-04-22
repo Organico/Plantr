@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom'
 import { connect } from 'react-redux';
 import ForumPost from './ForumPost';
@@ -8,7 +8,7 @@ import axios from 'axios';
 import { setPosts, setEditing } from '../Actions/ForumActions';
 import auth from '../client.js';
 
-const Forum = React.createClass({
+class Forum extends Component {
 
    getPost() {
     axios.get('/api/forum')
@@ -22,7 +22,7 @@ const Forum = React.createClass({
     }).catch((err) => {
       console.error('There has been a clientside error in getting the post in ForumJS ', err);
     });
-  },
+  }
 
    deletePost(id) {
     axios.delete('/api/forum/' + id, {
@@ -33,15 +33,16 @@ const Forum = React.createClass({
     }).catch((err) => {
       console.error('There has been a clientside error in deleting the post in ForumJS ', err);
     });
-  },
+  }
+
+  componentDidMount() {
+    this.getPost();
+  }
 
   render() {
     const profile = auth.getProfile();
     return(
         <div className="row">
-          <button type="submit" onClick={ () => {
-            this.getPost();
-          }} >Get Request Here</button>
           <div className="col-md-6 offset-md-2">
             <CreateNewPost />
           </div>
@@ -62,10 +63,9 @@ const Forum = React.createClass({
                </div>
               } else if (profile.email === post.email && this.props.editing && (post.message === this.props.messageToEdit)) {
                   return <div className="post">
-                    <EditPost message={post.message} title={post.title} />
+                    <EditPost id={post._id} message={post.message} title={post.title} />
                     <button type="submit" onClick={ () => {
                       this.props.dispatchSetEditing();
-                      this.deletePost(post._id);
                       this.getPost();
                     }}>delete</button>
                   </div>
@@ -78,7 +78,7 @@ const Forum = React.createClass({
         </div>
     )
   }
-})
+}
 
 const mapStateToProps = (state) => {
   return {

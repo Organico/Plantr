@@ -15,6 +15,7 @@ const initialForumState = {
       title: '',
       message: '',
       replies: [],
+      editing: false
      }
 }
 
@@ -52,9 +53,20 @@ const setEditing = (state, action) => {
   const newState = {};
 
   Object.assign(newState, state, { editing: !state.editing, messageToEdit: action.editing});
-
   return newState;
 };
+
+// const setReplyEditing = (state, action) => {
+//   console.log('THE OLD STATE: ', state);
+//   console.log('THE OLD ACTION: ', action);
+//   const newState = {};
+//   const newPost = { editing: !action.message.editing, title: action.message.title, message: action.message.message };
+
+//   Object.assign(newState, state, {currentPost: newPost});
+//   console.log('THE NEW STATE: ', newState);
+//   console.log('THE NEW ACTION: ', action.message);
+//   return newState;
+// };
 
 const setPosts = (state, action) => {
   const newState = {};
@@ -83,6 +95,8 @@ function forumReducer(state = initialForumState, action) {
     return setPosts(state, action);
   case 'SET_EDITING':
     return setEditing(state, action);
+  // case 'SET_REPLY_EDITING':
+  //   return setReplyEditing(state, action);
   case 'TOGGLE_POST':
     return togglePost(state, action);
   case 'ADD_REPLY':
