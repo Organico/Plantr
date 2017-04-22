@@ -51,8 +51,9 @@ const togglePost = (state, action) => {
 
 const setEditing = (state, action) => {
   const newState = {};
-
+  console.log('THIS IS THE OLD STATE: ', state)
   Object.assign(newState, state, { editing: !state.editing, messageToEdit: action.editing});
+  console.log('THIS IS THE NEW STATE: ', newState);
   return newState;
 };
 
