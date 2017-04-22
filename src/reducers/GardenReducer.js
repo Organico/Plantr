@@ -14,6 +14,12 @@ const initialGardenState = {
 
   pastPlantGridStates: [],
   futurePlantGrideStates: [],
+  gardenStats: [
+  "numberPlants": 0,
+  "squareFootage":0,
+  "soilSquareFootage":0,
+  "seedPacketCosts": 0
+  ],
 
   seedPacket:{
     'name': 'tomato',
@@ -95,7 +101,7 @@ const initialGardenState = {
       'img':'https://s3-us-west-2.amazonaws.com/ryaperry-bucket/plantImages/tomatoePlant.png',
       'model':'https://s3-us-west-2.amazonaws.com/ryaperry-bucket/plantModels/tomatoeModel.dae',
       'isDraggable': true,
-      'packetImg' : '/seedPacketIMGs/KaleResized.png',
+      'packetImg' : '/seedPacketIMGs/tomatoResized.png',
        'price': 10,
       'quantity': 10,
       'season': "Spring",
@@ -118,7 +124,7 @@ const initialGardenState = {
       'y':600,
       'img': 'https://c1.staticflickr.com/3/2939/33200675713_ea06c54442_o.png',
       'isDraggable': true,
-      'packetImg' : '/seedPacketIMGs/KaleResized.png',
+      'packetImg' : '/seedPacketIMGs/beansResized.png',
        'price': 12,
       'quantity': 32,
       'season': "Spring",
@@ -142,7 +148,7 @@ const initialGardenState = {
       'y':600,
       'img':'https://c1.staticflickr.com/3/2884/33883916601_9c04b38e73_o.png',
       'isDraggable': true,
-      'packetImg' : '/seedPacketIMGs/KaleResized.png',
+      'packetImg' : '/seedPacketIMGs/OnionResized.png',
        'price': 10,
       'quantity': 10,
       'season': "Spring",
@@ -166,7 +172,7 @@ const initialGardenState = {
       'y':600,
       'img':'https://c1.staticflickr.com/3/2810/33856016232_8ed446a91d_o.png',
       'isDraggable': true,
-      'packetImg' : '/seedPacketIMGs/KaleResized.png',
+      'packetImg' : '/seedPacketIMGs/OkraResized.png',
        'price': 10,
       'quantity': 10,
       'season': "Spring",
@@ -216,7 +222,7 @@ const initialGardenState = {
       'y':50,
       'img':'https://c1.staticflickr.com/3/2810/33856016232_8ed446a91d_o.png',
       'isDraggable': false,
-      'packetImg' : '/seedPacketIMGs/GenericResized.png',
+      'packetImg' : '/seedPacketIMGs/genericResized.png',
        'price': 10,
       'quantity': 10,
       'season': "Spring",
@@ -360,7 +366,7 @@ const initialGardenState = {
       'y':50,
       'img': 'https://c1.staticflickr.com/3/2844/33627640530_f866a32b60_o.png',
       'isDraggable': false,
-       'packetImg' : '/seedPacketIMGs/KaleResized.png',
+       'packetImg' : '/seedPacketIMGs/genericResized.png',
       'price': 10,
       'quantity': 10,
       'season': "Spring",
@@ -496,13 +502,6 @@ const initialGardenState = {
         {name: 'Harvest \r End', uv: 65}
       ],
     }
-
-
-
-
-
-
-
   ],
 
 
@@ -537,7 +536,7 @@ const initialGardenState = {
       'y':50,
       'img':'https://s3-us-west-2.amazonaws.com/ryaperry-bucket/plantImages/tomatoePlant.png',
       'isDraggable': true,
-      'packetImg' : '/seedPacketIMGs/KaleResized.png',
+      'packetImg' : '/seedPacketIMGs/tomatoResized.png',
        'price': 10,
       'quantity': 10,
       'season': "Spring",
@@ -928,7 +927,6 @@ const addPlantToPlantGrid = (state, action) => {
   }
 
   if(!plantToMoveIndex){
-    console.log("SAMY IN FIRST")
     console.log("THIS IS THE PLANT!!!", action.plant)
     newPlantGrid.push(action.plant);
   Object.assign(newState, state, {pastPlantGridStates: oldPlantGrid, plantGrid: newPlantGrid});
@@ -936,14 +934,6 @@ const addPlantToPlantGrid = (state, action) => {
     Object.assign(newState, state, {plantGrid: newPlantGrid});
   }
 
-
-
-
-
-
-
-  console.log('(before) state: ', state);
-  console.log('(after) state: ', newState);
 
   return newState
 }
@@ -1010,8 +1000,6 @@ const addToShelf= (state, action) => {
     }
   }
 
-  console.log("New shelf before changes", newShelfObject)
-
   var lastObject = plantShelfCopy[plantShelfCopy.length-1];
   var lastObjectX = lastObject['x'];
   var lastObjectY = lastObject['y'];
@@ -1038,7 +1026,7 @@ const addToShelf= (state, action) => {
   return newState;
 };
 
-const undo= (state, action) => {
+const undo = (state, action) => {
   const newState = {};
   var futurePlantGrid = state.plantGrid.slice();
   var oldPlantGrid = state.pastPlantGridStates.slice();

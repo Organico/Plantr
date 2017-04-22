@@ -131,9 +131,13 @@ class Plant extends React.Component {
         img: this.props.img,
         model: this.props.model,
         isDraggable: false
+        plant: this.props.plant
+
       };
     }
       console.log("PLANT GOING INTO dispatchAddPlantToPlantGrid", plant)
+
+    console.log("Samy, here is the plant my friend: ", plant.plant)
 
 
       this.props.dispatchAddPlantToPlantGrid(plant)
@@ -142,7 +146,6 @@ class Plant extends React.Component {
     render() {
       let newImage = new Image();
       newImage.src = this.props.img;
-      console.log("This.props is", this.props)
 
 
       var plantthing = this.props.plantStats;
