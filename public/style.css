@@ -63,6 +63,9 @@ body{
   margin-top: 130px;
   color: white;
 }
+#navbrand {
+  color: #FF8400;
+}
 .navText {
   color: #E7E1D5;
   font-family: "Lobster";
@@ -98,7 +101,6 @@ body{
 }
 #profilePic {
   height: 500px;
-  background-image: url("/profilebackground.png");
   background-repeat: no-repeat;
   background-size: 100%;
 }
@@ -121,10 +123,11 @@ body{
 }
 .userRecent {
   background-color: white;
-  border: solid 5px white;
+  border: solid 1px #694118;
   border-radius: 10px;
   color: black;
   margin-top: 10px;
+  height: 150px;
 }
 .userRecentSpan {
   text-align: center;

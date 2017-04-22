@@ -29,7 +29,7 @@ const RecentPosts = React.createClass({
     const profile = auth.getProfile();
     return (
       <div className="row">
-        <div className="col-md-6 offset-md-3 right userRecent">
+        <div className="col-md-12 offset-md-2 right userRecent">
           <div className="userRecentSpan"> Recent Posts </div>
           <button type="submit" onClick={ () => {
               this.getPost();
