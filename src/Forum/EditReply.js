@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom'
 import { connect } from 'react-redux';
 import axios from 'axios';
-import { setPosts } from '../Actions/ForumActions';
+import { setPosts, setEditing } from '../Actions/ForumActions';
 import auth from '../client.js';
 
 const EditPost = React.createClass({
@@ -32,6 +32,7 @@ const EditPost = React.createClass({
     }
   ).then((res) => {
     console.log("Post has been successfully updated on EditPost");
+    this.props.dispatchSetEditing();
     this.getPost();
   }).catch((err) => {
     console.error("Post has not updated on EditPost: ", err);
@@ -87,6 +88,9 @@ const mapDispatchToProps = (dispatch) => {
 
     dispatchSetPost(message) {
       dispatch(setPosts(message));
+    },
+    dispatchSetEditing(editing) {
+      dispatch(setEditing(editing));
     }
   };
 };
