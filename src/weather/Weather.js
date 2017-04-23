@@ -11,7 +11,6 @@ class WeatherTest extends React.Component {
 
   constructor(props){
     super(props)
-
   }
 
   getTempData(requestUrl){
@@ -128,7 +127,7 @@ class WeatherTest extends React.Component {
   }
 
   componentDidMount(){
-    this.getWeatherData("Fishers");
+    this.getWeatherData("Portland, ME");
   }
 
   render() {
