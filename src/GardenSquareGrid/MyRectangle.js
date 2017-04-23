@@ -10,15 +10,10 @@ import {Layer, Rect, Stage, Group} from 'react-konva';
 class MyRect extends React.Component {
     constructor(...args) {
       super(...args);
-      this.handleClick = this.handleClick.bind(this);
 
 
     }
-    handleClick() {
-      // this.setState({
-      //   color: Konva.Util.getRandomColor()
-      // });
-    }
+
     render() {
         return (
             <Rect

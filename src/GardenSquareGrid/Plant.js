@@ -60,8 +60,8 @@ class Plant extends React.Component {
       var newX;
 
 
-      var roundedPosY= Math.round(pos.y/50)*50-25
-      var roundedPosX= Math.round(pos.x/50)*50-25
+      var roundedPosY= Math.round(pos.y/50)*50
+      var roundedPosX= Math.round(pos.x/50)*50
       newY = roundedPosY;
       newX = roundedPosX;
 
@@ -114,8 +114,8 @@ class Plant extends React.Component {
     for (var i = 0; i<coordinates.length; i++){
       var coordinateToCheck = coordinates[i];
 
-      var coordinateToCheckX = coordinateToCheck['x']+25;
-      var coordinateToCheckY = coordinateToCheck['y']+25;
+      var coordinateToCheckX = coordinateToCheck['x'];
+      var coordinateToCheckY = coordinateToCheck['y'];
 
       if (this.state.posX ===coordinateToCheckX && this.state.posY === coordinateToCheckY) {
         isWithinGridBounds = true;
@@ -130,7 +130,7 @@ class Plant extends React.Component {
         y: this.state.posY,
         img: this.props.img,
         model: this.props.model,
-        isDraggable: false
+        isDraggable: false,
         plant: this.props.plant
 
       };

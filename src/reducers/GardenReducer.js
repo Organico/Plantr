@@ -9,6 +9,7 @@ const initialGardenState = {
   location: [0, 2],
   isDragging: false,
   tooltipOpen: false,
+  colladaCache: {},
   gardenXYCoordinates:[],
   selectedTitle: "https://c1.staticflickr.com/3/2923/33742489190_3e30fca5f7_o.jpg",
 
@@ -824,8 +825,8 @@ const setGardenParameters = (state, action) => {
   for (var i = 1; i < action.height + 1; i++ ) {
     for (var j =1; j < action.width + 1; j++) {
       var squareCounter = "square" + idCounter;
-      gardenGridArray.push({'x': i * 50, 'y': j * 50, 'img': "https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg"});
-      newGardenXYCoordinates.push({'x': i * 50, 'y': j * 50})
+      gardenGridArray.push({'x': i * 50+25, 'y': j * 50+25, 'img': "https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg"});
+      newGardenXYCoordinates.push({'x': i * 50+25, 'y': j * 50+25})
       idCounter++;
     }
   }

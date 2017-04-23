@@ -13,22 +13,36 @@ class ThreePlantGrid extends React.Component {
     constructor(props, context) {
       super(props,context)
       this.plantGrid = store.getState().gardenReducer.plantGrid
+
     }
 
-    //daeFile = {"https://s3-us-west-2.amazonaws.com/ryaperry-bucket/sectionize_sunflower5.dae"}
 
     render() {
       return (
         <group>
-          {this.plantGrid.map((newPlantModel, i) =>
-            <NewPlantModel key={i}
+          {this.plantGrid.map((newPlantModel, i) => {
+            if (newPlantModel.model in this.cache) {
+              return(<NewPlantModel key={i}
+              position={new THREE.Vector3(
+                newPlantModel.x * 2 - 500,
+                0,
+                newPlantModel.y * 2 - 500
+              )}
+              daeFile = {this.cache[newPlantModel.model]}
+            />)
+            } else {
+                let newPlantModelDae = newPlantModel.model;
+                this.cache[newPlantModelDae] = newPlantModelDae;
+               return(<NewPlantModel key={i}
               position={new THREE.Vector3(
                 newPlantModel.x * 2 - 500,
                 0,
                 newPlantModel.y * 2 - 500
               )}
               daeFile = {newPlantModel.model}
-            />
+            />)
+             }
+             }
           )}
         </group>
       )
