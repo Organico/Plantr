@@ -41,7 +41,8 @@ class Plant extends React.Component {
         'packetImg' : e.target.attrs.plant.packetImg
     }
      let seedGraph = e.target.attrs.plant.growthGraph;
-    console.log("**********THIS IS THE GROWTH GRAPH", seedObject)
+     console.log("HERE", e.target.attrs.plant)
+    console.log("**********THIS IS THE GROWTH GRAPH", seedGraph)
          this.props.dispatchSetGrowthGraph(seedGraph);
 
      this.props.dispatchSetSeedPacket(seedObject);
@@ -114,15 +115,15 @@ class Plant extends React.Component {
     for (var i = 0; i<coordinates.length; i++){
       var coordinateToCheck = coordinates[i];
 
-      var coordinateToCheckX = coordinateToCheck['x'];
-      var coordinateToCheckY = coordinateToCheck['y'];
+      var coordinateToCheckX = coordinateToCheck['x']+25;
+      var coordinateToCheckY = coordinateToCheck['y']+25;
 
       if (this.state.posX ===coordinateToCheckX && this.state.posY === coordinateToCheckY) {
         isWithinGridBounds = true;
         break;
       }
     }
-
+    console.log("The plant's x value is ", this.state.posX)
 
     if(isWithinGridBounds) {
        var plant = {
@@ -134,13 +135,10 @@ class Plant extends React.Component {
         plant: this.props.plant
 
       };
-    }
-      console.log("PLANT GOING INTO dispatchAddPlantToPlantGrid", plant)
-
-    console.log("Samy, here is the plant my friend: ", plant.plant)
-
-
       this.props.dispatchAddPlantToPlantGrid(plant)
+    }
+
+
     }
 
     render() {

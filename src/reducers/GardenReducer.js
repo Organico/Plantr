@@ -15,12 +15,19 @@ const initialGardenState = {
 
   pastPlantGridStates: [],
   futurePlantGrideStates: [],
-  gardenStats: [
+  analytics: {
   "numberPlants": 0,
   "squareFootage":0,
   "soilSquareFootage":0,
-  "seedPacketCosts": 0
-  ],
+  "seedPacketCosts": 0,
+  "numSeedPackets": 0,
+  "totalCost": 0,
+  "totalNumberOfSeedPackets": 0,
+  "plantLibrary": {},
+  "numFruits": 0,
+  "numVeggies": 0,
+  "numFlowers": 0
+  },
 
   seedPacket:{
     'name': 'tomato',
@@ -90,9 +97,10 @@ const initialGardenState = {
       'extremeWarning':[0,45],
       'growthGraph': [
         {name: 'Sow', uv: 0},
-        {name: 'Seedlings \r Emerge', uv: 6},
-        {name: 'Harvest', uv: 42},
-        {name: 'Harvest \r End', uv: 54}
+        {name: 'Seedlings Emerge', uv: 7},
+        {name: 'Bloom Start', uv: 45},
+        {name: 'Harvest', uv: 50},
+        {name: 'End', uv: 65}
       ],
     },
     { 'name': 'tomato',
@@ -918,6 +926,9 @@ const addPlantToPlantGrid = (state, action) => {
   var oldPlantGrid = plantGrid.slice();
   var newPlantGrid = plantGrid.slice();
 
+  var newAnalytics = {};
+  Object.assign(newAnalytics, state.analytics);
+
 
   for(var i = 0; i < state.plantGrid.length; i++){
     var individualPlant = state.plantGrid[i];
@@ -927,10 +938,59 @@ const addPlantToPlantGrid = (state, action) => {
     }
   }
 
+  console.log("Here is the new analytics ", newAnalytics);
+
+  //   analytics: [
+  // "numberPlants": 0,
+  // "squareFootage":0,
+  // "soilSquareFootage":0,
+  // "seedPacketCosts": 0,
+  // "numSeedPackets": 0,
+  // "totalCost": 0,
+  // "totalNumberOfSeedPackets": 0,
+  // "plantLibrary": {}
+  // "numFruits": 0,
+  // "numVeggies": 0,
+  // "numFlowers": 0
+  // ],
+
+
+  /*Analytics done at the same time a plant is added to the plant grid*/
+
+  var generateAnalytics = function(plantToBeAdded) {
+    //increment the number of that plant if already in the library
+    console.log("INSIDE GENERATE ANALYTICS, ",plantToBeAdded)
+    console.log("This is newAnalytics", newAnalytics);
+
+    if (newAnalytics["plantLibrary"][plantToBeAdded.plant.name]){
+      console.log("WE ALREADY HAVE THIS PLANT", plantToBeAdded.plant.name)
+      newAnalytics["plantLibrary"][plantToBeAdded.plant.name]["quantity"]+=1;
+    } else {
+      //if plant has yet been added, instantiate a key value pair
+
+      newAnalytics["plantLibrary"][plantToBeAdded.plant.name] = {};
+      newAnalytics["plantLibrary"][plantToBeAdded.plant.name]["quantity"]=1;
+      newAnalytics["totalCost"]+=plantToBeAdded.plant.price;
+      newAnalytics["numSeedPackets"]+=1;
+    }
+
+    if (plantToBeAdded.plant.type === "fruit"){
+      newAnalytics["numFruits"]+=1;
+    } else if (plantToBeAdded.plant.type ==="flower"){
+      newAnalytics["numFlowers"]+=1;
+    } else {
+      newAnalytics["numVeggies"]+=1;
+    }
+  }
+
+  /*Add the plant if there is no plant there already*/
   if(!plantToMoveIndex){
     console.log("THIS IS THE PLANT!!!", action.plant)
     newPlantGrid.push(action.plant);
-  Object.assign(newState, state, {pastPlantGridStates: oldPlantGrid, plantGrid: newPlantGrid});
+    console.log("The old analytics", state.analytics);
+    generateAnalytics(action.plant);
+    console.log("The new analytics is ", newAnalytics);
+  Object.assign(newState, state, {pastPlantGridStates: oldPlantGrid, plantGrid: newPlantGrid, analytics: newAnalytics});
   } else {
     Object.assign(newState, state, {plantGrid: newPlantGrid});
   }
