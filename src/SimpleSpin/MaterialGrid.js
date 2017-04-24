@@ -21,7 +21,8 @@ class MaterialGrid extends React.Component {
       return (
         <group>
           {this.gardenGrid.map((materialCube, i) =>
-            <MaterialCube key={i}
+            <MaterialCube
+            key={i}
               width={100}
               height={20}
               depth={100}

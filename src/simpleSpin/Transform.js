@@ -32,11 +32,24 @@ import Ground from './Ground'
 import CubeMapTest from './CubeMapTest'
 
 
+// let vrDevice = null;
 
-// import EffectComposer from 'three-effectcomposer';
-// console.log("EffectComposer: ", EffectComposer)
-// EffectComposer(THREE);
-// console.log("EffectComposer: ", EffectComposer)
+// navigator.vr.getDevices().then(devices => {
+//   if (devices.length > 0) {
+//     // Use the first device in the array if one is available. If multiple
+//     // devices are present, you may want to provide the user a way of choosing
+//     // which device to use.
+//     vrDevice = devices[0];
+//     OnVRAvailable();
+//   } else {
+//     // Could not find any VR hardware connected.
+//   }
+// }, err => {
+//   // An error occurred querying VR hardware. May be the result of blocked
+//   // permissions by a parent frame.
+// });
+
+console.log(navigator)
 
 class Transform extends React.Component {
   static propTypes = {
