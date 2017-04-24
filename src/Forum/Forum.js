@@ -8,8 +8,7 @@ import CreateNewPost from './CreateNewPost';
 import axios from 'axios';
 import { setPosts, setEditing } from '../Actions/ForumActions';
 import auth from '../client.js';
-import WeatherTest from '../weather/Weather';
-import {getTemp, getCoordinates, getWeatherDescription} from '../weather/OpenWeatherMap'
+import Ajax from 'react-ajax';
 
 const customStyles = {
   content : {
@@ -21,6 +20,8 @@ const customStyles = {
     transform             : 'translate(-50%, -50%)'
   }
 };
+
+const WUNDERGROUND_KEY = "b56f2c0800fdf6e4";
 
 class Forum extends Component {
   constructor() {
@@ -47,6 +48,67 @@ class Forum extends Component {
   closeModal() {
     this.setState({modalIsOpen: false});
   }
+
+  putRequest() {
+    Ajax({
+      type: 'GET',
+      url: 'https://phzmapi.org/97214.json',
+      dataType: 'json',
+      data: { zone : zone },
+      success: function(data) {
+        console.log(data)
+      }
+    }).bind(this)
+ }
+  //   axios.get('https://phzmapi.org/97214.json')
+  //   .then((res) => {
+  //     console.log('res here', res);
+  //   }).catch(err => {
+  //     console.error('error is: ', err)
+  //   })
+  // }
+    // var initialize = function() {
+    //     geocoder = new google.maps.Geocoder();
+    //     var latlng = new google.maps.LatLng(-34.397, 150.644);
+    //     var mapOptions = {
+    //       zoom: 8,
+    //       center: latlng
+    //     }
+    //     map = new google.maps.Map(document.getElementById('map'), mapOptions);
+    //   };
+
+    // codeAddress() {
+    //   geocoder = new google.maps.Geocoder();
+    //   var address = document.getElementById('address').value;
+    //   geocoder.geocode( { 'address': address}, function(results, status) {
+    //     if (status == 'OK') {
+    //       map.setCenter(results[0].geometry.location);
+    //       var marker = new google.maps.Marker({
+    //           map: map,
+    //           position: results[0].geometry.location
+    //       });
+    //       return results
+    //     } else {
+    //       alert('Geocode was not successful for the following reason: ' + status);
+    //     }
+    //   });
+    // }
+
+// checks the location, returns the lat & long
+  check () {
+    fetch("https://ipinfo.io/json")
+      .then(res => res.json())
+      .then(ip => {
+          let crd = this.state.coordinates; //***Turns into ==> this.props.coordinates
+          crd = crd || {
+            latitude: +ip.loc.split(",")[0],
+            longitude: +ip.loc.split(",")[1]
+          }
+          console.log('this is the CRD: ', crd);
+          console.log('GOOGLE API AIzaSyA6vXqv9uWnwy23Np7vN7CAOXFqtByzDL4')
+          return crd
+      })
+    }
 
    getPost() {
     axios.get('/api/forum')
@@ -78,9 +140,8 @@ class Forum extends Component {
   }
 
   render() {
-    // need to find out how to get the set the location
-    console.log('trying to get the coordinates: ', getCoordinates())
     const profile = auth.getProfile();
+    console.log('this is the response: ', this.putRequest());
     return(
         <div className="row">
           <div className="col-md-5 offset-md-2">
