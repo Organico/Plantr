@@ -25,7 +25,12 @@ class CubeMapTest extends React.Component {
 
               // var PATH = "https://s3-us-west-2.amazonaws.com/ryaperry-bucket/homeCubeMapNegZ37-NegZ2.4/"
               // var PATH = "https://s3-us-west-2.amazonaws.com/ryaperry-bucket/homeCubeMapNegZ33-NegZ2.4/" //Good!
-              var PATH = "https://s3-us-west-2.amazonaws.com/ryaperry-bucket/homeCubeMapNegZ33-NegZ2.6-Y5.7/" //Great!
+              // var PATH = "https://s3-us-west-2.amazonaws.com/ryaperry-bucket/homeCubeMapNegZ33-NegZ2.6-Y5.7/" //Great!
+
+              // var PATH = "https://s3-us-west-2.amazonaws.com/ryaperry-bucket/homeCubeMapBlue_02/"
+              // var PATH = "https://s3-us-west-2.amazonaws.com/ryaperry-bucket/homeCubeMapBlue_02_NegZ4/"
+
+              var PATH = "https://s3-us-west-2.amazonaws.com/ryaperry-bucket/homeCubeMapBlue_02_negZ4_NegZ65/" //best
 
               var texture0 = textureLoader.load( PATH + '0004.png' );
               var texture1 = textureLoader.load( PATH + '0002.png' );

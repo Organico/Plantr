@@ -2,6 +2,11 @@ body{
   background-color: #EAE0CC;
 }
 
+#embed-aframe {
+  width:500px;
+  height: 500px;
+}
+
 #logo {
   width: 133px;
   height: 75px;
