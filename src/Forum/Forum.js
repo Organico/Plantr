@@ -49,17 +49,17 @@ class Forum extends Component {
     this.setState({modalIsOpen: false});
   }
 
-  putRequest() {
-    Ajax({
-      type: 'GET',
-      url: 'https://phzmapi.org/97214.json',
-      dataType: 'json',
-      data: { zone : zone },
-      success: function(data) {
-        console.log(data)
-      }
-    }).bind(this)
- }
+ //  putRequest() {
+ //    Ajax({
+ //      type: 'GET',
+ //      url: 'https://phzmapi.org/97214.json',
+ //      dataType: 'json',
+ //      data: { zone : zone },
+ //      success: function(data) {
+ //        console.log(data)
+ //      }
+ //    }).bind(this)
+ // }
   //   axios.get('https://phzmapi.org/97214.json')
   //   .then((res) => {
   //     console.log('res here', res);
@@ -141,7 +141,7 @@ class Forum extends Component {
 
   render() {
     const profile = auth.getProfile();
-    console.log('this is the response: ', this.putRequest());
+    // console.log('this is the response: ', this.putRequest());
     return(
         <div className="row">
           <div className="col-md-5 offset-md-2">
