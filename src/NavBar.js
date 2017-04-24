@@ -1,5 +1,11 @@
 import React from 'react';
 import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
+import auth from './client.js';
+import {
+  HashRouter as Router,
+  Route,
+  Link
+} from 'react-router-dom';
 
 export default class NavBar extends React.Component {
   constructor(props) {
@@ -47,6 +53,9 @@ export default class NavBar extends React.Component {
             </li>
             <li className="nav-item">
               <a className="nav-link" href="#forum">Forum</a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link" href="javascript:window.location.reload()" onClick={auth.logout.bind(this)}>Logout</a>
             </li>
           </ul>
         </div>
