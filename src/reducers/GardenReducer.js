@@ -9,11 +9,25 @@ const initialGardenState = {
   location: [0, 2],
   isDragging: false,
   tooltipOpen: false,
+  colladaCache: {},
   gardenXYCoordinates:[],
   selectedTitle: "https://c1.staticflickr.com/3/2923/33742489190_3e30fca5f7_o.jpg",
 
   pastPlantGridStates: [],
   futurePlantGrideStates: [],
+  analytics: {
+  "numberPlants": 0,
+  "squareFootage":0,
+  "soilSquareFootage":0,
+  "seedPacketCosts": 0,
+  "numSeedPackets": 0,
+  "totalCost": 0,
+  "totalNumberOfSeedPackets": 0,
+  "plantLibrary": {},
+  "numFruits": 0,
+  "numVeggies": 0,
+  "numFlowers": 0
+  },
 
   seedPacket:{
     'name': 'tomato',
@@ -83,9 +97,10 @@ const initialGardenState = {
       'extremeWarning':[0,45],
       'growthGraph': [
         {name: 'Sow', uv: 0},
-        {name: 'Seedlings \r Emerge', uv: 6},
-        {name: 'Harvest', uv: 42},
-        {name: 'Harvest \r End', uv: 54}
+        {name: 'Seedlings Emerge', uv: 7},
+        {name: 'Bloom Start', uv: 45},
+        {name: 'Harvest', uv: 50},
+        {name: 'End', uv: 65}
       ],
     },
     { 'name': 'tomato',
@@ -95,7 +110,7 @@ const initialGardenState = {
       'img':'https://s3-us-west-2.amazonaws.com/ryaperry-bucket/plantImages/tomatoePlant.png',
       'model':'https://s3-us-west-2.amazonaws.com/ryaperry-bucket/plantModels/tomatoeModel.dae',
       'isDraggable': true,
-      'packetImg' : '/seedPacketIMGs/KaleResized.png',
+      'packetImg' : '/seedPacketIMGs/tomatoResized.png',
        'price': 10,
       'quantity': 10,
       'season': "Spring",
@@ -118,7 +133,7 @@ const initialGardenState = {
       'y':600,
       'img': 'https://c1.staticflickr.com/3/2939/33200675713_ea06c54442_o.png',
       'isDraggable': true,
-      'packetImg' : '/seedPacketIMGs/KaleResized.png',
+      'packetImg' : '/seedPacketIMGs/beansResized.png',
        'price': 12,
       'quantity': 32,
       'season': "Spring",
@@ -142,7 +157,7 @@ const initialGardenState = {
       'y':600,
       'img':'https://c1.staticflickr.com/3/2884/33883916601_9c04b38e73_o.png',
       'isDraggable': true,
-      'packetImg' : '/seedPacketIMGs/KaleResized.png',
+      'packetImg' : '/seedPacketIMGs/OnionResized.png',
        'price': 10,
       'quantity': 10,
       'season': "Spring",
@@ -166,7 +181,7 @@ const initialGardenState = {
       'y':600,
       'img':'https://c1.staticflickr.com/3/2810/33856016232_8ed446a91d_o.png',
       'isDraggable': true,
-      'packetImg' : '/seedPacketIMGs/KaleResized.png',
+      'packetImg' : '/seedPacketIMGs/OkraResized.png',
        'price': 10,
       'quantity': 10,
       'season': "Spring",
@@ -216,7 +231,7 @@ const initialGardenState = {
       'y':50,
       'img':'https://c1.staticflickr.com/3/2810/33856016232_8ed446a91d_o.png',
       'isDraggable': false,
-      'packetImg' : '/seedPacketIMGs/GenericResized.png',
+      'packetImg' : '/seedPacketIMGs/genericResized.png',
        'price': 10,
       'quantity': 10,
       'season': "Spring",
@@ -360,7 +375,7 @@ const initialGardenState = {
       'y':50,
       'img': 'https://c1.staticflickr.com/3/2844/33627640530_f866a32b60_o.png',
       'isDraggable': false,
-       'packetImg' : '/seedPacketIMGs/KaleResized.png',
+       'packetImg' : '/seedPacketIMGs/genericResized.png',
       'price': 10,
       'quantity': 10,
       'season': "Spring",
@@ -406,7 +421,7 @@ const initialGardenState = {
       'type': 'vegetable',
       'x':450,
       'y':50,
-      'img': 'https://c1.staticflickr.com/3/2878/33299363694_29057af863_o.png',
+      'img': 'https://c1.staticflickr.com/3/2946/34142450326_098f303eca_o.png',
       'isDraggable': false,
        'packetImg' : '/seedPacketIMGs/PumpkinResized.png',
       'price': 10,
@@ -496,13 +511,6 @@ const initialGardenState = {
         {name: 'Harvest \r End', uv: 65}
       ],
     }
-
-
-
-
-
-
-
   ],
 
 
@@ -537,7 +545,7 @@ const initialGardenState = {
       'y':50,
       'img':'https://s3-us-west-2.amazonaws.com/ryaperry-bucket/plantImages/tomatoePlant.png',
       'isDraggable': true,
-      'packetImg' : '/seedPacketIMGs/KaleResized.png',
+      'packetImg' : '/seedPacketIMGs/tomatoResized.png',
        'price': 10,
       'quantity': 10,
       'season': "Spring",
@@ -825,8 +833,8 @@ const setGardenParameters = (state, action) => {
   for (var i = 1; i < action.height + 1; i++ ) {
     for (var j =1; j < action.width + 1; j++) {
       var squareCounter = "square" + idCounter;
-      gardenGridArray.push({'x': i * 50, 'y': j * 50, 'img': "https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg"});
-      newGardenXYCoordinates.push({'x': i * 50, 'y': j * 50})
+      gardenGridArray.push({'x': i * 50+25, 'y': j * 50+25, 'img': "https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg"});
+      newGardenXYCoordinates.push({'x': i * 50+25, 'y': j * 50+25})
       idCounter++;
     }
   }
@@ -918,6 +926,9 @@ const addPlantToPlantGrid = (state, action) => {
   var oldPlantGrid = plantGrid.slice();
   var newPlantGrid = plantGrid.slice();
 
+  var newAnalytics = {};
+  Object.assign(newAnalytics, state.analytics);
+
 
   for(var i = 0; i < state.plantGrid.length; i++){
     var individualPlant = state.plantGrid[i];
@@ -927,23 +938,63 @@ const addPlantToPlantGrid = (state, action) => {
     }
   }
 
+  console.log("Here is the new analytics ", newAnalytics);
+
+  //   analytics: [
+  // "numberPlants": 0,
+  // "squareFootage":0,
+  // "soilSquareFootage":0,
+  // "seedPacketCosts": 0,
+  // "numSeedPackets": 0,
+  // "totalCost": 0,
+  // "totalNumberOfSeedPackets": 0,
+  // "plantLibrary": {}
+  // "numFruits": 0,
+  // "numVeggies": 0,
+  // "numFlowers": 0
+  // ],
+
+
+  /*Analytics done at the same time a plant is added to the plant grid*/
+
+  var generateAnalytics = function(plantToBeAdded) {
+    //increment the number of that plant if already in the library
+    console.log("INSIDE GENERATE ANALYTICS, ",plantToBeAdded)
+    console.log("This is newAnalytics", newAnalytics);
+
+    if (newAnalytics["plantLibrary"][plantToBeAdded.plant.name]){
+      console.log("WE ALREADY HAVE THIS PLANT", plantToBeAdded.plant.name)
+      newAnalytics["plantLibrary"][plantToBeAdded.plant.name]["quantity"]+=1;
+    } else {
+      //if plant has yet been added, instantiate a key value pair
+
+      newAnalytics["plantLibrary"][plantToBeAdded.plant.name] = {};
+      newAnalytics["plantLibrary"][plantToBeAdded.plant.name]["quantity"]=1;
+      newAnalytics["totalCost"]+=plantToBeAdded.plant.price;
+      newAnalytics["numSeedPackets"]+=1;
+    }
+
+    if (plantToBeAdded.plant.type === "fruit"){
+      newAnalytics["numFruits"]+=1;
+    } else if (plantToBeAdded.plant.type ==="flower"){
+      newAnalytics["numFlowers"]+=1;
+    } else {
+      newAnalytics["numVeggies"]+=1;
+    }
+  }
+
+  /*Add the plant if there is no plant there already*/
   if(!plantToMoveIndex){
-    console.log("SAMY IN FIRST")
     console.log("THIS IS THE PLANT!!!", action.plant)
     newPlantGrid.push(action.plant);
-  Object.assign(newState, state, {pastPlantGridStates: oldPlantGrid, plantGrid: newPlantGrid});
+    console.log("The old analytics", state.analytics);
+    generateAnalytics(action.plant);
+    console.log("The new analytics is ", newAnalytics);
+  Object.assign(newState, state, {pastPlantGridStates: oldPlantGrid, plantGrid: newPlantGrid, analytics: newAnalytics});
   } else {
     Object.assign(newState, state, {plantGrid: newPlantGrid});
   }
 
-
-
-
-
-
-
-  console.log('(before) state: ', state);
-  console.log('(after) state: ', newState);
 
   return newState
 }
@@ -1010,8 +1061,6 @@ const addToShelf= (state, action) => {
     }
   }
 
-  console.log("New shelf before changes", newShelfObject)
-
   var lastObject = plantShelfCopy[plantShelfCopy.length-1];
   var lastObjectX = lastObject['x'];
   var lastObjectY = lastObject['y'];
@@ -1038,7 +1087,7 @@ const addToShelf= (state, action) => {
   return newState;
 };
 
-const undo= (state, action) => {
+const undo = (state, action) => {
   const newState = {};
   var futurePlantGrid = state.plantGrid.slice();
   var oldPlantGrid = state.pastPlantGridStates.slice();

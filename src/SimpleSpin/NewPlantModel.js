@@ -6,6 +6,8 @@ import OBJLoader from 'three-obj-loader'
 OBJLoader(THREE);
 import MTLLoader from 'three-mtl-loader'
 import ColladaLoader from 'three-collada-loader';
+import store from '../store';
+
 
 
 class NewPlantModel extends React.Component {
@@ -18,6 +20,8 @@ class NewPlantModel extends React.Component {
     super(props, context);
 
     this.loadThing = this.loadThing.bind(this);
+    this.colladaCache = store.getState().gardenReducer.colladaCache;
+
 
   }
 
@@ -49,7 +53,7 @@ class NewPlantModel extends React.Component {
 
     var colladaLoader = new ColladaLoader()
     colladaLoader.options.convertUpAxis = true;
-    colladaLoader.load(FILE, function(collada){
+    var item = colladaLoader.load(FILE, function(collada){
       console.log("collada Loader loded successfully !!!!!", collada)
       var dae = collada.scene;
 
@@ -71,46 +75,7 @@ class NewPlantModel extends React.Component {
       for (var i = 0; i < arrayOfMeshes.length; i++){
         newPlantModelGroup.add(arrayOfMeshes[i])
       }
-
-      // var onProgress = function ( xhr ) {
-      //   if ( xhr.lengthComputable ) {
-      //     var percentComplete = xhr.loaded / xhr.total * 100;
-      //     console.log( Math.round(percentComplete, 2) + '% downloaded' );
-      //   }
-      // };
-      // var onError = function ( xhr ) {
-      //   console.log("error", xhr)
-      // };
-
-      // dae.traverse(function(child){
-      //   if (child.colladaId == "Suzanne"){
-      //       // child.traverse(function(e){
-      //       //     e.castShadow = true;
-      //       //     e.receiveShadow = true;
-      //           // if(e.material instanceof THREE.MeshPhongMaterial){
-      //           //     e.material.needsUpdate = true;
-      //           //     console.log("e.material in travers", e.material)
-      //           // }
-      //       // })
-      //       scene.add(child);
-      //   }
-
-      //   else if ( child. colladaId == "Plane"){
-      //       // child.traverse(function(e){
-      //       //     e.castShadow = true;
-      //       //     e.receiveShadow = true;
-      //       // })
-      //       console.
-      //   }
-      // })
-
-      // dae.updateMatrix()
-
-
-
-      //TODO: THIS SHOULD BE A FOR A LOOP
-      //Add position here....
-
+      this.cache[FILE] = item;
     })
 
 

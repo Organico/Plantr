@@ -14,17 +14,9 @@ class PlantDexPlant extends React.Component {
 
 
       this.handleClick = this.handleClick.bind(this);
-      this.dragBoundFunc = this.dragBoundFunc.bind(this);
-      this.handleMouseDragStart = this.handleMouseDragStart.bind(this);
-      this.handleMouseDragEnd = this.handleMouseDragEnd.bind(this);
-
-
 
     }
     handleClick(e) {
-
-
-
 
     console.log("Event attributes are: ", e)
     var seedObject = {
@@ -39,7 +31,8 @@ class PlantDexPlant extends React.Component {
         'extremeWarning': e.target.attrs.plant.extremeWarning,
         'packetImg' : e.target.attrs.plant.packetImg,
         'img': e.target.attrs.plant.img,
-        'isDraggable': true
+        'isDraggable': true,
+        'growthGraph': e.target.attrs.plant.growthGraph
     }
     this.props.dispatchAddToShelf(seedObject)
     this.props.dispatchSetSeedPacket(seedObject);
@@ -47,105 +40,6 @@ class PlantDexPlant extends React.Component {
     this.props.dispatchSetGrowthGraph(seedGraph);
     }
 
-
-
-
-    handleMouseOver(e){
-      console.log("Mouse over!!", e)
-      console.log(e.target)
-      document.body.style.cursor = 'pointer';
-
-    }
-    handleMouseOut(){
-      document.body.style.cursor = 'default';
-    }
-
-    dragBoundFunc(pos) {
-      var newY;
-      var newY;
-      var newX;
-      // console.log("Pos in dragBoundFunc", pos);
-
-      // console.log("Pos of y is ", pos.y)
-
-      var roundedPosY= Math.round(pos.y/50)*50-25
-      var roundedPosX= Math.round(pos.x/50)*50-25
-      newY = roundedPosY;
-      newX = roundedPosX;
-
-      this.setState({
-        posX: newX,
-        posY: newY
-      })
-
-      return {
-        x: newX,
-        y: newY
-      };
-
-
-    }
-
-    handleMouseDragStart(pos, e){
-      this.setState({isDragging: true})
-      var seedObject = {
-        'name': pos.target.attrs.plant.name,
-        'price': pos.target.attrs.plant.price,
-        'quantity':pos.target.attrs.plant.quantity,
-        'season': pos.target.attrs.plant.season,
-        'description': pos.target.attrs.plant.description,
-        'instructions': pos.target.attrs.plant.instructions,
-        'sunlight': pos.target.attrs.plant.sunlight,
-        'harvest': pos.target.attrs.plant.harvest,
-        'extremeWarning': pos.target.attrs.plant.extremeWarning,
-        'packetImg' : pos.target.attrs.plant.packetImg
-    }
-
-     this.props.dispatchSetSeedPacket(seedObject);
-
-
-
-    }
-
-   handleMouseDragEnd(pos){
-      console.log("end dragging", "x: ", pos.evt.x, "y: ", pos.evt.y);
-
-    var coordinates = this.props.gardenXYCoordinates;
-    console.log("coordinates are ", coordinates)
-
-    var isWithinGridBounds = false;
-
-    for (var i = 0; i<coordinates.length; i++){
-      var coordinateToCheck = coordinates[i];
-      console.log("CHECK THIS COORDINATE", coordinateToCheck['x']+25)
-
-      var coordinateToCheckX = coordinateToCheck['x']+25;
-      console.log("State is ", this.state.posX)
-      var coordinateToCheckY = coordinateToCheck['y']+25;
-
-      if (this.state.posX ===coordinateToCheckX && this.state.posY === coordinateToCheckY) {
-        console.log("It is within the Grid!")
-        isWithinGridBounds = true;
-        break;
-      }
-    }
-
-
-
-
-    if(isWithinGridBounds) {
-       var plant = {
-        x: this.state.posX,
-        y: this.state.posY,
-        img: this.props.img,
-        isDraggable: false
-      };
-    }
-
-
-      this.props.dispatchAddPlantToPlantGrid(plant)
-      console.log("Drag end This.props", this.props)
-    }
 
     render() {
       let newImage = new Image();

@@ -41,7 +41,8 @@ class Plant extends React.Component {
         'packetImg' : e.target.attrs.plant.packetImg
     }
      let seedGraph = e.target.attrs.plant.growthGraph;
-    console.log("**********THIS IS THE GROWTH GRAPH", seedObject)
+     console.log("HERE", e.target.attrs.plant)
+    console.log("**********THIS IS THE GROWTH GRAPH", seedGraph)
          this.props.dispatchSetGrowthGraph(seedGraph);
 
      this.props.dispatchSetSeedPacket(seedObject);
@@ -60,8 +61,8 @@ class Plant extends React.Component {
       var newX;
 
 
-      var roundedPosY= Math.round(pos.y/50)*50-25
-      var roundedPosX= Math.round(pos.x/50)*50-25
+      var roundedPosY= Math.round(pos.y/50)*50
+      var roundedPosX= Math.round(pos.x/50)*50
       newY = roundedPosY;
       newX = roundedPosX;
 
@@ -122,7 +123,7 @@ class Plant extends React.Component {
         break;
       }
     }
-
+    console.log("The plant's x value is ", this.state.posX)
 
     if(isWithinGridBounds) {
        var plant = {
@@ -130,19 +131,19 @@ class Plant extends React.Component {
         y: this.state.posY,
         img: this.props.img,
         model: this.props.model,
-        isDraggable: false
+        isDraggable: false,
+        plant: this.props.plant
+
       };
-    }
-      console.log("PLANT GOING INTO dispatchAddPlantToPlantGrid", plant)
-
-
       this.props.dispatchAddPlantToPlantGrid(plant)
+    }
+
+
     }
 
     render() {
       let newImage = new Image();
       newImage.src = this.props.img;
-      console.log("This.props is", this.props)
 
 
       var plantthing = this.props.plantStats;

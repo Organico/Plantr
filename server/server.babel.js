@@ -115,6 +115,29 @@ app.post('/api/gardens', (req, res, next) => {
     }
     res.send(200);
   });
+
+    var api_key = 'key-b90d2dcc5bdd42c5abceba45568ea1dd';
+    var domain = 'sandboxa7ed15c3bb5b4de696ad9041ddcadb4a.mailgun.org';
+    var mailgun = require('mailgun-js')({apiKey: api_key, domain: domain});
+
+    var data = {
+      from: 'Plantr <postmaster@sandboxa7ed15c3bb5b4de696ad9041ddcadb4a.mailgun.org>',
+      to: 'skebaish1992@gmail.com',
+      subject: 'Hello',
+      text: 'Testing some Mailgun awesomness!',
+      html: '<html>Inline image here: <img src="https://www.sciencea-z.com/shared/images/units/plant-life.jpg"></html>'
+    };
+
+    mailgun.messages().send(data, function (error, body) {
+      console.log(error);
+      if (error) {
+        console.log("You had an error", error);
+      } else {
+        console.log("The body is ", body);
+      }
+
+
+    });
 });
 
 app.post('/api/plants', (req, res, next) => {
@@ -154,6 +177,12 @@ app.post('/api/forum', (req, res, next) => {
     res.send(200, 'Posted to Forum');
   });
 });
+
+
+
+
+
+
 
 
 /*--------------------PUT REQUEST-----------------------------------------*/

@@ -13,7 +13,10 @@ import querystring from 'querystring'
 import MyRect from './MyRectangle.js'
 import SeedPacket from '../SeedPacket/SeedPacket.js';
 import HarvestGraph from '../Analytics/HarvestGraph.js';
+import PlantBreakdown from '../Analytics/PlantBreakdown.js';
 import PlantDex from '../PlantDex/PlantDex.js'
+import { TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTitle, CardText, Row, Col } from 'reactstrap';
+
 
 
 
@@ -72,7 +75,7 @@ const MakeGardenSquareGridView = React.createClass({
             <button onClick={() => {
                 this.props.dispatchClear();}}>Clear</button>
             <div className="row">
-              <Stage id="cat" width={800} height={670} fill="white" stroke="black" className="text-center">
+              <Stage id="cat" width={800} height={670} fill="white" stroke="black" className="gardenGrid">
 
                 <GardenGrid />
                 <PlantGrid />
@@ -93,9 +96,8 @@ const MakeGardenSquareGridView = React.createClass({
                   <SeedPacket />
                 </div>
                 <div className="col-md-10">
-                  <HarvestGraph />
+                  <PlantBreakdown />
                 </div>
-
 
               </div>
         </div>
