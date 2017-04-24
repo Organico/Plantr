@@ -8,6 +8,7 @@ import CreateNewPost from './CreateNewPost';
 import axios from 'axios';
 import { setPosts, setEditing } from '../Actions/ForumActions';
 import auth from '../client.js';
+import Ajax from 'react-ajax';
 
 const customStyles = {
   content : {
@@ -48,7 +49,24 @@ class Forum extends Component {
     this.setState({modalIsOpen: false});
   }
 
-
+  putRequest() {
+    Ajax({
+      type: 'GET',
+      url: 'https://phzmapi.org/97214.json',
+      dataType: 'json',
+      data: { zone : zone },
+      success: function(data) {
+        console.log(data)
+      }
+    }).bind(this)
+ }
+  //   axios.get('https://phzmapi.org/97214.json')
+  //   .then((res) => {
+  //     console.log('res here', res);
+  //   }).catch(err => {
+  //     console.error('error is: ', err)
+  //   })
+  // }
     // var initialize = function() {
     //     geocoder = new google.maps.Geocoder();
     //     var latlng = new google.maps.LatLng(-34.397, 150.644);
@@ -123,7 +141,7 @@ class Forum extends Component {
 
   render() {
     const profile = auth.getProfile();
-    console.log('CODE ADDRESS', this.codeAddress());
+    console.log('this is the response: ', this.putRequest());
     return(
         <div className="row">
           <div className="col-md-5 offset-md-2">

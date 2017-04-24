@@ -39,6 +39,7 @@
     "react": "^15.5.4",
     "react-addons-css-transition-group": "^15.5.2",
     "react-addons-transition-group": "^15.5.2",
+    "react-ajax": "^0.1.1",
     "react-bootstrap": "0.30.3",
     "react-bootstrap-dropdown": "^0.3.0",
     "react-dnd": "^2.3.0",
