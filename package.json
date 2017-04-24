@@ -16,8 +16,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-<<<<<<< HEAD
-=======
     "aframe": "^0.5.0",
     "aframe-animation-component": "^3.2.5",
     "aframe-click-drag-component": "^3.0.1",
@@ -26,7 +24,6 @@
     "aframe-mountain-component": "^0.3.3",
     "aframe-particle-system-component": "^1.0.9",
     "aframe-react": "^4.1.1",
->>>>>>> working aframe vr mapping of 2d / 3d gardens. Also added css to put vr component in specific sized space
     "auth0-lock": "^10.14.0",
     "axios": "^0.15.3",
     "babel-loader": "^6.4.1",
