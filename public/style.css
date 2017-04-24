@@ -56,12 +56,13 @@ body{
 .postUsername {
   font-family: "Above";
   font-weight: bold;
-  font-size: 20px;
+  font-size: 15px;
 }
 .postPicture {
+  margin-top: 10px;
 }
 .test {
-  /*border: solid 5px red;*/
+  border: solid 5px red;
 }
 .nav {
   height: 20px;
@@ -208,8 +209,9 @@ body{
   font-size: 30px;
 }
 .post {
-  border: solid 1px #694118;
+  border-radius: 10px;
   background-color: white;
+  margin-top: 20px;
 }
 
 .replyText {
@@ -219,7 +221,18 @@ body{
     max-height: 100px;
 }
 
-
+.forumTitleText {
+  border-left: solid 2px #EAE0CC;
+  border-right: solid 2px #EAE0CC;
+  padding-left: 20px;
+}
+.replyCount {
+  font-family: "Above";
+  font-weight: bold;
+}
+.replyBox {
+  margin-top: 20px;
+}
 #addReply {
   margin-top: 10px;
   margin-left: -100px;
