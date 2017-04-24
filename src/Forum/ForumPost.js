@@ -81,59 +81,64 @@ const ForumPost = React.createClass({
 
     return(
       <div className="container-fluid">
-        <div className="row" onClick = {() => {
+        <div className="row post" onClick = {() => {
             this.props.dispatchTogglePost(this.props.post._id);
             }} >
-          <div className="col-md-1">
-            <div className="row postPicture" style={profilePic}></div>
-            <div className="row postUsername">
-              { this.props.nickname }
+          <div className="col-md-2">
+            <div className="row"></div>
+              <div className="col-md-12 offset-md-3 postPicture" style={profilePic}></div>
+            <div className="row">
+              <div className="col-md-12 postUsername">{ this.props.nickname }</div>
             </div>
           </div>
-          <div className="col-md-8 offset-md-2">
+          <div className="col-md-8 forumTitleText">
             <div className="row">
               <span className="forumTitle">{ title }</span>
             </div>
             <div className="row">
               { message }
             </div>
-          </div>
-        </div>
-          <div>
-            <div className="col-md-8 offset-md-2">
-              {this.props.replies.map((reply, i) => {
-                if (!postType) {
-                  if (profile.email === reply.replyUser.email && !this.props.editing) {
-                  return <div>
-                    <Replies key={i} reply={reply} />
-                      <div className="col-md-10">
-                        <button type="submit" onClick={ () => {
-                          this.deletePost(reply.belongsToId, reply.replyUser.clientID);
-                        }}>delete</button>
-                        <button type="submit" onClick={ () => {
-                          this.props.dispatchSetEditing(reply.message);
-                        }}>edit</button>
-                    </div>
-                  </div>
-                   } else if (profile.email === reply.replyUser.email && this.props.editing && (reply.message === this.props.messageToEdit)) {
-                    return <div className="post">
-                      <EditReply replyId={reply.replyUser.clientID} id={reply.belongsToId} message={reply.message} />
-                    </div>
-                   }else {
-                    return <Replies key={i} reply={reply} />
-                   }
-                }
-              }
-              )}
-            </div>
-              { (function() {
-                if (!postType) {
-                  return <ReplyPost post={props.post}/>
-                }
-              }())
-              }
+            <div className="row">
+              <div>
+                <div className="col-md-8">
+                  {this.props.replies.map((reply, i) => {
+                    if (!postType) {
+                      if (profile.email === reply.replyUser.email && !this.props.editing) {
+                      return <div>
+                        <Replies key={i} reply={reply} />
+                          <div className="col-md-12">
+                            <button type="submit" onClick={ () => {
+                              this.deletePost(reply.belongsToId, reply.replyUser.clientID);
+                            }}>delete</button>
+                            <button type="submit" onClick={ () => {
+                              this.props.dispatchSetEditing(reply.message);
+                            }}>edit</button>
+                        </div>
+                      </div>
+                       } else if (profile.email === reply.replyUser.email && this.props.editing && (reply.message === this.props.messageToEdit)) {
+                        return <div>
+                          <EditReply replyId={reply.replyUser.clientID} id={reply.belongsToId} message={reply.message} />
+                        </div>
+                       }else {
+                        return <Replies key={i} reply={reply} />
+                       }
+                    }
+                  }
+                  )}
+                </div>
+                  { (function() {
+                    if (!postType) {
+                      return <ReplyPost post={props.post}/>
+                    }
+                  }())
+                  }
 
+              </div>
+            </div>
           </div>
+          <div className="col-md-2 replyCount">Replies: {this.props.replies.length}</div>
+        </div>
+
       </div>
     )
   }
