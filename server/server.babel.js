@@ -124,7 +124,8 @@ app.post('/api/gardens', (req, res, next) => {
       from: 'Plantr <postmaster@sandboxa7ed15c3bb5b4de696ad9041ddcadb4a.mailgun.org>',
       to: 'skebaish1992@gmail.com',
       subject: 'Hello',
-      text: 'Testing some Mailgun awesomness!'
+      text: 'Testing some Mailgun awesomness!',
+      html: '<html>Inline image here: <img src="https://www.sciencea-z.com/shared/images/units/plant-life.jpg"></html>'
     };
 
     mailgun.messages().send(data, function (error, body) {
