@@ -69,7 +69,7 @@ class VRScene extends React.Component {
           </a-assets>
           <a-entity position="0 500 0" particle-system="preset: snow" positionSpread="1000 1000 1000" size="10"></a-entity>
 
-          <a-entity position="0 500 0" cubemap="folder: https://s3-us-west-2.amazonaws.com/ryaperry-bucket/homeCubeMapAframe/; edgeLength: 1000"></a-entity>
+          <a-entity position="0 500 0" cubemap="folder: https://s3-us-west-2.amazonaws.com/ryaperry-bucket/homeCubeMapAframeBlue/; edgeLength: 1000"></a-entity>
 
           <a-plane src="#advertisement"></a-plane>
         </a-scene >
@@ -80,4 +80,5 @@ class VRScene extends React.Component {
 
 export default VRScene
 
+// <a-entity position="0 500 0" cubemap="folder: https://s3-us-west-2.amazonaws.com/ryaperry-bucket/homeCubeMapAframe/; edgeLength: 1000"></a-entity>
 // ReactDOM.render(<VRScene/>, document.querySelector('#sceneContainer'));

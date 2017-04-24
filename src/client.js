@@ -27,6 +27,7 @@ import Forum from './Forum/Forum';
 // <Route path="/userprofile" component={UserProfile}></Route>
 import Weather from './weather/Weather'
 const auth = new AuthService('vBOwXk8xIgy3kroSs5vz1TFfrYyFQNFf', 'skebaish1992.auth0.com');
+import VRScene from './AframeTest/VRScene'
 
 // validate authentication for private routes
 const requireAuth = (nextState, replace) => {
@@ -73,7 +74,7 @@ class App extends Component {
                 <Route path="/login" component={Login}></Route>
                 <Route path="/plant" component={MyCubeView}></Route>
                 <Route path="/layout" component={Layout}></Route>
-                <Route path="/cubes" component={GardenCubeGridView}></Route>
+                <Route path="/vrgarden" component={VRScene}></Route>
                 <Route path="/squares" component={GardenSquareGridView}></Route>
                 <Route path="/creategarden" component={MakeGardenSquareGridView}></Route>
                 <Route path="/profile" component={Profile}></Route>
