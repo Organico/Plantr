@@ -41,7 +41,6 @@ const CreateNewPost = React.createClass({
         }
       ).then((res) => {
         console.log("Successful posted on the client side of CreateNewPost");
-        console.log('props in create post: ', this.props)
         this.props.closeModal();
         this.getPost();
       }).catch((err) => {

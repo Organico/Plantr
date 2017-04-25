@@ -69,7 +69,6 @@ class App extends Component {
                 <Route path="/home" component={Home}></Route>
                 <Route path="/login" component={Login}></Route>
                 <Route path="/plant" component={MyCubeView}></Route>
-                <Route path="/layout" component={Layout}></Route>
                 <Route path="/vrgarden" component={VRScene}></Route>
                 <Route path="/squares" component={GardenSquareGridView}></Route>
                 <Route path="/creategarden" component={MakeGardenSquareGridView}></Route>

@@ -5,11 +5,10 @@ import auth from './client.js';
 export default class NavBar extends React.Component {
   constructor(props) {
     super(props);
-
-    this.toggle = this.toggle.bind(this);
-    this.state = {
-      isOpen: false
-    };
+      this.toggle = this.toggle.bind(this);
+      this.state = {
+        isOpen: false
+      };
   }
   toggle() {
     this.setState({
@@ -17,6 +16,17 @@ export default class NavBar extends React.Component {
     });
   }
   render() {
+    const profile = auth.getProfile();
+    console.log('here is the profile: ', profile);
+    console.log('here are the props in NavBar: ', this.props)
+  //   let profilePic = {
+  //   height: '50px',
+  //   width: '50px',
+  //   backgroundImage: 'url(' + this.props.post.profile + ')',
+  //   backgroundRepeat: 'no-repeat',
+  //   backgroundSize: 'cover',
+  //   backgroundPosition: 'center'
+  // }
     return (
       <nav className="navbar navbar-toggleable-md navbar-light bg-faded">
         <button className="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
