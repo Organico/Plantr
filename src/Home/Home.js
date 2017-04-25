@@ -3,6 +3,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 // import axios from 'axios';
 import NewsFeed from './NewsFeed';
+import LogoAnimation from './LogoAnimation'
 
 class Home extends React.Component {
 
@@ -34,6 +35,8 @@ class Home extends React.Component {
         <video autoPlay loop muted id="videoBackground">
           <source src="https://www.videvo.net/app/stream.php?id=3698" type="video/mp4" />
         </video>
+
+
 
       <div className="container">
         <div className="row">

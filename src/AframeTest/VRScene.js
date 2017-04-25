@@ -38,8 +38,20 @@ class VRScene extends React.Component {
         <a-scene embedded>
           <a-sphere click-drag position="0 1.25 -5" radius="1.25" color="#EF2D5E"></a-sphere>
 
-          <a-entity position="0 400 400" wasd-controls="acceleration: 1000" look-controls-enabled="false" >
-            <a-camera></a-camera>
+          <a-entity
+            position="0 400 400"
+            wasd-controls="acceleration: 1000"
+            look-controls-enabled="false">
+            <a-camera>
+            <a-entity
+              cursor="fuse: true; fuseTimeout: 500"
+              position="0 0 -1"
+              geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
+              material="color: black; shader: flat">
+            </a-entity>
+
+
+            </a-camera>
           </a-entity>
 
           {this.plantGrid.map((newPlantModel, i) =>
