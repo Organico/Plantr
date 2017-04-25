@@ -16,12 +16,8 @@ import {
 import GardenSquareGridView from './GardenSquareGrid/getGardenSquareGrid';
 import MakeGardenSquareGridView from './GardenSquareGrid/makeGardenSquareGrid';
 import GardenCubeGridView from './GardenCubeGrid/getGardenCubeGrid';
-import Layout from './Layout';
 import Profile from './userProfile/Profile';
 import NavBar from './NavBar';
-
-
-
 import MyCubeView from './SimpleSpin/index';
 import Forum from './Forum/Forum';
 // <Route path="/userprofile" component={UserProfile}></Route>
@@ -69,7 +65,7 @@ class App extends Component {
             <Router>
               <div className="container-fluid">
                 <NavBar />
-                <Route exact path="/" component={Layout}></Route>
+                <Route exact path="/" component={Home}></Route>
                 <Route path="/home" component={Home}></Route>
                 <Route path="/login" component={Login}></Route>
                 <Route path="/plant" component={MyCubeView}></Route>

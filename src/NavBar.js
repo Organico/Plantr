@@ -1,11 +1,6 @@
 import React from 'react';
 import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
 import auth from './client.js';
-import {
-  HashRouter as Router,
-  Route,
-  Link
-} from 'react-router-dom';
 
 export default class NavBar extends React.Component {
   constructor(props) {
