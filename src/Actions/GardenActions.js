@@ -64,6 +64,13 @@ export function setTile(name){
   return {type: 'SET_TILE', name};
 }
 
+export function setWidth(width){
+  return {type: 'SET_WIDTH', width};
+}
+
+export function setHeight(height){
+  return {type: 'SET_HEIGHT', height};
+}
 /*PLANT GRID*/
 export function addPlantToPlantGrid(plant){
   console.log('action: addPlantToPlantGrid');

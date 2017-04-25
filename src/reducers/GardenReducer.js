@@ -51,6 +51,8 @@ const initialGardenState = {
   ],
   plantGrid: [
   ],
+  height: 5,
+  width: 5,
 
   plantShelf: [
     {
@@ -1124,6 +1126,26 @@ const setGrowthGraph = (state, action) => {
   console.log('(before) state: ', state);
   console.log('(after) state: ', newState);
   return newState;
+};
+
+const setHeight = (state, action) => {
+  const newState = {};
+
+  Object.assign(newState, state, {height: action.height});
+
+  console.log('(before) state: ', state);
+  console.log('(after) state: ', newState);
+  return newState;
+};
+
+const setWidth = (state, action) => {
+  const newState = {};
+
+  Object.assign(newState, state, {width: action.width});
+
+  console.log('(before) state: ', state);
+  console.log('(after) state: ', newState);
+  return newState;
 }
 
 
@@ -1165,6 +1187,10 @@ function gardenReducer(state = initialGardenState, action) {
     return clear(state, action)
   case 'SET_GROWTH_GRAPH':
     return setGrowthGraph(state, action);
+  case 'SET_WIDTH':
+    return setWidth(state, action);
+  case 'SET_HEIGHT':
+    return setHeight(state, action);
   default:
     return state;
   }

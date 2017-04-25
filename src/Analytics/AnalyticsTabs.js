@@ -2,6 +2,7 @@
 import React from 'react';
 import { TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTitle, CardText, Row, Col } from 'reactstrap';
 import classnames from 'classnames';
+import PlantBreakdown from './PlantBreakdown'
 
 class AnalyticsTabs extends React.Component {
   constructor(props) {
@@ -21,51 +22,38 @@ class AnalyticsTabs extends React.Component {
     }
   }
   render() {
+    var divStyle = {
+      margin: "20px",
+      padding: "20px"
+    };
     return (
       <div>
         <Nav tabs>
           <NavItem>
             <NavLink
               className={classnames({ active: this.state.activeTab === '1' })}
-              onClick={() => { this.toggle('1'); }}
-            >
-              Tab1
+              onClick={() => { this.toggle('1'); }}>
+              Plant Breakdown
             </NavLink>
           </NavItem>
           <NavItem>
             <NavLink
               className={classnames({ active: this.state.activeTab === '2' })}
-              onClick={() => { this.toggle('2'); }}
-            >
-              Moar Tabs
+              onClick={() => { this.toggle('2'); }}>
+              Analytics
             </NavLink>
           </NavItem>
         </Nav>
         <TabContent activeTab={this.state.activeTab}>
           <TabPane tabId="1">
-            <Row>
-              <Col sm="12">
-                <h4>Tab 1 Contents</h4>
-              </Col>
-            </Row>
+            <PlantBreakdown stle={divStyle}/>
           </TabPane>
           <TabPane tabId="2">
-            <Row>
-              <Col sm="6">
-                <Card block>
+                <Card block style={divStyle}>
                   <CardTitle>Special Title Treatment</CardTitle>
                   <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
                   <Button>Go somewhere</Button>
                 </Card>
-              </Col>
-              <Col sm="6">
-                <Card block>
-                  <CardTitle>Special Title Treatment</CardTitle>
-                  <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
-                  <Button>Go somewhere</Button>
-                </Card>
-              </Col>
-            </Row>
           </TabPane>
         </TabContent>
       </div>

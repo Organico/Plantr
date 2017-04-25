@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {setGardenParameters, setGarden, undo, redo, clear} from '../Actions/GardenActions.js';
+import {setGardenParameters, setGarden, undo, redo, clear, setHeight, setWidth} from '../Actions/GardenActions.js';
 import axios from 'axios';
 import GardenGrid from './GardenGrid.js';
 import MySquare from './MySquare.js';
@@ -13,9 +13,12 @@ import querystring from 'querystring'
 import MyRect from './MyRectangle.js'
 import SeedPacket from '../SeedPacket/SeedPacket.js';
 import HarvestGraph from '../Analytics/HarvestGraph.js';
+import AnalyticsTabs from '../Analytics/AnalyticsTabs.js';
 import PlantBreakdown from '../Analytics/PlantBreakdown.js';
 import PlantDex from '../PlantDex/PlantDex.js'
 import { TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTitle, CardText, Row, Col } from 'reactstrap';
+import html2canvas from 'html2canvas';
+
 
 
 
@@ -25,6 +28,14 @@ const MakeGardenSquareGridView = React.createClass({
 
   saveGarden() {
     console.log("Saving garden...")
+      html2canvas(document.body, {
+      onrendered: function(canvas) {
+              var myImage = canvas.toDataURL("image/png");
+            window.open(myImage);
+      }
+    });
+
+
     axios.post('/api/gardens',
       {
         gardenId: Math.random()*100,
@@ -39,12 +50,25 @@ const MakeGardenSquareGridView = React.createClass({
       console.log("Error in getGardenSquareGrid getAllGardens()")
     });
   },
+  setHeight(e){
+      let height = parseInt(e.target.value);
+      this.props.dispatchSetHeight(height);
+      console.log(this.props)
+      this.props.dispatchSetGardenParameters(this.props.width, height);
+  },
+
+  setWidth(e){
+      let width = parseInt(e.target.value);
+      this.props.dispatchSetWidth(width);
+      this.props.dispatchSetGardenParameters(width, this.props.height);
+  },
+
 
 
   render () {
     let input;
-    let width;
-    let height;
+    let width = 10;
+    let height = 10;
     let color;
     let center = {
       textAlign: "center"
@@ -54,15 +78,25 @@ const MakeGardenSquareGridView = React.createClass({
 
 
 
+
     return (
       <div style={center}>
         <h1>Create a Garden</h1>
-            <input ref={(node) => width = node } type="number" name="width" placeholder='Feet [width] is your garden?'/>
-            <input ref={(node) => height = node } type="number" name="height" placeholder='Feet [height] is your garden?'/>
-            <button className="btn btn-primary btn-sm" onClick={() => {
-                this.props.dispatchSetGardenParameters(+width.value, +height.value, "green");
-                }} type="submit">Set Garden Parameters
-            </button>
+
+        <h2>Garden Height</h2>
+        <span><strong>{this.props.width} ft</strong></span>
+          <form action="#">
+            <p className="range-field">
+              <input type="range" min="1" max="10" step="1" value={parseInt(this.props.width)} onChange={this.setWidth}/>
+            </p>
+          </form>
+        <h2>Garden Width</h2>
+        <span><strong>{this.props.height} ft</strong></span>
+          <form action="#">
+            <p className="range-field">
+              <input type="range"  min="1" max="14" step="1" value={this.props.height} onChange={this.setHeight}/>
+            </p>
+          </form>
             <button className="btn btn-primary btn-sm" onClick={() => {
               this.saveGarden();
               }} type="submit">Submit Garden
@@ -74,6 +108,10 @@ const MakeGardenSquareGridView = React.createClass({
                 this.props.dispatchUndo();}}>Undo</button>
             <button onClick={() => {
                 this.props.dispatchClear();}}>Clear</button>
+            <button onClick={() => {
+                this.props.dispatchUndo();}}>Redo</button>
+            <button onClick={() => {
+                this.props.dispatchClear();}}>Delete</button>
             <div className="row">
               <Stage id="cat" width={800} height={670} fill="white" stroke="black" className="gardenGrid">
 
@@ -89,20 +127,17 @@ const MakeGardenSquareGridView = React.createClass({
               <PlantDex />
             </div>
           </div>
-
             <div className="col-md-5 offset-md-1">
-              <div className="row" id="costEstimate">
               <div className="col-md-6 offset-md-3 userRecentSpan" id="seedHolder">
                   <SeedPacket />
-                </div>
-                <div className="col-md-10">
-                  <PlantBreakdown />
-                </div>
-
               </div>
-        </div>
-
-
+                <div className="col-md-10">
+                 <HarvestGraph />
+                </div>
+            <div className="row">
+              <AnalyticsTabs />
+            </div>
+          </div>
         </div>
       </div>
     );
@@ -113,6 +148,8 @@ const mapStateToProps = (state) => {
   return {
     gardenGrid: state.gardenReducer.gardenGrid,
     plantGrid: state.gardenReducer.plantGrid,
+    width: state.gardenReducer.width,
+    height: state.gardenReducer.height,
     tooltipOpen: state.gardenReducer.tooltipOpen
   };
 };
@@ -125,6 +162,12 @@ const mapDispatchToProps = (dispatch) => {
     },
     dispatchSetGarden(dbGardenGrid) {
       dispatch(setGarden(dbGardenGrid));
+    },
+    dispatchSetHeight(height){
+      dispatch(setHeight(height));
+    },
+    dispatchSetWidth(width){
+      dispatch(setWidth(width));
     },
     dispatchUndo() {
       dispatch(undo());
