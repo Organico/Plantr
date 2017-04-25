@@ -3,14 +3,17 @@ import 'aframe-particle-system-component';
 import 'aframe-mountain-component';
 import 'aframe-cubemap-component';
 import 'aframe-gridhelper-component'
+import 'aframe-mouse-cursor-component'
+import 'aframe-event-set-component'
+
 
 import {Entity, Scene} from 'aframe-react';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
 import aframe from 'aframe'
-import registerClickDrag from 'aframe-click-drag-component';
-registerClickDrag(aframe);
+// import registerClickDrag from 'aframe-click-drag-component';
+// registerClickDrag(aframe);
 import store from '../store';
 
 
@@ -36,11 +39,26 @@ class VRScene extends React.Component {
     return (
       <div id="embed-aframe">
         <a-scene embedded>
-          <a-sphere click-drag position="0 1.25 -5" radius="1.25" color="#EF2D5E"></a-sphere>
+          <a-sphere
+            position="0 1.25 -5"
+            radius="100"
+            color="#EF2D5E"
+            event-set__enter="_event: mouseenter; material.color: yellowgreen; scale: 3 1 1"
+            event-set__leave="_event: mouseleave; material.color: skyblue; scale: 1 1 1"
+          >
+          </a-sphere>
 
-          <a-entity position="0 400 400" wasd-controls="acceleration: 1000" look-controls-enabled="false" >
-            <a-camera></a-camera>
+          <a-entity
+            camera
+            position="0 200 400"
+            wasd-controls="acceleration: 1000"
+            look-controls-enabled="true"
+            mouse-cursor>
+            <a-camera>
+              <a-cursor fuse="true" color="yellow"></a-cursor>
+            </a-camera>
           </a-entity>
+
 
           {this.plantGrid.map((newPlantModel, i) =>
             <Entity
