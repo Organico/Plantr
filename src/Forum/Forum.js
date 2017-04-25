@@ -161,18 +161,20 @@ class Forum extends Component {
             {this.props.posts.map((post, i) => {
               if (profile.email === post.email && !this.props.editing) {
                return <div className="post">
+                    <div className="editDelete">
+                      <i className="fa fa-pencil-square-o" ariaHidden="true" onClick={ () => {
+                          this.props.dispatchSetEditing(post.message);
+                        }}></i>
+                      <i className="fa fa-trash" ariaHidden="true" onClick={ () => {
+                          this.deletePost(post._id);
+                          this.getPost();
+                        }}></i>
+                    </div>
                  <ForumPost key={i} post={post} nickname={post.nickname} title={post.title} message={post.message} replies={post.replies} />
-                    <div>
-                      <button type="submit" onClick={ () => {
-                        this.deletePost(post._id);
-                        this.getPost();
-                      }}>delete</button>
-                      <button type="submit" onClick={ () => {
-                        this.props.dispatchSetEditing(post.message);
-                      }}>edit</button>
-                  </div>
                </div>
-              } else if (profile.email === post.email && this.props.editing && (post.message === this.props.messageToEdit)) {
+              }
+
+              else if (profile.email === post.email && this.props.editing && (post.message === this.props.messageToEdit)) {
                   return <div className="post">
                     <EditPost id={post._id} message={post.message} title={post.title} />
                     <button type="submit" onClick={ () => {
