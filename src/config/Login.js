@@ -1,4 +1,3 @@
-
 import React from 'react'
 import AuthService from './AuthService.js';
 import { connect } from 'react-redux';
@@ -7,7 +6,8 @@ import NewsFeed from '../Home/NewsFeed';
 export class Login extends React.Component {
 
   render() {
-    const { auth } = this.props
+    const { auth } = this.props;
+    const profileState = this.props.profile
     let background = {
       marginTop: '10px',
       marginLeft: '10px',
@@ -38,7 +38,12 @@ export class Login extends React.Component {
             <hr className="my-2"/>
             <p style={font}>From customization to cost and weather integration, Plantr gives you the tools to make gardening quick and easy. Sign up to join our community of local growers to find out how you can take your gardening skills to the next level! </p>
             <p className="lead">
-               <button className="btn btn-primary" onClick={auth.login.bind(this)}>Getting Started</button>
+              { (function() {
+                if (!profileState) {
+                  return <button className="btn btn-primary" onClick={auth.login.bind(this)}>Getting Started</button>
+                  }
+                }())
+              }
             </p>
           </div>
         </div>

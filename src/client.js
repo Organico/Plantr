@@ -56,7 +56,7 @@ class App extends Component {
     if (!this.state.profile) {
             return (
                 <div>
-                    <Login auth={auth}/>
+                    <Login profile={this.state.profile} auth={auth}/>
                 </div>
             );
           } else {
