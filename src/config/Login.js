@@ -11,6 +11,7 @@ export class Login extends React.Component {
     return (
       <div className="container login">
         <LogoAnimation />
+           <p>From customization to cost and weather integration, Plantr gives you the tools to make gardening quick and easy. Sign up to join our community of local growers to find out how you can take your gardening skills to the next level! </p>
           <p className="lead">
             { (function() {
               if (!profileState) {
