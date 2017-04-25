@@ -46,12 +46,12 @@ const ReplyPost = React.createClass({
     return(
       <div className="row">
 
-        <div className="col-md-8 replyBox">
+        <div className="replyBox">
 
           <textarea  rows="2" cols="50" ref={(node) => replyMessage = node } type="string" name="messageInput" placeholder='Your message'>
           </textarea>
         </div>
-        <div className="col-md-1 offset-md-1" id="addReply">
+        <div className="col-md-1" id="addReply">
           <button type="submit" onClick={() => {
             replyMessage.value = JSON.stringify(replyMessage.value);
             this.replyPost(replyMessage.value);

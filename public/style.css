@@ -239,9 +239,14 @@ body{
 .replyCount {
   font-family: "Above";
   font-weight: bold;
+  background: transparent;
 }
 .replyBox {
   margin-top: 20px;
+
+
+
+  margin-left: 30px;
 
 }
 #addReply {
