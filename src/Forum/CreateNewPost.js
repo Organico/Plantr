@@ -41,6 +41,8 @@ const CreateNewPost = React.createClass({
         }
       ).then((res) => {
         console.log("Successful posted on the client side of CreateNewPost");
+        console.log('props in create post: ', this.props)
+        this.props.closeModal();
         this.getPost();
       }).catch((err) => {
         console.error(err);
@@ -60,7 +62,7 @@ const CreateNewPost = React.createClass({
       <button type="submit" onClick={() => {
           titleInput.value = JSON.stringify(titleInput.value);
           messageInput.value = JSON.stringify(messageInput.value);
-          this.savePost(titleInput.value, messageInput.value)
+          this.savePost(titleInput.value, messageInput.value);
           titleInput.value = '';
           messageInput.value = '';
         }}>
