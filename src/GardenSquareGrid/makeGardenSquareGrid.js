@@ -28,7 +28,7 @@ import auth from '../client.js'
 
 const MakeGardenSquareGridView = React.createClass({
 
-  saveGarden(profilePicture, profileEmail, profileNickname, gardenName) {
+  saveGarden(profilePicture, profileEmail, profileNickname, gardenName, zone) {
     console.log("Saving garden...")
       var myImage;
       html2canvas(document.body, {
@@ -52,7 +52,8 @@ const MakeGardenSquareGridView = React.createClass({
         profileEmail: profileEmail,
         profileNickname: profileNickname,
         gardenImage: myImage,
-        gardenName: gardenName
+        gardenName: gardenName,
+        hardinessZone: zone
       }
     ).then((res) => {
       console.log("Successful post");
@@ -115,7 +116,7 @@ const MakeGardenSquareGridView = React.createClass({
           </form>
          <input ref={(node) => gardenName = node } type="text" name="gardenName" placeholder='Name your new garden' required/>
             <button className="btn btn-primary btn-sm" onClick={() => {
-              this.saveGarden(profilePicture, profileEmail, profileNickname, gardenName.value);
+              this.saveGarden(profilePicture, profileEmail, profileNickname, gardenName.value, this.props.zone);
               }} type="submit">Submit Garden
             </button>
             <br></br><br></br>
@@ -167,7 +168,8 @@ const mapStateToProps = (state) => {
     plantGrid: state.gardenReducer.plantGrid,
     width: state.gardenReducer.width,
     height: state.gardenReducer.height,
-    tooltipOpen: state.gardenReducer.tooltipOpen
+    tooltipOpen: state.gardenReducer.tooltipOpen,
+    zone: state.weatherReducer.zone
   };
 };
 

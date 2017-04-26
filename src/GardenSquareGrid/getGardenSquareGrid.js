@@ -12,8 +12,6 @@ import Autosuggest from 'react-autosuggest';
 import match from 'autosuggest-highlight/match'
 import parse from 'autosuggest-highlight/parse'
 
-
-
 const people = [
   {
     first: 'Charlie',
@@ -37,6 +35,8 @@ const people = [
   }
 ];
 
+
+
 function escapeRegexCharacters(str) {
   return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
@@ -50,7 +50,7 @@ function getSuggestions(value) {
 
   const regex = new RegExp('\\b' + escapedValue, 'i');
 
-  return people.filter(person => regex.test(getSuggestionValue(person)));
+  return this.state.filter(person => regex.test(getSuggestionValue(person)));
 }
 
 function getSuggestionValue(suggestion) {
@@ -87,8 +87,13 @@ class GardenSquareGridView extends React.Component{
 
     this.state = {
       value: '',
-      suggestions: []
+      suggestions: [],
+      gardens: [],
     };
+  }
+
+  componentDidMount(){
+    this.getAllGardens()
   }
 
   onChange = (event, { newValue, method }) => {
@@ -114,27 +119,40 @@ class GardenSquareGridView extends React.Component{
 
             var dbGardenGridData = res.data;
             console.log("DB gargen Grid data: ", dbGardenGridData);
-            var dbGardenGrids = [];
-            var dbPlantGrids = [];
-            var dbDropdownOptions = [];
+            var allGardens = [];
+            var userGardens = [];
 
             for (var i = 0; i<dbGardenGridData.length; i++) {
-              var individualGarden = dbGardenGridData[i].gardenGrid;
-              var individualPlant = dbGardenGridData[i].plantGrid;
-              dbGardenGrids.push(individualGarden);
-              dbPlantGrids.push(individualPlant);
-              console.log(individualPlant);
 
-              var dropDownObject = {
-                text: "Garden :" + i,
-                value: i.toString()
-              }
-              dbDropdownOptions.push(dropDownObject);
+              var gardenObj = {}
+
+              var dbGardenGrid = dbGardenGridData[i].gardenGrid;
+              var dbPlantGrid = dbGardenGridData[i].gardenGrid;
+              var dbUserEmail = dbGardenGridData[i].profileEmail;
+              var dbGardenName = dbGardenGridData[i].gardenName;
+              var dbProfilePicture = dbGardenGridData[i].profilePicture
+              var dbProfileNickname = dbGardenGridData[i].dbProfileNickname;
+
+              gardenObj["gardenGrid"]=  dbGardenGrid;
+              gardenObj["plantGrid"]= dbPlantGrid;
+              gardenObj["userEmail"] = dbUserEmail;
+              gardenObj["gardenName"] = dbGardenName;
+              gardenObj["profilePicture"] = dbProfilePicture;
+              gardenObj["profileNickname"] = dbProfileNickname;
+
+              console.log("Here is the garden Obj! ", gardenObj);
+
+
+              allGardens.push(gardenObj);
+
             }
 
-            this.props.dispatchGetAllGardens(dbGardenGrids);
-            this.props.dispatchGetAllPlants(dbPlantGrids);
-            this.props.dispatchSetDropdown(dbDropdownOptions);
+               // this.setState = this.setState({
+               //  gardens: allGardens
+               //   });
+
+
+
 
           }).catch((err) => {
             console.error(err);
@@ -152,6 +170,19 @@ class GardenSquareGridView extends React.Component{
     };
 
     return (
+      <div>
+        <div>
+          <h1>My Gardens</h1>
+          <Autosuggest
+            suggestions={suggestions}
+            onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+            onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+            getSuggestionValue={getSuggestionValue}
+            renderSuggestion={renderSuggestion}
+            inputProps={inputProps} />
+          </div>
+        <div>
+        <h1>All Gardens</h1>
       <Autosuggest
         suggestions={suggestions}
         onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
@@ -159,6 +190,9 @@ class GardenSquareGridView extends React.Component{
         getSuggestionValue={getSuggestionValue}
         renderSuggestion={renderSuggestion}
         inputProps={inputProps} />
+
+        </div>
+        </div>
     );
   }
 }

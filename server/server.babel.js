@@ -133,7 +133,8 @@ app.post('/api/gardens', (req, res, next) => {
     gardenImage: req.body.gardenImage,
     profilePicture: req.body.profilePicture,
     profileEmail: req.body.profileEmail,
-    profileNickname: req.body.profileNickname
+    profileNickname: req.body.profileNickname,
+    hardinessZone: req.body.hardinessZone
   });
   garden.save({}, (err)=> {
     if (err) {
