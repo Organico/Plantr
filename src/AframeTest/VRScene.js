@@ -12,9 +12,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import aframe from 'aframe'
-// import registerClickDrag from 'aframe-click-drag-component';
-// registerClickDrag(aframe);
+import registerClickDrag from 'aframe-click-drag-component';
+registerClickDrag(aframe);
+
 import store from '../store';
+
+import './SnapToGrid'
 
 
 class VRScene extends React.Component {
@@ -40,11 +43,14 @@ class VRScene extends React.Component {
       <div id="embed-aframe">
         <a-scene embedded>
           <a-sphere
+            id="sphere"
             position="0 1.25 -5"
             radius="100"
             color="#EF2D5E"
             event-set__enter="_event: mouseenter; material.color: yellowgreen; scale: 3 1 1"
             event-set__leave="_event: mouseleave; material.color: skyblue; scale: 1 1 1"
+            snap-to-grid="folder: https://s3-us-west-2.amazonaws.com/ryaperry-bucket/homeCubeMapAframeBlue/; edgeLength: 1000"
+            click-drag
           >
           </a-sphere>
 
@@ -68,6 +74,9 @@ class VRScene extends React.Component {
               src={newPlantModel.model}
               position={"" + (newPlantModel.x * 2 - 500) + " " + 0 + " " + (newPlantModel.y * 2-500)}
               scale="50 50 50"
+              event-set__enter="_event: mouseenter; scale: 70 70 70"
+              event-set__leave="_event: mouseleave; scale: 50 50 50"
+
               click-drag
             />
           )}
