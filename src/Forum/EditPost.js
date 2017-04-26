@@ -66,7 +66,8 @@ render() {
         <div className="col-md-8 forumTitleText">
           <br/>
           <div className="row">
-            <input ref={(title) => newTitle = title } type="string" name="newTitle" defaultValue={JSON.parse(this.props.title)}/>
+            <textarea cols="50" rows="1" ref={(title) => newTitle = title } type="string" name="newTitle" defaultValue={JSON.parse(this.props.title)}>
+            </textarea>
           </div>
           <br/>
           <div className="row">

@@ -54,9 +54,10 @@ const CreateNewPost = React.createClass({
     let messageInput;
     return (
       <div>
-        <input ref={(node) => titleInput= node } type="string" name="titleInput" placeholder='Your title'/>
+        <textarea cols="50" rows="1" ref={(node) => titleInput= node } type="string" name="titleInput" placeholder="Title Example: My organic compost tea recipe">
+        </textarea>
         <br />
-        <textarea  rows="15" cols="75" ref={(node) => messageInput = node } type="string" name="messageInput" placeholder='Your message'>
+        <textarea  rows="15" cols="75" ref={(node) => messageInput = node } type="string" name="messageInput" placeholder="Message Example: This super special compost tea requires ...">
         </textarea>
         <button type="submit" onClick={() => {
             titleInput.value = JSON.stringify(titleInput.value);
