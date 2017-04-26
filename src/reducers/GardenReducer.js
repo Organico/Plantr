@@ -47,8 +47,7 @@ const initialGardenState = {
       {name: 'Harvest', uv:45},
       {name: 'End', uv: 60}
 ],
-  gardenGrid: [
-  ],
+  gardenGrid: [{"x":75,"y":75,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg"},{"x":75,"y":125,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg"},{"x":75,"y":175,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg"},{"x":75,"y":225,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg"},{"x":75,"y":275,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg"},{"x":125,"y":75,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg"},{"x":125,"y":125,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg"},{"x":125,"y":175,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg"},{"x":125,"y":225,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg"},{"x":125,"y":275,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg"},{"x":175,"y":75,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg"},{"x":175,"y":125,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg"},{"x":175,"y":175,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg"},{"x":175,"y":225,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg"},{"x":175,"y":275,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg"},{"x":225,"y":75,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg"},{"x":225,"y":125,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg"},{"x":225,"y":175,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg"},{"x":225,"y":225,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg"},{"x":225,"y":275,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg"},{"x":275,"y":75,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg"},{"x":275,"y":125,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg"},{"x":275,"y":175,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg"},{"x":275,"y":225,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg"},{"x":275,"y":275,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg"}],
   plantGrid: [
   ],
   height: 5,
@@ -840,6 +839,8 @@ const setGardenParameters = (state, action) => {
       idCounter++;
     }
   }
+  console.log("Plant grid below: ")
+  console.log(JSON.stringify(gardenGridArray));
   Object.assign(newState, state, {gardenGrid: gardenGridArray,
     gardenXYCoordinates: newGardenXYCoordinates});
   return newState;
@@ -941,23 +942,6 @@ const addPlantToPlantGrid = (state, action) => {
   }
 
   console.log("Here is the new analytics ", newAnalytics);
-
-  //   analytics: [
-  // "numberPlants": 0,
-  // "squareFootage":0,
-  // "soilSquareFootage":0,
-  // "seedPacketCosts": 0,
-  // "numSeedPackets": 0,
-  // "totalCost": 0,
-  // "totalNumberOfSeedPackets": 0,
-  // "plantLibrary": {}
-  // "numFruits": 0,
-  // "numVeggies": 0,
-  // "numFlowers": 0
-  // ],
-
-
-  /*Analytics done at the same time a plant is added to the plant grid*/
 
   var generateAnalytics = function(plantToBeAdded) {
     //increment the number of that plant if already in the library
@@ -1095,9 +1079,6 @@ const undo = (state, action) => {
   var oldPlantGrid = state.pastPlantGridStates.slice();
   var oldOldPlantGrid =state.pastPlantGridStates.slice();
   oldOldPlantGrid.pop();
-
-
-
 
   Object.assign(newState, state, {plantGrid: oldPlantGrid , pastPlantGridStates: oldOldPlantGrid, futurePlantGrideStates: futurePlantGrid});
 
