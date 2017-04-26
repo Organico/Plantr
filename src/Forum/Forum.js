@@ -82,6 +82,7 @@ class Forum extends Component {
     })
     .then((res) => {
       console.log('Successfully deleted user post');
+      this.props.dispatchSetEditing();
     }).catch((err) => {
       console.error('There has been a clientside error in deleting the post in ForumJS ', err);
     });

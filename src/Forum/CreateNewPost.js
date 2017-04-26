@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import auth from '../client.js';
-import { setPosts, addPost } from '../Actions/ForumActions';
+import { setPosts, addPost, setEditing } from '../Actions/ForumActions';
 import axios from 'axios';
 
 
@@ -42,6 +42,7 @@ class CreateNewPost extends Component {
       ).then((res) => {
         console.log("Successful posted on the client side of CreateNewPost");
         this.props.closeModal();
+        this.props.dispatchSetEditing();
         this.getPost();
       }).catch((err) => {
         console.error("Error in creating a new post on CreateNewPost", err);
@@ -86,6 +87,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     dispatchSetPost(message) {
       dispatch(setPosts(message));
+    },
+    dispatchSetEditing(editing) {
+      dispatch(setEditing(editing));
     }
   };
 };
