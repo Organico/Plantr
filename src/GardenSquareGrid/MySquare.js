@@ -27,15 +27,20 @@ const MySquare = React.createClass({
 
      this.props.dispatchToggleSquare(e.target.attrs.x, e.target.attrs.y)
 
+
+
     },
 
     render() {
       let newImage = new Image();
       newImage.src = this.props.img
+           console.log("Here is the viability", this.props.viability)
+
         return (
             <Rect
                 x={this.props.x} y={this.props.y} width={50} height={50}
                 fillPatternImage={newImage}
+                viability = {this.props.viability}
                 fillPatternOffset= {{ x: 0, y: 0}}
                 stroke={'black'}
                 shadowBlur={10}

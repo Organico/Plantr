@@ -35,6 +35,7 @@ class TileDex extends React.Component {
                 y={tile.y}
                 img={tile.img}
                 name={tile.name}
+                viability={tile.viability}
                 stroke={tile.stroke}
               />
             )}

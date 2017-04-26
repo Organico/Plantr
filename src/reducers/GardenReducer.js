@@ -713,13 +713,15 @@ const initialGardenState = {
       'x':50,
       'y':50,
       'img': "https://s3-us-west-2.amazonaws.com/ryaperry-bucket/gardenTextures/soilTexture.jpg",
-      'stroke': 'black'
+      'stroke': 'black',
+      'viability': true
     },
     { 'name': 'grass',
       'x':104,
       'y':50,
       'img':"https://s3-us-west-2.amazonaws.com/ryaperry-bucket/gardenTextures/grassTexture.jpg",
-      'stroke': 'black'
+      'stroke': 'black',
+      'viability': true
 
       },
       {
@@ -727,7 +729,8 @@ const initialGardenState = {
       'x':158,
       'y':50,
       'img':'https://c1.staticflickr.com/3/2888/33316224483_1c8a775cf0_o.jpg',
-      'stroke': 'black'
+      'stroke': 'black',
+      'viability': false
 
     },
     {
@@ -735,7 +738,8 @@ const initialGardenState = {
       'x': 212,
       'y':50,
       'img': 'https://c1.staticflickr.com/3/2865/33285295564_e948bbe297_o.jpg',
-      'stroke': 'black'
+      'stroke': 'black',
+      'viability': false
 
     },
     {
@@ -743,42 +747,48 @@ const initialGardenState = {
       'x': 104,
       'y':150,
       'img': 'https://c1.staticflickr.com/3/2832/33285295044_f9354e513e_o.png',
-      'stroke': 'black'
+      'stroke': 'black',
+      'viability': false
     },
     {
       'name': 'RyanGnome',
       'x': 50,
       'y':100,
       'img': 'https://c1.staticflickr.com/3/2936/34033385761_c776af67f7_o.png',
-      'stroke': 'black'
+      'stroke': 'black',
+      'viability': false
     },
     {
       'name': 'ArielGnome',
       'x': 104,
       'y':100,
       'img': 'https://c1.staticflickr.com/3/2838/33779524940_77d4e0b1c5_o.png',
-      'stroke': 'black'
+      'stroke': 'black',
+      'viability': false
     },
     {
       'name': 'NathanGnome',
       'x': 158,
       'y':100,
       'img': 'https://c1.staticflickr.com/3/2920/33353040833_da5d00443d_o.png',
-      'stroke': 'black'
+      'stroke': 'black',
+      'viability': false
     }
     ,{
       'name': 'SamyGnome',
       'x': 212,
       'y':100,
       'img': 'https://c1.staticflickr.com/3/2910/34164510815_2e26ff97cd_o.png',
-      'stroke': 'black'
+      'stroke': 'black',
+      'viability': false
     },
     {
       'name': 'TreGnome',
       'x': 50,
       'y':150,
       'img': 'https://c1.staticflickr.com/3/2816/33353374503_0dca33c3ba_o.png',
-      'stroke': 'black'
+      'stroke': 'black',
+      'viability': false
     }
   ],
   gardens: [],
@@ -804,7 +814,11 @@ const toggleSquare = (state, action) => {
   var squareToToggleImg = squareToToggle.img;
     console.log("HERE", squareToToggleImg);
 
-  var tileToToggleTo = state.selectedTitle;
+  var tileToToggleTo = state.selectedTitle.img;
+
+  var gardenXYCoordinatesCopy = state.gardenXYCoordinates.slice();
+  gardenXYCoordinatesCopy[squareToToggleIndex].viability = state.selectedTitle.viability;
+
 
 
   var gardenCopy = state.gardenGrid.slice();
@@ -834,13 +848,12 @@ const setGardenParameters = (state, action) => {
   for (var i = 1; i < action.height + 1; i++ ) {
     for (var j =1; j < action.width + 1; j++) {
       var squareCounter = "square" + idCounter;
-      gardenGridArray.push({'x': i * 50+25, 'y': j * 50+25, 'img': "https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg"});
-      newGardenXYCoordinates.push({'x': i * 50+25, 'y': j * 50+25})
+      gardenGridArray.push({'x': i * 50+25, 'y': j * 50+25, 'img': "https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg", 'viability': true});
+      newGardenXYCoordinates.push({'x': i * 50+25, 'y': j * 50+25, 'viability': true})
       idCounter++;
     }
   }
-  console.log("Plant grid below: ")
-  console.log(JSON.stringify(gardenGridArray));
+
   Object.assign(newState, state, {gardenGrid: gardenGridArray,
     gardenXYCoordinates: newGardenXYCoordinates});
   return newState;
@@ -1005,7 +1018,9 @@ const setTile = (state, action) => {
     state.tileDex[i]['stroke'] = 'black'
     if (action.name === state.tileDex[i]['name']) {
       console.log("I FOUND YOU")
-      newTile = state.tileDex[i]['img'];
+      newTile = {}
+      newTile= state.tileDex[i]
+      console.log("Here is the new tile", newTile)
       indexOfTile = i;
     }
   }
