@@ -98,8 +98,17 @@ class Forum extends Component {
     console.log('this is the CHECK: ', this.check());
     return(
         <div className="row">
-          <div className="col-md-5 offset-md-2">
-            <button onClick={this.openModal}>Create New Forum Post</button>
+          <div className="col-md-8 offset-md-2">
+            <div className="post">
+              <div className="row">
+                <div className="col-md-8 offset-md-2">
+                  <h3>Let Your Community Know About Your Garden</h3>
+                </div>
+                <div className="replyEditDelete">
+                  <button type="submit" onClick={this.openModal}>Post Here!</button>
+                </div>
+              </div>
+            </div>
           </div>
             <Modal
               isOpen={this.state.modalIsOpen}
@@ -108,6 +117,7 @@ class Forum extends Component {
               style={customStyles}
               contentLabel="Example Modal"
             >
+              <h3>Post Your Questions or Successes Onto the Forum</h3>
               <CreateNewPost closeModal={this.closeModal}/>
               <button onClick={this.closeModal}>close</button>
            </Modal>

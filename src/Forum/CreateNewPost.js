@@ -54,19 +54,19 @@ const CreateNewPost = React.createClass({
     let messageInput;
     return (
       <div>
-      <input ref={(node) => titleInput= node } type="string" name="titleInput" placeholder='Your title'/>
-      <br />
-      <textarea  rows="4" cols="50" ref={(node) => messageInput = node } type="string" name="messageInput" placeholder='Your message'>
-      </textarea>
-      <button type="submit" onClick={() => {
-          titleInput.value = JSON.stringify(titleInput.value);
-          messageInput.value = JSON.stringify(messageInput.value);
-          this.savePost(titleInput.value, messageInput.value);
-          titleInput.value = '';
-          messageInput.value = '';
-        }}>
-        Add Post
-      </button>
+        <input ref={(node) => titleInput= node } type="string" name="titleInput" placeholder='Your title'/>
+        <br />
+        <textarea  rows="15" cols="75" ref={(node) => messageInput = node } type="string" name="messageInput" placeholder='Your message'>
+        </textarea>
+        <button type="submit" onClick={() => {
+            titleInput.value = JSON.stringify(titleInput.value);
+            messageInput.value = JSON.stringify(messageInput.value);
+            this.savePost(titleInput.value, messageInput.value);
+            titleInput.value = '';
+            messageInput.value = '';
+          }}>
+          Add Post
+        </button>
       </div>
     );
   }
