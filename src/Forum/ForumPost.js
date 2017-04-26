@@ -7,6 +7,7 @@ import ReplyPost from './ReplyPost';
 import EditReply from './EditReply';
 import Replies from './Replies';
 import axios from 'axios';
+import moment from '../../node_modules/moment/moment'
 
 class ForumPost extends Component {
 
@@ -146,7 +147,9 @@ class ForumPost extends Component {
               </div>
             </div>
           </div>
-          <div className="col-md-2 replyCount">Replies: {this.props.replies.length}</div>
+          <div className="col-md-2 replyCount">Replies: {this.props.replies.length}
+          <br />
+          <div className="replyCount"> {moment().startOf('hour').fromNow()} </div></div>
         </div>
 
       </div>

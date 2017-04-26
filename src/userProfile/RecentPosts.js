@@ -68,3 +68,22 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(RecentPosts);
+
+// =======
+//     <div className="text-center">
+//     <div>
+//       <form>
+//       <br />
+//         <select value={this.state.value} onChange={this.onChange.bind(this)} className="form-control">
+//           {this.props.gardenDropdown.map((dropdownOption, i) =>
+//             <option key={i} value={dropdownOption.value}>{dropdownOption.text}</option>)
+//           }
+//         </select>
+//       </form>
+//       </div>
+//           <div>
+//             <Stage id="cat" width={500} height={500} fill="white" stroke="black" className = "text-center">
+//               <GardenGrid />
+//               <PlantGrid />
+//             </Stage>
+// >>>>>>> made userPost div dynamic
