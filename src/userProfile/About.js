@@ -5,10 +5,10 @@ class About extends Component {
   render() {
     return (
       <div className="row">
-        <div className="col-md-12 offset-md-2 right userRecent">
+        <div className="col-md-12 about">
           <div className="userRecentSpan"> About Me </div>
           <div>
-            <p>This is a paragraph about myself. I'm so cool. Look at all this cool stuff about me!</p>
+            <p>I'm a modern day gardener in a world where life seems to get in the way of the easy life. Gardening takes me there. It is my peace, my fortress of solitude, my breath of fresh air when I need it the most.</p>
           </div>
         </div>
       </div>

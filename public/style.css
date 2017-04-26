@@ -105,18 +105,30 @@ body{
 .lineChart {
   margin-left: -100px;
 }
-#profilePic {
-  height: 500px;
-  background-repeat: no-repeat;
-  background-size: 100%;
+.profileLeft {
+  margin-top: 20px;
+  background-color: #694118;
 }
-#innerProfile {
+#picDiv {
+  margin-top: -60px;
+  margin-bottom: -50px;
+}
+
+.about {
+  color: white;
+}
+.profileDividerLine {
+  display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #EAE0CC;
+    margin: 1em 0;
+    padding: 0;
 }
 #username {
   text-align: center;
-  font-weight: bold;
   font-size: 25px;
-  color: white;
+  color: #EAE0CC;
   margin-bottom: 20px;
   text-shadow:
     -1px -1px 0 #000,
@@ -130,10 +142,9 @@ body{
 .userRecent {
   background-color: white;
   border: solid 1px #694118;
-  border-radius: 10px;
-  color: black;
-  margin-top: 10px;
-  height: 150px;
+  color: #8DC83B;
+  margin-top: 20px;
+  height: 225px;
 }
 .userRecentSpan {
   text-align: center;

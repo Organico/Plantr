@@ -38,13 +38,15 @@ class Profile extends Component {
         <div className="container-fluid containerStyle">
 
           <div className="row">
-            <div className="col-md-6">
+            <div className="col-md-3 profileLeft">
+              <ProfilePic />
+              <hr className="profileDividerLine" />
               <About />
+              <hr className="profileDividerLine" />
+            </div>
+            <div className="col-md-6">
               <RecentGardens />
               <RecentPosts />
-            </div>
-            <div className="col-md-5 offset-md-1">
-              <ProfilePic />
             </div>
           </div>
         </div>

@@ -45,7 +45,7 @@ const ReplyPost = React.createClass({
 
     return(
       <div className="row">
-        <div className="col-md-8 replyBox">
+        <div className="replyBox">
 
           <textarea  rows="2" cols="50" ref={(node) => replyMessage = node } type="string" name="messageInput" placeholder='Your message'>
           </textarea>
