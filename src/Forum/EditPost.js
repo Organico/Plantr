@@ -40,32 +40,51 @@ const EditPost = React.createClass({
 render() {
   const profile = auth.getProfile();
   let profilePic = {
-    backgroundImage: 'url(' + profile.picture + ')',
+    height: '50px',
+    width: '50px',
+    backgroundImage: 'url(' + this.props.post.profile + ')',
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
-    backgroundPosition: 'center'
+    backgroundPosition: 'center',
+    zIndex: '900'
   }
-
 
   let id = this.props.id;
   let newMessage;
   let newTitle;
   return(
-    <div className="row">
-      <div className="col-md-1" style={profilePic}>
-        <div>
-          { profile.nickname }
+    <div className="container-fluid">
+       <div className="row post">
+        <div className="col-md-2">
+          <div className="row"></div>
+            <div className="col-md-12 offset-md-3 postPicture" style={profilePic}></div>
+          <div className="row">
+            <div className="col-md-12 postUsername">{ this.props.nickname }</div>
+          </div>
         </div>
+        <div className="col-md-8 forumTitleText">
+          <br/>
+          <div className="row">
+            <input ref={(title) => newTitle = title } type="string" name="newTitle" defaultValue={JSON.parse(this.props.title)}/>
+          </div>
+          <br/>
+          <div className="row">
+            <textarea  rows="4" cols="60" ref={(message) => newMessage = message } type="string" name="newMessage" defaultValue={JSON.parse(this.props.message)}>
+            </textarea>
+            <div className="col-md-1" id="addReply">
+              <button type="submit" onClick ={ () => {
+                newMessage.value = JSON.stringify(newMessage.value);
+                newTitle.value = JSON.stringify(newTitle.value);
+                this.editPost(id, newMessage.value, newTitle.value);
+                newMessage.value = '';
+                newTitle.value = '';
+              }}>submit</button>
+            </div>
+          </div>
+          <br/>
+        </div>
+        <div className="col-md-2 replyCount">Replies: {this.props.replies.length}</div>
       </div>
-      <input ref={(title) => newTitle = title } type="string" name="newTitle" defaultValue={JSON.parse(this.props.title)}/>
-      <input ref={(message) => newMessage = message } type="string" name="newMessage" defaultValue={JSON.parse(this.props.message)}/>
-      <button type="submit" onClick ={ () => {
-        newMessage.value = JSON.stringify(newMessage.value);
-        newTitle.value = JSON.stringify(newTitle.value);
-        this.editPost(id, newMessage.value, newTitle.value);
-        newMessage.value = '';
-        newTitle.value = '';
-      }}>submit</button>
     </div>
     )
   }

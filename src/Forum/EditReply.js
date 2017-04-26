@@ -40,9 +40,8 @@ const EditPost = React.createClass({
 },
 
 render() {
-  const profile = auth.getProfile();
   let profilePic = {
-    backgroundImage: 'url(' + profile.picture + ')',
+    backgroundImage: 'url(' + this.props.reply.replyUser.picture + ')',
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
     backgroundPosition: 'center'
@@ -54,20 +53,32 @@ render() {
     textShadow: '-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black',
     marginTop: '50%'
   }
-  console.log('THIS PROPS IN EDITREPLY ', this.props);
   let id = this.props.id;
   let replyId = this.props.replyId
   let newMessage;
   return(
-    <div className="row">
-      <div className="col-md-1" style={profilePic}>
+    <div className="reply">
+      <div className="row">
+        <div className="col-md-1 offset-md-1" style={profilePic}>
+        <br/>
+        </div>
+        <div className="postUsername">
+          { this.props.reply.replyUser.nickname }
+        </div>
+        <div className="col-md-10 offset-md-1">
+          <div className="row">
+          <textarea  rows="4" cols="50" ref={(message) => newMessage = message } type="string" name="newMessage" defaultValue={JSON.parse(this.props.message)}>
+          </textarea>
+          <div className="col-md-1" id="addReply">
+            <button type="submit" onClick ={ () => {
+              newMessage.value = JSON.stringify(newMessage.value);
+              this.editPost(id, replyId, newMessage.value, this.props.message);
+              newMessage.value = '';
+            }}>submit</button>
+            </div>
+          </div>
+        </div>
       </div>
-      <input ref={(message) => newMessage = message } type="string" name="newMessage" defaultValue={JSON.parse(this.props.message)}/>
-      <button type="submit" onClick ={ () => {
-        newMessage.value = JSON.stringify(newMessage.value);
-        this.editPost(id, replyId, newMessage.value, this.props.message);
-        newMessage.value = '';
-      }}>submit</button>
     </div>
     )
   }

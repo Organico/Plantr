@@ -49,52 +49,6 @@ class Forum extends Component {
     this.setState({modalIsOpen: false});
   }
 
- //  putRequest() {
- //    Ajax({
- //      type: 'GET',
- //      url: 'https://phzmapi.org/97214.json',
- //      dataType: 'json',
- //      data: { zone : zone },
- //      success: function(data) {
- //        console.log(data)
- //      }
- //    }).bind(this)
- // }
-  //   axios.get('https://phzmapi.org/97214.json')
-  //   .then((res) => {
-  //     console.log('res here', res);
-  //   }).catch(err => {
-  //     console.error('error is: ', err)
-  //   })
-  // }
-    // var initialize = function() {
-    //     geocoder = new google.maps.Geocoder();
-    //     var latlng = new google.maps.LatLng(-34.397, 150.644);
-    //     var mapOptions = {
-    //       zoom: 8,
-    //       center: latlng
-    //     }
-    //     map = new google.maps.Map(document.getElementById('map'), mapOptions);
-    //   };
-
-    // codeAddress() {
-    //   geocoder = new google.maps.Geocoder();
-    //   var address = document.getElementById('address').value;
-    //   geocoder.geocode( { 'address': address}, function(results, status) {
-    //     if (status == 'OK') {
-    //       map.setCenter(results[0].geometry.location);
-    //       var marker = new google.maps.Marker({
-    //           map: map,
-    //           position: results[0].geometry.location
-    //       });
-    //       return results
-    //     } else {
-    //       alert('Geocode was not successful for the following reason: ' + status);
-    //     }
-    //   });
-    // }
-
-// checks the location, returns the lat & long
   check () {
     fetch("https://ipinfo.io/json")
       .then(res => res.json())
@@ -176,11 +130,13 @@ class Forum extends Component {
 
               else if (profile.email === post.email && this.props.editing && (post.message === this.props.messageToEdit)) {
                   return <div className="post">
-                    <EditPost id={post._id} message={post.message} title={post.title} />
-                    <button type="submit" onClick={ () => {
-                      this.props.dispatchSetEditing();
+                  <div className="editDelete">
+                    <i className="fa fa-trash" ariaHidden="true" onClick={ () => {
+                      this.deletePost(post._id);
                       this.getPost();
-                    }}>delete</button>
+                    }}></i>
+                  </div>
+                    <EditPost id={post._id} post={post} nickname={post.nickname} message={post.message} title={post.title} replies={post.replies} />
                   </div>
               } else {
                return <div className="post"><ForumPost key={i} post={post} nickname={post.nickname} title={post.title} message={post.message} replies={post.replies} /></div>

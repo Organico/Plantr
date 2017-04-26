@@ -16,6 +16,7 @@ const Replies = React.createClass({
     return(
       <div className="reply">
         <div className="row">
+          <br/>
           <div className="col-md-1 offset-md-1" style={profilePic}>
           <br/>
           </div>
