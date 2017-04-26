@@ -7,11 +7,28 @@ import {getTemp, getCoordinates, getWeatherDescription} from './OpenWeatherMap'
 import axios from 'axios'
 import CloudAnimation from './CloudAnimation'
 
-class WeatherTest extends React.Component {
+var loc;
 
+class WeatherTest extends React.Component {
   constructor(props){
     super(props)
   }
+
+  getLocation() {
+    $.get("http://ipinfo.io", function(response) {
+    let city = response.city.toString();
+    let state = response.region.toString();
+    loc = city +", " + state;
+    console.log("LOC IS HERE ------>", loc);
+    return loc;
+    }, "jsonp").then(res => {
+      this.getWeatherData(loc);
+    }).catch(err => {
+      console.err("error found in weather.js", err);
+    });
+  }
+
+
 
   getTempData(requestUrl){
     var temperature;
@@ -21,9 +38,6 @@ class WeatherTest extends React.Component {
         if (res.data.cod && res.data.message){
           throw new Error(res.data.message);
         } else {
-          // console.log("return data from axios request: ", res.data)
-          // console.log("this when the axios  data from axios request: ", this)
-          // console.log("that when the axios  data from axios request: ", that)
           temperature = res.data.main.temp;
           return res.data.main.temp;
         }
@@ -33,10 +47,6 @@ class WeatherTest extends React.Component {
       }
     ).then(
       function(){
-        // console.log("this in the second then .... ", this)
-        // console.log("that in the second then .|||... ", that)
-        // console.log("test in the second then .... ", temperature)
-        // console.log("props in the second then ||... ", that.props)
         that.props.dispatchSetTemperature(temperature)
     });
   }
@@ -49,8 +59,6 @@ class WeatherTest extends React.Component {
         if (res.data.cod && res.data.message){
           throw new Error(res.data.message);
         } else {
-          // console.log("return data from axios request setDecription: ", res.data)
-          // console.log("this when the axios  data from axios request: ", this)
           description = res.data.weather[0].description;
           return res.data.weather[0].description;
         }
@@ -60,10 +68,6 @@ class WeatherTest extends React.Component {
       }
     ).then(
       function(){
-        // console.log("this in the second then .... ", this)
-        // console.log("that in the second then .|||... ", that)
-        // console.log("test in the second then .... ", description)
-        // console.log("props in the second then ||... ", that.props)
         that.props.dispatchSetDescription(description)
     });
   }
@@ -77,7 +81,6 @@ class WeatherTest extends React.Component {
           throw new Error(res.data.message);
         } else {
           console.log("return data from axios request prefilter: ", res.data)
-          // console.log("this when the axios  data from axios request: ", this)
           coordinates = res.data.coord;
           return res.data.coord;
         }
@@ -87,29 +90,12 @@ class WeatherTest extends React.Component {
       }
     ).then(
       function(){
-        // console.log("this in the second then .... ", this)
-        // console.log("that in the second then .|||... ", that)
-        // console.log("test in the second then .... ", coordinates)
-        // console.log("props in the second then ||... ", that.props)
         that.props.dispatchSetCoordinates(coordinates)
     });
   }
 
 
   getForecastedWeatherData(location){
-    // http://api.openweathermap.org/data/2.5/forecast?appid=b625bae7d54136d7e2d33c6a3f383f9e&units=metric&q=San%20Francisco
-
-    //change url to "forecast" instead of weather
-    //returns a list of weather forecasts for 3 hour intervales for five days
-      //needs to have a function to increment by 3 hours in timestamp form
-    //same format as getWeatherdata so maybe reformat functions to not be so specific
-
-
-
-    //http://api.openweathermap.org/data/2.5/forecast/daily?appid=b625bae7d54136d7e2d33c6a3f383f9e&units=metric&q=San%20Francisco
-    //change url to "forecast/daily" instead of weather
-      //returns a list of weather forecast for the next 16 days by day
-
   }
 
   getWeatherData(location){
@@ -127,33 +113,14 @@ class WeatherTest extends React.Component {
   }
 
   componentDidMount(){
-    this.getWeatherData("Portland, ME");
+    this.getLocation();
   }
 
   render() {
 
-    // function renderMessage () {
-    //   if (isLoading) {
-    //     return <h3 className="text-center">fetching weather...</h3>;
-    //   } else if (temp && location) {
-    //     return <WeatherMessage location={location} temp={temp}/>;
-    //   }
-    // }
-
-    // function renderError () {
-    //   if (typeof errorMessage === 'string') {
-    //     return (
-    //       <ErrorModal message={errorMessage}/>
-    //     );
-    //   }
-    // }
-
     return(
       <div>
-        <h1>Get Weather</h1>
-        <div><p>{this.props.temperature} </p></div>
-        <div><p>{this.props.description} </p></div>
-        <CloudAnimation />
+        <div> {Math.round(((this.props.temperature * 9) / 5) + 32)}°F - {this.props.description}</div>
       </div>
     );
   }
