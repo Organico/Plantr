@@ -4,10 +4,6 @@ import {Layer, Rect, Circle, Stage, Group} from 'react-konva';
 import { connect } from 'react-redux'
 import { addPlantToPlantGrid, setSeedPacket, setGrowthGraph } from '../Actions/GardenActions.js';
 
-
-
-// import { togglePlant} from '../action'
-
 class Plant extends React.Component {
      constructor(...args) {
       super(...args);
@@ -17,8 +13,6 @@ class Plant extends React.Component {
       this.dragBoundFunc = this.dragBoundFunc.bind(this);
       this.handleMouseDragStart = this.handleMouseDragStart.bind(this);
       this.handleMouseDragEnd = this.handleMouseDragEnd.bind(this);
-
-
 
     }
     handleClick(e) {
@@ -93,14 +87,8 @@ class Plant extends React.Component {
         'packetImg' : pos.target.attrs.plant.packetImg
     }
     let seedGraph = pos.target.attrs.plant.growthGraph;
-
      this.props.dispatchSetSeedPacket(seedObject);
      this.props.dispatchSetGrowthGraph(seedGraph);
-     // this.props.dispatchSetSeedPacket(seedObject);
-
-
-
-
     }
 
    handleMouseDragEnd(pos){

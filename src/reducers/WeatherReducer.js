@@ -6,12 +6,7 @@
 
 // console.log(makeImage('https://c1.staticflickr.com/3/2909/33168957064_a7ef238410_o.png'));
 const initialWeatherState = {
-  //garden state
-  // temp_f: 0,
-  // temp_c: 0,
-  // weather_period_0: [],
-  // weather_period_1: [],
-  // weather_period_2: []
+
   zone: '',
   coordinates: '',
   description: '',

@@ -12,73 +12,8 @@ import Autosuggest from 'react-autosuggest';
 import match from 'autosuggest-highlight/match'
 import parse from 'autosuggest-highlight/parse'
 
-const people = [
-  {
-    first: 'Charlie',
-    last: 'Brown',
-    twitter: 'dancounsell'
-  },
-  {
-    first: 'Charlotte',
-    last: 'White',
-    twitter: 'mtnmissy'
-  },
-  {
-    first: 'Chloe',
-    last: 'Jones',
-    twitter: 'ladylexy'
-  },
-  {
-    first: 'Cooper',
-    last: 'King',
-    twitter: 'steveodom'
-  }
+var gardens = [
 ];
-
-
-
-function escapeRegexCharacters(str) {
-  return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-}
-
-function getSuggestions(value) {
-  const escapedValue = escapeRegexCharacters(value.trim());
-
-  if (escapedValue === '') {
-    return [];
-  }
-
-  const regex = new RegExp('\\b' + escapedValue, 'i');
-
-  return this.state.filter(person => regex.test(getSuggestionValue(person)));
-}
-
-function getSuggestionValue(suggestion) {
-  return `${suggestion.first} ${suggestion.last}`;
-}
-
-function renderSuggestion(suggestion, { query }) {
-  const suggestionText = `${suggestion.first} ${suggestion.last}`;
-  const matches = match(suggestionText, query);
-  const parts = parse(suggestionText, matches);
-
-  return (
-    <span className={'suggestion-content ' + suggestion.twitter}>
-      <span className="name">
-        {
-          parts.map((part, index) => {
-            const className = part.highlight ? 'highlight' : null;
-
-            return (
-              <span className={className} key={index}>{part.text}</span>
-            );
-          })
-        }
-      </span>
-    </span>
-  );
-}
-
 
 
 class GardenSquareGridView extends React.Component{
@@ -88,8 +23,10 @@ class GardenSquareGridView extends React.Component{
     this.state = {
       value: '',
       suggestions: [],
-      gardens: [],
+      propsdo: this.props
     };
+
+    this.getGardens = this.getGardens.bind(this);
   }
 
   componentDidMount(){
@@ -104,7 +41,7 @@ class GardenSquareGridView extends React.Component{
 
   onSuggestionsFetchRequested = ({ value }) => {
     this.setState({
-      suggestions: getSuggestions(value)
+      suggestions: this.getSuggestions(value)
     });
   };
 
@@ -113,6 +50,64 @@ class GardenSquareGridView extends React.Component{
       suggestions: []
     });
   };
+
+
+  getSuggestions(value) {
+
+      const escapedValue = this.escapeRegexCharacters(value.trim());
+
+      if (escapedValue === '') {
+        return [];
+      }
+
+      const regex = new RegExp('\\b' + escapedValue, 'i');
+
+      return gardens.filter(person => regex.test(this.getSuggestionValue(person)));
+    }
+
+  escapeRegexCharacters(str) {
+    return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  }
+
+
+  getGardens(suggestion) {
+    console.log("HERE ARE THE PROPS", this.props)
+    this.props.dispatchGetAllGardens(suggestion.gardenGrid)
+    this.props.dispatchGetAllPlants(suggestion.plantGrid)
+    this.props.dispatchSetGarden(dbGardenGrid);
+
+  }
+
+
+
+
+  getSuggestionValue(suggestion) {
+    this.getGardens(suggestion);
+    return `${suggestion.gardenName} ${suggestion.userEmail}`;
+  }
+
+  renderSuggestion(suggestion, { query }) {
+    const suggestionText = `${suggestion.gardenName} ${suggestion.userEmail}`;
+    const matches = match(suggestionText, query);
+    const parts = parse(suggestionText, matches);
+
+
+    return (
+      <span className={'suggestion-content ' + suggestion.twitter}>
+        <span className="name">
+          {
+            parts.map((part, index) => {
+              const className = part.highlight ? 'highlight' : null;
+
+              return (
+                <span className={className} key={index}>{part.text}</span>
+              );
+            })
+          }
+        </span>
+      </span>
+    );
+  }
 
   getAllGardens() {
    axios.get('/api/gardens').then((res) => {
@@ -127,7 +122,7 @@ class GardenSquareGridView extends React.Component{
               var gardenObj = {}
 
               var dbGardenGrid = dbGardenGridData[i].gardenGrid;
-              var dbPlantGrid = dbGardenGridData[i].gardenGrid;
+              var dbPlantGrid = dbGardenGridData[i].plantGrid;
               var dbUserEmail = dbGardenGridData[i].profileEmail;
               var dbGardenName = dbGardenGridData[i].gardenName;
               var dbProfilePicture = dbGardenGridData[i].profilePicture
@@ -147,12 +142,7 @@ class GardenSquareGridView extends React.Component{
 
             }
 
-               // this.setState = this.setState({
-               //  gardens: allGardens
-               //   });
-
-
-
+        gardens = allGardens;
 
           }).catch((err) => {
             console.error(err);
@@ -177,21 +167,39 @@ class GardenSquareGridView extends React.Component{
             suggestions={suggestions}
             onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
             onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-            getSuggestionValue={getSuggestionValue}
-            renderSuggestion={renderSuggestion}
+            getGardens={this.getGardens}
+            getSuggestionValue={this.getSuggestionValue}
+            renderSuggestion={this.renderSuggestion}
             inputProps={inputProps} />
           </div>
         <div>
         <h1>All Gardens</h1>
+
       <Autosuggest
         suggestions={suggestions}
         onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
         onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-        getSuggestionValue={getSuggestionValue}
-        renderSuggestion={renderSuggestion}
+        getSuggestionValue={this.getSuggestionValue}
+        renderSuggestion={this.renderSuggestion}
         inputProps={inputProps} />
 
         </div>
+
+        <div>
+            <Stage id="cat" width={500} height={500} fill="white" stroke="black" className = "text-center">
+              <GardenGrid />
+              <PlantGrid />
+
+
+            </Stage>
+
+
+            </div>
+
+
+
+
+
         </div>
     );
   }
