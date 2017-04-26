@@ -12,10 +12,10 @@ const initialWeatherState = {
   // weather_period_0: [],
   // weather_period_1: [],
   // weather_period_2: []
-
-  coordinates: {},
+  zone: '',
+  coordinates: '',
   description: '',
-  temperature: 0,
+  temperature: [],
 };
 
 const updateWeather = (state, action) => {
@@ -100,27 +100,31 @@ const setForecast = (state, action) => {
 }
 
 const setCoordinates = (state, action) => {
-  console.log("In WeatherReducer - setCoordinates state: ", state)
-  console.log("In WeatherReducer - setCoordinates action: ", action)
-  console.log('(before) state: ', state);
 
   const newState = {};
-  // const {
-  //   temp_f, temp_c,
-  //   weather_period_0,
-  //   weather_period_1,
-  //   weather_period_2
-  // } = state
-  const {
-    coordinates,
-  } = state
+  const { coordinates } = state
 
-  var newCoordinates = action;
+  Object.assign(newState, state, {coordinates: action.coordinates});
 
-  Object.assign(newState, state, {coordinates: newCoordinates});
-  console.log('(before) state: ', state);
-  console.log('(after) state: ', newState);
   return newState
+}
+
+const setPlantHardiness = (state, action) => {
+  console.log("In WeatherReducer - setDescription state: ", state)
+  console.log("In WeatherReducer - setDescription action: ", action)
+  console.log('(before) state: ', state);
+  const newState = {};
+  const { zone } = state
+  var newArray = action.data.temperature_range.split(' to ');
+  console.log('HERE IS THE NEWARRAY', newArray);
+  newArray[0] = +newArray[0];
+  newArray[1] = +newArray[1];
+  console.log('HERE IS THE NEWARRAY', newArray);
+  Object.assign(newState, state, {zone: action.data.zone, temperature: newArray });
+  console.log('(before) state: ', state);
+  console.log('(after) state: ', newState)
+  return newState
+
 }
 
 const setDescription = (state, action) => {
@@ -177,8 +181,8 @@ function weatherReducer(state = initialWeatherState, action) {
   switch (action.type) {
   case 'UPDATE_WEATHER':
     return updateWeather(state, action);
-  // case 'SET_COORDINATES':
-  //   return setCoordinates(state, action);
+  case 'SET_PLANT_HARDINESS':
+    return setPlantHardiness(state, action);
   case 'SET_FORECAST':
     return setForecast(state, action);
   case 'SET_DROPDOWN_OPTIONS':

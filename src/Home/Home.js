@@ -1,34 +1,72 @@
 import React, { Component, PropTypes } from 'react';
 // import {Layer, Rect, Stage} from 'react-konva';
 import { connect } from 'react-redux';
-// import axios from 'axios';
-import NewsFeed from './NewsFeed';
+import axios from 'axios';
+import { setCoordinates, setForecast } from '../Actions/WeatherActions.js';
+import weatherReducer from '../reducers/WeatherReducer.js'
 import LogoAnimation from './LogoAnimation'
 
-class Home extends React.Component {
+var zipCode;
+
+class Home extends Component {
+  constructor() {
+    super();
+    this.state = {};
+};
+
+  setCoordinates(zipCode) {
+    this.props.dispatchSetCoordinates(zipCode)
+  }
+
+  check() {
+    var that = this;
+    var latitudeLongitude;
+    fetch("https://ipinfo.io/json")
+      .then(res => res.json())
+      .then(ip => {
+          latitudeLongitude = ip.loc; //***Turns into ==> this.props.coordinates
+      }).then(res => {
+        let geocoder = new google.maps.Geocoder;
+        let latlngStr = latitudeLongitude.split(',', 2);
+        let latlng = {lat: parseFloat(latlngStr[0]), lng: parseFloat(latlngStr[1])};
+        return geocoder.geocode({'location': latlng}, function(results, status) {
+          if (status === 'OK') {
+            let location = results[0]['formatted_address'].split(',');
+            let diffLoc = location[location.length-2].split(' ');
+            zipCode = diffLoc[diffLoc.length - 1];
+            that.setCoordinates(zipCode);
+          } else {
+            window.alert('Geocoder failed due to: ' + status);
+          }
+      })
+    })
+  }
+
+  componentDidMount() {
+    this.check();
+  }
 
  render() {
-
-    let background = {
-      marginTop: '10px',
-      marginLeft: '10px',
-      backgroundImage: 'url(https://static.pexels.com/photos/132957/pexels-photo-132957.jpeg)',
-      backgroundRepeat: 'no-repeat',
-      backgroundPosition: 'center',
-      position: 'fixed',
-      backgroundSize: 'cover',
-      borderRadius: '10px'
-    };
-    let color = {
-      color: 'white',
-      textShadow: '-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black'
-    };
-    let font = {
-      color: 'white',
-      fontSize: '16px',
-      fontWeight: 'bold',
-      textShadow: '-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black'
-    };
+  let background = {
+    marginTop: '10px',
+    marginLeft: '10px',
+    backgroundImage: 'url(https://static.pexels.com/photos/132957/pexels-photo-132957.jpeg)',
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'center',
+    position: 'fixed',
+    backgroundSize: 'cover',
+    borderRadius: '10px'
+  };
+  let color = {
+    color: 'white',
+    textShadow: '-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black'
+  };
+  let font = {
+    color: 'white',
+    fontSize: '16px',
+    fontWeight: 'bold',
+    textShadow: '-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black'
+  };
     return (
       <div>
 
@@ -58,22 +96,27 @@ class Home extends React.Component {
   }
 };
 
-// const mapStateToProps = (state) => {
-//   return {
-//     // searchTerm: state.searchTerm
-//   };
-// };
+const mapStateToProps = (state) => {
+  return {
+    messageToEdit: state.forumReducer.messageToEdit,
+    posts: state.forumReducer.posts,
+    currentPost: state.forumReducer.currentPost,
+    editing: state.forumReducer.editing
+  };
+};
 
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-
-//     // dispatchSetGardenParameters(width, height, color) {
-//     //   dispatch(setGardenParameters(width, height, color));
-//     // },
-//     // dispatchSetGarden(dbGardenGrid) {
-//     //   dispatch(setGarden(dbGardenGrid));
-//     // }
-//   };
-// };
-// export default connect(mapStateToProps, mapDispatchToProps)(Home);
-export default Home;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    dispatchSetCoordinates(coordinates){
+      dispatch(setCoordinates(coordinates))
+    },
+    dispatchSetPost(message) {
+      dispatch(setPosts(message));
+    },
+    dispatchSetEditing(editing) {
+      dispatch(setEditing(editing));
+    }
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
+// export default Home;

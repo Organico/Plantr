@@ -1,5 +1,4 @@
-var express = require('express');
-
+const express = require('express');
 const app = express();
 const User = require('../db/models/User');
 const Garden = require('../db/models/Garden')
@@ -9,6 +8,7 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const axios = require('axios');
 const mongoose = require('mongoose');
+const request = require('request');
 
 app.use(morgan('dev'));
 app.use(bodyParser.json());
@@ -38,6 +38,26 @@ app.get('/api/users', function(req, res, next) {
     next();
   })
 });
+
+app.get('/api/users/hardiness', function(req, res, next) {
+  console.log('IN THE SERVER: ', req.query.zipCode)
+  request.get('https://phzmapi.org/' + req.query.zipCode + '.json', function(err, data) {
+    if (err) {
+      console.error('error on the server API: ', err);
+    } else {
+      console.log('THIS WILL BE THE MIRACLE: ', res.body);
+      res.status(200).send(data.body);
+    }
+  })
+
+  // User.find({}, (err, data) => {
+  //   if (err) {
+  //     console.error(err);
+  //   }
+  //   res.status(200).send(data);
+  //   next();
+  // })
+})
 
 app.get('/api/gardens', function(req, res, next) {
   console.log("Server side: ", req);
