@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom'
 import { connect } from 'react-redux';
 import CoverPhoto from './CoverPhoto';
@@ -6,11 +6,31 @@ import ProfilePic from './ProfilePic';
 import About from './About';
 import RecentGardens from './RecentGardens';
 import RecentPosts from './RecentPosts';
-// import axios from 'axios';
-// import { setUserParameters } from '../action';
+import axios from 'axios';
+import { setPlantHardiness } from '../Actions/WeatherActions';
 // import GardenGrid from './GardenSquareGrid/GardenGrid';
 
-const Profile = React.createClass({
+class Profile extends Component {
+
+  getHardiness() {
+  let zipCode = this.props.coordinates;
+  console.log('here is the zipCode: ', this.props)
+    axios.get('api/users/hardiness', {
+      params: {
+        zipCode: zipCode
+      }
+    })
+    .then((res) => {
+      console.log('res here', res.data);
+      this.props.dispatchPlantHardiness(res.data);
+    }).catch(err => {
+      console.error('error is: ', err)
+    })
+  }
+
+  componentDidMount() {
+    this.getHardiness();
+  }
 
   render() {
     return(
@@ -31,12 +51,13 @@ const Profile = React.createClass({
       </div>
       )
   }
-})
+}
 
 const mapStateToProps = (state) => {
   return {
     username: state.username,
-    gardens: state.gardens
+    gardens: state.gardens,
+    coordinates: state.weatherReducer.coordinates
   };
 };
 
@@ -46,6 +67,9 @@ const mapDispatchToProps = (dispatch) => {
     dispatchUserParameters(username, gardens) {
       dispatch(setUserParameters(username, gardens));
     },
+    dispatchPlantHardiness(data) {
+      dispatch(setPlantHardiness(data))
+    }
   };
 };
 

@@ -141,7 +141,7 @@ class Forum extends Component {
 
   render() {
     const profile = auth.getProfile();
-    // console.log('this is the response: ', this.putRequest());
+    console.log('this is the CHECK: ', this.check());
     return(
         <div className="row">
           <div className="col-md-5 offset-md-2">
