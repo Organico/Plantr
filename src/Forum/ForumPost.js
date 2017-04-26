@@ -46,7 +46,8 @@ const ForumPost = React.createClass({
     backgroundImage: 'url(' + this.props.post.profile + ')',
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
-    backgroundPosition: 'center'
+    backgroundPosition: 'center',
+    zIndex: '900'
   }
   let props = this.props;
   let postType = this.props.post.isShort;
@@ -100,20 +101,25 @@ const ForumPost = React.createClass({
             </div>
             <div className="row">
               <div>
-                <div className="col-md-8">
+                <div className="col-md-12">
                   {this.props.replies.map((reply, i) => {
                     if (!postType) {
                       if (profile.email === reply.replyUser.email && !this.props.editing) {
-                      return <div>
-                        <Replies key={i} reply={reply} />
-                          <div className="col-md-12">
-                            <button type="submit" onClick={ () => {
-                              this.deletePost(reply.belongsToId, reply.replyUser.clientID);
-                            }}>delete</button>
-                            <button type="submit" onClick={ () => {
-                              this.props.dispatchSetEditing(reply.message);
-                            }}>edit</button>
-                        </div>
+                      return <div className="row">
+                            <div className="col-md-10">
+                              <Replies key={i} reply={reply} />
+                            </div>
+                            <div className="col-md-1">
+                              <div className="replyEditDelete">
+                                <i className="fa fa-pencil-square-o" ariaHidden="true" onClick={ () => {
+                                    this.props.dispatchSetEditing(reply.message);
+                                  }}></i>
+                                <i className="fa fa-trash" ariaHidden="true" onClick={ () => {
+                                    this.deletePost(reply.belongsToId, reply.replyUser.clientID);
+                                  }}></i>
+                              </div>
+                          </div>
+
                       </div>
                        } else if (profile.email === reply.replyUser.email && this.props.editing && (reply.message === this.props.messageToEdit)) {
                         return <div>

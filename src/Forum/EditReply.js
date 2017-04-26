@@ -61,9 +61,6 @@ render() {
   return(
     <div className="row">
       <div className="col-md-1" style={profilePic}>
-        <div style={username}>
-          { profile.nickname }
-        </div>
       </div>
       <input ref={(message) => newMessage = message } type="string" name="newMessage" defaultValue={JSON.parse(this.props.message)}/>
       <button type="submit" onClick ={ () => {

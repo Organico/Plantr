@@ -203,6 +203,16 @@ body{
   height: 350px;
 }
 
+.editDelete {
+  margin-bottom: -44px;
+  margin-left: 10px;
+  position: relative;
+  z-index: 1000;
+}
+.replyEditDelete{
+  margin-left: -20px;
+  margin-top: 10px;
+}
 .forumTitle {
   font-family: "Above";
   font-weight: bold;
@@ -229,13 +239,15 @@ body{
 .replyCount {
   font-family: "Above";
   font-weight: bold;
+  background: transparent;
 }
 .replyBox {
   margin-top: 20px;
+  margin-left: 30px;
+
 }
 #addReply {
-  margin-top: 10px;
-  margin-left: -100px;
+  margin-top: 30px;
 }
 @import url('https://fonts.googleapis.com/css?family=Arsenal');
 
