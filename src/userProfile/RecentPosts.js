@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom'
 import { connect } from 'react-redux';
 import ForumPost from '../Forum/ForumPost';
@@ -6,7 +6,7 @@ import axios from 'axios';
 import auth from '../client.js';
 import { setPosts } from '../Actions/ForumActions';
 
-const RecentPosts = React.createClass({
+class RecentPosts extends Component {
 
    getPost() {
     const profile = auth.getProfile();
@@ -23,32 +23,32 @@ const RecentPosts = React.createClass({
       console.error(err);
       console.log("Error in RECENTPOSTS");
     });
-  },
+  }
+
+  componentDidMount() {
+    this.getPost();
+  }
 
   render() {
     const profile = auth.getProfile();
     return (
       <div className="row">
         <div className="col-md-12 offset-md-2 right userRecent">
-          <div className="userRecentSpan"> Recent Posts </div>
-          <button type="submit" onClick={ () => {
-              this.getPost();
-            }} >Get Request Here</button>
-          <div>
-           <div className="col-md-6">
-              {this.props.posts.map((post, i) => {
-                if (post.email === profile.email) {
-                  return <ForumPost key={i} post={post} nickname={post.nickname} title={post.title} message={post.message} replies={post.replies} />
+          <div className="userRecentSpan"> Recent Posts
+            <div>
+                {this.props.posts.map((post, i) => {
+                  if (post.email === profile.email) {
+                    return <ForumPost key={i} post={post} nickname={post.nickname} title={post.title} message={post.message} replies={post.replies} />
+                  }
                 }
-              }
-              )}
+                )}
             </div>
           </div>
         </div>
       </div>
     )
   }
-})
+}
 
 
 const mapStateToProps = (state) => {
