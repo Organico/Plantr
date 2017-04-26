@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom'
 import { connect } from 'react-redux';
 import axios from 'axios';
 import { setPosts, setEditing } from '../Actions/ForumActions';
 import auth from '../client.js';
 
-const EditPost = React.createClass({
+class EditPost extends Component {
 
   getPost() {
     axios.get('/api/forum')
@@ -19,7 +19,7 @@ const EditPost = React.createClass({
     }).catch((err) => {
       console.error('There has been a clientside error in getting the post in ForumJS ', err);
     });
-  },
+  }
 
  editPost(id, replyId, message, oldMessage) {
   axios.put('/api/forum/' + id + '/' + replyId, {
@@ -37,7 +37,7 @@ const EditPost = React.createClass({
   }).catch((err) => {
     console.error("Post has not updated on EditPost: ", err);
   });
-},
+}
 
 render() {
   let profilePic = {
@@ -79,7 +79,7 @@ render() {
     </div>
     )
   }
-});
+};
 
 const mapStateToProps = (state) => {
   return {

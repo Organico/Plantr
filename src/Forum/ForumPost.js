@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import auth from '../client.js';
@@ -8,7 +8,7 @@ import EditReply from './EditReply';
 import Replies from './Replies';
 import axios from 'axios';
 
-const ForumPost = React.createClass({
+class ForumPost extends Component {
 
     getPost() {
      axios.get('/api/forum')
@@ -22,7 +22,7 @@ const ForumPost = React.createClass({
      }).catch((err) => {
        console.error('There has been a clientside error in getting the post in ForumJS ', err);
      });
-   },
+   }
 
   deletePost(id, replyId) {
     axios.delete('/api/forum/' + id + '/' + replyId, {
@@ -36,7 +36,7 @@ const ForumPost = React.createClass({
     }).catch((err) => {
       console.error('There has been a clientside error in deleting the post in ForumJS ', err);
     });
-  },
+  }
 
   render() {
   const profile = auth.getProfile();
@@ -100,7 +100,6 @@ const ForumPost = React.createClass({
                   {this.props.replies.map((reply, i) => {
                     if (!postType) {
                       if (profile.email === reply.replyUser.email && !this.props.editing) {
-                        console.log('here is the reply: ', reply);
                       return <div className="row">
                             <div className="col-md-10">
                               <Replies key={i} reply={reply} />
@@ -153,7 +152,7 @@ const ForumPost = React.createClass({
       </div>
     )
   }
-})
+}
 
 const mapStateToProps = (state) => {
   return {

@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { Component }from 'react';
 import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import ReplyPost from './ReplyPost';
 
-const Replies = React.createClass({
+class Replies extends Component{
 
   render() {
     let profilePic = {
@@ -31,6 +31,6 @@ const Replies = React.createClass({
       </div>
     )
   }
-})
+}
 
 export default Replies

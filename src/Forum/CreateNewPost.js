@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import auth from '../client.js';
@@ -6,7 +6,7 @@ import { setPosts, addPost } from '../Actions/ForumActions';
 import axios from 'axios';
 
 
-const CreateNewPost = React.createClass({
+class CreateNewPost extends Component {
 
    getPost() {
     axios.get('/api/forum')
@@ -20,7 +20,7 @@ const CreateNewPost = React.createClass({
     }).catch((err) => {
       console.error('ERROR IN FORUMJS ', err);
     });
-  },
+  }
 
     savePost(title, message) {
       const profile = auth.getProfile();
@@ -44,10 +44,9 @@ const CreateNewPost = React.createClass({
         this.props.closeModal();
         this.getPost();
       }).catch((err) => {
-        console.error(err);
-        console.log("Error in creating a new post on CreateNewPost");
+        console.error("Error in creating a new post on CreateNewPost", err);
       });
-    },
+    }
 
     render() {
     let titleInput;
@@ -71,7 +70,7 @@ const CreateNewPost = React.createClass({
       </div>
     );
   }
-});
+};
 
 const mapStateToProps = (state) => {
   return {

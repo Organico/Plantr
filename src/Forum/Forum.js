@@ -21,8 +21,6 @@ const customStyles = {
   }
 };
 
-const WUNDERGROUND_KEY = "b56f2c0800fdf6e4";
-
 class Forum extends Component {
   constructor() {
     super();
@@ -95,7 +93,6 @@ class Forum extends Component {
 
   render() {
     const profile = auth.getProfile();
-    console.log('this is the CHECK: ', this.check());
     return(
         <div className="row">
           <div className="col-md-8 offset-md-2">
