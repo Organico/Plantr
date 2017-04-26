@@ -34,6 +34,7 @@ const MakeGardenSquareGridView = React.createClass({
       html2canvas(document.body, {
       onrendered: function(canvas) {
               myImage = canvas.toDataURL("image/png");
+              console.log("Here is your image");
             // window.open(myImage);
       }
     });
