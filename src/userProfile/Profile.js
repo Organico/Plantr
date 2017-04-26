@@ -8,7 +8,6 @@ import RecentGardens from './RecentGardens';
 import RecentPosts from './RecentPosts';
 import axios from 'axios';
 import { setPlantHardiness } from '../Actions/WeatherActions';
-// import GardenGrid from './GardenSquareGrid/GardenGrid';
 
 class Profile extends Component {
 
