@@ -13,11 +13,11 @@ Plantr
 ##### Prerequisites
 1. Node version > 4
 2. mongodb installed
-3. Chrome or Firefox Compatible
+3. Chrome or Firefox Compatible (Not IE Compatible)
 
 ##### Steps
 1. `npm install`
-2. `mongod` (to start up mongodb instance) <-- is this still necessary??
+2. start up server (to start up mongodb instance, normally `mongod`)
 3. `npm run dev`
 4. Goto `http://localhost:3000`
 

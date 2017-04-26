@@ -35,8 +35,8 @@ class RecentGardens extends Component {
     const profile = auth.getProfile();
     return (
       <div className="row">
-        <div className="col-md-12 offset-md-2 right userRecent">
-          <div className="userRecentSpan"> Recent Gardens
+        <div className="col-md-12 offset-md-2 right userGarden">
+          <div className="userGardenSpan"> Recent Gardens
             <GardenSquareGridView />
           </div>
         </div>
