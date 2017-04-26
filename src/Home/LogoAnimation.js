@@ -1,4 +1,3 @@
-
 import React from 'react';
 import ReactSWFCompat from 'react-swf';
 
