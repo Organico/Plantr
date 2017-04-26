@@ -47,7 +47,8 @@ const ForumPost = React.createClass({
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
     backgroundPosition: 'center',
-    zIndex: '900'
+    zIndex: '900',
+    borderRadius: '50%'
   }
   let props = this.props;
   let postType = this.props.post.isShort;
@@ -118,8 +119,10 @@ const ForumPost = React.createClass({
                       </div>
                        } else if (profile.email === reply.replyUser.email && this.props.editing && (reply.message === this.props.messageToEdit)) {
                         return <div className="row">
+                        <div className="col-md-11">
                           <EditReply reply={reply} replyId={reply.replyUser.clientID} id={reply.belongsToId} message={reply.message}/>
-                          <div className="col-md-1 offset-md-1">
+                        </div>
+                          <div className="col-md-1">
                             <div className="replyEditDelete">
                               <i className="fa fa-trash" ariaHidden="true" onClick={ () => {
                                   this.deletePost(reply.belongsToId, reply.replyUser.clientID);
@@ -135,7 +138,7 @@ const ForumPost = React.createClass({
                   )}
                 </div>
                   { (function() {
-                    if (!postType) {
+                    if (!postType && !props.editing) {
                       return <ReplyPost post={props.post}/>
                     }
                   }())

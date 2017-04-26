@@ -46,7 +46,8 @@ render() {
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
     backgroundPosition: 'center',
-    zIndex: '900'
+    zIndex: '900',
+    borderRadius: '50%'
   }
 
   let id = this.props.id;
@@ -69,7 +70,7 @@ render() {
           </div>
           <br/>
           <div className="row">
-            <textarea  rows="4" cols="60" ref={(message) => newMessage = message } type="string" name="newMessage" defaultValue={JSON.parse(this.props.message)}>
+            <textarea  rows="4" cols="50" ref={(message) => newMessage = message } type="string" name="newMessage" defaultValue={JSON.parse(this.props.message)}>
             </textarea>
             <div className="col-md-1" id="addReply">
               <button type="submit" onClick ={ () => {

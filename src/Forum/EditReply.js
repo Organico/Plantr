@@ -41,40 +41,37 @@ const EditPost = React.createClass({
 
 render() {
   let profilePic = {
+    height: '30px',
+    width: '30px',
     backgroundImage: 'url(' + this.props.reply.replyUser.picture + ')',
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
     backgroundPosition: 'center'
   }
-  let username = {
-    color: 'white',
-    fontSize: '16px',
-    fontWeight: 'bold',
-    textShadow: '-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black',
-    marginTop: '50%'
-  }
+
   let id = this.props.id;
   let replyId = this.props.replyId
   let newMessage;
   return(
     <div className="reply">
       <div className="row">
-        <div className="col-md-1 offset-md-1" style={profilePic}>
-        <br/>
+        <div className="col-md-1 offset-md-1 postPicture" style={profilePic}>
         </div>
         <div className="postUsername">
           { this.props.reply.replyUser.nickname }
         </div>
-        <div className="col-md-10 offset-md-1">
+        <div className="col-md-12">
           <div className="row">
-          <textarea  rows="4" cols="50" ref={(message) => newMessage = message } type="string" name="newMessage" defaultValue={JSON.parse(this.props.message)}>
-          </textarea>
-          <div className="col-md-1" id="addReply">
-            <button type="submit" onClick ={ () => {
-              newMessage.value = JSON.stringify(newMessage.value);
-              this.editPost(id, replyId, newMessage.value, this.props.message);
-              newMessage.value = '';
-            }}>submit</button>
+            <div className="col-md-8 replyBox">
+              <textarea  rows="4" cols="40" ref={(message) => newMessage = message } type="string" name="newMessage" defaultValue={JSON.parse(this.props.message)}>
+              </textarea>
+            </div>
+            <div className="col-md-1" id="addReply">
+              <button type="submit" onClick ={ () => {
+                newMessage.value = JSON.stringify(newMessage.value);
+                this.editPost(id, replyId, newMessage.value, this.props.message);
+                newMessage.value = '';
+              }}>submit</button>
             </div>
           </div>
         </div>
