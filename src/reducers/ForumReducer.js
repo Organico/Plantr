@@ -1,13 +1,4 @@
 const initialForumState = {
-     // // subject: "",
-     // // body: "",
-     // // subscriberIds: [""],
-     // // altTopicId: ""
-     // currentPost: {
-     //   id: "",
-     //   text: "",
-     //   completed: true
-     // },
      messageToEdit: '',
      editing: false,
      posts: [],
@@ -51,9 +42,7 @@ const togglePost = (state, action) => {
 
 const setEditing = (state, action) => {
   const newState = {};
-  console.log('THIS IS THE OLD STATE: ', state)
   Object.assign(newState, state, { editing: !state.editing, messageToEdit: action.editing});
-  console.log('THIS IS THE NEW STATE: ', newState);
   return newState;
 };
 

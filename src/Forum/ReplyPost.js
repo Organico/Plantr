@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import { setPosts, togglePost, setEditing } from '../Actions/ForumActions';
 import auth from '../client.js';
 import axios from 'axios';
 
-const ReplyPost = React.createClass({
+class ReplyPost extends Component {
 
    getPost() {
     axios.get('/api/forum')
@@ -19,7 +19,7 @@ const ReplyPost = React.createClass({
     }).catch((err) => {
       console.error('there has been an error in rerendering on ReplyPost ', err);
     });
-  },
+  }
 
   replyPost(replyMessage) {
     const profile = auth.getProfile();
@@ -38,7 +38,7 @@ const ReplyPost = React.createClass({
     }).catch((err) => {
       console.error("Error in submitting a reply - replyPost: ", err);
     });
-  },
+  }
 
   render() {
     let replyMessage;
@@ -46,8 +46,7 @@ const ReplyPost = React.createClass({
     return(
       <div className="row">
         <div className="replyBox">
-
-          <textarea  rows="2" cols="50" ref={(node) => replyMessage = node } type="string" name="messageInput" placeholder='Your message'>
+          <textarea  rows="2" cols="50" ref={(node) => replyMessage = node } type="string" name="messageInput" placeholder='Got advice or questions about this post? Reply here'>
           </textarea>
         </div>
         <div className="col-md-1 offset-md-1" id="addReply">
@@ -60,7 +59,7 @@ const ReplyPost = React.createClass({
       </div>
     )
   }
-})
+}
 
 const mapStateToProps = (state) => {
   return {

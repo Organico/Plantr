@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import auth from '../client.js';
@@ -8,7 +8,7 @@ import EditReply from './EditReply';
 import Replies from './Replies';
 import axios from 'axios';
 
-const ForumPost = React.createClass({
+class ForumPost extends Component {
 
     getPost() {
      axios.get('/api/forum')
@@ -22,7 +22,7 @@ const ForumPost = React.createClass({
      }).catch((err) => {
        console.error('There has been a clientside error in getting the post in ForumJS ', err);
      });
-   },
+   }
 
   deletePost(id, replyId) {
     axios.delete('/api/forum/' + id + '/' + replyId, {
@@ -36,7 +36,7 @@ const ForumPost = React.createClass({
     }).catch((err) => {
       console.error('There has been a clientside error in deleting the post in ForumJS ', err);
     });
-  },
+  }
 
   render() {
   const profile = auth.getProfile();
@@ -47,7 +47,8 @@ const ForumPost = React.createClass({
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
     backgroundPosition: 'center',
-    zIndex: '900'
+    zIndex: '900',
+    borderRadius: '50%'
   }
   let props = this.props;
   let postType = this.props.post.isShort;
@@ -72,19 +73,9 @@ const ForumPost = React.createClass({
     title = this.props.title;
   }
 
-  // let username = {
-  //   color: 'white',
-  //   fontSize: '16px',
-  //   fontWeight: 'bold',
-  //   textShadow: '-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black',
-  //   marginTop: '50%'
-  // }
-
     return(
       <div className="container-fluid">
-        <div className="row post" onClick = {() => {
-            this.props.dispatchTogglePost(this.props.post._id);
-            }} >
+        <div className="row post">
           <div className="col-md-2">
             <div className="row"></div>
               <div className="col-md-12 offset-md-3 postPicture" style={profilePic}></div>
@@ -93,11 +84,15 @@ const ForumPost = React.createClass({
             </div>
           </div>
           <div className="col-md-8 forumTitleText">
-            <div className="row">
-              <span className="forumTitle">{ title }</span>
-            </div>
-            <div className="row">
-              { message }
+            <div onClick = {() => {
+            this.props.dispatchTogglePost(this.props.post._id);
+            }}>
+              <div className="row">
+                <span className="forumTitle">{ title }</span>
+              </div>
+              <div className="row">
+                { message }
+              </div>
             </div>
             <div className="row">
               <div>
@@ -122,10 +117,19 @@ const ForumPost = React.createClass({
 
                       </div>
                        } else if (profile.email === reply.replyUser.email && this.props.editing && (reply.message === this.props.messageToEdit)) {
-                        return <div>
-                          <EditReply replyId={reply.replyUser.clientID} id={reply.belongsToId} message={reply.message} />
+                        return <div className="row">
+                        <div className="col-md-11">
+                          <EditReply reply={reply} replyId={reply.replyUser.clientID} id={reply.belongsToId} message={reply.message}/>
                         </div>
-                       }else {
+                          <div className="col-md-1">
+                            <div className="replyEditDelete">
+                              <i className="fa fa-trash" ariaHidden="true" onClick={ () => {
+                                  this.deletePost(reply.belongsToId, reply.replyUser.clientID);
+                                }}></i>
+                              </div>
+                          </div>
+                        </div>
+                       } else {
                         return <Replies key={i} reply={reply} />
                        }
                     }
@@ -133,7 +137,7 @@ const ForumPost = React.createClass({
                   )}
                 </div>
                   { (function() {
-                    if (!postType) {
+                    if (!postType && !props.editing) {
                       return <ReplyPost post={props.post}/>
                     }
                   }())
@@ -148,7 +152,7 @@ const ForumPost = React.createClass({
       </div>
     )
   }
-})
+}
 
 const mapStateToProps = (state) => {
   return {

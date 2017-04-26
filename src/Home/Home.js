@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-// import {Layer, Rect, Stage} from 'react-konva';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import { setCoordinates, setForecast } from '../Actions/WeatherActions.js';
@@ -119,4 +118,3 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
-// export default Home;

@@ -1,23 +1,23 @@
-import React from 'react';
+import React, { Component }from 'react';
 import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import ReplyPost from './ReplyPost';
 
-const Replies = React.createClass({
+class Replies extends Component{
 
   render() {
-  let profilePic = {
-    backgroundImage: 'url(' + this.props.reply.replyUser.picture + ')',
-    backgroundRepeat: 'no-repeat',
-    backgroundSize: 'cover',
-    backgroundPosition: 'center'
-  }
-
+    let profilePic = {
+      height: '30px',
+      width: '30px',
+      backgroundImage: 'url(' + this.props.reply.replyUser.picture + ')',
+      backgroundRepeat: 'no-repeat',
+      backgroundSize: 'cover',
+      backgroundPosition: 'center'
+    }
     return(
       <div className="reply">
         <div className="row">
-          <div className="col-md-1 offset-md-1" style={profilePic}>
-          <br/>
+          <div className="col-md-1 offset-md-1 postPicture" style={profilePic}>
           </div>
           <div className="postUsername">
             { this.props.reply.replyUser.nickname }
@@ -31,6 +31,6 @@ const Replies = React.createClass({
       </div>
     )
   }
-})
+}
 
 export default Replies

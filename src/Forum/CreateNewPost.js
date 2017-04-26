@@ -1,12 +1,12 @@
-import React, { PropTypes } from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import auth from '../client.js';
-import { setPosts, addPost } from '../Actions/ForumActions';
+import { setPosts, addPost, setEditing } from '../Actions/ForumActions';
 import axios from 'axios';
 
 
-const CreateNewPost = React.createClass({
+class CreateNewPost extends Component {
 
    getPost() {
     axios.get('/api/forum')
@@ -20,7 +20,7 @@ const CreateNewPost = React.createClass({
     }).catch((err) => {
       console.error('ERROR IN FORUMJS ', err);
     });
-  },
+  }
 
     savePost(title, message) {
       const profile = auth.getProfile();
@@ -42,35 +42,36 @@ const CreateNewPost = React.createClass({
       ).then((res) => {
         console.log("Successful posted on the client side of CreateNewPost");
         this.props.closeModal();
+        this.props.dispatchSetEditing();
         this.getPost();
       }).catch((err) => {
-        console.error(err);
-        console.log("Error in creating a new post on CreateNewPost");
+        console.error("Error in creating a new post on CreateNewPost", err);
       });
-    },
+    }
 
     render() {
     let titleInput;
     let messageInput;
     return (
       <div>
-      <input ref={(node) => titleInput= node } type="string" name="titleInput" placeholder='Your title'/>
-      <br />
-      <textarea  rows="4" cols="50" ref={(node) => messageInput = node } type="string" name="messageInput" placeholder='Your message'>
-      </textarea>
-      <button type="submit" onClick={() => {
-          titleInput.value = JSON.stringify(titleInput.value);
-          messageInput.value = JSON.stringify(messageInput.value);
-          this.savePost(titleInput.value, messageInput.value);
-          titleInput.value = '';
-          messageInput.value = '';
-        }}>
-        Add Post
-      </button>
+        <textarea cols="50" rows="1" ref={(node) => titleInput= node } type="string" name="titleInput" placeholder="Title Example: My organic compost tea recipe">
+        </textarea>
+        <br />
+        <textarea  rows="15" cols="75" ref={(node) => messageInput = node } type="string" name="messageInput" placeholder="Message Example: This super special compost tea requires ...">
+        </textarea>
+        <button type="submit" onClick={() => {
+            titleInput.value = JSON.stringify(titleInput.value);
+            messageInput.value = JSON.stringify(messageInput.value);
+            this.savePost(titleInput.value, messageInput.value);
+            titleInput.value = '';
+            messageInput.value = '';
+          }}>
+          Add Post
+        </button>
       </div>
     );
   }
-});
+};
 
 const mapStateToProps = (state) => {
   return {
@@ -86,6 +87,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     dispatchSetPost(message) {
       dispatch(setPosts(message));
+    },
+    dispatchSetEditing(editing) {
+      dispatch(setEditing(editing));
     }
   };
 };
