@@ -120,10 +120,7 @@ class WeatherTest extends React.Component {
 
     return(
       <div>
-        <h1>Get Weather</h1>
-        <div><p>{this.props.temperature} </p></div>
-        <div><p>{this.props.description} </p></div>
-        <CloudAnimation />
+        <div> {Math.round(((this.props.temperature * 9) / 5) + 32)}°F - {this.props.description}</div>
       </div>
     );
   }
