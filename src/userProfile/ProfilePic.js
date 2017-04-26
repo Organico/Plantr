@@ -9,22 +9,22 @@ class ProfilePic extends Component {
     magin: 'auto',
     width: '100px',
     height: '250px',
+    backgroundSize: '150px 150px',
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center',
     backgroundImage: 'url(' + profile.picture + ')'
   }
       // ||   'url(http://www.clipartbest.com/cliparts/4Tb/6oR/4Tb6oR9ac.gif)'
     return (
-      <div className="test " id="profilePic">
-        <div className="test">
+      <div id="profilePic">
+        <div>
           <div className="row">
-            <div id="username" className="col-md-6  col-sm-6 offset-sm-3">
+            <div id="username" className="col-md-12">
               {profile.nickname}
             </div>
           </div>
           <div className="row">
-            <div style={profPic} className="col-md-6  col-sm-6 offset-sm-3">
-              <div id="innerProfilePic"></div>
+            <div id="picDiv" style={profPic} className="col-md-6 offset-md-3">
             </div>
           </div>
         </div>
