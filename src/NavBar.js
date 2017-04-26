@@ -50,10 +50,10 @@ export default class NavBar extends React.Component {
             <li className="nav-item">
               <a className="nav-link" href="#forum">Forum</a>
             </li>
-            <li className="nav-item">
+            <li className="nav-item navbarDivider">
               <a className="nav-link weather"><WeatherTest className="nav-link" /></a>
             </li>
-            <li className="nav-item navbarDivider">
+            <li className="nav-item">
               <a className="nav-link" href="javascript:window.location.reload()" onClick={auth.logout.bind(this)}>Logout</a>
             </li>
             <li className="nav-item">
