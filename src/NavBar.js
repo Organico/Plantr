@@ -36,9 +36,6 @@ export default class NavBar extends React.Component {
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav">
             <li className="nav-item">
-              <a className="nav-link" href="#profile"><img style={profilePic} /></a>
-            </li>
-            <li className="nav-item">
               <a className="nav-link" href="#home">Home</a>
             </li>
             <li className="nav-item">
@@ -60,10 +57,13 @@ export default class NavBar extends React.Component {
               <a className="nav-link" href="#forum">Forum</a>
             </li>
             <li className="nav-item">
+              <a className="nav-link weather"><WeatherTest className="nav-link" /></a>
+            </li>
+            <li className="nav-item">
               <a className="nav-link" href="javascript:window.location.reload()" onClick={auth.logout.bind(this)}>Logout</a>
             </li>
             <li className="nav-item">
-              <a className="nav-link weather"><WeatherTest className="nav-link" /></a>
+              <a className="nav-link" href="#profile"><img style={profilePic} /></a>
             </li>
           </ul>
         </div>
