@@ -48,10 +48,13 @@ body{
 }
 .videoText {
   text-align: center;
-  font-size: 20px;
-  letter-spacing: 3px;
+  font-size: 30px;
+  letter-spacing: 2px;
   color: white;
+  font-family: 'Reem Kufi', sans-serif;
   background-color: rgba(0,0,0,0.3);
+  border-radius: 15px;
+  padding: 10px;
 }
 .postUsername {
   font-family: "Above";
