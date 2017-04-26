@@ -44,23 +44,6 @@
           "img": "https://c1.staticflickr.com/3/2909/33168957064_a7ef238410_o.png"
         }
       ]
-    },
-    {
-      "gardenId": "202",
-      "userId": "1",
-      "gardenGrid": [
-        {"x": 0, "y": 0, "color": "red", "size": 50},
-        {"x": 50, "y": 50, "color": "red", "size": 50},
-        {"x": 0, "y": 50, "color": "red", "size": 50 },
-        {"x": 50, "y": 0, "color": "red", "size": 50 },
-        {"x": 0, "y": 100, "color": "red", "size": 50 },
-        {"x": 50, "y": 100, "color": "red", "size": 50 }],
-      "plantGrid": [
-        {"x": 0, "y": 0,"img": "https://c1.staticflickr.com/3/2909/33168957064_a7ef238410_o.png", "size": 50},
-        {"x": 50, "y": 50, "color": "white", "size": 50},
-        {"x": 0, "y": 50, "color": "red", "size": 50 },
-        {"x": 50, "y": 0, "color": "yellow", "size": 50 }
-      ]
     }
   ]
 
@@ -127,10 +110,10 @@
   // User.collection.drop();
 
   // Step 2: Add data from `data.json`
-  console.log("This is the gardenData: ", gardenData);
-  Plant.collection.insertMany(plantData);
-  Garden.collection.insertMany(gardenData);
-  Forum.collection.insertMany(forumData);
+  // console.log("This is the gardenData: ", gardenData);
+  // Plant.collection.insertMany(plantData);
+  // Garden.collection.insertMany(gardenData);
+  // Forum.collection.insertMany(forumData);
   // User.collection.insertMany(userData);
 
   console.log("end of seeding file")

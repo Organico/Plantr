@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { setWidth, setHeight, setGardenParameters, setGarden, getAllGardens, getAllPlants, setDropdown, getGardenFromDropdown, getPlantsFromDropdown} from '../Actions/GardenActions.js';
 import axios from 'axios';
@@ -8,138 +8,202 @@ import {Layer, Rect, Circle, Stage, Group} from 'react-konva';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import PlantGrid from './PlantGrid.js';
 import Plant from './Plant.js';
-import Modal from  'react-modal';
+import Autosuggest from 'react-autosuggest';
+import match from 'autosuggest-highlight/match'
+import parse from 'autosuggest-highlight/parse'
 
-const customStyles = {
-  content : {
-    top                   : '50%',
-    left                  : '50%',
-    right                 : 'auto',
-    bottom                : 'auto',
-    marginRight           : '-50%',
-    transform             : 'translate(-50%, -50%)'
-  }
-};
+var gardens = [
+];
 
-class GardenSquareGridView extends Component {
-  constructor(props) {
-    super(props);
 
-    this.toggle = this.toggle.bind(this);
+class GardenSquareGridView extends React.Component{
+ constructor() {
+    super();
+
     this.state = {
-      dropdownOpen: false,
-      modalIsOpen: false
-    }
-      this.openModal = this.openModal.bind(this);
-      this.afterOpenModal = this.afterOpenModal.bind(this);
-      this.closeModal = this.closeModal.bind(this);
-    }
+      value: '',
+      suggestions: [],
+      propsdo: this.props
+    };
 
-    openModal() {
-      this.setState({modalIsOpen: true});
-    }
+    this.getGardens = this.getGardens.bind(this);
+  }
 
-    afterOpenModal() {
-      // references are now sync'd and can be accessed.
-      this.subtitle.style.color = '#f00';
-    }
+  componentDidMount(){
+    this.getAllGardens()
+  }
 
-    closeModal() {
-      this.setState({modalIsOpen: false});
-    }
-
-    toggle() {
-      this.setState({
-        dropdownOpen: !this.state.dropdownOpen
-      });
-    }
-
-  onChange(e) {
+  onChange = (event, { newValue, method }) => {
     this.setState({
-      value: e.target.value
+      value: newValue
     });
-    var gardenIndex = e.target.value;
-    this.props.dispatchGetGardenFromDropdown(gardenIndex);
-    this.props.dispatchGetPlantsFromDropdown(gardenIndex);
+  };
+
+  onSuggestionsFetchRequested = ({ value }) => {
+    this.setState({
+      suggestions: this.getSuggestions(value)
+    });
+  };
+
+  onSuggestionsClearRequested = () => {
+    this.setState({
+      suggestions: []
+    });
+  };
+
+
+  getSuggestions(value) {
+
+      const escapedValue = this.escapeRegexCharacters(value.trim());
+
+      if (escapedValue === '') {
+        return [];
+      }
+
+      const regex = new RegExp('\\b' + escapedValue, 'i');
+
+      return gardens.filter(person => regex.test(this.getSuggestionValue(person)));
+    }
+
+  escapeRegexCharacters(str) {
+    return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  }
+
+
+  getGardens(suggestion) {
+    console.log("HERE ARE THE PROPS", this.props)
+    this.props.dispatchGetAllGardens(suggestion.gardenGrid)
+    this.props.dispatchGetAllPlants(suggestion.plantGrid)
+    this.props.dispatchSetGarden(dbGardenGrid);
+
+  }
+
+
+
+
+  getSuggestionValue(suggestion) {
+    this.getGardens(suggestion);
+    return `${suggestion.gardenName} ${suggestion.userEmail}`;
+  }
+
+  renderSuggestion(suggestion, { query }) {
+    const suggestionText = `${suggestion.gardenName} ${suggestion.userEmail}`;
+    const matches = match(suggestionText, query);
+    const parts = parse(suggestionText, matches);
+
+
+    return (
+      <span className={'suggestion-content ' + suggestion.twitter}>
+        <span className="name">
+          {
+            parts.map((part, index) => {
+              const className = part.highlight ? 'highlight' : null;
+
+              return (
+                <span className={className} key={index}>{part.text}</span>
+              );
+            })
+          }
+        </span>
+      </span>
+    );
   }
 
   getAllGardens() {
    axios.get('/api/gardens').then((res) => {
-      var dbGardenGridData = res.data;
-      var dbGardenGrids = [];
-      var dbPlantGrids = [];
-      var dbDropdownOptions = [];
 
-      for (var i = 0; i<dbGardenGridData.length; i++) {
-        var individualGarden = dbGardenGridData[i].gardenGrid;
-        var individualPlant = dbGardenGridData[i].plantGrid;
-        dbGardenGrids.push(individualGarden);
-        dbPlantGrids.push(individualPlant);
+            var dbGardenGridData = res.data;
+            console.log("DB gargen Grid data: ", dbGardenGridData);
+            var allGardens = [];
+            var userGardens = [];
 
-        var dropDownObject = {
-          text: "Garden :" + i,
-          value: i.toString()
-        }
-        dbDropdownOptions.push(dropDownObject);
-      }
+            for (var i = 0; i<dbGardenGridData.length; i++) {
 
-      this.props.dispatchGetAllGardens(dbGardenGrids);
-      this.props.dispatchGetAllPlants(dbPlantGrids);
-      this.props.dispatchSetDropdown(dbDropdownOptions);
+              var gardenObj = {}
 
-    }).catch((err) => {
-      console.error("Error in getGardenSquareGrid getAllGardens()", err);
-    });
+              var dbGardenGrid = dbGardenGridData[i].gardenGrid;
+              var dbPlantGrid = dbGardenGridData[i].plantGrid;
+              var dbUserEmail = dbGardenGridData[i].profileEmail;
+              var dbGardenName = dbGardenGridData[i].gardenName;
+              var dbProfilePicture = dbGardenGridData[i].profilePicture
+              var dbProfileNickname = dbGardenGridData[i].dbProfileNickname;
+
+              gardenObj["gardenGrid"]=  dbGardenGrid;
+              gardenObj["plantGrid"]= dbPlantGrid;
+              gardenObj["userEmail"] = dbUserEmail;
+              gardenObj["gardenName"] = dbGardenName;
+              gardenObj["profilePicture"] = dbProfilePicture;
+              gardenObj["profileNickname"] = dbProfileNickname;
+
+              console.log("Here is the garden Obj! ", gardenObj);
+
+
+              allGardens.push(gardenObj);
+
+            }
+
+        gardens = allGardens;
+
+          }).catch((err) => {
+            console.error(err);
+            console.log("Error in getGardenSquareGrid getAllGardens()")
+          });
   }
 
-  getSingleGarden(allGardens){
-    this.props.dispatchSetGarden(dbGardenGrid);
-    return//array of {}
-  }
-  componentDidMount () {
-     this.getAllGardens()
-  }
 
-  render () {
-    let input;
-    let width;
-    let height;
-    let color;
-    let options = [];
+  render() {
+    const { value, suggestions } = this.state;
+    const inputProps = {
+      placeholder: "Type 'c'",
+      value,
+      onChange: this.onChange
+    };
 
     return (
-    <div className="text-center">
-    <div>
-      <form>
-      <br />
-        <select value={this.state.value} onChange={this.onChange.bind(this)} className="form-control">
-          {this.props.gardenDropdown.map((dropdownOption, i) =>
-            <option onClick={this.openModal} key={i} value={dropdownOption.value}>{dropdownOption.text}</option>)
-          }
-        </select>
-      </form>
-      </div>
-          <div>
-          <Modal
-              isOpen={this.state.modalIsOpen}
-              onAfterOpen={this.afterOpenModal}
-              onRequestClose={this.closeModal}
-              style={customStyles}
-              contentLabel="Example Modal"
-            >
-            {console.log('in the modal')}
-              <Stage id="cat" width={500} height={500} fill="white" stroke="black" className = "text-center">
-                <GardenGrid />
-                <PlantGrid />
-              </Stage>
-              <button onClick={this.closeModal}>close</button>
-            </Modal>
+      <div>
+        <div>
+          <h1>My Gardens</h1>
+          <Autosuggest
+            suggestions={suggestions}
+            onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+            onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+            getGardens={this.getGardens}
+            getSuggestionValue={this.getSuggestionValue}
+            renderSuggestion={this.renderSuggestion}
+            inputProps={inputProps} />
           </div>
+        <div>
+        <h1>All Gardens</h1>
+
+      <Autosuggest
+        suggestions={suggestions}
+        onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+        onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+        getSuggestionValue={this.getSuggestionValue}
+        renderSuggestion={this.renderSuggestion}
+        inputProps={inputProps} />
+
+        </div>
+
+        <div>
+            <Stage id="cat" width={500} height={500} fill="white" stroke="black" className = "text-center">
+              <GardenGrid />
+              <PlantGrid />
+
+
+            </Stage>
+
+
+            </div>
+
+
+
+
+
         </div>
     );
   }
 }
-
 const mapStateToProps = (state) => {
   return {
     gardenDropdown: state.gardenReducer.gardenDropdown

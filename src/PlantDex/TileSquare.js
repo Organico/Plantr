@@ -41,6 +41,7 @@ const TileSquare = React.createClass({
                 stroke={this.props.stroke}
                 shadowBlur={10}
                 name={this.props.name}
+                viability = {this.props.viability}
                 onClick={this.handleClick}
                 onMouseOver={this.handleMouseOver}
                 onMouseOut={this.handleMouseOut}

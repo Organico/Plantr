@@ -10,8 +10,6 @@ const CostEstimate = React.createClass({
         <div >
           <h1>Plantr Analytics</h1>
           <h2>Plants in your Garden</h2>
-
-
         </div>
       );
     }

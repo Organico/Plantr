@@ -122,12 +122,19 @@ app.post('/api/users', (req, res, next) => {
 });
 
 app.post('/api/gardens', (req, res, next) => {
-  console.log("In /api/gardens server side")
-  let garden = new Garden({
+  console.log("In /api/gardens server side. Here is the req.body", req.body)
+  var garden = new Garden({
     gardenId: req.body.gardenId,
     plantId: req.body.plantId,
     gardenGrid: req.body.gardenGrid,
-    plantGrid: req.body.plantGrid
+    plantGrid: req.body.plantGrid,
+    userEmail: req.body.userEmail,
+    gardenName: req.body.gardenName,
+    gardenImage: req.body.gardenImage,
+    profilePicture: req.body.profilePicture,
+    profileEmail: req.body.profileEmail,
+    profileNickname: req.body.profileNickname,
+    hardinessZone: req.body.hardinessZone
   });
   garden.save({}, (err)=> {
     if (err) {
@@ -139,6 +146,7 @@ app.post('/api/gardens', (req, res, next) => {
     var api_key = 'key-b90d2dcc5bdd42c5abceba45568ea1dd';
     var domain = 'sandboxa7ed15c3bb5b4de696ad9041ddcadb4a.mailgun.org';
     var mailgun = require('mailgun-js')({apiKey: api_key, domain: domain});
+    console.log("Here is your gardenName", garden.gardenName)
 
     var data = {
       from: 'Plantr <postmaster@sandboxa7ed15c3bb5b4de696ad9041ddcadb4a.mailgun.org>',
@@ -148,16 +156,16 @@ app.post('/api/gardens', (req, res, next) => {
       html: '<html>Inline image here: <img src="https://www.sciencea-z.com/shared/images/units/plant-life.jpg"></html>'
     };
 
-    mailgun.messages().send(data, function (error, body) {
-      console.log(error);
-      if (error) {
-        console.log("You had an error", error);
-      } else {
-        console.log("The body is ", body);
-      }
+    // mailgun.messages().send(data, function (error, body) {
+    //   console.log(error);
+    //   if (error) {
+    //     console.log("You had an error", error);
+    //   } else {
+    //     console.log("The body is ", body);
+    //   }
 
 
-    });
+    // });
 });
 
 app.post('/api/plants', (req, res, next) => {

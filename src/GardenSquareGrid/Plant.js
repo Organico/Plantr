@@ -4,10 +4,6 @@ import {Layer, Rect, Circle, Stage, Group} from 'react-konva';
 import { connect } from 'react-redux'
 import { addPlantToPlantGrid, setSeedPacket, setGrowthGraph } from '../Actions/GardenActions.js';
 
-
-
-// import { togglePlant} from '../action'
-
 class Plant extends React.Component {
      constructor(...args) {
       super(...args);
@@ -17,8 +13,6 @@ class Plant extends React.Component {
       this.dragBoundFunc = this.dragBoundFunc.bind(this);
       this.handleMouseDragStart = this.handleMouseDragStart.bind(this);
       this.handleMouseDragEnd = this.handleMouseDragEnd.bind(this);
-
-
 
     }
     handleClick(e) {
@@ -41,8 +35,6 @@ class Plant extends React.Component {
         'packetImg' : e.target.attrs.plant.packetImg
     }
      let seedGraph = e.target.attrs.plant.growthGraph;
-     console.log("HERE", e.target.attrs.plant)
-    console.log("**********THIS IS THE GROWTH GRAPH", seedGraph)
          this.props.dispatchSetGrowthGraph(seedGraph);
 
      this.props.dispatchSetSeedPacket(seedObject);
@@ -95,14 +87,8 @@ class Plant extends React.Component {
         'packetImg' : pos.target.attrs.plant.packetImg
     }
     let seedGraph = pos.target.attrs.plant.growthGraph;
-    console.log("**********THIS IS THE GROWTH GRAPH", seedObject)
      this.props.dispatchSetSeedPacket(seedObject);
      this.props.dispatchSetGrowthGraph(seedGraph);
-     // this.props.dispatchSetSeedPacket(seedObject);
-
-
-
-
     }
 
    handleMouseDragEnd(pos){
@@ -111,15 +97,29 @@ class Plant extends React.Component {
     console.log("coordinates are ", coordinates)
 
     var isWithinGridBounds = false;
+    var strokeColor = ''
 
     for (var i = 0; i<coordinates.length; i++){
       var coordinateToCheck = coordinates[i];
 
       var coordinateToCheckX = coordinateToCheck['x']+25;
       var coordinateToCheckY = coordinateToCheck['y']+25;
+      var coordinateToCheckViability = coordinateToCheck['viability'];
+      console.log("HERE IS THE VIABILITY", coordinateToCheckViability)
+                console.log("THE ZONE:", this.props.zone)
+
 
       if (this.state.posX ===coordinateToCheckX && this.state.posY === coordinateToCheckY) {
         isWithinGridBounds = true;
+
+        if (!coordinateToCheckViability){
+          strokeColor = 'red';
+          console.log('NOT VIABLE')
+        } else if (this.props.hardiness !== this.props.plantZone) {
+          console.log(this.props.hardiness)
+          strokeColor = 'yellow';
+        }
+
         break;
       }
     }
@@ -132,7 +132,8 @@ class Plant extends React.Component {
         img: this.props.img,
         model: this.props.model,
         isDraggable: false,
-        plant: this.props.plant
+        plant: this.props.plant,
+        stroke: strokeColor
 
       };
       this.props.dispatchAddPlantToPlantGrid(plant)
@@ -151,6 +152,7 @@ class Plant extends React.Component {
 
       let xOffset = (-1*this.props.x);
       let yOffset = this.props.y;
+      let stroke = this.props.stroke || ''
 
         return (
             <Circle
@@ -160,6 +162,7 @@ class Plant extends React.Component {
                 fillPatternImage={newImage}
                 fillPatternOffset= {{ x: 25, y: 25}}
                 shadowBlur={10}
+                stroke={stroke}
                 onClick={this.handleClick}
                 onMouseOver={this.handleMouseOver}
                 onMouseOut={this.handleMouseOut}
@@ -178,7 +181,8 @@ class Plant extends React.Component {
 const mapStateToProps = (state) => {
   return {
     plantGrid: state.gardenReducer.plantGrid,
-    gardenXYCoordinates: state.gardenReducer.gardenXYCoordinates
+    gardenXYCoordinates: state.gardenReducer.gardenXYCoordinates,
+    hardiness: state.weatherReducer.zone
   };
 };
 

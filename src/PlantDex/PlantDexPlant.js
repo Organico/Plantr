@@ -44,8 +44,6 @@ class PlantDexPlant extends React.Component {
     render() {
       let newImage = new Image();
       newImage.src = this.props.img;
-      console.log("This.props is", this.props)
-
 
       var plantthing = this.props.plantStats;
 

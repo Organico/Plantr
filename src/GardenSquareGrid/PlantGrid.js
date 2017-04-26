@@ -14,10 +14,12 @@ const PlantGrid = React.createClass({
             <Plant key={i}
               x={plantSquare.x}
               y={plantSquare.y}
+              stroke={plantSquare.stroke}
               img={plantSquare.img}
               model={plantSquare.model}
               plantStats ={plantSquare}
               isDraggable={plantSquare.isDraggable}
+              plantZone={'8b'}
               />)
           }
         </Layer>

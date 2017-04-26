@@ -47,10 +47,11 @@ const initialGardenState = {
       {name: 'Harvest', uv:45},
       {name: 'End', uv: 60}
 ],
-  gardenGrid: [
-  ],
+  gardenGrid: [{"x":75,"y":75,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg"},{"x":75,"y":125,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg"},{"x":75,"y":175,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg"},{"x":75,"y":225,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg"},{"x":75,"y":275,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg"},{"x":125,"y":75,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg"},{"x":125,"y":125,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg"},{"x":125,"y":175,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg"},{"x":125,"y":225,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg"},{"x":125,"y":275,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg"},{"x":175,"y":75,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg"},{"x":175,"y":125,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg"},{"x":175,"y":175,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg"},{"x":175,"y":225,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg"},{"x":175,"y":275,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg"},{"x":225,"y":75,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg"},{"x":225,"y":125,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg"},{"x":225,"y":175,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg"},{"x":225,"y":225,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg"},{"x":225,"y":275,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg"},{"x":275,"y":75,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg"},{"x":275,"y":125,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg"},{"x":275,"y":175,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg"},{"x":275,"y":225,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg"},{"x":275,"y":275,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg"}],
   plantGrid: [
   ],
+  height: 5,
+  width: 5,
 
   plantShelf: [
     {
@@ -712,13 +713,15 @@ const initialGardenState = {
       'x':50,
       'y':50,
       'img': "https://s3-us-west-2.amazonaws.com/ryaperry-bucket/gardenTextures/soilTexture.jpg",
-      'stroke': 'black'
+      'stroke': 'black',
+      'viability': true
     },
     { 'name': 'grass',
       'x':104,
       'y':50,
       'img':"https://s3-us-west-2.amazonaws.com/ryaperry-bucket/gardenTextures/grassTexture.jpg",
-      'stroke': 'black'
+      'stroke': 'black',
+      'viability': true
 
       },
       {
@@ -726,7 +729,8 @@ const initialGardenState = {
       'x':158,
       'y':50,
       'img':'https://c1.staticflickr.com/3/2888/33316224483_1c8a775cf0_o.jpg',
-      'stroke': 'black'
+      'stroke': 'black',
+      'viability': false
 
     },
     {
@@ -734,7 +738,8 @@ const initialGardenState = {
       'x': 212,
       'y':50,
       'img': 'https://c1.staticflickr.com/3/2865/33285295564_e948bbe297_o.jpg',
-      'stroke': 'black'
+      'stroke': 'black',
+      'viability': false
 
     },
     {
@@ -742,42 +747,48 @@ const initialGardenState = {
       'x': 104,
       'y':150,
       'img': 'https://c1.staticflickr.com/3/2832/33285295044_f9354e513e_o.png',
-      'stroke': 'black'
+      'stroke': 'black',
+      'viability': false
     },
     {
       'name': 'RyanGnome',
       'x': 50,
       'y':100,
       'img': 'https://c1.staticflickr.com/3/2936/34033385761_c776af67f7_o.png',
-      'stroke': 'black'
+      'stroke': 'black',
+      'viability': false
     },
     {
       'name': 'ArielGnome',
       'x': 104,
       'y':100,
       'img': 'https://c1.staticflickr.com/3/2838/33779524940_77d4e0b1c5_o.png',
-      'stroke': 'black'
+      'stroke': 'black',
+      'viability': false
     },
     {
       'name': 'NathanGnome',
       'x': 158,
       'y':100,
       'img': 'https://c1.staticflickr.com/3/2920/33353040833_da5d00443d_o.png',
-      'stroke': 'black'
+      'stroke': 'black',
+      'viability': false
     }
     ,{
       'name': 'SamyGnome',
       'x': 212,
       'y':100,
       'img': 'https://c1.staticflickr.com/3/2910/34164510815_2e26ff97cd_o.png',
-      'stroke': 'black'
+      'stroke': 'black',
+      'viability': false
     },
     {
       'name': 'TreGnome',
       'x': 50,
       'y':150,
       'img': 'https://c1.staticflickr.com/3/2816/33353374503_0dca33c3ba_o.png',
-      'stroke': 'black'
+      'stroke': 'black',
+      'viability': false
     }
   ],
   gardens: [],
@@ -803,7 +814,11 @@ const toggleSquare = (state, action) => {
   var squareToToggleImg = squareToToggle.img;
     console.log("HERE", squareToToggleImg);
 
-  var tileToToggleTo = state.selectedTitle;
+  var tileToToggleTo = state.selectedTitle.img;
+
+  var gardenXYCoordinatesCopy = state.gardenXYCoordinates.slice();
+  gardenXYCoordinatesCopy[squareToToggleIndex].viability = state.selectedTitle.viability;
+
 
 
   var gardenCopy = state.gardenGrid.slice();
@@ -833,11 +848,12 @@ const setGardenParameters = (state, action) => {
   for (var i = 1; i < action.height + 1; i++ ) {
     for (var j =1; j < action.width + 1; j++) {
       var squareCounter = "square" + idCounter;
-      gardenGridArray.push({'x': i * 50+25, 'y': j * 50+25, 'img': "https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg"});
-      newGardenXYCoordinates.push({'x': i * 50+25, 'y': j * 50+25})
+      gardenGridArray.push({'x': i * 50+25, 'y': j * 50+25, 'img': "https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg", 'viability': true});
+      newGardenXYCoordinates.push({'x': i * 50+25, 'y': j * 50+25, 'viability': true})
       idCounter++;
     }
   }
+
   Object.assign(newState, state, {gardenGrid: gardenGridArray,
     gardenXYCoordinates: newGardenXYCoordinates});
   return newState;
@@ -940,23 +956,6 @@ const addPlantToPlantGrid = (state, action) => {
 
   console.log("Here is the new analytics ", newAnalytics);
 
-  //   analytics: [
-  // "numberPlants": 0,
-  // "squareFootage":0,
-  // "soilSquareFootage":0,
-  // "seedPacketCosts": 0,
-  // "numSeedPackets": 0,
-  // "totalCost": 0,
-  // "totalNumberOfSeedPackets": 0,
-  // "plantLibrary": {}
-  // "numFruits": 0,
-  // "numVeggies": 0,
-  // "numFlowers": 0
-  // ],
-
-
-  /*Analytics done at the same time a plant is added to the plant grid*/
-
   var generateAnalytics = function(plantToBeAdded) {
     //increment the number of that plant if already in the library
     console.log("INSIDE GENERATE ANALYTICS, ",plantToBeAdded)
@@ -1019,7 +1018,9 @@ const setTile = (state, action) => {
     state.tileDex[i]['stroke'] = 'black'
     if (action.name === state.tileDex[i]['name']) {
       console.log("I FOUND YOU")
-      newTile = state.tileDex[i]['img'];
+      newTile = {}
+      newTile= state.tileDex[i]
+      console.log("Here is the new tile", newTile)
       indexOfTile = i;
     }
   }
@@ -1094,9 +1095,6 @@ const undo = (state, action) => {
   var oldOldPlantGrid =state.pastPlantGridStates.slice();
   oldOldPlantGrid.pop();
 
-
-
-
   Object.assign(newState, state, {plantGrid: oldPlantGrid , pastPlantGridStates: oldOldPlantGrid, futurePlantGrideStates: futurePlantGrid});
 
   console.log('(before) state: ', state);
@@ -1120,6 +1118,26 @@ const setGrowthGraph = (state, action) => {
   const newGraph = action.graph;
 
   Object.assign(newState, state, {plantGrowthGraph: action.graph});
+
+  console.log('(before) state: ', state);
+  console.log('(after) state: ', newState);
+  return newState;
+};
+
+const setHeight = (state, action) => {
+  const newState = {};
+
+  Object.assign(newState, state, {height: action.height});
+
+  console.log('(before) state: ', state);
+  console.log('(after) state: ', newState);
+  return newState;
+};
+
+const setWidth = (state, action) => {
+  const newState = {};
+
+  Object.assign(newState, state, {width: action.width});
 
   console.log('(before) state: ', state);
   console.log('(after) state: ', newState);
@@ -1165,6 +1183,10 @@ function gardenReducer(state = initialGardenState, action) {
     return clear(state, action)
   case 'SET_GROWTH_GRAPH':
     return setGrowthGraph(state, action);
+  case 'SET_WIDTH':
+    return setWidth(state, action);
+  case 'SET_HEIGHT':
+    return setHeight(state, action);
   default:
     return state;
   }

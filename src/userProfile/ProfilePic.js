@@ -4,7 +4,7 @@ import auth from '../client.js'
 class ProfilePic extends Component {
   render() {
   const profile = auth.getProfile();
-  console.dir(profile)
+  console.log("HERE IS THE PROFILE:", profile)
   const profPic = {
     magin: 'auto',
     width: '100px',
