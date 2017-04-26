@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { setWidth, setHeight, setGardenParameters, setGarden, getAllGardens, getAllPlants, setDropdown, getGardenFromDropdown, getPlantsFromDropdown} from '../Actions/GardenActions.js';
 import axios from 'axios';
@@ -8,88 +8,99 @@ import {Layer, Rect, Circle, Stage, Group} from 'react-konva';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import PlantGrid from './PlantGrid.js';
 import Plant from './Plant.js';
+import Modal from  'react-modal';
 
+const customStyles = {
+  content : {
+    top                   : '50%',
+    left                  : '50%',
+    right                 : 'auto',
+    bottom                : 'auto',
+    marginRight           : '-50%',
+    transform             : 'translate(-50%, -50%)'
+  }
+};
 
-class GardenSquareGridView extends React.Component {
+class GardenSquareGridView extends Component {
   constructor(props) {
     super(props);
 
     this.toggle = this.toggle.bind(this);
     this.state = {
-      dropdownOpen: false
-    };
-  }
+      dropdownOpen: false,
+      modalIsOpen: false
+    }
+      this.openModal = this.openModal.bind(this);
+      this.afterOpenModal = this.afterOpenModal.bind(this);
+      this.closeModal = this.closeModal.bind(this);
+    }
 
-  toggle() {
-    this.setState({
-      dropdownOpen: !this.state.dropdownOpen
-    });
-  }
+    openModal() {
+      this.setState({modalIsOpen: true});
+    }
 
+    afterOpenModal() {
+      // references are now sync'd and can be accessed.
+      this.subtitle.style.color = '#f00';
+    }
 
+    closeModal() {
+      this.setState({modalIsOpen: false});
+    }
 
+    toggle() {
+      this.setState({
+        dropdownOpen: !this.state.dropdownOpen
+      });
+    }
 
   onChange(e) {
     this.setState({
       value: e.target.value
     });
-
     var gardenIndex = e.target.value;
-    console.log("About to go to the action. Garden index is: ", gardenIndex);
     this.props.dispatchGetGardenFromDropdown(gardenIndex);
     this.props.dispatchGetPlantsFromDropdown(gardenIndex);
   }
 
-
-  componentDidMount () {
-    // this.props.dispatchGetAllGardens()
-  }
-
   getAllGardens() {
    axios.get('/api/gardens').then((res) => {
+      var dbGardenGridData = res.data;
+      var dbGardenGrids = [];
+      var dbPlantGrids = [];
+      var dbDropdownOptions = [];
 
-            var dbGardenGridData = res.data;
-            console.log("DB gargen Grid data: ", dbGardenGridData);
-            var dbGardenGrids = [];
-            var dbPlantGrids = [];
-            var dbDropdownOptions = [];
+      for (var i = 0; i<dbGardenGridData.length; i++) {
+        var individualGarden = dbGardenGridData[i].gardenGrid;
+        var individualPlant = dbGardenGridData[i].plantGrid;
+        dbGardenGrids.push(individualGarden);
+        dbPlantGrids.push(individualPlant);
 
-            for (var i = 0; i<dbGardenGridData.length; i++) {
-              var individualGarden = dbGardenGridData[i].gardenGrid;
-              var individualPlant = dbGardenGridData[i].plantGrid;
-              dbGardenGrids.push(individualGarden);
-              dbPlantGrids.push(individualPlant);
-              console.log(individualPlant);
+        var dropDownObject = {
+          text: "Garden :" + i,
+          value: i.toString()
+        }
+        dbDropdownOptions.push(dropDownObject);
+      }
 
-              var dropDownObject = {
-                text: "Garden :" + i,
-                value: i.toString()
-              }
-              dbDropdownOptions.push(dropDownObject);
-            }
+      this.props.dispatchGetAllGardens(dbGardenGrids);
+      this.props.dispatchGetAllPlants(dbPlantGrids);
+      this.props.dispatchSetDropdown(dbDropdownOptions);
 
-            this.props.dispatchGetAllGardens(dbGardenGrids);
-            this.props.dispatchGetAllPlants(dbPlantGrids);
-            this.props.dispatchSetDropdown(dbDropdownOptions);
-
-          }).catch((err) => {
-            console.error(err);
-            console.log("Error in getGardenSquareGrid getAllGardens()")
-          });
+    }).catch((err) => {
+      console.error("Error in getGardenSquareGrid getAllGardens()", err);
+    });
   }
 
-
-
   getSingleGarden(allGardens){
-
-
     this.props.dispatchSetGarden(dbGardenGrid);
-
     return//array of {}
+  }
+  componentDidMount () {
+     this.getAllGardens()
   }
 
   render () {
-
     let input;
     let width;
     let height;
@@ -98,35 +109,31 @@ class GardenSquareGridView extends React.Component {
 
     return (
     <div className="text-center">
+    <div>
       <form>
-        <label htmlFor="select1" >Select From Your Gardens</label>
+      <br />
         <select value={this.state.value} onChange={this.onChange.bind(this)} className="form-control">
           {this.props.gardenDropdown.map((dropdownOption, i) =>
-            <option key={i} value={dropdownOption.value}>{dropdownOption.text}</option>)
+            <option onClick={this.openModal} key={i} value={dropdownOption.value}>{dropdownOption.text}</option>)
           }
         </select>
       </form>
-
-
-          <h1> Garden Square Grid </h1>
-            <input ref={(node) => width = node } type="number" name="width" placeholder='Feet [width] is your garden?'/>
-            <input ref={(node) => height = node } type="number" name="height" placeholder='Feet [height] is your garden?'/>
-            <button className="btn btn-primary btn-sm" onClick={() => {
-              console.log("Button clicked");
-              this.getAllGardens();
-            }} type="submit">Get All Gardens
-            </button>
-
-          <div >
-          <br></br>
-          <br></br>
-
-            <Stage id="cat" width={500} height={500} fill="white" stroke="black" className = "text-center">
-              <GardenGrid />
-              <PlantGrid />
-
-
-            </Stage>
+      </div>
+          <div>
+          <Modal
+              isOpen={this.state.modalIsOpen}
+              onAfterOpen={this.afterOpenModal}
+              onRequestClose={this.closeModal}
+              style={customStyles}
+              contentLabel="Example Modal"
+            >
+            {console.log('in the modal')}
+              <Stage id="cat" width={500} height={500} fill="white" stroke="black" className = "text-center">
+                <GardenGrid />
+                <PlantGrid />
+              </Stage>
+              <button onClick={this.closeModal}>close</button>
+            </Modal>
           </div>
         </div>
     );
