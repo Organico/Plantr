@@ -109,6 +109,7 @@ class GardenSquareGridView extends Component {
 
     return (
     <div className="text-center">
+    <div>
       <form>
       <br />
         <select value={this.state.value} onChange={this.onChange.bind(this)} className="form-control">
@@ -117,6 +118,7 @@ class GardenSquareGridView extends Component {
           }
         </select>
       </form>
+      </div>
           <div>
           <Modal
               isOpen={this.state.modalIsOpen}
