@@ -101,7 +101,6 @@ const ForumPost = React.createClass({
             </div>
             <div className="row">
               <div>
-
                 <div className="col-md-12">
                   {this.props.replies.map((reply, i) => {
                     if (!postType) {
@@ -120,7 +119,6 @@ const ForumPost = React.createClass({
                                   }}></i>
                               </div>
                           </div>
-
                       </div>
                        } else if (profile.email === reply.replyUser.email && this.props.editing && (reply.message === this.props.messageToEdit)) {
                         return <div>
