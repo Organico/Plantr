@@ -5,7 +5,6 @@ bower_components
 .lock-wscript
 build/Release
 node_modules/
-public/bundle.js
 jspm_packages/
 typings/
 .npm

@@ -125,6 +125,7 @@ class GardenSquareGridView extends Component {
               style={customStyles}
               contentLabel="Example Modal"
             >
+            {console.log('in the modal')}
               <Stage id="cat" width={500} height={500} fill="white" stroke="black" className = "text-center">
                 <GardenGrid />
                 <PlantGrid />
