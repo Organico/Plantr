@@ -32,15 +32,9 @@ export default class NavBar extends React.Component {
         <button className="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>
-        <a className="navbar-brand" href="#home"><span id="navbrand">Plantr</span></a>
+        <a className="navbar-brand" href="#home"><img src="logo.png" height="40px" width="70px"/></a>
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav">
-            <li className="nav-item">
-              <a className="nav-link" href="#home">Home</a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#weather">Weather</a>
-            </li>
             <li className="nav-item">
               <a className="nav-link" href="#plant">Plant Test Env</a>
             </li>
@@ -59,7 +53,7 @@ export default class NavBar extends React.Component {
             <li className="nav-item">
               <a className="nav-link weather"><WeatherTest className="nav-link" /></a>
             </li>
-            <li className="nav-item">
+            <li className="nav-item navbarDivider">
               <a className="nav-link" href="javascript:window.location.reload()" onClick={auth.logout.bind(this)}>Logout</a>
             </li>
             <li className="nav-item">

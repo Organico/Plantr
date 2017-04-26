@@ -72,6 +72,10 @@ body{
   margin-top: 130px;
   color: white;
 }
+.navbarDivider{
+  border-left: solid 1px #8AC73D;
+  margin-left: 310px;
+}
 #navbrand {
   color: #FF8400;
 }
