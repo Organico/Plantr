@@ -119,6 +119,7 @@ const ForumPost = React.createClass({
                                   }}></i>
                               </div>
                           </div>
+
                       </div>
                        } else if (profile.email === reply.replyUser.email && this.props.editing && (reply.message === this.props.messageToEdit)) {
                         return <div>

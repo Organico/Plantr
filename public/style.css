@@ -62,7 +62,7 @@ body{
   margin-top: 10px;
 }
 .test {
-  /*border: solid 5px red;*/
+  border: solid 5px red;
 }
 .nav {
   height: 20px;
@@ -244,6 +244,7 @@ body{
 .replyBox {
   margin-top: 20px;
   margin-left: 30px;
+
 }
 #addReply {
   margin-top: 30px;
