@@ -109,6 +109,40 @@ class GardenSquareGridView extends React.Component{
     });
   };
 
+  getAllGardens() {
+   axios.get('/api/gardens').then((res) => {
+
+            var dbGardenGridData = res.data;
+            console.log("DB gargen Grid data: ", dbGardenGridData);
+            var dbGardenGrids = [];
+            var dbPlantGrids = [];
+            var dbDropdownOptions = [];
+
+            for (var i = 0; i<dbGardenGridData.length; i++) {
+              var individualGarden = dbGardenGridData[i].gardenGrid;
+              var individualPlant = dbGardenGridData[i].plantGrid;
+              dbGardenGrids.push(individualGarden);
+              dbPlantGrids.push(individualPlant);
+              console.log(individualPlant);
+
+              var dropDownObject = {
+                text: "Garden :" + i,
+                value: i.toString()
+              }
+              dbDropdownOptions.push(dropDownObject);
+            }
+
+            this.props.dispatchGetAllGardens(dbGardenGrids);
+            this.props.dispatchGetAllPlants(dbPlantGrids);
+            this.props.dispatchSetDropdown(dbDropdownOptions);
+
+          }).catch((err) => {
+            console.error(err);
+            console.log("Error in getGardenSquareGrid getAllGardens()")
+          });
+  }
+
+
   render() {
     const { value, suggestions } = this.state;
     const inputProps = {

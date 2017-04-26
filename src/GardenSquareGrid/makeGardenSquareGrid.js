@@ -18,6 +18,8 @@ import PlantBreakdown from '../Analytics/PlantBreakdown.js';
 import PlantDex from '../PlantDex/PlantDex.js'
 import { TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTitle, CardText, Row, Col } from 'reactstrap';
 import html2canvas from 'html2canvas';
+import auth from '../client.js'
+
 
 
 
@@ -26,22 +28,30 @@ import html2canvas from 'html2canvas';
 
 const MakeGardenSquareGridView = React.createClass({
 
-  saveGarden() {
+  saveGarden(profilePicture, profileEmail, profileNickname, gardenName) {
     console.log("Saving garden...")
+      var myImage;
       html2canvas(document.body, {
       onrendered: function(canvas) {
-              var myImage = canvas.toDataURL("image/png");
-            window.open(myImage);
+              myImage = canvas.toDataURL("image/png");
+            // window.open(myImage);
       }
     });
 
 
+
+      console.log("myImage is! ", myImage)
     axios.post('/api/gardens',
       {
         gardenId: Math.random()*100,
         userId: Math.random()*100,
         gardenGrid: this.props.gardenGrid,
-        plantGrid: this.props.plantGrid
+        plantGrid: this.props.plantGrid,
+        profilePicture: profilePicture,
+        profileEmail: profileEmail,
+        profileNickname: profileNickname,
+        gardenImage: myImage,
+        gardenName: gardenName
       }
     ).then((res) => {
       console.log("Successful post");
@@ -73,6 +83,11 @@ const MakeGardenSquareGridView = React.createClass({
     let center = {
       textAlign: "center"
     };
+    let gardenName;
+    let profile = auth.getProfile();
+    let profilePicture = profile.picture
+    let profileEmail = profile.email;
+    let profileNickname = profile.nickname
 
 
 
@@ -97,8 +112,9 @@ const MakeGardenSquareGridView = React.createClass({
               <input type="range"  min="1" max="14" step="1" value={this.props.height} onChange={this.setHeight}/>
             </p>
           </form>
+         <input ref={(node) => gardenName = node } type="text" name="gardenName" placeholder='Name your new garden' required/>
             <button className="btn btn-primary btn-sm" onClick={() => {
-              this.saveGarden();
+              this.saveGarden(profilePicture, profileEmail, profileNickname, gardenName.value);
               }} type="submit">Submit Garden
             </button>
             <br></br><br></br>

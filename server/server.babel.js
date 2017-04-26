@@ -122,7 +122,7 @@ app.post('/api/users', (req, res, next) => {
 });
 
 app.post('/api/gardens', (req, res, next) => {
-  console.log("In /api/gardens server side")
+  console.log("In /api/gardens server side. Here is the req.body", req.body)
   var garden = new Garden({
     gardenId: req.body.gardenId,
     plantId: req.body.plantId,
@@ -130,7 +130,10 @@ app.post('/api/gardens', (req, res, next) => {
     plantGrid: req.body.plantGrid,
     userEmail: req.body.userEmail,
     gardenName: req.body.gardenName,
-    gardenImage: req.body.gardenImage
+    gardenImage: req.body.gardenImage,
+    profilePicture: req.body.profilePicture,
+    profileEmail: req.body.profileEmail,
+    profileNickname: req.body.profileNickname
   });
   garden.save({}, (err)=> {
     if (err) {
@@ -152,16 +155,16 @@ app.post('/api/gardens', (req, res, next) => {
       html: '<html>Inline image here: <img src="https://www.sciencea-z.com/shared/images/units/plant-life.jpg"></html>'
     };
 
-    mailgun.messages().send(data, function (error, body) {
-      console.log(error);
-      if (error) {
-        console.log("You had an error", error);
-      } else {
-        console.log("The body is ", body);
-      }
+    // mailgun.messages().send(data, function (error, body) {
+    //   console.log(error);
+    //   if (error) {
+    //     console.log("You had an error", error);
+    //   } else {
+    //     console.log("The body is ", body);
+    //   }
 
 
-    });
+    // });
 });
 
 app.post('/api/plants', (req, res, next) => {
