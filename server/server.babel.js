@@ -116,7 +116,6 @@ app.get('/api/forum/:email', function(req, res, next) {
 
 app.post('/api/users', (req, res, next) => {
   let user = new User({
-    id: req.body.id,
     username: req.body.username,
     email: req.body.email,
     profilePhoto: req.body.profilePhoto,
