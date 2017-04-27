@@ -70,7 +70,7 @@ const MakeGardenSquareGridView = React.createClass({
       this.props.dispatchSetGardenParameters(width, this.props.height);
   },
 
-  returnCombinedGrid(){
+  return2DGrid(){
     return(
       <div className="row">
         <Stage id="cat" width={800} height={670} fill="white" stroke="black" className="gardenGrid">
@@ -84,8 +84,16 @@ const MakeGardenSquareGridView = React.createClass({
       </div>)
   },
 
-  returnVRScene(){
+  return3DGrid(){
     return (<VRScene />)
+  },
+
+  toggleView(viewIsTwoD){
+    if(viewIsTwoD === true){
+      return this.return2DGrid()
+    } else {
+      return this.return3DGrid()
+    }
   },
 
 
@@ -147,7 +155,7 @@ const MakeGardenSquareGridView = React.createClass({
 
 
             <div className="row">
-              {this.returnCombinedGrid()}
+              {this.toggleView(this.props.viewIsTwoD)}
             </div>
 
 
