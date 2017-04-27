@@ -102,9 +102,9 @@ const MakeGardenSquareGridView = React.createClass({
             <h1>Create a Garden</h1>
           </div>
         </div>
-------------------------------------------------------------------------------------------------------------------
+      <hr className="hrTwoD"/>
         <div className="row">
-          <div className="col-md-2">
+          <div className="col-md-3">
             Garden Height <br/>
             <span><strong>{this.props.width} ft</strong></span>
               <form action="#">
@@ -127,6 +127,16 @@ const MakeGardenSquareGridView = React.createClass({
               <div id="seedHolder">
                 <SeedPacket />
               </div>
+              <div>
+                <button onClick={() => {
+                    this.props.dispatchUndo();}}>Undo</button>
+                <button onClick={() => {
+                    this.props.dispatchClear();}}>Clear</button>
+                <button onClick={() => {
+                    this.props.dispatchUndo();}}>Redo</button>
+                <button onClick={() => {
+                    this.props.dispatchClear();}}>Delete</button>
+              </div>
           </div>
 
           <div className="col-md-8">
@@ -139,28 +149,14 @@ const MakeGardenSquareGridView = React.createClass({
                 </Layer>
               </Stage>
           </div>
-          <div className="col-md-4">
-                <br></br><br></br>
+        </div>
+        <div className="row">
+          <div className="col-md-6 offset-md-3">
+            <PlantDex />
           </div>
         </div>
-      -----------------------------------------------------------------------------------------------------
+
         <div className="row" style={center}>
-          <div className="col-md-6">
-            <button onClick={() => {
-                this.props.dispatchUndo();}}>Undo</button>
-            <button onClick={() => {
-                this.props.dispatchClear();}}>Clear</button>
-            <button onClick={() => {
-                this.props.dispatchUndo();}}>Redo</button>
-            <button onClick={() => {
-                this.props.dispatchClear();}}>Delete</button>
-            <div className="row">
-            </div>
- ------------------------------------------------------------------------------------
-            <div className="row">
-              <PlantDex />
-            </div>
-          </div>
             <div className="col-md-5 offset-md-1">
               <div className="col-md-10">
                 <h2>Harvest Graph</h2>
