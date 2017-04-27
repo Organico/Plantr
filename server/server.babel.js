@@ -13,7 +13,7 @@ const cron = require('node-cron');
 
 console.log("IN HERE!")
 var date = new Date();
-cron.schedule(' * * * *', function(){
+cron.schedule('10 * * * *', function(){
   console.log('running a task every minute', date);
 
 
@@ -28,16 +28,18 @@ cron.schedule(' * * * *', function(){
 
   var temperature;
 
-
-    request.get('https://phzmapi.org/' + req.query.zipCode + '.json', function(err, data) {
-    if (err) {
-      console.error('There was an error getting the hardiness zone on the server: ', err);
-      res.status(404);
-    } else {
-      console.log('Successful get request for hardiness zone API');
-      res.status(200).send(data.body);
-    }
-  })
+    request.get(requestUrl).then(
+      function(res) {
+        if (res.data.cod && res.data.message){
+          throw new Error(res.data.message);
+        } else {
+          temperature = res.data.main.temp;
+          console.log("Here is the temperature")
+          return res.data.main.temp;
+        }
+      }
+    ).then(
+      function(){
 
 
   let api_key = 'key-b90d2dcc5bdd42c5abceba45568ea1dd';
