@@ -49,8 +49,6 @@ class VRScene extends React.Component {
             position="0 1.25 -5"
             radius="100"
             color="#EF2D5E"
-
-            snap-to-grid="folder: https://s3-us-west-2.amazonaws.com/ryaperry-bucket/homeCubeMapAframeBlue/; edgeLength: 1000"
             click-drag
             cursor-listener
           >
@@ -70,7 +68,6 @@ class VRScene extends React.Component {
               ></a-cursor>
             </a-camera>
           </a-entity>
-
 
           {this.plantGrid.map((newPlantModel, i) =>
             <Entity
@@ -103,8 +100,8 @@ class VRScene extends React.Component {
               id="colladaBookshelf"
               primitive="a-collada-model"
               src={"https://s3-us-west-2.amazonaws.com/ryaperry-bucket/bookshelf/bookshelf2.dae"}
-              position={"" + 350 + " " + 0 + " " + -350}
-              scale="50 50 50"
+              position={"" + 400 + " " + 0 + " " + -350}
+              scale="40 40 30"
               event-set__enter="_event: mouseenter; scale: 70 70 70"
               event-set__leave="_event: mouseleave; scale: 50 50 50"
 
@@ -117,16 +114,16 @@ class VRScene extends React.Component {
 
 
           <a-plane
-            position={"" + 250 + " " + 100 + " " + -350}
-            rotation={"" + 0 + " " + 0 + " " + 0}
-            scale="200 200 200"
+            position={"" + 370 + " " + 140 + " " + -375}
+            rotation={"" + 0 + " " + -90 + " " + 0}
+            scale="40 50 50"
             src="#seed"
           ></a-plane>
 
 
           <a-entity id="rain" particle-system="preset: snow; color: #24CAFF; particleCount: 10000"></a-entity>
           <a-entity position="0 500 0" particle-system="preset: snow" positionSpread="1000 1000 1000" size="10"></a-entity>
-          <a-entity position="0 500 0" cubemap="folder: https://s3-us-west-2.amazonaws.com/ryaperry-bucket/homeCubeMapAframeBlue/; edgeLength: 1000"></a-entity>
+          <a-entity position="0 500 0" cubemap="folder: https://s3-us-west-2.amazonaws.com/ryaperry-bucket/homeCubeMapAframeBlue3/; edgeLength: 1000"></a-entity>
 
         </a-scene >
     </div>

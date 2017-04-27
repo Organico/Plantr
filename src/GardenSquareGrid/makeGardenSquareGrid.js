@@ -36,7 +36,7 @@ const MakeGardenSquareGridView = React.createClass({
       }
     });
 
-    console.log("myImage is! ", myImage)
+    // console.log("myImage is! ", myImage)
     axios.post('/api/gardens',
       {
         gardenId: Math.random()*100,
@@ -60,7 +60,7 @@ const MakeGardenSquareGridView = React.createClass({
   setHeight(e){
       let height = parseInt(e.target.value);
       this.props.dispatchSetHeight(height);
-      console.log(this.props)
+      // console.log(this.props)
       this.props.dispatchSetGardenParameters(this.props.width, height);
   },
 
@@ -72,7 +72,8 @@ const MakeGardenSquareGridView = React.createClass({
 
   return2DGrid(){
     return(
-      <div className="row">
+
+
         <Stage id="cat" width={800} height={670} fill="white" stroke="black" className="gardenGrid">
           <GardenGrid />
           <PlantGrid />
@@ -81,7 +82,8 @@ const MakeGardenSquareGridView = React.createClass({
             <MyRect />
           </Layer>
         </Stage>
-      </div>)
+
+    )
   },
 
   return3DGrid(){
@@ -98,12 +100,11 @@ const MakeGardenSquareGridView = React.createClass({
 
   renderButtonText(viewIsTwoD){
     if(viewIsTwoD === true){
-      return "3D"
+      return "Switch to 3D"
     } else {
-      return "2D"
+      return "Switch to 2D"
     }
   },
-
 
 
   render () {
@@ -165,6 +166,8 @@ const MakeGardenSquareGridView = React.createClass({
                     this.props.dispatchUndo();}}>Redo</button>
                 <button onClick={() => {
                     this.props.dispatchClear();}}>Delete</button>
+                <button onClick={() => {
+                    this.props.dispatchToggleVR(this.props.viewIsTwoD);}}>{this.renderButtonText(this.props.viewIsTwoD)}</button>
               </div>
               <div className="col-md-12 offset-md-1">
                 <p>Harvest Graph</p>
@@ -173,16 +176,13 @@ const MakeGardenSquareGridView = React.createClass({
           </div>
 
           <div className="col-md-8">
-              <Stage id="cat" width={800} height={670} fill="white" stroke="black" className="gardenGrid">
-                <GardenGrid />
-                <PlantGrid />
-                <Layer>
-                  <PlantShelf />
-                  <MyRect />
-                </Layer>
-              </Stage>
-            <div className="col-md-12">
 
+
+          {this.toggleView(this.props.viewIsTwoD)}
+
+
+
+            <div className="col-md-12">
               <PlantDex />
             </div>
             <div className="col-md-12 AnalyticsTabs">
