@@ -73,7 +73,9 @@ class GardenSquareGridView extends React.Component{
     this.state = {
       value: '',
       suggestions: [],
-      propsdo: this.props
+      propsdo: this.props,
+      profileName: 'Andrew Chung',
+      profileImage: ''
     };
 
     this.getGardens = this.getGardens.bind(this);
@@ -105,6 +107,10 @@ class GardenSquareGridView extends React.Component{
     var newPlantGrid = suggestion.plantGrid;
     this.props.dispatchSetSuggestedGarden(newGarden)
     this.props.dispatchSetSuggestedPlants(newPlantGrid)
+    this.setState({
+      profileName: suggestion.userEmail,
+      profileImage: suggestion.profilePicture
+    })
   };
 
   onSuggestionsClearRequested = () => {
@@ -185,13 +191,23 @@ class GardenSquareGridView extends React.Component{
 
 
   render() {
-    const { value, suggestions } = this.state;
+
+    const { value, suggestions, profileName, profileImage } = this.state;
     const inputProps = {
       placeholder: "Search for a garden!",
       value,
       onChange: this.onChange
     };
-
+    const profPic = {
+      magin: 'auto',
+      width: '100px',
+      height: '250px',
+      backgroundSize: '150px 150px',
+      backgroundRepeat: 'no-repeat',
+      backgroundPosition: 'center',
+      backgroundImage: 'url(' + profileImage + ')'
+    }
+    console.log('profileImage', profileImage);
     return (
       <div className="container">
           <div className="row">
@@ -220,8 +236,8 @@ class GardenSquareGridView extends React.Component{
             </div>
             <div className="col-md-4">
               <div id="currentPublicGarden">
-                <div>user picture goes here</div>
-                <div><h3>user nickname goes here</h3></div>
+                <div style={profPic}></div>
+                <div><h3>{profileName}</h3></div>
                 <div><p>user about goes here. this is a little something sweet about me. and maybe even something about the current garden. who knows what is possible!</p></div>
               </div>
             </div>
