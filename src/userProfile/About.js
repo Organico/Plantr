@@ -30,17 +30,13 @@ class About extends Component {
 
   getAbout() {
     const profile = auth.getProfile();
-    axios.get('api/users/:' + profile.clientID)
+    axios.get('api/users/' + profile.email)
     .then((res) => {
-      res.data.forEach((user) => {
-        console.log('HERE IS THE USER IN THE GET :', user);
-        if (user.email === profile.email) {
-          userAboutObject = {
-            id: user._id,
-            about: user.about
-          }
-        }
-      });
+      userAboutObject = {
+        id: res.data._id,
+        about: res.data.about
+      }
+      console.log('HERE IS THE USER OBJ: ', userAboutObject)
       console.log('successfully getting the user information in AboutJS', res.data)
     }).catch((err) => {
       console.error('there has been an error in rendering your AboutMe: ', err);
@@ -58,7 +54,7 @@ class About extends Component {
     return (
       <div className="row userAboutMe">
         <div className="col-md-12 about">
-          <div> About Me </div>
+          <h3> About Me </h3>
           <div>
           { (function() {
             if (userAboutObject.about && that.state.edit) {

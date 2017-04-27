@@ -96,14 +96,20 @@ app.get('/api/users', function(req, res, next) {
   })
 });
 
-app.get('/api/users/:id', function(req, res, next) {
+app.get('/api/users/:email', function(req, res, next) {
+  let userInfo;
   User.find({}, (err, data) => {
     if (err) {
       console.error('There was an error getting a specific user info: ', err);
       res.status(404);
     } else {
+      data.forEach((user) => {
+        if (user.email === req.params.email) {
+          userInfo = user;
+        }
+      })
       console.log('Successful get request for specific user info');
-      res.status(200).send(data);
+      res.status(200).send(userInfo);
     }
   })
 });
@@ -128,6 +134,24 @@ app.get('/api/gardens', function(req, res, next) {
     } else {
       console.log('Successful get request for garden info');
       res.status(200).send(data);
+    }
+  })
+});
+
+app.get('/api/gardens/:email', function(req, res, next) {
+  let userGardens = [];
+  Garden.find({}, (err, data) => {
+    if (err) {
+      console.error('There was an error getting the garden info: ' , err);
+      res.status(404);
+    } else {
+      data.forEach((garden) => {
+        if (req.params.email === garden.profileEmail) {
+          userGardens.push(garden);
+        }
+      });
+      console.log('Successful get request for user garden info');
+      res.status(200).send(userGardens);
     }
   })
 });
