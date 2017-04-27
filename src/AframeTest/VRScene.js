@@ -50,7 +50,7 @@ class VRScene extends React.Component {
             radius="100"
             color="#EF2D5E"
 
-            snap-to-grid="folder: https://s3-us-west-2.amazonaws.com/ryaperry-bucket/homeCubeMapAframeBlue/; edgeLength: 1000"
+            snap-to-grid="folder: https://s3-us-west-2.amazonaws.com/ryaperry-bucket/homeCubeMapAframeBlue2/; edgeLength: 1000"
             click-drag
             cursor-listener
           >
@@ -70,7 +70,6 @@ class VRScene extends React.Component {
               ></a-cursor>
             </a-camera>
           </a-entity>
-
 
           {this.plantGrid.map((newPlantModel, i) =>
             <Entity
@@ -126,7 +125,7 @@ class VRScene extends React.Component {
 
           <a-entity id="rain" particle-system="preset: snow; color: #24CAFF; particleCount: 10000"></a-entity>
           <a-entity position="0 500 0" particle-system="preset: snow" positionSpread="1000 1000 1000" size="10"></a-entity>
-          <a-entity position="0 500 0" cubemap="folder: https://s3-us-west-2.amazonaws.com/ryaperry-bucket/homeCubeMapAframeBlue/; edgeLength: 1000"></a-entity>
+          <a-entity position="0 500 0" cubemap="folder: https://s3-us-west-2.amazonaws.com/ryaperry-bucket/homeCubeMapAframeBlue2/; edgeLength: 1000"></a-entity>
 
         </a-scene >
     </div>

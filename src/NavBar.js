@@ -48,7 +48,6 @@ export default class NavBar extends React.Component {
             <li className="nav-item">
               <a className="nav-link" href="#forum">Forum</a>
             </li>
-
         </ul>
         <ul className="navbar-nav">
             <li className="nav-item navbarDivider">
