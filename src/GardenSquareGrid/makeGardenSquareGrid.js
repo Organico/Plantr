@@ -125,7 +125,7 @@ const MakeGardenSquareGridView = React.createClass({
   } else {
    return (
       <div style={center}>
-        <img id="seed" src="https://s3-us-west-2.amazonaws.com/ryaperry-bucket/banners/Plantr_Build_A_Garden.png" alt="Build a Garden" crossOrigin="anonymous" width="1049" heigh="149"></img>
+        <img id="seed" src="https://s3-us-west-2.amazonaws.com/ryaperry-bucket/banners/Plantr_Build_A_Garden.png" alt="Build a Garden" crossOrigin="anonymous" width="1049" height="149"></img>
 
 
         <h2>Garden Height</h2>
