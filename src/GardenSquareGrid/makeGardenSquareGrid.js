@@ -96,6 +96,14 @@ const MakeGardenSquareGridView = React.createClass({
     }
   },
 
+  renderButtonText(viewIsTwoD){
+    if(viewIsTwoD === true){
+      return "3D"
+    } else {
+      return "2D"
+    }
+  },
+
 
 
   render () {
@@ -151,7 +159,7 @@ const MakeGardenSquareGridView = React.createClass({
                 this.props.dispatchClear();}}>Delete</button>
 
             <button onClick={() => {
-                this.props.dispatchToggleVR();}}>3D</button>
+                this.props.dispatchToggleVR();}}>{this.renderButtonText(this.props.viewIsTwoD)}</button>
 
 
             <div className="row">
