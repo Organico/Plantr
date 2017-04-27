@@ -89,6 +89,7 @@ class VRScene extends React.Component {
 
           {this.gardenGrid.map((materialCube, i) =>
             <Entity
+              key={i}
               class="materialCube"
               geometry={{primitive: 'box', width: 100, height:30, depth:100}}
               material={{src: materialCube.img}}
@@ -97,6 +98,32 @@ class VRScene extends React.Component {
               click-drag
             />
           )}
+
+            <Entity
+              id="colladaBookshelf"
+              primitive="a-collada-model"
+              src={"https://s3-us-west-2.amazonaws.com/ryaperry-bucket/bookshelf/bookshelf2.dae"}
+              position={"" + 350 + " " + 0 + " " + -350}
+              scale="50 50 50"
+              event-set__enter="_event: mouseenter; scale: 70 70 70"
+              event-set__leave="_event: mouseleave; scale: 50 50 50"
+
+              click-drag
+            />
+
+          <a-assets>
+            <img id="seed" src="https://s3-us-west-2.amazonaws.com/ryaperry-bucket/seedPackets/tomatoResized.png" crossOrigin="anonymous"></img>
+          </a-assets>
+
+
+          <a-plane
+            position={"" + 250 + " " + 100 + " " + -350}
+            rotation={"" + 0 + " " + 0 + " " + 0}
+            scale="200 200 200"
+            src="#seed"
+          ></a-plane>
+
+
           <a-entity id="rain" particle-system="preset: snow; color: #24CAFF; particleCount: 10000"></a-entity>
           <a-entity position="0 500 0" particle-system="preset: snow" positionSpread="1000 1000 1000" size="10"></a-entity>
           <a-entity position="0 500 0" cubemap="folder: https://s3-us-west-2.amazonaws.com/ryaperry-bucket/homeCubeMapAframeBlue/; edgeLength: 1000"></a-entity>
