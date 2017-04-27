@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import auth from '../client.js';
 import { setPosts, addPost, setEditing } from '../Actions/ForumActions';
 import axios from 'axios';
-import moment from '../../node_modules/moment/moment'
 
 class CreateNewPost extends Component {
 
@@ -23,8 +22,6 @@ class CreateNewPost extends Component {
   }
 
     savePost(title, message) {
-      console.log('here is the time: ', moment("YYYY-MM-DD HH:mm"));
-      console.log('here is another time: ', )
       const profile = auth.getProfile();
       const profilePic = {
         backgroundImage: 'url(' + profile.picture + ')',
@@ -40,7 +37,7 @@ class CreateNewPost extends Component {
           nickname: profile.nickname,
           email: profile.email,
           replies: [],
-          time: moment()._d
+          time: new Date().toDateString()
         }
       ).then((res) => {
         console.log("Successful posted on the client side of CreateNewPost");

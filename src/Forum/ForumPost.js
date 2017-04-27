@@ -7,7 +7,6 @@ import ReplyPost from './ReplyPost';
 import EditReply from './EditReply';
 import Replies from './Replies';
 import axios from 'axios';
-import moment from '../../node_modules/moment/moment'
 
 class ForumPost extends Component {
 
