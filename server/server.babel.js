@@ -18,67 +18,72 @@ app.use('/', express.static('public'));
 
 mongoose.connect('mongodb://test:test@ds015750.mlab.com:15750/plantrdb', function(err) {
   if(err) {
-    console.log('connection error', err);
-  }
-  else {
+    console.error('There has been an error connection to the server: ', err);
+  } else {
     console.log('connection with database successful');
   }
 });
 
 const db = mongoose.connection;
 
-
 /*--------------------GET REQUEST---------------------------------------------*/
 app.get('/api/users', function(req, res, next) {
   User.find({}, (err, data) => {
     if (err) {
       console.error('There was an error getting the user info: ', err);
+      res.status(404);
+    } else {
+      console.log('Successful get request for user info: ', data);
+      res.status(200).send(data);
     }
-    console.log('successful get request: ', data)
-    res.status(200).send(data);
   })
 });
 
 app.get('/api/users/:id', function(req, res, next) {
   User.find({}, (err, data) => {
     if (err) {
-      console.error('There was an error getting the user info: ', err);
+      console.error('There was an error getting a specific user info: ', err);
+      res.status(404);
+    } else {
+      console.log('Successful get request for specific user info: ', data);
+      res.status(200).send(data);
     }
-    console.log('successful get request: ', data)
-    res.status(200).send(data);
   })
 });
 
 app.get('/api/users/hardiness', function(req, res, next) {
-  console.log('IN THE SERVER: ', req.query.zipCode)
   request.get('https://phzmapi.org/' + req.query.zipCode + '.json', function(err, data) {
     if (err) {
-      console.error('error on the server API: ', err);
+      console.error('There was an error getting the hardiness zone on the server: ', err);
+      res.status(404);
     } else {
-      console.log('THIS WILL BE THE MIRACLE: ', res.body);
+      console.log('Successful get request for hardiness zone API: ', res.body);
       res.status(200).send(data.body);
     }
   })
 })
 
 app.get('/api/gardens', function(req, res, next) {
-  console.log("Server side: ", req);
   Garden.find({}, (err, data) => {
     if (err) {
-      console.error(err);
+      console.error('There was an error getting the garden info: ' , err);
+      res.status(404);
+    } else {
+      console.log('Successful get request for garden info: ', data);
+      res.status(200).send(data);
     }
-    res.status(200).send(data);
-    next();
   })
 });
 
 app.get('/api/plants', function(req, res, next) {
   Plant.find({}, (err, data) => {
     if (err) {
-      console.error(err);
+      console.error('There was an error getting the plant info: ', err);
+      res.status(404);
+    } else {
+      console.log('Successful get request for plant info: ', data);
+      res.status(200).send(data);
     }
-    res.status(200).send(data);
-    next();
   })
 });
 
@@ -86,20 +91,24 @@ app.get('/api/forum', function(req, res, next) {
   let email = req.query
   Forum.find({}, (err, data) => {
     if (err) {
-      console.error(err);
+      console.error('There was an error getting the forum info: 'err);
+      res.status(404);
+    } else {
+      console.log('Successful get request for forum info: ', data);
+      res.status(200).send(data);
     }
-    res.status(200).send(data);
-    next();
   })
 });
 
 app.get('/api/forum/:email', function(req, res, next) {
   Forum.find({}, (err, data) => {
     if (err) {
-      console.error(err);
+      console.error('There was an error getting the specific forum info: 'err);
+      res.status(404);
+    } else {
+      console.log('Successful get request for specific forum info: ', data);
+      res.status(200).send(data);
     }
-    res.status(200).send(data);
-    next();
   })
 });
 
@@ -110,21 +119,23 @@ app.post('/api/users', (req, res, next) => {
     id: req.body.id,
     username: req.body.username,
     email: req.body.email,
-    // gardens: req.body.gardens,
     profilePhoto: req.body.profilePhoto,
-    // coverPhoto: req.body.coverPhoto,
     about: req.body.about
+    // gardens: req.body.gardens, <-- possible addition
+    // coverPhoto: req.body.coverPhoto, <-- possible addition
   });
-  user.save({}, (err)=> {
+  user.save({}, (err, data)=> {
     if (err) {
-      console.error(err);
+      console.error('There was an error saving the user info onto the server: ', err);
+      res.status(500);
+    } else {
+      console.log('Successfully posting user info on the server: ', data);
+      res.status(200).send(data);
     }
-    res.send(200, 'Saved to the DB');
   });
 });
 
 app.post('/api/gardens', (req, res, next) => {
-  console.log("In /api/gardens server side. Here is the req.body", req.body)
   var garden = new Garden({
     gardenId: req.body.gardenId,
     plantId: req.body.plantId,
@@ -138,36 +149,35 @@ app.post('/api/gardens', (req, res, next) => {
     profileNickname: req.body.profileNickname,
     hardinessZone: req.body.hardinessZone
   });
-  garden.save({}, (err)=> {
+  garden.save({}, (err) => {
     if (err) {
-      console.error(err);
+      console.error('There was an error saving the garden info onto the server: ', err);
+      res.status(500);
+    } else {
+      console.log('Successfully posting garden info on the server: ', data);
+      res.status(200).send(data);
     }
-    res.send(200);
   });
 
-    var api_key = 'key-b90d2dcc5bdd42c5abceba45568ea1dd';
-    var domain = 'sandboxa7ed15c3bb5b4de696ad9041ddcadb4a.mailgun.org';
-    var mailgun = require('mailgun-js')({apiKey: api_key, domain: domain});
-    console.log("Here is your gardenName", garden.gardenName)
-
-    var data = {
-      from: 'Plantr <postmaster@sandboxa7ed15c3bb5b4de696ad9041ddcadb4a.mailgun.org>',
-      to: 'skebaish1992@gmail.com',
-      subject: 'Hello',
-      text: 'Testing some Mailgun awesomness!',
-      html: '<html>Inline image here: <img src="https://www.sciencea-z.com/shared/images/units/plant-life.jpg"></html>'
-    };
-
-    // mailgun.messages().send(data, function (error, body) {
-    //   console.log(error);
-    //   if (error) {
-    //     console.log("You had an error", error);
-    //   } else {
-    //     console.log("The body is ", body);
-    //   }
-
-
-    // });
+  let api_key = 'key-b90d2dcc5bdd42c5abceba45568ea1dd';
+  let domain = 'sandboxa7ed15c3bb5b4de696ad9041ddcadb4a.mailgun.org';
+  let mailgun = require('mailgun-js')({apiKey: api_key, domain: domain});
+  // console.log("Here is your gardenName", garden.gardenName)
+  let data = {
+    from: 'Plantr <postmaster@sandboxa7ed15c3bb5b4de696ad9041ddcadb4a.mailgun.org>',
+    to: 'skebaish1992@gmail.com',
+    subject: 'Hello',
+    text: 'Testing some Mailgun awesomness!',
+    html: '<html>Inline image here: <img src="https://www.sciencea-z.com/shared/images/units/plant-life.jpg"></html>'
+  };
+  // mailgun.messages().send(data, function (error, body) {
+  //   console.log(error);
+  //   if (error) {
+  //     console.log("You had an error", error);
+  //   } else {
+  //     console.log("The body is ", body);
+  //   }
+  // });
 });
 
 app.post('/api/plants', (req, res, next) => {
@@ -175,25 +185,19 @@ app.post('/api/plants', (req, res, next) => {
     plantId: req.body.plantId,
     image: req.body.image
   });
-  plant.save({}, (err)=> {
+  plant.save({}, (err) => {
     if (err) {
-      console.error(err);
+      console.error('There was an error saving the plant info onto the server: ', err);
+      res.status(500);
+    } else {
+      console.log('Successfully posting plant info on the server: ', data);
+      res.status(200).send(data);
     }
-    res.send(200);
   });
 });
 
 app.post('/api/forum', (req, res, next) => {
-  console.log('HERE IS THE REQ.BODY: ', req.body)
   let forum = new Forum({
-    // category: req.body.category,
-    // subjectLine: req.body.subjectLine,
-    // message: req.body.message,
-    // tags: req.body.tags,
-    // region: req.body.region,
-    // replies: req.body.replies,
-    // voteCount: req.body.voteCount,
-    // userId: req.body.userId,
     profile: req.body.profile,
     title: req.body.title,
     message: req.body.message,
@@ -202,38 +206,33 @@ app.post('/api/forum', (req, res, next) => {
     replies: req.body.replies,
     time: req.body.time
   });
-  forum.save({}, (err)=> {
+  forum.save({}, (err) => {
     if (err) {
-      console.error(err);
+      console.error('There was an error saving the forum info onto the server: ', err);
+      res.status(500);
+    } else {
+      console.log('Successfully posting plant info on the server: ', data);
+      res.status(200).send(data);
     }
-    res.send(200, 'Posted to Forum');
   });
 });
-
-
-
-
-
-
-
 
 /*--------------------PUT REQUEST-----------------------------------------*/
 // updating the user About Me
 app.put('/api/users', (req, res, next) => {
-  console.log('here is your req in user update:' ,req.body)
-  User.findById(req.body.id, function(err, result) {
-    console.log('HERE IS THEPUT REQUEST RESULT', result)
-      if (err) {
-        console.error('There has been a serverside error updating the aboutMe: ', err)
-      } else {
-        result.about = req.body.about;
-        result.save(function(err) {
+  User.findById(req.body.id, (err, result) => {
+    if (err) {
+      console.error('There has been a serverside error updating the aboutMe: ', err);
+      res.status(500);
+    } else {
+      result.about = req.body.about;
+      result.save((err) => {
         if (err) {
-          console.error('error');
-        }
-        else {
-          res.send(200, result);
-          console.log('Successfully posted an AboutMe on the server');
+          console.error('There has been a serverside error saving the updated aboutMe: ', err);
+          res.status(500);
+        } else {
+          console.log('Successfully updated an AboutMe on the server: ', result);
+          res.status(200).send(result);
         }
       });
     }
@@ -242,18 +241,19 @@ app.put('/api/users', (req, res, next) => {
 
 // posting replies on the server
 app.put('/api/forum', (req, res, next) => {
-  Forum.findById(req.body.id, function(err, result) {
-      if (err) {
-        console.error('There has been a serverside error updating the replies: '/*, err*/)
-      } else {
-        result.replies.push(req.body.replies);
-        result.save(function(err) {
+  Forum.findById(req.body.id, (err, result) => {
+    if (err) {
+      console.error('There has been a serverside error posting the replies: ', err);
+      res.status(500);
+    } else {
+      result.replies.push(req.body.replies);
+      result.save((err) => {
         if (err) {
-          console.error('error');
-        }
-        else {
-          res.send(200, result);
-          console.log('Successfully posted a reply on the server');
+          console.error('There has been a serverside error saving the posted replies: ', err);
+          res.status(500);
+        } else {
+          console.log('Successfully posting a reply on the server: ', result);
+          res.status(200).send(result);
         }
       });
     }
@@ -262,19 +262,20 @@ app.put('/api/forum', (req, res, next) => {
 
 // updating posts on the server
 app.put('/api/forum/:id', (req, res, next) => {
-  Forum.findById(req.body.id, function(err, result) {
-      if (err) {
-        console.error('There has been a serverside error updating the posts: ', err)
-      } else {
-        result.message = req.body.message;
-        result.title = req.body.title;
-        result.save(function(err) {
+  Forum.findById(req.body.id, (err, result) => {
+    if (err) {
+      console.error('There has been a serverside error updating the posts: ', err);
+      res.status(500);
+    } else {
+      result.message = req.body.message;
+      result.title = req.body.title;
+      result.save((err) => {
         if (err) {
-          console.error('error');
-        }
-        else {
-          res.send(200, result);
-          console.log('Successfully updated the post on the server');
+          console.error('There has been a serverside error saving the updated posts: ', err);
+          res.status(500);
+        } else {
+          console.log('Successfully updated a post on the server: ', result);
+          res.status(200).send(result);
         }
       });
     }
@@ -282,11 +283,12 @@ app.put('/api/forum/:id', (req, res, next) => {
 });
 
 // updating replies on the server
-app.put('/api/forum/:id/:replyId', function(req, res, next) {
+app.put('/api/forum/:id/:replyId', (req, res, next) => {
   let modifiedId;
-  Forum.findById(req.params.id, function(err, result) {
+  Forum.findById(req.params.id, (err, result) => {
     if (err) {
-      console.error('There was an error deleting your post: ', err)
+      console.error('There has been a serverside error updating the replies: ', err);
+      res.status(500);
     } else {
       result.replies.forEach((key, i) => {
         if (key.message === req.body.params.oldMessage) {
@@ -298,11 +300,11 @@ app.put('/api/forum/:id/:replyId', function(req, res, next) {
       result.replies.splice(modifiedId, 1, newMessage)
       result.save(function(err) {
         if (err) {
-          console.error('There was an error updating your response from the server: ', err);
-        }
-        else {
-          res.send(200, result);
-          console.log('successfully updated response on the server');
+          console.error('There was an error saving your reply on the server: ', err);
+          res.status(500);
+        } else {
+          console.log('Successfully saved a reply on the server: ', result);
+          res.status(200).send(result);
         }
       });
     }
@@ -311,22 +313,25 @@ app.put('/api/forum/:id/:replyId', function(req, res, next) {
 
 /*--------------------DELETE REQUEST-----------------------------------------*/
 // deleting posts made by users
-app.delete('/api/forum/:id', function(req, res, next) {
-  Forum.findByIdAndRemove(req.params.id, function(err, result) {
+app.delete('/api/forum/:id', (req, res, next) => {
+  Forum.findByIdAndRemove(req.params.id, (err, result) => {
     if (err) {
-      console.error('There was an error deleting your post: ', err)
+      console.error('There was an error deleting your post: ', err);
+      res.status(500);
     } else {
-      res.send(200, 'You have successfully deleted the post');
+      console.log('Successfully deleted a post on the server: ', result);
+      res.status(200).send(result);
     }
   });
 });
 
 // deleting replies made by users
-app.delete('/api/forum/:id/:replyId', function(req, res, next) {
+app.delete('/api/forum/:id/:replyId', (req, res, next) => {
   let deleteId;
-  Forum.findById(req.params.id, function(err, result) {
+  Forum.findById(req.params.id, (err, result) => {
     if (err) {
-      console.error('There was an error deleting your post: ', err)
+      console.error('There has been a serverside error deleting the replies: ', err);
+      res.status(500);
     } else {
       result.replies.forEach( (key, i) => {
         if (key['replyUser']['clientID'] === req.params.replyId) {
@@ -334,13 +339,13 @@ app.delete('/api/forum/:id/:replyId', function(req, res, next) {
         }
       });
       result.replies.splice(deleteId, 1);
-      result.save(function(err) {
+      result.save((err) => {
         if (err) {
-          console.error('There was an error deleting your post from the server: ', err);
-        }
-        else {
-          res.send(200, result);
-          console.log('successfully deleted post on the serverside');
+          console.error('There was an error deleting your reply from the server: ', err);
+          res.status(500);
+        } else {
+          console.log('Successfully deleted a reply from the server: ', result);
+          res.status(200).send(result);
         }
       });
     }
@@ -348,7 +353,7 @@ app.delete('/api/forum/:id/:replyId', function(req, res, next) {
 });
 
 
-app.use(function(err, req, res, next){
+app.use((err, req, res, next) => {
   console.log('Something failed');
   res.status(500).send({"Error" : err.message})
 });
