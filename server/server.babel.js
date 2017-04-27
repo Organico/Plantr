@@ -33,7 +33,7 @@ app.get('/api/users', function(req, res, next) {
       console.error('There was an error getting the user info: ', err);
       res.status(404);
     } else {
-      console.log('Successful get request for user info: ', data);
+      console.log('Successful get request for user info');
       res.status(200).send(data);
     }
   })
@@ -45,7 +45,7 @@ app.get('/api/users/:id', function(req, res, next) {
       console.error('There was an error getting a specific user info: ', err);
       res.status(404);
     } else {
-      console.log('Successful get request for specific user info: ', data);
+      console.log('Successful get request for specific user info');
       res.status(200).send(data);
     }
   })
@@ -57,7 +57,7 @@ app.get('/api/users/hardiness', function(req, res, next) {
       console.error('There was an error getting the hardiness zone on the server: ', err);
       res.status(404);
     } else {
-      console.log('Successful get request for hardiness zone API: ', res.body);
+      console.log('Successful get request for hardiness zone API');
       res.status(200).send(data.body);
     }
   })
@@ -69,7 +69,7 @@ app.get('/api/gardens', function(req, res, next) {
       console.error('There was an error getting the garden info: ' , err);
       res.status(404);
     } else {
-      console.log('Successful get request for garden info: ', data);
+      console.log('Successful get request for garden info');
       res.status(200).send(data);
     }
   })
@@ -81,7 +81,7 @@ app.get('/api/plants', function(req, res, next) {
       console.error('There was an error getting the plant info: ', err);
       res.status(404);
     } else {
-      console.log('Successful get request for plant info: ', data);
+      console.log('Successful get request for plant info');
       res.status(200).send(data);
     }
   })
@@ -94,7 +94,7 @@ app.get('/api/forum', function(req, res, next) {
       console.error('There was an error getting the forum info: ', err);
       res.status(404);
     } else {
-      console.log('Successful get request for forum info: ', data);
+      console.log('Successful get request for forum info');
       res.status(200).send(data);
     }
   })
@@ -106,7 +106,7 @@ app.get('/api/forum/:email', function(req, res, next) {
       console.error('There was an error getting the specific forum info: ', err);
       res.status(404);
     } else {
-      console.log('Successful get request for specific forum info: ', data);
+      console.log('Successful get request for specific forum info');
       res.status(200).send(data);
     }
   })
@@ -129,7 +129,7 @@ app.post('/api/users', (req, res, next) => {
       console.error('There was an error saving the user info onto the server: ', err);
       res.status(500);
     } else {
-      console.log('Successfully posting user info on the server: ', data);
+      console.log('Successfully posting user info on the server');
       res.status(200).send(data);
     }
   });
@@ -154,7 +154,7 @@ app.post('/api/gardens', (req, res, next) => {
       console.error('There was an error saving the garden info onto the server: ', err);
       res.status(500);
     } else {
-      console.log('Successfully posting garden info on the server: ', data);
+      console.log('Successfully posting garden info on the server');
       res.status(200).send(data);
     }
   });
@@ -190,7 +190,7 @@ app.post('/api/plants', (req, res, next) => {
       console.error('There was an error saving the plant info onto the server: ', err);
       res.status(500);
     } else {
-      console.log('Successfully posting plant info on the server: ', data);
+      console.log('Successfully posting plant info on the server');
       res.status(200).send(data);
     }
   });
@@ -211,7 +211,7 @@ app.post('/api/forum', (req, res, next) => {
       console.error('There was an error saving the forum info onto the server: ', err);
       res.status(500);
     } else {
-      console.log('Successfully posting plant info on the server: ', data);
+      console.log('Successfully posting plant info on the server');
       res.status(200).send(data);
     }
   });
@@ -231,7 +231,7 @@ app.put('/api/users', (req, res, next) => {
           console.error('There has been a serverside error saving the updated aboutMe: ', err);
           res.status(500);
         } else {
-          console.log('Successfully updated an AboutMe on the server: ', result);
+          console.log('Successfully updated an AboutMe on the server');
           res.status(200).send(result);
         }
       });
@@ -252,7 +252,7 @@ app.put('/api/forum', (req, res, next) => {
           console.error('There has been a serverside error saving the posted replies: ', err);
           res.status(500);
         } else {
-          console.log('Successfully posting a reply on the server: ', result);
+          console.log('Successfully posting a reply on the server');
           res.status(200).send(result);
         }
       });
@@ -274,7 +274,7 @@ app.put('/api/forum/:id', (req, res, next) => {
           console.error('There has been a serverside error saving the updated posts: ', err);
           res.status(500);
         } else {
-          console.log('Successfully updated a post on the server: ', result);
+          console.log('Successfully updated a post on the server');
           res.status(200).send(result);
         }
       });
@@ -303,7 +303,7 @@ app.put('/api/forum/:id/:replyId', (req, res, next) => {
           console.error('There was an error saving your reply on the server: ', err);
           res.status(500);
         } else {
-          console.log('Successfully saved a reply on the server: ', result);
+          console.log('Successfully saved a reply on the server');
           res.status(200).send(result);
         }
       });
@@ -319,7 +319,7 @@ app.delete('/api/forum/:id', (req, res, next) => {
       console.error('There was an error deleting your post: ', err);
       res.status(500);
     } else {
-      console.log('Successfully deleted a post on the server: ', result);
+      console.log('Successfully deleted a post on the server');
       res.status(200).send(result);
     }
   });
@@ -344,7 +344,7 @@ app.delete('/api/forum/:id/:replyId', (req, res, next) => {
           console.error('There was an error deleting your reply from the server: ', err);
           res.status(500);
         } else {
-          console.log('Successfully deleted a reply from the server: ', result);
+          console.log('Successfully deleted a reply from the server');
           res.status(200).send(result);
         }
       });

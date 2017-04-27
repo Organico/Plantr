@@ -51,8 +51,8 @@ class Forum extends Component {
 
   check () {
     fetch("https://ipinfo.io/json")
-      .then(res => res.json())
-      .then(ip => {
+      .then((res) => res.json())
+      .then((ip) => {
           let crd = this.state.coordinates; //***Turns into ==> this.props.coordinates
           crd = crd || {
             latitude: +ip.loc.split(",")[0],
@@ -117,7 +117,7 @@ class Forum extends Component {
             </div>
             <br/>
             <div className="searchForum">
-              <input className="searchForum" />
+              <input className="searchForumInput" />
             </div>
           </div>
           <Modal

@@ -62,8 +62,8 @@ class EditPost extends Component {
           </div>
           <div className="col-md-12">
             <div className="row">
-              <div className="col-md-8 replyBox">
-                <textarea  rows="4" cols="40" ref={(message) => newMessage = message } type="string" name="newMessage" defaultValue={JSON.parse(this.props.message)}>
+              <div className="col-md-9 replyBox">
+                <textarea  rows="4" className="textArea" ref={(message) => newMessage = message } type="string" name="newMessage" defaultValue={JSON.parse(this.props.message)}>
                 </textarea>
               </div>
               <div className="col-md-1" id="addReply">
