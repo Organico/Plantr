@@ -116,7 +116,6 @@ app.get('/api/forum/:email', function(req, res, next) {
 
 app.post('/api/users', (req, res, next) => {
   let user = new User({
-    id: req.body.id,
     username: req.body.username,
     email: req.body.email,
     profilePhoto: req.body.profilePhoto,
@@ -219,7 +218,7 @@ app.post('/api/forum', (req, res, next) => {
 
 /*--------------------PUT REQUEST-----------------------------------------*/
 // updating the user About Me
-app.put('/api/users', (req, res, next) => {
+app.put('/api/users/:id', (req, res, next) => {
   User.findById(req.body.id, (err, result) => {
     if (err) {
       console.error('There has been a serverside error updating the aboutMe: ', err);

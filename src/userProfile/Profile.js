@@ -15,7 +15,6 @@ class Profile extends Component {
     const profile = auth.getProfile();
     console.log("HERE IS THE PROFILE:", profile)
     axios.post('/api/users', {
-      id: profile.clientID,
       username: profile.nickname,
       email: profile.email,
       profilePhoto: profile.picture,
