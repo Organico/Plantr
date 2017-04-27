@@ -96,29 +96,54 @@ const MakeGardenSquareGridView = React.createClass({
     return <VRScene />
   } else {
    return (
-      <div style={center}>
-        <h1>Create a Garden</h1>
+      <div className="container" style={center}>
+        <div className="row">
+          <div className="col-md-6 offset-md-3">
+            <h1>Create a Garden</h1>
+          </div>
+        </div>
+------------------------------------------------------------------------------------------------------------------
+        <div className="row">
+          <div className="col-md-2">
+            Garden Height <br/>
+            <span><strong>{this.props.width} ft</strong></span>
+              <form action="#">
+                <p className="range-field">
+                  <input type="range" min="1" max="10" step="1" value={parseInt(this.props.width)} onChange={this.setWidth}/>
+                </p>
+              </form>
+            Garden Width <br/>
+            <span><strong>{this.props.height} ft</strong></span>
+              <form action="#">
+                <p className="range-field">
+                  <input type="range"  min="1" max="14" step="1" value={this.props.height} onChange={this.setHeight}/>
+                </p>
+              </form>
+             <input ref={(node) => gardenName = node } type="text" name="gardenName" placeholder='Name your new garden' required/>
+                <button className="btn btn-primary btn-sm" onClick={() => {
+                  this.saveGarden(profilePicture, profileEmail, profileNickname, gardenName.value, this.props.zone);
+                  }} type="submit">Submit Garden
+                </button>
+              <div id="seedHolder">
+                <SeedPacket />
+              </div>
+          </div>
 
-        <h2>Garden Height</h2>
-        <span><strong>{this.props.width} ft</strong></span>
-          <form action="#">
-            <p className="range-field">
-              <input type="range" min="1" max="10" step="1" value={parseInt(this.props.width)} onChange={this.setWidth}/>
-            </p>
-          </form>
-        <h2>Garden Width</h2>
-        <span><strong>{this.props.height} ft</strong></span>
-          <form action="#">
-            <p className="range-field">
-              <input type="range"  min="1" max="14" step="1" value={this.props.height} onChange={this.setHeight}/>
-            </p>
-          </form>
-         <input ref={(node) => gardenName = node } type="text" name="gardenName" placeholder='Name your new garden' required/>
-            <button className="btn btn-primary btn-sm" onClick={() => {
-              this.saveGarden(profilePicture, profileEmail, profileNickname, gardenName.value, this.props.zone);
-              }} type="submit">Submit Garden
-            </button>
-            <br></br><br></br>
+          <div className="col-md-8">
+              <Stage id="cat" width={800} height={670} fill="white" stroke="black" className="gardenGrid">
+                <GardenGrid />
+                <PlantGrid />
+                <Layer className="plantShelf">
+                  <PlantShelf />
+                  <MyRect />
+                </Layer>
+              </Stage>
+          </div>
+          <div className="col-md-4">
+                <br></br><br></br>
+          </div>
+        </div>
+      -----------------------------------------------------------------------------------------------------
         <div className="row" style={center}>
           <div className="col-md-6">
             <button onClick={() => {
@@ -130,33 +155,21 @@ const MakeGardenSquareGridView = React.createClass({
             <button onClick={() => {
                 this.props.dispatchClear();}}>Delete</button>
             <div className="row">
-              <Stage id="cat" width={800} height={670} fill="white" stroke="black" className="gardenGrid">
-
-                <GardenGrid />
-                <PlantGrid />
-                <Layer className="plantShelf">
-                  <PlantShelf />
-                  <MyRect />
-                </Layer>
-              </Stage>
             </div>
+ ------------------------------------------------------------------------------------
             <div className="row">
               <PlantDex />
             </div>
           </div>
             <div className="col-md-5 offset-md-1">
-              <div className="col-md-6 offset-md-3 userRecentSpan" id="seedHolder">
-                  <SeedPacket />
-              </div>
-                <div className="col-md-10">
+              <div className="col-md-10">
                 <h2>Harvest Graph</h2>
-
-                 <HarvestGraph />
-                </div>
-            <div className="row">
-              <AnalyticsTabs />
+                <HarvestGraph />
+              </div>
+              <div className="row">
+                <AnalyticsTabs />
+              </div>
             </div>
-          </div>
         </div>
       </div>
     );
