@@ -125,7 +125,8 @@ const MakeGardenSquareGridView = React.createClass({
   } else {
    return (
       <div style={center}>
-        <h1>Create a Garden</h1>
+        <img id="seed" src="https://s3-us-west-2.amazonaws.com/ryaperry-bucket/banners/Plantr_Build_A_Garden.png" alt="Build a Garden" crossOrigin="anonymous" width="1049" heigh="149"></img>
+
 
         <h2>Garden Height</h2>
         <span><strong>{this.props.width} ft</strong></span>
@@ -157,11 +158,8 @@ const MakeGardenSquareGridView = React.createClass({
                 this.props.dispatchUndo();}}>Redo</button>
             <button onClick={() => {
                 this.props.dispatchClear();}}>Delete</button>
-
             <button onClick={() => {
                 this.props.dispatchToggleVR();}}>{this.renderButtonText(this.props.viewIsTwoD)}</button>
-
-
             <div className="row">
               {this.toggleView(this.props.viewIsTwoD)}
             </div>
