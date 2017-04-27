@@ -1,12 +1,13 @@
 var mongoose = require('mongoose');
 
 var userSchema = new mongoose.Schema({
-  userId: String,
+  id: String,
   username: String,
   email: String,
-  gardens: Array,
+  // gardens: Array,
   profilePhoto: String,
-  coverPhoto: String
+  // coverPhoto: String,
+  about: String
 });
 
 var User = mongoose.model('User', userSchema);

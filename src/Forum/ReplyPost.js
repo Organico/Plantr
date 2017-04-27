@@ -33,8 +33,8 @@ class ReplyPost extends Component {
           replyUser: profile,
           time: moment()._d
         }
-      }
-    ).then((res) => {
+      })
+    .then((res) => {
       console.log("Successfully posted a reply");
       this.getPost();
     }).catch((err) => {

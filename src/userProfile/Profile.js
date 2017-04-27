@@ -7,8 +7,21 @@ import RecentGardens from './RecentGardens';
 import RecentPosts from './RecentPosts';
 import axios from 'axios';
 import { setPlantHardiness } from '../Actions/WeatherActions';
+import auth from '../client.js';
 
 class Profile extends Component {
+
+  postUser() {
+    const profile = auth.getProfile();
+    console.log("HERE IS THE PROFILE:", profile)
+    axios.post('/api/users', {
+     id: profile.clientID,
+     username: profile.nickname,
+     email: profile.email,
+     profilePhoto: profile.picture,
+     about: ''
+    })
+  }
 
   getHardiness() {
   let zipCode = this.props.coordinates;
@@ -28,6 +41,7 @@ class Profile extends Component {
 
   componentDidMount() {
     this.getHardiness();
+    this.postUser();
   }
 
   render() {
