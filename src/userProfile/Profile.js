@@ -55,6 +55,7 @@ class Profile extends Component {
             </div>
             <div className="col-md-6">
               <RecentPosts />
+              <RecentGardens />
             </div>
           </div>
         </div>

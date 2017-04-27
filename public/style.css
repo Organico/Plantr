@@ -211,8 +211,10 @@ button {
 }
 .userRecent {
   background-color: white;
-  border: solid 1px #694118;
-  color: #8DC83B;
+  border-style: solid;
+  border-width: 7px;
+  border-color: #8AC73D;
+  border-radius: 20px;
   margin-top: 20px;
   min-height: 225px;
 }
@@ -240,7 +242,10 @@ button {
 
 .userGarden {
   background-color: white;
-  border: solid 1px #694118;
+  border-style: solid;
+  border-width: 7px;
+  border-color: #8AC73D;
+  border-radius: 20px;
   color: #8DC83B;
   margin-top: 20px;
   min-height: 100px;
