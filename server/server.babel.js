@@ -91,7 +91,7 @@ app.get('/api/forum', function(req, res, next) {
   let email = req.query
   Forum.find({}, (err, data) => {
     if (err) {
-      console.error('There was an error getting the forum info: 'err);
+      console.error('There was an error getting the forum info: ', err);
       res.status(404);
     } else {
       console.log('Successful get request for forum info: ', data);
@@ -103,7 +103,7 @@ app.get('/api/forum', function(req, res, next) {
 app.get('/api/forum/:email', function(req, res, next) {
   Forum.find({}, (err, data) => {
     if (err) {
-      console.error('There was an error getting the specific forum info: 'err);
+      console.error('There was an error getting the specific forum info: ', err);
       res.status(404);
     } else {
       console.log('Successful get request for specific forum info: ', data);
