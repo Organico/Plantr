@@ -15,11 +15,11 @@ class Profile extends Component {
     const profile = auth.getProfile();
     console.log("HERE IS THE PROFILE:", profile)
     axios.post('/api/users', {
-     id: profile.clientID,
-     username: profile.nickname,
-     email: profile.email,
-     profilePhoto: profile.picture,
-     about: ''
+      id: profile.clientID,
+      username: profile.nickname,
+      email: profile.email,
+      profilePhoto: profile.picture,
+      about: ''
     })
   }
 
@@ -30,8 +30,7 @@ class Profile extends Component {
       params: {
         zipCode: zipCode
       }
-    })
-    .then((res) => {
+    }).then((res) => {
       console.log('res here', res.data);
       this.props.dispatchPlantHardiness(res.data);
     }).catch(err => {
@@ -48,7 +47,6 @@ class Profile extends Component {
     return(
       <div>
         <div className="container-fluid containerStyle">
-
           <div className="row">
             <div className="col-md-3 profileLeft">
               <ProfilePic />
@@ -77,7 +75,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-
     dispatchUserParameters(username, gardens) {
       dispatch(setUserParameters(username, gardens));
     },

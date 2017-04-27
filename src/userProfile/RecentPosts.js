@@ -8,7 +8,7 @@ import { setPosts } from '../Actions/ForumActions';
 
 class RecentPosts extends Component {
 
-   getPost() {
+  getPost() {
     const profile = auth.getProfile();
     axios.get('/api/forum/:' + profile.email)
     .then((res) => {
@@ -20,8 +20,7 @@ class RecentPosts extends Component {
       console.log("Db post data", dbPostData)
       this.props.dispatchSetPost(dbPostData)
     }).catch((err) => {
-      console.error(err);
-      console.log("Error in RECENTPOSTS");
+      console.error("There was a get request error on the client in User RecentPosts", err);
     });
   }
 
@@ -60,7 +59,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-
     dispatchSetPost(message) {
       dispatch(setPosts(message));
     }

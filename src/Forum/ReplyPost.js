@@ -44,11 +44,11 @@ class ReplyPost extends Component {
 
     return(
       <div className="row">
-        <div className="replyBox">
-          <textarea  rows="2" cols="50" ref={(node) => replyMessage = node } type="string" name="messageInput" placeholder='Got advice or questions about this post? Reply here'>
+        <div className="replyBox col-md-9">
+          <textarea  rows="2" className="textArea" ref={(node) => replyMessage = node } type="string" name="messageInput" placeholder='Got advice or questions about this post? Reply here'>
           </textarea>
         </div>
-        <div className="col-md-1 offset-md-1" id="addReply">
+        <div className="col-md-1" id="addReply">
           <button type="submit" onClick={() => {
             replyMessage.value = JSON.stringify(replyMessage.value);
             this.replyPost(replyMessage.value);

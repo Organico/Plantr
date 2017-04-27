@@ -99,7 +99,7 @@ class ForumPost extends Component {
                     if (!postType) {
                       if (profile.email === reply.replyUser.email && !this.props.editing) {
                       return <div className="row">
-                            <div className="col-md-10">
+                            <div className="col-md-11">
                               <Replies key={i} reply={reply} />
                             </div>
                             <div className="col-md-1">
@@ -112,21 +112,9 @@ class ForumPost extends Component {
                                   }}></i>
                               </div>
                           </div>
-
                       </div>
                        } else if (profile.email === reply.replyUser.email && this.props.editing && (reply.message === this.props.messageToEdit)) {
-                        return <div className="row">
-                        <div className="col-md-11">
-                          <EditReply reply={reply} replyId={reply.replyUser.clientID} id={reply.belongsToId} message={reply.message}/>
-                        </div>
-                          <div className="col-md-1">
-                            <div className="replyEditDelete">
-                              <i className="fa fa-trash" ariaHidden="true" onClick={ () => {
-                                  this.deletePost(reply.belongsToId, reply.replyUser.clientID);
-                                }}></i>
-                              </div>
-                          </div>
-                        </div>
+                        return <EditReply reply={reply} replyId={reply.replyUser.clientID} id={reply.belongsToId} message={reply.message}/>
                        } else {
                         return <Replies key={i} reply={reply} />
                        }

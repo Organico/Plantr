@@ -12,15 +12,14 @@ class About extends Component {
   }
 
   toggleState() {
-     this.setState({edit: !this.state.edit});
+    this.setState({edit: !this.state.edit});
   }
 
   setAbout(id, about) {
-    axios.put('api/users',
-    {
+    axios.put('api/users', {
       id: id,
       about: about
-    }).then(res => {
+    }).then((res) => {
       console.log("Successfully posted your AboutMe! ", res.data);
       this.toggleState();
       this.getAbout();
@@ -29,11 +28,11 @@ class About extends Component {
     });
   }
 
-  getAbout(){
+  getAbout() {
     const profile = auth.getProfile();
     axios.get('api/users/:' + profile.clientID)
-    .then(res => {
-      res.data.forEach(user => {
+    .then((res) => {
+      res.data.forEach((user) => {
         console.log('HERE IS THE USER IN THE GET :', user);
         if (user.email === profile.email) {
           userAboutObject = {
@@ -57,14 +56,14 @@ class About extends Component {
     let that = this;
     let newMessage;
     return (
-      <div className="row">
+      <div className="row userAboutMe">
         <div className="col-md-12 about">
-          <div className="userRecentSpan"> About Me </div>
+          <div> About Me </div>
           <div>
           { (function() {
             if (userAboutObject.about && that.state.edit) {
               return <div>
-                <textarea  rows="4" cols="40" ref={(message) => newMessage = message } type="string" name="newMessage" defaultValue={JSON.parse(userAboutObject.about)}>
+                <textarea className="textArea" rows="4" ref={(message) => newMessage = message } type="string" name="newMessage" defaultValue={JSON.parse(userAboutObject.about)}>
                 </textarea>
                 <button type="submit" onClick ={ () => {
                   newMessage.value = JSON.stringify(newMessage.value);
@@ -81,7 +80,7 @@ class About extends Component {
             </div>
             } else {
               return <div>
-                <textarea  rows="4" cols="40" ref={(message) => newMessage = message } type="string" name="newMessage" placeholder='Who knows you better than yourself?'>
+                <textarea className="textArea" rows="4" ref={(message) => newMessage = message } type="string" name="newMessage" placeholder='Who knows you better than yourself?'>
                 </textarea>
                 <button type="submit" onClick ={ () => {
                   newMessage.value = JSON.stringify(newMessage.value);

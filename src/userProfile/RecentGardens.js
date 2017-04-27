@@ -21,8 +21,7 @@ class RecentGardens extends Component {
       console.log("Db post data", dbPostData)
       this.props.dispatchSetPost(dbPostData)
     }).catch((err) => {
-      console.error(err);
-      console.log("Error in RECENTPOSTS");
+      console.error("There was a get request error on the client in User RecentGardens", err);
     });
   }
 
@@ -36,7 +35,8 @@ class RecentGardens extends Component {
     return (
       <div className="row">
         <div className="col-md-12 offset-md-2 right userGarden">
-          <div className="userGardenSpan"> Recent Gardens
+          <div className="userGardenSpan">
+            <h3>Recent Gardens</h3>
             <GardenSquareGridView />
           </div>
         </div>
@@ -53,7 +53,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-
     dispatchSetPost(message) {
       dispatch(setPosts(message));
     }

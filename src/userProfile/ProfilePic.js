@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import auth from '../client.js'
 
 class ProfilePic extends Component {
+
   render() {
   const profile = auth.getProfile();
-  console.log("HERE IS THE PROFILE:", profile)
   const profPic = {
     magin: 'auto',
     width: '100px',
@@ -18,8 +18,8 @@ class ProfilePic extends Component {
       <div id="profilePic">
         <div>
           <div className="row">
-            <div id="username" className="col-md-12">
-              {profile.nickname}
+            <div className="col-md-12">
+              <h3>{profile.nickname}</h3>
             </div>
           </div>
           <div className="row">
