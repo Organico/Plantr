@@ -17,7 +17,6 @@ class About extends Component {
 
   setAbout(id, about) {
     axios.put('api/users/' + id + '/', {
-      id: id,
       about: about
     }).then((res) => {
       console.log("Successfully posted your AboutMe! ", res.data);
