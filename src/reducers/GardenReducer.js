@@ -12,6 +12,7 @@ const initialGardenState = {
   colladaCache: {},
   gardenXYCoordinates:[],
   selectedTitle: "https://c1.staticflickr.com/3/2923/33742489190_3e30fca5f7_o.jpg",
+  harvestTable:[],
 
   pastPlantGridStates: [],
   futurePlantGrideStates: [],
@@ -907,9 +908,10 @@ const setDropdown = (state, action) => {
 }
 
 /*PLANTS*/
-const getAllPlants = (state, action) => {
+const getPlants = (state, action) => {
   const newState = {};
   const {plants} = state;
+  console.log("HERE ARE ALL YOUR PLANTS", "ARIEL")
 
   Object.assign(newState, state, {plants: action.dbPlantGrids});
   console.log('(before) state: ', state);
@@ -956,7 +958,19 @@ const addPlantToPlantGrid = (state, action) => {
 
   console.log("Here is the new analytics ", newAnalytics);
 
+  var harvestTableCopy = state.harvestTable.slice();
+
   var generateAnalytics = function(plantToBeAdded) {
+
+
+    var today = new Date();
+    var numberOfDaysToAdd = plantToBeAdded.plant.harvest;
+    today.setDate(today.getDate() + numberOfDaysToAdd);
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1;
+    var y = today.getFullYear();
+
+    var someFormattedDate = dd + '/'+ mm + '/'+ y;
     //increment the number of that plant if already in the library
     console.log("INSIDE GENERATE ANALYTICS, ",plantToBeAdded)
     console.log("This is newAnalytics", newAnalytics);
@@ -969,6 +983,7 @@ const addPlantToPlantGrid = (state, action) => {
 
       newAnalytics["plantLibrary"][plantToBeAdded.plant.name] = {};
       newAnalytics["plantLibrary"][plantToBeAdded.plant.name]["quantity"]=1;
+      harvestTableCopy.push({name: plantToBeAdded.plant.name, harvest:plantToBeAdded.plant.harvest, harvestDate: someFormattedDate});
       newAnalytics["totalCost"]+=plantToBeAdded.plant.price;
       newAnalytics["numSeedPackets"]+=1;
     }
@@ -989,7 +1004,7 @@ const addPlantToPlantGrid = (state, action) => {
     console.log("The old analytics", state.analytics);
     generateAnalytics(action.plant);
     console.log("The new analytics is ", newAnalytics);
-  Object.assign(newState, state, {pastPlantGridStates: oldPlantGrid, plantGrid: newPlantGrid, analytics: newAnalytics});
+  Object.assign(newState, state, {pastPlantGridStates: oldPlantGrid, plantGrid: newPlantGrid, analytics: newAnalytics, harvestTable: harvestTableCopy});
   } else {
     Object.assign(newState, state, {plantGrid: newPlantGrid});
   }
@@ -1144,6 +1159,25 @@ const setWidth = (state, action) => {
   return newState;
 }
 
+const setSuggestedPlants = (state, action) => {
+  const newState = {};
+
+  Object.assign(newState, state, {plantGrid: action.suggestedPlants});
+
+  console.log('(before) state: ', state);
+  console.log('(after) state: ', newState);
+  return newState;
+}
+
+const setSuggestedGarden = (state, action) => {
+  const newState = {};
+
+  Object.assign(newState, state, {gardenGrid: action.suggestedGarden});
+
+  console.log('(before) state: ', state);
+  console.log('(after) state: ', newState);
+  return newState;
+}
 
 function gardenReducer(state = initialGardenState, action) {
   console.log('GardenReducer.js - Reducer called');
@@ -1163,8 +1197,8 @@ function gardenReducer(state = initialGardenState, action) {
     return getGardenFromDropdown(state, action);
   case 'GET_PLANTS_FROM_DROPDOWN':
     return getPlantsFromDropdown(state, action);
-  case 'GET_ALL_PLANTS':
-    return getAllPlants(state, action);
+  case 'GET_PLANTS':
+    return getPlants(state, action);
   case 'ADD_PLANT_TO_PLANT_GRID':
     return addPlantToPlantGrid(state, action);
   case 'SET_USER_PARAMETERS':
@@ -1181,12 +1215,18 @@ function gardenReducer(state = initialGardenState, action) {
     return redo(state, action)
   case 'CLEAR':
     return clear(state, action)
+  case 'ATTEMPT_THIS':
+    return attemptThis(state, action)
   case 'SET_GROWTH_GRAPH':
     return setGrowthGraph(state, action);
   case 'SET_WIDTH':
     return setWidth(state, action);
   case 'SET_HEIGHT':
     return setHeight(state, action);
+  case 'SET_SUGGESTED_GARDEN':
+    return setSuggestedGarden(state, action);
+  case 'SET_SUGGESTED_PLANTS':
+    return setSuggestedPlants(state, action);
   default:
     return state;
   }
