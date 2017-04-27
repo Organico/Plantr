@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom'
 import { connect } from 'react-redux';
-import CoverPhoto from './CoverPhoto';
 import ProfilePic from './ProfilePic';
 import About from './About';
 import RecentGardens from './RecentGardens';
