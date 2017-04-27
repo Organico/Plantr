@@ -9,12 +9,12 @@ import PlantGrid from './PlantGrid.js';
 import Autosuggest from 'react-autosuggest';
 import match from 'autosuggest-highlight/match'
 import parse from 'autosuggest-highlight/parse'
-// import auth from '../client.js'
+import auth from '../client.js'
 // console.log("Here is auth", auth)
 // // var profile = auth.getProfile();
 // // var email = profile.email
 
-
+const profile = auth.getProfile();
 var gardens = [];
 
 var myGardens = [];
@@ -74,8 +74,8 @@ class GardenSquareGridView extends React.Component{
       value: '',
       suggestions: [],
       propsdo: this.props,
-      profileName: 'Andrew Chung',
-      profileImage: ''
+      profileName: profile.nickname,
+      profileImage: profile.picture
     };
 
     this.getGardens = this.getGardens.bind(this);
