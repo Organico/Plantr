@@ -14,7 +14,6 @@ class ProfilePic extends Component {
     backgroundPosition: 'center',
     backgroundImage: 'url(' + profile.picture + ')'
   }
-      // ||   'url(http://www.clipartbest.com/cliparts/4Tb/6oR/4Tb6oR9ac.gif)'
     return (
       <div id="profilePic">
         <div>

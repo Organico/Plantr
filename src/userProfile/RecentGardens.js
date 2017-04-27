@@ -44,15 +44,6 @@ class RecentGardens extends Component {
     )
   }
 }
-/*            <div>
-                {this.props.posts.map((post, i) => {
-                  if (post.email === profile.email) {
-                    return <ForumPost key={i} post={post} nickname={post.nickname} title={post.title} message={post.message} replies={post.replies} />
-                  }
-                }
-                )}
-            </div>
-*/
 const mapStateToProps = (state) => {
   return {
     posts: state.forumReducer.posts,
