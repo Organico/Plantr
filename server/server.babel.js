@@ -32,10 +32,20 @@ const db = mongoose.connection;
 app.get('/api/users', function(req, res, next) {
   User.find({}, (err, data) => {
     if (err) {
-      console.error(err);
+      console.error('There was an error getting the user info: ', err);
     }
+    console.log('successful get request: ', data)
     res.status(200).send(data);
-    next();
+  })
+});
+
+app.get('/api/users/:id', function(req, res, next) {
+  User.find({}, (err, data) => {
+    if (err) {
+      console.error('There was an error getting the user info: ', err);
+    }
+    console.log('successful get request: ', data)
+    res.status(200).send(data);
   })
 });
 
@@ -49,14 +59,6 @@ app.get('/api/users/hardiness', function(req, res, next) {
       res.status(200).send(data.body);
     }
   })
-
-  // User.find({}, (err, data) => {
-  //   if (err) {
-  //     console.error(err);
-  //   }
-  //   res.status(200).send(data);
-  //   next();
-  // })
 })
 
 app.get('/api/gardens', function(req, res, next) {
@@ -104,14 +106,14 @@ app.get('/api/forum/:email', function(req, res, next) {
 /*--------------------POST REQUEST---------------------------------------------*/
 
 app.post('/api/users', (req, res, next) => {
-  console.log("Inside api/users");
   let user = new User({
-    userId: req.body.userId,
+    id: req.body.id,
     username: req.body.username,
     email: req.body.email,
-    gardens: req.body.gardens,
+    // gardens: req.body.gardens,
     profilePhoto: req.body.profilePhoto,
-    coverPhoto: req.body.coverPhoto
+    // coverPhoto: req.body.coverPhoto,
+    about: req.body.about
   });
   user.save({}, (err)=> {
     if (err) {
@@ -216,11 +218,33 @@ app.post('/api/forum', (req, res, next) => {
 
 
 /*--------------------PUT REQUEST-----------------------------------------*/
+// updating the user About Me
+app.put('/api/users', (req, res, next) => {
+  console.log('here is your req in user update:' ,req.body)
+  User.findById(req.body.id, function(err, result) {
+    console.log('HERE IS THEPUT REQUEST RESULT', result)
+      if (err) {
+        console.error('There has been a serverside error updating the aboutMe: ', err)
+      } else {
+        result.about = req.body.about;
+        result.save(function(err) {
+        if (err) {
+          console.error('error');
+        }
+        else {
+          res.send(200, result);
+          console.log('Successfully posted an AboutMe on the server');
+        }
+      });
+    }
+  });
+});
+
 // posting replies on the server
 app.put('/api/forum', (req, res, next) => {
   Forum.findById(req.body.id, function(err, result) {
       if (err) {
-        console.error('There has been a serverside error updating the replies: ', err)
+        console.error('There has been a serverside error updating the replies: '/*, err*/)
       } else {
         result.replies.push(req.body.replies);
         result.save(function(err) {
