@@ -53,21 +53,78 @@ body{
   letter-spacing: 2px;
   color: white;
   font-family: 'Reem Kufi', sans-serif;
-  background-color: rgba(0,0,0,0.3);
+  background-color: rgba(0,0,0,0.4);
   border-radius: 15px;
   padding: 10px;
 }
+
+h3 {
+  font-family: "Quicksand";
+  font-weight: bold;
+  padding: 5px;
+  text-align: center;
+}
+
+textarea {
+  font-family: "Quicksand";
+  font-weight: bold;
+  border-radius: 10px;
+}
+
+button {
+  font-family: "Quicksand";
+  font-weight: bold;
+  border-radius: 5px;
+}
+
+.reply {
+  border: solid 1px #89C83B;
+  margin-top: 10px;
+}
+.replyMessage,
+.forumMessage {
+  font-family: "Quicksand";
+  font-weight: bold;
+}
+.searchForum,
+.searchForumInput {
+  font-family: "Quicksand";
+  font-weight: bold;
+  text-align: center;
+  border-radius: 10px;
+}
+
 .postUsername {
-  font-family: "Above";
+  font-family: "Quicksand";
   font-weight: bold;
   font-size: 15px;
+  text-align: center;
+  margin-left: -10px;
 }
+
+.replyUsername {
+  font-family: "Quicksand";
+  font-weight: bold;
+  font-size: 15px;
+  margin-left: 10px;
+  margin-top: 5px;
+  text-align: center;
+}
+
 .postPicture {
   margin-top: 10px;
 }
 .test {
   border: solid 5px red;
 }
+
+.navbar {
+  background-color: #d6eef9;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
 .nav {
   height: 20px;
   margin-top: 130px;
@@ -89,8 +146,7 @@ body{
     src: url("/Lobster.otf") format("opentype");
 }
 @font-face {
-    font-family: Above;
-    src: url("/Above.ttf");
+    font-family: Quicksand;
 }
 @font-face {
     font-family: Fizz;
@@ -104,11 +160,7 @@ body{
 .plantShelf {
   margin-left: 10px;
 }
-.reply {
-  border: solid 1px #89C83B;
 
-  margin-top: 10px;
-}
 .lineChart {
   margin-left: -100px;
 }
@@ -245,7 +297,7 @@ body{
   margin-top: 10px;
 }
 .forumTitle {
-  font-family: "Above";
+  font-family: "Quicksand";
   font-weight: bold;
   font-size: 30px;
 }
@@ -268,7 +320,7 @@ body{
   padding-left: 20px;
 }
 .replyCount {
-  font-family: "Above";
+  font-family: "Quicksand";
   font-weight: bold;
   background: transparent;
 }

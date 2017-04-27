@@ -82,7 +82,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-
     dispatchAddPost(message) {
       dispatch(addPost(message));
     },

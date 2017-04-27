@@ -7,7 +7,7 @@ import axios from 'axios';
 
 class ReplyPost extends Component {
 
-   getPost() {
+  getPost() {
     axios.get('/api/forum')
     .then((res) => {
       let dbPostData = res.data;
@@ -23,17 +23,15 @@ class ReplyPost extends Component {
 
   replyPost(replyMessage) {
     const profile = auth.getProfile();
-    axios.put('/api/forum',
-      {
-        id: this.props.post._id,
-        replies: {
-          belongsToId: this.props.post._id,
-          message: replyMessage,
-          replyUser: profile,
-          time: new Date().toDateString()
-        }
-      })
-    .then((res) => {
+    axios.put('/api/forum', {
+      id: this.props.post._id,
+      replies: {
+        belongsToId: this.props.post._id,
+        message: replyMessage,
+        replyUser: profile,
+        time: new Date().toDateString()
+      }
+    }).then((res) => {
       console.log("Successfully posted a reply");
       this.getPost();
     }).catch((err) => {
