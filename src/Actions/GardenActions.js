@@ -108,3 +108,8 @@ export function tryThis() {
   console.log('TRYCALLED');
   return { type: 'TRY_THIS'};
 }
+
+export function toggleVR() {
+  console.log('toggleVR CALLED');
+  return { type: 'TOGGLE_VR'};
+}
