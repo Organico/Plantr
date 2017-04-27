@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {setGardenParameters, setGarden, undo, redo, clear, setHeight, setWidth} from '../Actions/GardenActions.js';
+import {setGardenParameters, setGarden, undo, redo, clear, setHeight, setWidth, toggleVR} from '../Actions/GardenActions.js';
 import axios from 'axios';
 import GardenGrid from './GardenGrid.js';
 import MySquare from './MySquare.js';
@@ -23,10 +23,6 @@ import auth from '../client.js'
 
 
 
-
-
-
-
 const MakeGardenSquareGridView = React.createClass({
 
   saveGarden(profilePicture, profileEmail, profileNickname, gardenName, zone) {
@@ -40,9 +36,7 @@ const MakeGardenSquareGridView = React.createClass({
       }
     });
 
-
-
-      console.log("myImage is! ", myImage)
+    console.log("myImage is! ", myImage)
     axios.post('/api/gardens',
       {
         gardenId: Math.random()*100,
@@ -74,6 +68,24 @@ const MakeGardenSquareGridView = React.createClass({
       let width = parseInt(e.target.value);
       this.props.dispatchSetWidth(width);
       this.props.dispatchSetGardenParameters(width, this.props.height);
+  },
+
+  returnCombinedGrid(){
+    return(
+      <div className="row">
+        <Stage id="cat" width={800} height={670} fill="white" stroke="black" className="gardenGrid">
+          <GardenGrid />
+          <PlantGrid />
+          <Layer className="plantShelf">
+            <PlantShelf />
+            <MyRect />
+          </Layer>
+        </Stage>
+      </div>)
+  },
+
+  returnVRScene(){
+    return (<VRScene />)
   },
 
 
@@ -129,17 +141,17 @@ const MakeGardenSquareGridView = React.createClass({
                 this.props.dispatchUndo();}}>Redo</button>
             <button onClick={() => {
                 this.props.dispatchClear();}}>Delete</button>
-            <div className="row">
-              <Stage id="cat" width={800} height={670} fill="white" stroke="black" className="gardenGrid">
 
-                <GardenGrid />
-                <PlantGrid />
-                <Layer className="plantShelf">
-                  <PlantShelf />
-                  <MyRect />
-                </Layer>
-              </Stage>
+            <button onClick={() => {
+                this.props.dispatchToggleVR();}}>3D</button>
+
+
+            <div className="row">
+              {this.returnCombinedGrid()}
             </div>
+
+
+
             <div className="row">
               <PlantDex />
             </div>
@@ -171,6 +183,7 @@ const mapStateToProps = (state) => {
     width: state.gardenReducer.width,
     height: state.gardenReducer.height,
     tooltipOpen: state.gardenReducer.tooltipOpen,
+    viewIsTwoD: state.gardenReducer.viewIsTwoD,
     zone: state.weatherReducer.zone
   };
 };
@@ -198,6 +211,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     dispatchClear() {
       dispatch(clear());
+    },
+    dispatchToggleVR() {
+      dispatch(toggleVR());
     }
   };
 };
