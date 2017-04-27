@@ -2,42 +2,69 @@ import React, { Component } from 'react';
 import GardenSquareGridView from '../GardenSquareGrid/getGardenSquareGrid';
 import ReactDOM from 'react-dom'
 import { connect } from 'react-redux';
-import ForumPost from '../Forum/ForumPost';
+import IndividualGarden from './IndividualGarden';
+import IndividualGardenInfo from './IndividualGardenInfo';
 import axios from 'axios';
 import auth from '../client.js';
 import { setPosts } from '../Actions/ForumActions';
 
-class RecentGardens extends Component {
+let userGardens = [];
 
-  getPost() {
-    const profile = auth.getProfile();
-    axios.get('/api/forum/:' + profile.email)
-    .then((res) => {
-      let dbPostData = res.data;
-      for (let i = 0; i<dbPostData.length; i++) {
-        let message = dbPostData[i];
-        message['isShort'] = true;
+class RecentGardens extends Component {
+  constructor() {
+    super()
+      this.state = {
+        dropDown: false
       }
-      console.log("Db post data", dbPostData)
-      this.props.dispatchSetPost(dbPostData)
+  }
+
+  toggleDropDown() {
+    console.log('toggleDropDown is being toggled');
+    this.setState({dropDown: !this.state.dropDown});
+  }
+
+  getUserGardens() {
+    const profile = auth.getProfile();
+    axios.get('/api/gardens/' + profile.email).then((res) => {
+      let personalGarden = res.data;
+      userGardens = [];
+      for (let i = 0; i < personalGarden.length; i++) {
+        let gardenObj = {
+          gardenGrid: personalGarden[i].gardenGrid,
+          plantGrid: personalGarden[i].plantGrid,
+          profileEmail: personalGarden[i].profileEmail,
+          gardenName: personalGarden[i].gardenName,
+          profilePicture: personalGarden[i].profilePicture
+        }
+        userGardens.push(gardenObj);
+      }
     }).catch((err) => {
       console.error("There was a get request error on the client in User RecentGardens", err);
     });
   }
 
   componentDidMount() {
-    this.getPost();
+    this.getUserGardens();
   }
 
   render() {
-    console.table(GardenSquareGridView)
     const profile = auth.getProfile();
     return (
       <div className="row">
         <div className="col-md-12 offset-md-2 right userGarden">
           <div className="userGardenSpan">
             <h3>Recent Gardens</h3>
-            <GardenSquareGridView />
+              { userGardens.map((garden, i) => {
+
+                if (!this.state.dropDown) {
+                  return <div>
+                    <IndividualGardenInfo gardenName={garden.gardenName} nickname={profile.nickname} profilePicture={garden.profilePicture} onClick={ () => { this.toggleDropDown(); }}/>
+                    </div>
+                  } else {
+                    return <IndividualGarden gardenName={garden.gardenName} plantGrid={garden.plantGrid} gardenGrid={garden.gardenGrid} nickname={profile.nickname} profilePicture={garden.profilePicture} onClick={ () => { this.toggleDropDown(); }}/>
+                  }
+                }
+              )}
           </div>
         </div>
       </div>
@@ -58,5 +85,6 @@ const mapDispatchToProps = (dispatch) => {
     }
   };
 };
+            // <GardenSquareGridView />
 
 export default connect(mapStateToProps, mapDispatchToProps)(RecentGardens);

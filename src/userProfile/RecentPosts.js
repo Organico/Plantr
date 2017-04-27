@@ -10,7 +10,7 @@ class RecentPosts extends Component {
 
   getPost() {
     const profile = auth.getProfile();
-    axios.get('/api/forum/:' + profile.email)
+    axios.get('/api/forum/' + profile.email)
     .then((res) => {
       let dbPostData = res.data;
       for (let i = 0; i<dbPostData.length; i++) {
