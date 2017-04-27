@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { setPosts, togglePost, setEditing } from '../Actions/ForumActions';
 import auth from '../client.js';
 import axios from 'axios';
+import moment from '../../node_modules/moment/moment'
 
 class ReplyPost extends Component {
 

@@ -82,7 +82,7 @@ class Forum extends Component {
     })
     .then((res) => {
       console.log('Successfully deleted user post');
-      this.props.dispatchSetEditing();
+      this.getPost();
     }).catch((err) => {
       console.error('There has been a clientside error in deleting the post in ForumJS ', err);
     });
@@ -94,6 +94,7 @@ class Forum extends Component {
 
   render() {
     const profile = auth.getProfile();
+    let that = this;
     return(
         <div className="row">
           <div className="col-md-8 offset-md-2">
@@ -103,7 +104,12 @@ class Forum extends Component {
                   <h3>Let Your Community Know About Your Garden</h3>
                 </div>
                 <div className="replyEditDelete">
-                  <button type="submit" onClick={this.openModal}>Post Here!</button>
+                  { (function() {
+                    if (!that.props.editing) {
+                     return  <button type="submit" onClick={that.openModal}>Post Here!</button>
+                    }
+                  }())
+                  }
                 </div>
               </div>
             </div>
@@ -121,7 +127,7 @@ class Forum extends Component {
            </Modal>
           <div className="col-md-8 offset-md-2">
             {this.props.posts.map((post, i) => {
-              if (profile.email === post.email && !this.props.editing) {
+              if (profile.email === post.email && !this.props.editing && !that.state.modalIsOpen) {
                return <div className="post">
                     <div className="editDelete">
                       <i className="fa fa-pencil-square-o" ariaHidden="true" onClick={ () => {
@@ -129,7 +135,6 @@ class Forum extends Component {
                         }}></i>
                       <i className="fa fa-trash" ariaHidden="true" onClick={ () => {
                           this.deletePost(post._id);
-                          this.getPost();
                         }}></i>
                     </div>
                  <ForumPost key={i} post={post} nickname={post.nickname} title={post.title} message={post.message} replies={post.replies} />
@@ -141,7 +146,6 @@ class Forum extends Component {
                   <div className="editDelete">
                     <i className="fa fa-trash" ariaHidden="true" onClick={ () => {
                       this.deletePost(post._id);
-                      this.getPost();
                     }}></i>
                   </div>
                     <EditPost id={post._id} post={post} nickname={post.nickname} message={post.message} title={post.title} replies={post.replies} />

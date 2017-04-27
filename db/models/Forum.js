@@ -14,7 +14,8 @@ var forumSchema = new mongoose.Schema({
   message: String,
   nickname: String,
   email: String,
-  replies: Array
+  replies: Array,
+  time: String
 });
 
 var Forum = mongoose.model('Forum', forumSchema);
