@@ -329,6 +329,20 @@ button {
 
 }
 
+.searchGardenBar {
+  text-align: center;
+}
+#currentPublicGarden {
+  text-align: center;
+  width: 100%;
+  margin-top: 75px;
+  background-color: #d6eef9;
+  border-style: solid;
+  border-width: 7px;
+  border-color: #8AC73D;
+  border-radius: 20px;
+}
+
 .editDelete {
   margin-bottom: -44px;
   margin-left: 10px;

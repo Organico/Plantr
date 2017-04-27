@@ -40,7 +40,7 @@ export default class NavBar extends React.Component {
               <a className="nav-link" href="#vrgarden">VR Gardens</a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="#squares">My 2D Gardens</a>
+              <a className="nav-link" href="#squares">Community Gardens</a>
             </li>
             <li className="nav-item">
               <a className="nav-link" href="#creategarden">Create A Garden</a>
