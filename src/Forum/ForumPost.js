@@ -147,8 +147,9 @@ class ForumPost extends Component {
             </div>
           </div>
           <div className="col-md-2 replyCount">Replies: {this.props.replies.length}
-          <br />
-          <div className="replyCount"> {this.props.post.time} </div></div>
+            <br />
+            <div className="replyCount"> {moment().startOf(props.post.time).fromNow()} </div>
+          </div>
         </div>
 
       </div>

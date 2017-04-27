@@ -47,7 +47,6 @@ class CreateNewPost extends Component {
         this.props.closeModal();
         this.props.dispatchSetEditing();
         this.getPost();
-        this.props.dispatchSetEditing();
       }).catch((err) => {
         console.error("Error in creating a new post on CreateNewPost", err);
       });

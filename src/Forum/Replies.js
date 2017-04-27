@@ -24,7 +24,7 @@ class Replies extends Component{
           </div>
           <div className="col-md-10 offset-md-1">
             <div className="row">
-              { this.props.reply.message }
+              { this.props.reply.message + ' - ' + this.props.reply.time }
             </div>
           </div>
         </div>

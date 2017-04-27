@@ -30,7 +30,8 @@ class ReplyPost extends Component {
         replies: {
           belongsToId: this.props.post._id,
           message: replyMessage,
-          replyUser: profile
+          replyUser: profile,
+          time: moment()._d
         }
       }
     ).then((res) => {
