@@ -29,12 +29,12 @@ export default class NavBar extends React.Component {
   }
     return (
       <nav className="navbar navbar-toggleable-md navbar-light bg-faded">
-        <button className="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span className="navbar-toggler-icon"></span>
+        <button className="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span className="navbar-toggler-icon"></span>
         </button>
-        <a className="navbar-brand" href="#home"><img src="logo.png" height="40px" width="70px"/></a>
-        <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav">
+        <a className="navbar-brand" href="#"><img src="logo.png" height="40px" width="70px"/></a>
+        <div  id="navbarNavDropdown" className="navbar-collapse collapse">
+        <ul className="navbar-nav mr-auto">
             <li className="nav-item">
               <a className="nav-link" href="#plant">Plant Test Env</a>
             </li>
@@ -50,6 +50,9 @@ export default class NavBar extends React.Component {
             <li className="nav-item">
               <a className="nav-link" href="#forum">Forum</a>
             </li>
+
+        </ul>
+        <ul className="navbar-nav">
             <li className="nav-item navbarDivider">
               <a className="nav-link weather"><WeatherTest className="nav-link" /></a>
             </li>
@@ -59,9 +62,10 @@ export default class NavBar extends React.Component {
             <li className="nav-item">
               <a className="nav-link" href="#profile"><img style={profilePic} /></a>
             </li>
-          </ul>
+        </ul>
         </div>
-      </nav>
+    </nav>
+
     );
   }
 }
