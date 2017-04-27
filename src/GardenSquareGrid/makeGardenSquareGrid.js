@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {setGardenParameters, setGarden, undo, redo, clear, setHeight, setWidth} from '../Actions/GardenActions.js';
+import {setGardenParameters, setGarden, undo, redo, clear, setHeight, setWidth, toggleVR} from '../Actions/GardenActions.js';
 import axios from 'axios';
 import GardenGrid from './GardenGrid.js';
 import MySquare from './MySquare.js';
@@ -23,10 +23,6 @@ import auth from '../client.js'
 
 
 
-
-
-
-
 const MakeGardenSquareGridView = React.createClass({
 
   saveGarden(profilePicture, profileEmail, profileNickname, gardenName, zone) {
@@ -40,9 +36,7 @@ const MakeGardenSquareGridView = React.createClass({
       }
     });
 
-
-
-      console.log("myImage is! ", myImage)
+    console.log("myImage is! ", myImage)
     axios.post('/api/gardens',
       {
         gardenId: Math.random()*100,
@@ -76,6 +70,40 @@ const MakeGardenSquareGridView = React.createClass({
       this.props.dispatchSetGardenParameters(width, this.props.height);
   },
 
+  return2DGrid(){
+    return(
+      <div className="row">
+        <Stage id="cat" width={800} height={670} fill="white" stroke="black" className="gardenGrid">
+          <GardenGrid />
+          <PlantGrid />
+          <Layer className="plantShelf">
+            <PlantShelf />
+            <MyRect />
+          </Layer>
+        </Stage>
+      </div>)
+  },
+
+  return3DGrid(){
+    return (<VRScene />)
+  },
+
+  toggleView(viewIsTwoD){
+    if(viewIsTwoD === true){
+      return this.return2DGrid()
+    } else {
+      return this.return3DGrid()
+    }
+  },
+
+  renderButtonText(viewIsTwoD){
+    if(viewIsTwoD === true){
+      return "3D"
+    } else {
+      return "2D"
+    }
+  },
+
 
 
   render () {
@@ -97,7 +125,8 @@ const MakeGardenSquareGridView = React.createClass({
   } else {
    return (
       <div style={center}>
-        <h1>Create a Garden</h1>
+        <img id="seed" src="https://s3-us-west-2.amazonaws.com/ryaperry-bucket/banners/Plantr_Build_A_Garden.png" alt="Build a Garden" crossOrigin="anonymous" width="1049" height="149"></img>
+
 
         <h2>Garden Height</h2>
         <span><strong>{this.props.width} ft</strong></span>
@@ -129,17 +158,14 @@ const MakeGardenSquareGridView = React.createClass({
                 this.props.dispatchUndo();}}>Redo</button>
             <button onClick={() => {
                 this.props.dispatchClear();}}>Delete</button>
+            <button onClick={() => {
+                this.props.dispatchToggleVR();}}>{this.renderButtonText(this.props.viewIsTwoD)}</button>
             <div className="row">
-              <Stage id="cat" width={800} height={670} fill="white" stroke="black" className="gardenGrid">
-
-                <GardenGrid />
-                <PlantGrid />
-                <Layer className="plantShelf">
-                  <PlantShelf />
-                  <MyRect />
-                </Layer>
-              </Stage>
+              {this.toggleView(this.props.viewIsTwoD)}
             </div>
+
+
+
             <div className="row">
               <PlantDex />
             </div>
@@ -171,6 +197,7 @@ const mapStateToProps = (state) => {
     width: state.gardenReducer.width,
     height: state.gardenReducer.height,
     tooltipOpen: state.gardenReducer.tooltipOpen,
+    viewIsTwoD: state.gardenReducer.viewIsTwoD,
     zone: state.weatherReducer.zone
   };
 };
@@ -198,6 +225,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     dispatchClear() {
       dispatch(clear());
+    },
+    dispatchToggleVR() {
+      dispatch(toggleVR());
     }
   };
 };

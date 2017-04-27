@@ -35,9 +35,7 @@ export default class NavBar extends React.Component {
         <a className="navbar-brand" href="#"><img src="logo.png" height="40px" width="70px"/></a>
         <div  id="navbarNavDropdown" className="navbar-collapse collapse">
         <ul className="navbar-nav mr-auto">
-            <li className="nav-item">
-              <a className="nav-link" href="#plant">Plant Test Env</a>
-            </li>
+
             <li className="nav-item">
               <a className="nav-link" href="#vrgarden">VR Gardens</a>
             </li>
@@ -68,3 +66,8 @@ export default class NavBar extends React.Component {
     );
   }
 }
+
+
+            // <li className="nav-item">
+            //   <a className="nav-link" href="#plant">Plant Test Env</a>
+            // </li>

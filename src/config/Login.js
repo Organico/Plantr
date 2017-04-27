@@ -26,3 +26,5 @@ export class Login extends React.Component {
 }
 
 export default Login;
+
+        // <img id="seed" src="https://s3-us-west-2.amazonaws.com/ryaperry-bucket/banners/Plantr_Banner_how_to_use4.png" alt="Build a Garden" crossOrigin="anonymous" width="1049" height="320"></img>

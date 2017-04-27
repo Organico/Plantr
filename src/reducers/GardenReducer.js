@@ -6,6 +6,8 @@ const makeImage = function(urlsrc) {
 
 console.log(makeImage('https://c1.staticflickr.com/3/2909/33168957064_a7ef238410_o.png'));
 const initialGardenState = {
+  viewIsTwoD:true,
+
   location: [0, 2],
   isDragging: false,
   tooltipOpen: false,
@@ -1179,6 +1181,21 @@ const setSuggestedGarden = (state, action) => {
   return newState;
 }
 
+
+const toggleVR = (state, action) => {
+  console.log("in toggleVR")
+  console.log("state: ", state)
+  console.log("action: ", action)
+  const newState = {};
+
+  Object.assign(newState, state, {viewIsTwoD: !state.viewIsTwoD});
+
+  console.log('(before) state: ', !state.viewIsTwoD);
+  console.log('(after) state: ', newState);
+  return newState;
+}
+
+
 function gardenReducer(state = initialGardenState, action) {
   console.log('GardenReducer.js - Reducer called');
   console.log('current action: ', action);
@@ -1215,6 +1232,8 @@ function gardenReducer(state = initialGardenState, action) {
     return redo(state, action)
   case 'CLEAR':
     return clear(state, action)
+  case 'TOGGLE_VR':
+    return toggleVR(state, action)
   case 'ATTEMPT_THIS':
     return attemptThis(state, action)
   case 'SET_GROWTH_GRAPH':
