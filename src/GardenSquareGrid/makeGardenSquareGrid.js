@@ -124,65 +124,74 @@ const MakeGardenSquareGridView = React.createClass({
     return <VRScene />
   } else {
    return (
-      <div style={center}>
-        <img id="seed" src="https://s3-us-west-2.amazonaws.com/ryaperry-bucket/banners/Plantr_Build_A_Garden.png" alt="Build a Garden" crossOrigin="anonymous" width="1049" height="149"></img>
 
+      <div className="container" style={center}>
+        <div className="row">
+          <div className="col-md-6 offset-md-3">
+            <img id="seed" src="https://s3-us-west-2.amazonaws.com/ryaperry-bucket/banners/Plantr_Build_A_Garden.png" alt="Build a Garden" crossOrigin="anonymous" width="500" height="149"></img>
+          </div>
+        </div>
+      <hr className="hrTwoD"/>
+        <div className="row">
+          <div className="col-md-3">
+            Garden Height <br/>
+            <span><strong>{this.props.width} ft</strong></span>
+              <form action="#">
+                <p className="range-field">
+                  <input type="range" min="1" max="10" step="1" value={parseInt(this.props.width)} onChange={this.setWidth}/>
+                </p>
+              </form>
+            Garden Width <br/>
+            <span><strong>{this.props.height} ft</strong></span>
+              <form action="#">
+                <p className="range-field">
+                  <input type="range"  min="1" max="14" step="1" value={this.props.height} onChange={this.setHeight}/>
+                </p>
+              </form>
+             <input ref={(node) => gardenName = node } type="text" name="gardenName" placeholder='Name your new garden' required/>
+                <button className="btn btn-primary btn-sm" onClick={() => {
+                  this.saveGarden(profilePicture, profileEmail, profileNickname, gardenName.value, this.props.zone);
+                  }} type="submit">Submit Garden
+                </button>
+              <div id="seedHolder">
+                <SeedPacket />
+              </div>
+              <div>
+                <button onClick={() => {
+                    this.props.dispatchUndo();}}>Undo</button>
+                <button onClick={() => {
+                    this.props.dispatchClear();}}>Clear</button>
+                <button onClick={() => {
+                    this.props.dispatchUndo();}}>Redo</button>
+                <button onClick={() => {
+                    this.props.dispatchClear();}}>Delete</button>
+              </div>
+              <div className="col-md-12 offset-md-1">
+                <p>Harvest Graph</p>
+                <HarvestGraph />
+              </div>
+          </div>
 
-        <h2>Garden Height</h2>
-        <span><strong>{this.props.width} ft</strong></span>
-          <form action="#">
-            <p className="range-field">
-              <input type="range" min="1" max="10" step="1" value={parseInt(this.props.width)} onChange={this.setWidth}/>
-            </p>
-          </form>
-        <h2>Garden Width</h2>
-        <span><strong>{this.props.height} ft</strong></span>
-          <form action="#">
-            <p className="range-field">
-              <input type="range"  min="1" max="14" step="1" value={this.props.height} onChange={this.setHeight}/>
-            </p>
-          </form>
-         <input ref={(node) => gardenName = node } type="text" name="gardenName" placeholder='Name your new garden' required/>
-            <button className="btn btn-primary btn-sm" onClick={() => {
-              this.saveGarden(profilePicture, profileEmail, profileNickname, gardenName.value, this.props.zone);
-              }} type="submit">Submit Garden
-            </button>
-            <br></br><br></br>
-        <div className="row" style={center}>
-          <div className="col-md-6">
-            <button onClick={() => {
-                this.props.dispatchUndo();}}>Undo</button>
-            <button onClick={() => {
-                this.props.dispatchClear();}}>Clear</button>
-            <button onClick={() => {
-                this.props.dispatchUndo();}}>Redo</button>
-            <button onClick={() => {
-                this.props.dispatchClear();}}>Delete</button>
-            <button onClick={() => {
-                this.props.dispatchToggleVR();}}>{this.renderButtonText(this.props.viewIsTwoD)}</button>
-            <div className="row">
-              {this.toggleView(this.props.viewIsTwoD)}
-            </div>
+          <div className="col-md-8">
+              <Stage id="cat" width={800} height={670} fill="white" stroke="black" className="gardenGrid">
+                <GardenGrid />
+                <PlantGrid />
+                <Layer>
+                  <PlantShelf />
+                  <MyRect />
+                </Layer>
+              </Stage>
+            <div className="col-md-12">
 
-
-
-            <div className="row">
               <PlantDex />
             </div>
-          </div>
-            <div className="col-md-5 offset-md-1">
-              <div className="col-md-6 offset-md-3 userRecentSpan" id="seedHolder">
-                  <SeedPacket />
-              </div>
-                <div className="col-md-10">
-                <h2>Harvest Graph</h2>
-
-                 <HarvestGraph />
-                </div>
-            <div className="row">
+            <div className="col-md-12 AnalyticsTabs">
               <AnalyticsTabs />
             </div>
           </div>
+        </div>
+
+        <div className="row" style={center}>
         </div>
       </div>
     );
