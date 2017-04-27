@@ -35,8 +35,7 @@ class About extends Component {
         id: res.data._id,
         about: res.data.about
       }
-      console.log('HERE IS THE USER OBJ: ', userAboutObject)
-      console.log('successfully getting the user information in AboutJS', res.data)
+      console.log('successfully getting the user information in AboutJS')
     }).catch((err) => {
       console.error('there has been an error in rendering your AboutMe: ', err);
     });

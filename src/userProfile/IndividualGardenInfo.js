@@ -9,7 +9,7 @@ import PlantGrid from '../GardenSquareGrid/PlantGrid';
 import GardenGrid from '../GardenSquareGrid/GardenGrid';
 import {Layer, Rect, Circle, Stage, Group} from 'react-konva';
 
-class IndividualGarden extends Component {
+class IndividualGardenInfo extends Component {
 
   render() {
     let profilePic = {
@@ -38,12 +38,6 @@ class IndividualGarden extends Component {
             <div className="row" onClick={ () => {this.props.onClick(); }}>
               <div className="col-mid-10 gardenName">
                 { this.props.gardenName }
-                <div className="row">
-                <Stage width={500} height={500} fill="white" stroke="black" className="text-center">
-                  <GardenGrid />
-                  <PlantGrid />
-                </Stage>
-                </div>
               </div>
             </div>
         </div>
@@ -68,4 +62,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(IndividualGarden);
+export default connect(mapStateToProps, mapDispatchToProps)(IndividualGardenInfo);
