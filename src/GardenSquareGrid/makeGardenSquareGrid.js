@@ -150,6 +150,8 @@ const MakeGardenSquareGridView = React.createClass({
                   <SeedPacket />
               </div>
                 <div className="col-md-10">
+                <h2>Harvest Graph</h2>
+
                  <HarvestGraph />
                 </div>
             <div className="row">

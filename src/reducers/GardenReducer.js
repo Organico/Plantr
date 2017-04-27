@@ -12,6 +12,7 @@ const initialGardenState = {
   colladaCache: {},
   gardenXYCoordinates:[],
   selectedTitle: "https://c1.staticflickr.com/3/2923/33742489190_3e30fca5f7_o.jpg",
+  harvestTable:[],
 
   pastPlantGridStates: [],
   futurePlantGrideStates: [],
@@ -957,7 +958,19 @@ const addPlantToPlantGrid = (state, action) => {
 
   console.log("Here is the new analytics ", newAnalytics);
 
+  var harvestTableCopy = state.harvestTable.slice();
+
   var generateAnalytics = function(plantToBeAdded) {
+
+
+    var today = new Date();
+    var numberOfDaysToAdd = plantToBeAdded.plant.harvest;
+    today.setDate(today.getDate() + numberOfDaysToAdd);
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1;
+    var y = today.getFullYear();
+
+    var someFormattedDate = dd + '/'+ mm + '/'+ y;
     //increment the number of that plant if already in the library
     console.log("INSIDE GENERATE ANALYTICS, ",plantToBeAdded)
     console.log("This is newAnalytics", newAnalytics);
@@ -970,6 +983,7 @@ const addPlantToPlantGrid = (state, action) => {
 
       newAnalytics["plantLibrary"][plantToBeAdded.plant.name] = {};
       newAnalytics["plantLibrary"][plantToBeAdded.plant.name]["quantity"]=1;
+      harvestTableCopy.push({name: plantToBeAdded.plant.name, harvest:plantToBeAdded.plant.harvest, harvestDate: someFormattedDate});
       newAnalytics["totalCost"]+=plantToBeAdded.plant.price;
       newAnalytics["numSeedPackets"]+=1;
     }
@@ -990,7 +1004,7 @@ const addPlantToPlantGrid = (state, action) => {
     console.log("The old analytics", state.analytics);
     generateAnalytics(action.plant);
     console.log("The new analytics is ", newAnalytics);
-  Object.assign(newState, state, {pastPlantGridStates: oldPlantGrid, plantGrid: newPlantGrid, analytics: newAnalytics});
+  Object.assign(newState, state, {pastPlantGridStates: oldPlantGrid, plantGrid: newPlantGrid, analytics: newAnalytics, harvestTable: harvestTableCopy});
   } else {
     Object.assign(newState, state, {plantGrid: newPlantGrid});
   }

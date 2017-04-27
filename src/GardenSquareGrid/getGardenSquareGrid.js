@@ -195,7 +195,7 @@ class GardenSquareGridView extends React.Component{
     return (
       <div>
         <div>
-          <h1>My Gardens</h1>
+          <h1>Garden Search</h1>
           <Autosuggest
             suggestions={suggestions}
             onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
@@ -206,18 +206,6 @@ class GardenSquareGridView extends React.Component{
             renderSuggestion={this.renderSuggestion}
             inputProps={inputProps} />
           </div>
-        <div>
-        <h1>All Gardens</h1>
-
-      <Autosuggest
-        suggestions={suggestions}
-        onSuggestionsFetchRequested={this.onUserSuggestionsFetchRequested}
-        onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-        getSuggestionValue={this.getSuggestionValue}
-        renderSuggestion={this.renderSuggestion}
-        inputProps={inputProps} />
-
-        </div>
 
         <div>
             <Stage width={700} height={700} fill="white" stroke="black" className = "text-center">

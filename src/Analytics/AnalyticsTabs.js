@@ -1,8 +1,10 @@
-
 import React from 'react';
 import { TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTitle, CardText, Row, Col } from 'reactstrap';
 import classnames from 'classnames';
 import PlantBreakdown from './PlantBreakdown'
+import Calendar from './Calendar'
+import { connect } from 'react-redux'
+
 
 class AnalyticsTabs extends React.Component {
   constructor(props) {
@@ -23,7 +25,7 @@ class AnalyticsTabs extends React.Component {
   }
   render() {
     var divStyle = {
-      margin: "20px",
+      margin: "40px",
       padding: "20px"
     };
     return (
@@ -43,16 +45,63 @@ class AnalyticsTabs extends React.Component {
               Analytics
             </NavLink>
           </NavItem>
+          <NavItem>
+            <NavLink
+              className={classnames({ active: this.state.activeTab === '' })}
+              onClick={() => { this.toggle('3'); }}>
+              Harvest Chart
+            </NavLink>
+          </NavItem>
         </Nav>
         <TabContent activeTab={this.state.activeTab}>
           <TabPane tabId="1">
-            <PlantBreakdown stle={divStyle}/>
+            <br></br>
+            <Calendar stle={divStyle}/>
           </TabPane>
           <TabPane tabId="2">
                 <Card block style={divStyle}>
-                  <CardTitle>Special Title Treatment</CardTitle>
-                  <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
-                  <Button>Go somewhere</Button>
+                  <CardTitle>Stats</CardTitle>
+                  <CardText>Square Footage: </CardText>
+                  <CardText>Hardiness Zone: </CardText>
+                  <CardText>Estimated Plant Cost: </CardText>
+                       { (function() {
+                    if (true) {
+                      return <CardText>Warning: You have plants out of your Hardiness zone</CardText>
+                    }
+                  }())
+                  }
+                      { (function() {
+                    if (true) {
+                      return <CardText>Warning: You have plants on non-viable surfaces</CardText>
+                    }
+                  }())
+                  }
+                </Card>
+          </TabPane>
+          <TabPane tabId="3">
+                <Card block style={divStyle}>
+              <table className="MyClassName">
+           <thead className="hideMe">
+                <tr>
+                  <th>Name</th>
+                  <th>Quantity</th>
+                  <th>Days 'til Harvest</th>
+                  <th>Harvest Date</th>
+                </tr>
+              </thead>
+              <tbody>
+              {this.props.harvestTable.map(function(schedule, i) {
+                    return (
+                      <tr>
+                          <td>{schedule.name}</td>
+                          <td>{12}</td>
+                          <td>{schedule.harvest}</td>
+                          <td>{schedule.harvestDate}</td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
                 </Card>
           </TabPane>
         </TabContent>
@@ -61,5 +110,15 @@ class AnalyticsTabs extends React.Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  return {
+    harvestTable: state.gardenReducer.harvestTable
+  }
+}
 
-export default AnalyticsTabs;
+const mapDispatchToProps = (dispatch) => {
+  return {
+  }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(AnalyticsTabs)

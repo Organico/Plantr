@@ -1,4 +1,4 @@
- {
+{
   "name": "reactMar21",
   "version": "1.0.0",
   "description": "",
@@ -48,6 +48,7 @@
     "konva": "^1.5.0",
     "lodash": "^4.17.4",
     "mailgun-js": "^0.10.1",
+    "moment": "^2.18.1",
     "mongoose": "^4.9.1",
     "morgan": "^1.8.1",
     "querystring": "^0.2.0",
@@ -56,6 +57,7 @@
     "react-addons-transition-group": "^15.5.2",
     "react-ajax": "^0.1.1",
     "react-autosuggest": "^9.0.1",
+    "react-big-calendar": "^0.13.0",
     "react-bootstrap": "0.30.3",
     "react-bootstrap-dropdown": "^0.3.0",
     "react-dnd": "^2.3.0",
