@@ -99,7 +99,7 @@ const MakeGardenSquareGridView = React.createClass({
       <div className="container" style={center}>
         <div className="row">
           <div className="col-md-6 offset-md-3">
-            <h1>Create a Garden</h1>
+            <img id="seed" src="https://s3-us-west-2.amazonaws.com/ryaperry-bucket/banners/Plantr_Build_A_Garden.png" alt="Build a Garden" crossOrigin="anonymous" width="500" height="149"></img>
           </div>
         </div>
       <hr className="hrTwoD"/>
