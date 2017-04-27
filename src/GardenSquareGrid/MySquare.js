@@ -15,7 +15,7 @@ const MySquare = React.createClass({
     },
 
     handleMouseDragStart(pos){
-      console.log("begin dragging", "x: ", pos.evt.x, "y: ", pos.evt.y);
+      // console.log("begin dragging", "x: ", pos.evt.x, "y: ", pos.evt.y);
       // this.setState({isDragging: true})
     },
 
@@ -34,7 +34,7 @@ const MySquare = React.createClass({
     render() {
       let newImage = new Image();
       newImage.src = this.props.img
-           console.log("Here is the viability", this.props.viability)
+           // console.log("Here is the viability", this.props.viability)
 
         return (
             <Rect

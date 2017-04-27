@@ -36,7 +36,7 @@ const MakeGardenSquareGridView = React.createClass({
       }
     });
 
-    console.log("myImage is! ", myImage)
+    // console.log("myImage is! ", myImage)
     axios.post('/api/gardens',
       {
         gardenId: Math.random()*100,
@@ -60,7 +60,7 @@ const MakeGardenSquareGridView = React.createClass({
   setHeight(e){
       let height = parseInt(e.target.value);
       this.props.dispatchSetHeight(height);
-      console.log(this.props)
+      // console.log(this.props)
       this.props.dispatchSetGardenParameters(this.props.width, height);
   },
 

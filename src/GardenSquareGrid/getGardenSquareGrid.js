@@ -45,7 +45,7 @@ var getAllGardens = function() {
               gardenObj["profilePicture"] = dbProfilePicture;
               gardenObj["profileNickname"] = dbProfileNickname;
 
-              console.log("Here is the garden Obj! ", gardenObj);
+              // console.log("Here is the garden Obj! ", gardenObj);
 
 
               allGardens.push(gardenObj);

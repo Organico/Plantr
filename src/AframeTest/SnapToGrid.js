@@ -37,13 +37,13 @@ AFRAME.registerComponent('snap-to-grid', {
       'posz.png', 'negz.png'
     ];
 
-    console.log("El: ", el);
-    console.log("data", data);
-    console.log("this", this);
-    console.log("oldData", oldData);
-    var thisItemEl = document.querySelector("sphere");
-    console.log("thisItemEl", thisItemEl)
-    console.log("document", document)
+    // console.log("El: ", el);
+    // console.log("data", data);
+    // console.log("this", this);
+    // console.log("oldData", oldData);
+    // var thisItemEl = document.querySelector("sphere");
+    // console.log("thisItemEl", thisItemEl)
+    // console.log("document", document)
 
 
     // var object3D = this.el.object3D;
