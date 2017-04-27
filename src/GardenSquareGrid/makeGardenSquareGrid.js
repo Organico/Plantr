@@ -137,35 +137,31 @@ const MakeGardenSquareGridView = React.createClass({
                 <button onClick={() => {
                     this.props.dispatchClear();}}>Delete</button>
               </div>
+              <div className="col-md-12 offset-md-1">
+                <p>Harvest Graph</p>
+                <HarvestGraph />
+              </div>
           </div>
 
           <div className="col-md-8">
               <Stage id="cat" width={800} height={670} fill="white" stroke="black" className="gardenGrid">
                 <GardenGrid />
                 <PlantGrid />
-                <Layer className="plantShelf">
+                <Layer>
                   <PlantShelf />
                   <MyRect />
                 </Layer>
               </Stage>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-md-6 offset-md-3">
-            <PlantDex />
+            <div className="col-md-12">
+              <PlantDex />
+            </div>
+            <div className="col-md-12 AnalyticsTabs">
+              <AnalyticsTabs />
+            </div>
           </div>
         </div>
 
         <div className="row" style={center}>
-            <div className="col-md-5 offset-md-1">
-              <div className="col-md-10">
-                <h2>Harvest Graph</h2>
-                <HarvestGraph />
-              </div>
-              <div className="row">
-                <AnalyticsTabs />
-              </div>
-            </div>
         </div>
       </div>
     );
