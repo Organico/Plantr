@@ -218,7 +218,7 @@ app.post('/api/forum', (req, res, next) => {
 
 /*--------------------PUT REQUEST-----------------------------------------*/
 // updating the user About Me
-app.put('/api/users', (req, res, next) => {
+app.put('/api/users/:id', (req, res, next) => {
   User.findById(req.body.id, (err, result) => {
     if (err) {
       console.error('There has been a serverside error updating the aboutMe: ', err);
