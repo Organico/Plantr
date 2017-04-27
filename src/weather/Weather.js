@@ -99,6 +99,7 @@ class WeatherTest extends React.Component {
   }
 
   getWeatherData(location){
+
     const OPEN_WEATHER_MAP_URL = 'http://api.openweathermap.org/data/2.5/weather?&appid=b625bae7d54136d7e2d33c6a3f383f9e&units=metric';
 
     var encodedLocation = encodeURIComponent(location);

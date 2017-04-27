@@ -9,7 +9,64 @@ const bodyParser = require('body-parser');
 const axios = require('axios');
 const mongoose = require('mongoose');
 const request = require('request');
+const cron = require('node-cron');
 
+console.log("IN HERE!")
+var date = new Date();
+cron.schedule('10 * * * *', function(){
+  console.log('running a task every minute', date);
+
+
+    const OPEN_WEATHER_MAP_URL = 'http://api.openweathermap.org/data/2.5/weather?&appid=b625bae7d54136d7e2d33c6a3f383f9e&units=metric';
+
+    var encodedLocation = encodeURIComponent('Lafayette, California');
+    console.log("Encoded Location: ", encodedLocation)
+
+    var requestUrl = `${OPEN_WEATHER_MAP_URL}&q=${encodedLocation}`;
+    console.log("requestUrl : ", requestUrl)
+
+
+  var temperature;
+
+    request.get(requestUrl).then(
+      function(res) {
+        if (res.data.cod && res.data.message){
+          throw new Error(res.data.message);
+        } else {
+          temperature = res.data.main.temp;
+          console.log("Here is the temperature")
+          return res.data.main.temp;
+        }
+      }
+    ).then(
+      function(){
+
+
+  let api_key = 'key-b90d2dcc5bdd42c5abceba45568ea1dd';
+  let domain = 'sandboxa7ed15c3bb5b4de696ad9041ddcadb4a.mailgun.org';
+  let mailgun = require('mailgun-js')({apiKey: api_key, domain: domain});
+  // console.log("Here is your gardenName", garden.gardenName)
+  let data = {
+    from: 'Plantr <postmaster@sandboxa7ed15c3bb5b4de696ad9041ddcadb4a.mailgun.org>',
+    to: 'skebaish1992@gmail.com',
+    subject: 'Hello',
+    text: 'Testing some Mailgun awesomness! ' + date + ' ' + temperature,
+    html: '<html>Inline image here: <img src="https://www.sciencea-z.com/shared/images/units/plant-life.jpg"></html>'
+  };
+
+  mailgun.messages().send(data, function (error, body) {
+    console.log(error);
+    if (error) {
+      console.log("You had an error", error);
+    } else {
+      console.log("The body is ", body);
+    }
+  });
+
+
+
+    });
+});
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({'extended': 'true'}));
