@@ -182,6 +182,7 @@ app.post('/api/plants', (req, res, next) => {
 });
 
 app.post('/api/forum', (req, res, next) => {
+  console.log('HERE IS THE REQ.BODY: ', req.body)
   let forum = new Forum({
     // category: req.body.category,
     // subjectLine: req.body.subjectLine,
@@ -196,7 +197,8 @@ app.post('/api/forum', (req, res, next) => {
     message: req.body.message,
     nickname: req.body.nickname,
     email: req.body.email,
-    replies: req.body.replies
+    replies: req.body.replies,
+    time: req.body.time
   });
   forum.save({}, (err)=> {
     if (err) {
