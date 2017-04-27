@@ -16,6 +16,7 @@ import HarvestGraph from '../Analytics/HarvestGraph.js';
 import AnalyticsTabs from '../Analytics/AnalyticsTabs.js';
 import PlantBreakdown from '../Analytics/PlantBreakdown.js';
 import PlantDex from '../PlantDex/PlantDex.js'
+import VRScene from '../AframeTest/VRScene.js'
 import { TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTitle, CardText, Row, Col } from 'reactstrap';
 import html2canvas from 'html2canvas';
 import auth from '../client.js'
@@ -91,12 +92,10 @@ const MakeGardenSquareGridView = React.createClass({
     let profileEmail = profile.email;
     let profileNickname = profile.nickname
 
-
-
-
-
-
-    return (
+  if (false) {
+    return <VRScene />
+  } else {
+   return (
       <div style={center}>
         <h1>Create a Garden</h1>
 
@@ -162,6 +161,7 @@ const MakeGardenSquareGridView = React.createClass({
       </div>
     );
   }
+}
 });
 
 const mapStateToProps = (state) => {
