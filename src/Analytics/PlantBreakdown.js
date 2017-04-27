@@ -7,6 +7,12 @@ import {BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend} from 'recha
 const PlantBreakdown = React.createClass({
     render() {
 
+      // let gardenToTraverseForData = this.props.plantGrid;
+
+      // for () {
+
+      // }
+
       console.log(this.props.analytics)
       console.log("HERE ARE THE PROPS ", this.props)
       const data = [

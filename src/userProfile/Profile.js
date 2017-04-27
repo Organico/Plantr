@@ -54,7 +54,6 @@ class Profile extends Component {
               <hr className="profileDividerLine" />
             </div>
             <div className="col-md-6">
-              <RecentGardens />
               <RecentPosts />
             </div>
           </div>

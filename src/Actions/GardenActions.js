@@ -26,11 +26,12 @@ export function getAllGardens(dbGardenGrids){
   return {type: 'GET_ALL_GARDENS', dbGardenGrids};
 }
 
-export function getAllPlants(dbPlantGrids){
+export function getPlants(dbPlantGrids){
   console.log('action: GET_ALL_PLANTS from db called');
   console.log("DB Plant grids: ", dbPlantGrids);
+  console.log("ROAAARRRRR")
 
-  return {type: 'GET_ALL_PLANTS', dbPlantGrids};
+  return {type: 'GET_PLANTS', dbPlantGrids};
 }
 
 export function setDropdown(dbDropdownOptions) {
@@ -51,6 +52,16 @@ export function addToShelf(shelfObject) {
 export function setGrowthGraph(graph) {
   console.log('action: adding to shelf');
   return { type: 'SET_GROWTH_GRAPH', graph};
+}
+
+export function setSuggestedGarden(suggestedGarden) {
+  console.log('action: adding to shelf');
+  return { type: 'SET_SUGGESTED_GARDEN', suggestedGarden};
+}
+
+export function setSuggestedPlants(suggestedPlants) {
+  console.log('action: adding to shelf');
+  return { type: 'SET_SUGGESTED_PLANTS', suggestedPlants};
 }
 
 
@@ -93,3 +104,7 @@ export function clear() {
   return { type: 'CLEAR'};
 }
 
+export function tryThis() {
+  console.log('TRYCALLED');
+  return { type: 'TRY_THIS'};
+}

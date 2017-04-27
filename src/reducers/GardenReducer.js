@@ -907,9 +907,10 @@ const setDropdown = (state, action) => {
 }
 
 /*PLANTS*/
-const getAllPlants = (state, action) => {
+const getPlants = (state, action) => {
   const newState = {};
   const {plants} = state;
+  console.log("HERE ARE ALL YOUR PLANTS", "ARIEL")
 
   Object.assign(newState, state, {plants: action.dbPlantGrids});
   console.log('(before) state: ', state);
@@ -1144,6 +1145,25 @@ const setWidth = (state, action) => {
   return newState;
 }
 
+const setSuggestedPlants = (state, action) => {
+  const newState = {};
+
+  Object.assign(newState, state, {plantGrid: action.suggestedPlants});
+
+  console.log('(before) state: ', state);
+  console.log('(after) state: ', newState);
+  return newState;
+}
+
+const setSuggestedGarden = (state, action) => {
+  const newState = {};
+
+  Object.assign(newState, state, {gardenGrid: action.suggestedGarden});
+
+  console.log('(before) state: ', state);
+  console.log('(after) state: ', newState);
+  return newState;
+}
 
 function gardenReducer(state = initialGardenState, action) {
   console.log('GardenReducer.js - Reducer called');
@@ -1163,8 +1183,8 @@ function gardenReducer(state = initialGardenState, action) {
     return getGardenFromDropdown(state, action);
   case 'GET_PLANTS_FROM_DROPDOWN':
     return getPlantsFromDropdown(state, action);
-  case 'GET_ALL_PLANTS':
-    return getAllPlants(state, action);
+  case 'GET_PLANTS':
+    return getPlants(state, action);
   case 'ADD_PLANT_TO_PLANT_GRID':
     return addPlantToPlantGrid(state, action);
   case 'SET_USER_PARAMETERS':
@@ -1181,12 +1201,18 @@ function gardenReducer(state = initialGardenState, action) {
     return redo(state, action)
   case 'CLEAR':
     return clear(state, action)
+  case 'ATTEMPT_THIS':
+    return attemptThis(state, action)
   case 'SET_GROWTH_GRAPH':
     return setGrowthGraph(state, action);
   case 'SET_WIDTH':
     return setWidth(state, action);
   case 'SET_HEIGHT':
     return setHeight(state, action);
+  case 'SET_SUGGESTED_GARDEN':
+    return setSuggestedGarden(state, action);
+  case 'SET_SUGGESTED_PLANTS':
+    return setSuggestedPlants(state, action);
   default:
     return state;
   }
