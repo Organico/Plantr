@@ -187,37 +187,45 @@ class GardenSquareGridView extends React.Component{
   render() {
     const { value, suggestions } = this.state;
     const inputProps = {
-      placeholder: "Type 'c'",
+      placeholder: "Search for a garden!",
       value,
       onChange: this.onChange
     };
 
     return (
-      <div>
-        <div>
-          <h1>Garden Search</h1>
-          <Autosuggest
-            suggestions={suggestions}
-            onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-            onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-            onSuggestionSelected={this.setGardenToSuggestion}
-            getGardens={this.getGardens}
-            getSuggestionValue={this.getSuggestionValue}
-            renderSuggestion={this.renderSuggestion}
-            inputProps={inputProps} />
-          </div>
-
-        <div>
-            <Stage width={700} height={700} fill="white" stroke="black" className = "text-center">
-              <GardenGrid />
-              <PlantGrid />
-
-
-            </Stage>
-
-
+      <div className="container">
+          <div className="row">
+            <div className="searchGardenBar col-md-4 offset-md-4">
+              <h2>Community Gardens</h2>
+              <Autosuggest
+                suggestions={suggestions}
+                onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+                onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+                onSuggestionSelected={this.setGardenToSuggestion}
+                getGardens={this.getGardens}
+                getSuggestionValue={this.getSuggestionValue}
+                renderSuggestion={this.renderSuggestion}
+                inputProps={inputProps} />
             </div>
+          </div>
+        <div className="row">
+          <div className="col-md-8">
 
+              <div className="row">
+                  <Stage width={700} height={700} fill="white" stroke="black" className = "text-center">
+                    <GardenGrid />
+                    <PlantGrid />
+                  </Stage>
+              </div>
+            </div>
+            <div className="col-md-4">
+              <div id="currentPublicGarden">
+                <div>user picture goes here</div>
+                <div><h3>user nickname goes here</h3></div>
+                <div><p>user about goes here. this is a little something sweet about me. and maybe even something about the current garden. who knows what is possible!</p></div>
+              </div>
+            </div>
+          </div>
         </div>
     );
   }
