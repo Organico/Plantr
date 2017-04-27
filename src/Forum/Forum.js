@@ -12,12 +12,14 @@ import Ajax from 'react-ajax';
 
 const customStyles = {
   content : {
-    top                   : '50%',
-    left                  : '50%',
-    right                 : 'auto',
-    bottom                : 'auto',
-    marginRight           : '-50%',
-    transform             : 'translate(-50%, -50%)'
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)',
+    backgroundColor: '#d6eef9',
+    borderRadius: '10px'
   }
 };
 
@@ -113,50 +115,52 @@ class Forum extends Component {
                 </div>
               </div>
             </div>
+            <br/>
+            <div className="searchForum">
+              <input className="searchForum" />
+            </div>
           </div>
-            <Modal
-              isOpen={this.state.modalIsOpen}
-              onAfterOpen={this.afterOpenModal}
-              onRequestClose={this.closeModal}
-              style={customStyles}
-              contentLabel="Example Modal"
-            >
-              <h3>Post Your Questions or Successes Onto the Forum</h3>
-              <CreateNewPost closeModal={this.closeModal}/>
-              <button onClick={this.closeModal}>close</button>
-           </Modal>
-          <div className="col-md-8 offset-md-2">
-            {this.props.posts.map((post, i) => {
-              if (profile.email === post.email && !this.props.editing && !that.state.modalIsOpen) {
-               return <div className="post">
-                    <div className="editDelete">
-                      <i className="fa fa-pencil-square-o" ariaHidden="true" onClick={ () => {
-                          this.props.dispatchSetEditing(post.message);
-                        }}></i>
-                      <i className="fa fa-trash" ariaHidden="true" onClick={ () => {
-                          this.deletePost(post._id);
-                        }}></i>
-                    </div>
-                 <ForumPost key={i} post={post} nickname={post.nickname} title={post.title} message={post.message} replies={post.replies} />
-               </div>
-              }
-
-              else if (profile.email === post.email && this.props.editing && (post.message === this.props.messageToEdit)) {
-                  return <div className="post">
+          <Modal
+            isOpen={this.state.modalIsOpen}
+            onAfterOpen={this.afterOpenModal}
+            onRequestClose={this.closeModal}
+            style={customStyles}
+            contentLabel="Example Modal"
+          >
+            <h3>Post Your Questions or Successes Onto the Forum</h3>
+            <CreateNewPost closeModal={this.closeModal}/>
+            <button onClick={this.closeModal}>close</button>
+         </Modal>
+         <div className="col-md-8 offset-md-2">
+           {this.props.posts.map((post, i) => {
+             if (profile.email === post.email && !this.props.editing && !that.state.modalIsOpen) {
+            return <div className="post">
+                 <div className="editDelete">
+                   <i className="fa fa-pencil-square-o" ariaHidden="true" onClick={ () => {
+                       this.props.dispatchSetEditing(post.message);
+                     }}></i>
+                   <i className="fa fa-trash" ariaHidden="true" onClick={ () => {
+                       this.deletePost(post._id);
+                     }}></i>
+                 </div>
+              <ForumPost key={i} post={post} nickname={post.nickname} title={post.title} message={post.message} replies={post.replies} />
+            </div>
+           } else if (profile.email === post.email && this.props.editing && (post.message === this.props.messageToEdit)) {
+                return <div className="post">
                   <div className="editDelete">
                     <i className="fa fa-trash" ariaHidden="true" onClick={ () => {
                       this.deletePost(post._id);
                     }}></i>
                   </div>
-                    <EditPost id={post._id} post={post} nickname={post.nickname} message={post.message} title={post.title} replies={post.replies} />
-                  </div>
-              } else {
-               return <div className="post"><ForumPost key={i} post={post} nickname={post.nickname} title={post.title} message={post.message} replies={post.replies} /></div>
-              }
+                  <EditPost id={post._id} post={post} nickname={post.nickname} message={post.message} title={post.title} replies={post.replies} />
+                </div>
+            } else {
+              return <div className="post"><ForumPost key={i} post={post} nickname={post.nickname} title={post.title} message={post.message} replies={post.replies} /></div>
             }
-            )}
-          </div>
+          }
+          )}
         </div>
+      </div>
     )
   }
 }

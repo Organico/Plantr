@@ -10,19 +10,19 @@ import axios from 'axios';
 
 class ForumPost extends Component {
 
-    getPost() {
-     axios.get('/api/forum')
-     .then((res) => {
-       let dbPostData = res.data;
-       for (let i = 0; i<dbPostData.length; i++) {
-         let message = dbPostData[i];
-         message['isShort'] = true;
-       }
-       this.props.dispatchSetPost(dbPostData)
-     }).catch((err) => {
-       console.error('There has been a clientside error in getting the post in ForumJS ', err);
-     });
-   }
+  getPost() {
+    axios.get('/api/forum')
+   .then((res) => {
+     let dbPostData = res.data;
+     for (let i = 0; i<dbPostData.length; i++) {
+       let message = dbPostData[i];
+       message['isShort'] = true;
+     }
+     this.props.dispatchSetPost(dbPostData)
+   }).catch((err) => {
+     console.error('There has been a clientside error in getting the post in ForumJS ', err);
+    });
+  }
 
   deletePost(id, replyId) {
     axios.delete('/api/forum/' + id + '/' + replyId, {
@@ -38,41 +38,40 @@ class ForumPost extends Component {
   }
 
   render() {
-  const profile = auth.getProfile();
-  let profilePic = {
-    height: '50px',
-    width: '50px',
-    backgroundImage: 'url(' + this.props.post.profile + ')',
-    backgroundRepeat: 'no-repeat',
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-    zIndex: '900',
-    borderRadius: '50%'
-  }
-  let props = this.props;
-  let postType = this.props.post.isShort;
-  let message;
-  let title;
-
-  if (postType) {
-    if (this.props.message.split(" ").length < 100) {
-      if (this.props.replies.length) {
-        message = this.props.message.split(" ").slice(0, 100).join(" ") + "...Click to see replies";
-        title = this.props.title.split(" ").slice(0, 20).join(" ");
+    const profile = auth.getProfile();
+    let profilePic = {
+      height: '50px',
+      width: '50px',
+      backgroundImage: 'url(' + this.props.post.profile + ')',
+      backgroundRepeat: 'no-repeat',
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      zIndex: '900',
+      borderRadius: '50%'
+    }
+    let props = this.props;
+    let postType = this.props.post.isShort;
+    let message;
+    let title;
+    if (postType) {
+      if (this.props.message.split(" ").length < 100) {
+        if (this.props.replies.length) {
+          message = this.props.message.split(" ").slice(0, 100).join(" ") + "...Click to see replies";
+          title = this.props.title.split(" ").slice(0, 20).join(" ");
+        } else {
+          title = this.props.title;
+          message = this.props.message;
+        }
       } else {
-        title = this.props.title;
-        message = this.props.message;
+        message = this.props.message.split(" ").slice(0, 100).join(" ") + "...Click to Expand";
+        title = this.props.title.split(" ").slice(0, 20).join(" ");
       }
     } else {
-      message = this.props.message.split(" ").slice(0, 100).join(" ") + "...Click to Expand";
-      title = this.props.title.split(" ").slice(0, 20).join(" ");
+      message = this.props.message;
+      title = this.props.title;
     }
-  } else {
-    message = this.props.message;
-    title = this.props.title;
-  }
 
-    return(
+    return (
       <div className="container-fluid">
         <div className="row post">
           <div className="col-md-2">
@@ -89,7 +88,7 @@ class ForumPost extends Component {
               <div className="row">
                 <span className="forumTitle">{ title }</span>
               </div>
-              <div className="row">
+              <div className="row forumMessage">
                 { message }
               </div>
             </div>
@@ -141,7 +140,6 @@ class ForumPost extends Component {
                     }
                   }())
                   }
-
               </div>
             </div>
           </div>
@@ -150,7 +148,6 @@ class ForumPost extends Component {
             <div className="replyCount"> { props.post.time } </div>
           </div>
         </div>
-
       </div>
     )
   }
@@ -166,7 +163,6 @@ const mapStateToProps = (state) => {
 };
 const mapDispatchToProps = (dispatch) => {
   return {
-
     dispatchTogglePost(id) {
       dispatch(togglePost(id));
     },
