@@ -151,13 +151,18 @@ button {
     font-family: Fizz;
     src: url("/Fizz.otf") format("opentype");
 }
-
+.hrTwoD {
+  border-style: solid;
+  border-width: 1px;
+  border-color: #92C84E;
+  border-radius: 15px;
+}
 .plantDex {
   margin-top: -10px;
   margin-left: 20px;
 }
-.plantShelf {
-  margin-left: 10px;
+.AnalyticsTabs {
+  margin-top: -240px;
 }
 
 .lineChart {
@@ -288,6 +293,7 @@ button {
 .flip3D:hover > .back {
   transform: perspective( 600px ) rotateY( 0deg );
 }
+
 #packetFront {
   margin-top: 15px;
   width: 212px;
@@ -316,6 +322,7 @@ button {
 
 #seedHolder {
   height: 350px;
+
 }
 
 .editDelete {

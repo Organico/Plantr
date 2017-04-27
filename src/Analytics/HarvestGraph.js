@@ -8,7 +8,7 @@ const HarvestGraph = React.createClass({
     render() {
       return (
         <div className="lineChart">
-          <LineChart width={500} height={300} data={this.props.plantGrowthGraph}>
+          <LineChart width={300} height={200} data={this.props.plantGrowthGraph}>
             <XAxis dataKey="name"/>
             <YAxis/>
             <CartesianGrid stroke="#eee" strokeDasharray="5 5"/>
