@@ -112,7 +112,7 @@ const initialGardenState = {
       'x':150,
       'y':600,
       'img':'https://s3-us-west-2.amazonaws.com/ryaperry-bucket/plantImages/tomatoePlant.png',
-      'model':'https://s3-us-west-2.amazonaws.com/ryaperry-bucket/plantModels/tomatoeModel.dae',
+      'model':'https://s3-us-west-2.amazonaws.com/ryaperry-bucket/plantModels/carrotModel.dae',
       'isDraggable': true,
       'packetImg' : '/seedPacketIMGs/tomatoResized.png',
        'price': 10,
