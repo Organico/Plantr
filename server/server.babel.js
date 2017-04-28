@@ -229,7 +229,7 @@ app.post('/api/gardens', (req, res, next) => {
     profileNickname: req.body.profileNickname,
     hardinessZone: req.body.hardinessZone
   });
-  garden.save({}, (err) => {
+  garden.save({}, (err, data) => {
     if (err) {
       console.error('There was an error saving the garden info onto the server: ', err);
       res.status(500);
@@ -265,7 +265,7 @@ app.post('/api/plants', (req, res, next) => {
     plantId: req.body.plantId,
     image: req.body.image
   });
-  plant.save({}, (err) => {
+  plant.save({}, (err, data) => {
     if (err) {
       console.error('There was an error saving the plant info onto the server: ', err);
       res.status(500);
@@ -286,7 +286,7 @@ app.post('/api/forum', (req, res, next) => {
     replies: req.body.replies,
     time: req.body.time
   });
-  forum.save({}, (err) => {
+  forum.save({}, (err, data) => {
     if (err) {
       console.error('There was an error saving the forum info onto the server: ', err);
       res.status(500);
