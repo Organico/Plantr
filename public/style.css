@@ -110,6 +110,13 @@ button {
   text-align: center;
 }
 
+.aboutGarden {
+  font-size: 12px;
+}
+.communityGardenUserName {
+  font-weight: bold;
+  font-size: 15px;
+}
 .postPicture {
   margin-top: 10px;
 }
@@ -156,6 +163,8 @@ button {
   border-width: 1px;
   border-color: #92C84E;
   border-radius: 15px;
+  margin-bottom: 3px;
+  margin-top: 2px;
 }
 .plantDex {
   margin-top: -10px;
