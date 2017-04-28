@@ -83,7 +83,7 @@ const initialGardenState = {
       'x': 100,
       'y': 600,
       'img': 'https://c1.staticflickr.com/3/2844/33627640530_f866a32b60_o.png',
-      'model':'https://s3-us-west-2.amazonaws.com/ryaperry-bucket/plantModels/cornModel2.dae',
+      'model':'https://s3-us-west-2.amazonaws.com/ryaperry-bucket/plantModels/cornModel3.dae',
       'isDraggable': true,
       'packetImg': '/seedPacketIMGs/genericResized.png',
       'price': 0.75,
