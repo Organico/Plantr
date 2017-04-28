@@ -14,7 +14,6 @@ import auth from '../client.js'
 // // var profile = auth.getProfile();
 // // var email = profile.email
 
-const profile = auth.getProfile();
 var gardens = [];
 
 var myGardens = [];
@@ -69,7 +68,7 @@ getAllGardens();
 class GardenSquareGridView extends React.Component{
  constructor() {
     super();
-
+    const profile = auth.getProfile();
     this.state = {
       value: '',
       suggestions: [],
