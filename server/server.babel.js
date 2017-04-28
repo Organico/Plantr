@@ -13,60 +13,46 @@ const cron = require('node-cron');
 
 console.log("IN HERE!")
 var date = new Date();
-// cron.schedule('10 * * * *', function(){
-//   console.log('running a task every minute', date);
 
+cron.schedule('* * * * *', function(){
+  console.log('running a task every minute', date);
+     let api_key = 'key-b90d2dcc5bdd42c5abceba45568ea1dd';
+  let domain = 'sandboxa7ed15c3bb5b4de696ad9041ddcadb4a.mailgun.org';
+  let mailgun = require('mailgun-js')({apiKey: api_key, domain: domain});
+  // console.log("Here is your gardenName", garden.gardenName)
+  let data = {
+    from: 'Plantr <postmaster@sandboxa7ed15c3bb5b4de696ad9041ddcadb4a.mailgun.org>',
+    to: 'skebaish1992@gmail.com',
+    subject: 'Hello',
+    text: 'Testing some Mailgun awesomness! ' + date + ' ' + temperature,
+    html: '<!DOCTYPE html><html style="font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;box-sizing:border-box;font-size:14px;margin:0"xmlns=http://www.w3.org/1999/xhtml><meta content="width=device-width"name=viewport><meta content="text/html; charset=UTF-8"http-equiv=Content-Type><title>Alerts e.g. approaching your limit</title><style>img{max-width:100%}body{-webkit-font-smoothing:antialiased;-webkit-text-size-adjust:none;width:100%!important;height:100%;line-height:1.6em}body{background-color:#f6f6f6}@media only screen and (max-width:640px){body{padding:0!important}h1{font-weight:800!important;margin:20px 0 5px!important}h2{font-weight:800!important;margin:20px 0 5px!important}h3{font-weight:800!important;margin:20px 0 5px!important}h4{font-weight:800!important;margin:20px 0 5px!important}h1{font-size:22px!important}h2{font-size:18px!important}h3{font-size:16px!important}.container{padding:0!important;width:100%!important}.content{padding:0!important}.content-wrap{padding:10px!important}.invoice{width:100%!important}}</style><body bgcolor=#f6f6f6 itemscope itemtype=http://schema.org/EmailMessage style="font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;box-sizing:border-box;font-size:14px;-webkit-font-smoothing:antialiased;-webkit-text-size-adjust:none;width:100%!important;height:100%;line-height:1.6em;background-color:#f6f6f6;margin:0"><table style="font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;box-sizing:border-box;font-size:14px;width:100%;background-color:#f6f6f6;margin:0"bgcolor=#f6f6f6 class=body-wrap><tr style="font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;box-sizing:border-box;font-size:14px;margin:0"><td style="font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;box-sizing:border-box;font-size:14px;vertical-align:top;margin:0"valign=top><td style="font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;box-sizing:border-box;font-size:14px;vertical-align:top;display:block!important;max-width:600px!important;clear:both!important;margin:0 auto"valign=top class=container width=600><div class=content style="font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;box-sizing:border-box;font-size:14px;max-width:600px;display:block;margin:0 auto;padding:20px"><table style="font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;box-sizing:border-box;font-size:14px;border-radius:3px;background-color:#fff;margin:0;border:1px solid #e9e9e9"width=100% cellpadding=0 cellspacing=0 bgcolor=#fff class=main><tr></tr><tr style="font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;box-sizing:border-box;font-size:14px;margin:0"><td style="font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;box-sizing:border-box;font-size:16px;vertical-align:top;color:#fff;font-weight:500;text-align:center;border-radius:3px 3px 0 0;background-color:#ff9f00;margin:0;padding:20px"valign=top class="alert alert-warning"align=center bgcolor=#FF9F00><Warning:You are approaching your limit. Please upgrade.<tr style="font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;box-sizing:border-box;font-size:14px;margin:0"><td style="font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;box-sizing:border-box;font-size:14px;vertical-align:top;margin:0;padding:20px"valign=top class=content-wrap><table style="font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;box-sizing:border-box;font-size:14px;margin:0"width=100% cellpadding=0 cellspacing=0><tr style="font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;box-sizing:border-box;font-size:14px;margin:0"><td style="font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;box-sizing:border-box;font-size:14px;vertical-align:top;margin:0;padding:0 0 20px"valign=top class=content-block>You have <strong style="font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;box-sizing:border-box;font-size:14px;margin:0">1 free report</strong> remaining.<tr style="font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;box-sizing:border-box;font-size:14px;margin:0"><td style="font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;box-sizing:border-box;font-size:14px;vertical-align:top;margin:0;padding:0 0 20px"valign=top class=content-block>Add your credit card now to upgrade your account to a premium plan to ensure you dot miss out on any reports.<tr style="font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;box-sizing:border-box;font-size:14px;margin:0"><td style="font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;box-sizing:border-box;font-size:14px;vertical-align:top;margin:0;padding:0 0 20px"valign=top class=content-block><a href=http://www.mailgun.com style="font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;box-sizing:border-box;font-size:14px;color:#fff;text-decoration:none;line-height:2em;font-weight:700;text-align:center;cursor:pointer;display:inline-block;border-radius:5px;text-transform:capitalize;background-color:#348eda;margin:0;border-color:#348eda;border-style:solid;border-width:10px 20px"class=btn-primary>Upgrade my account</a><tr style="font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;box-sizing:border-box;font-size:14px;margin:0"><td style="font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;box-sizing:border-box;font-size:14px;vertical-align:top;margin:0;padding:0 0 20px"valign=top class=content-block>Thanks for choosing Acme Inc.</table></table><div class=footer style="font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;box-sizing:border-box;font-size:14px;width:100%;clear:both;color:#999;margin:0;padding:20px"><table style="font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;box-sizing:border-box;font-size:14px;margin:0"width=100%><tr style="font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;box-sizing:border-box;font-size:14px;margin:0"><td style="font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;box-sizing:border-box;font-size:12px;vertical-align:top;color:#999;text-align:center;margin:0;padding:0 0 20px"valign=top class="content-block aligncenter"align=center><a href=http://www.mailgun.com style="font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;box-sizing:border-box;font-size:12px;color:#999;text-decoration:underline;margin:0">Unsubscribe</a> from these alerts.</table></div></div><td style="font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;box-sizing:border-box;font-size:14px;vertical-align:top;margin:0"valign=top></table>'};
 
-//     const OPEN_WEATHER_MAP_URL = 'http://api.openweathermap.org/data/2.5/weather?&appid=b625bae7d54136d7e2d33c6a3f383f9e&units=metric';
+  var temperature;
 
-//     var encodedLocation = encodeURIComponent('Lafayette, California');
-//     console.log("Encoded Location: ", encodedLocation)
-
-//     var requestUrl = `${OPEN_WEATHER_MAP_URL}&q=${encodedLocation}`;
-//     console.log("requestUrl : ", requestUrl)
-
-
-//   var temperature;
-
-//     request.get(requestUrl).then(
-//       function(res) {
-//         if (res.data.cod && res.data.message){
-//           throw new Error(res.data.message);
-//         } else {
-//           temperature = res.data.main.temp;
-//           console.log("Here is the temperature")
-//           return res.data.main.temp;
-//         }
-//       }
-//     ).then(
-//       function(){
-
-
-//   let api_key = 'key-b90d2dcc5bdd42c5abceba45568ea1dd';
-//   let domain = 'sandboxa7ed15c3bb5b4de696ad9041ddcadb4a.mailgun.org';
-//   let mailgun = require('mailgun-js')({apiKey: api_key, domain: domain});
-//   // console.log("Here is your gardenName", garden.gardenName)
-//   let data = {
-//     from: 'Plantr <postmaster@sandboxa7ed15c3bb5b4de696ad9041ddcadb4a.mailgun.org>',
-//     to: 'skebaish1992@gmail.com',
-//     subject: 'Hello',
-//     text: 'Testing some Mailgun awesomness! ' + date + ' ' + temperature,
-//     html: '<html>Inline image here: <img src="https://www.sciencea-z.com/shared/images/units/plant-life.jpg"></html>'
-//   };
-
-//   mailgun.messages().send(data, function (error, body) {
-//     console.log(error);
-//     if (error) {
-//       console.log("You had an error", error);
-//     } else {
-//       console.log("The body is ", body);
-//     }
-//   });
+    request.get(requestUrl, function(err, andrewChung ) {
+      if (err) {
+        console.error('There was an error getting the hardiness zone on the server: ', err);
+        andrewChung .status(404);
+      } else {
+          // description = andrewChung .andrewChung .weather[0].description;
+         var weatherData = (JSON.parse(andrewChung.body))
+         var weather = weatherData.weather[0].description;
 
 
 
-//     });
-// });
+             mailgun.messages().send(data, function (error, body) {
+            console.log(error);
+              if (error) {
+                console.log("You had an error", error);
+              } else {
+             console.log("The body is ", weather);
+              }
+            })
+      }
+    }
+  );
+})
+
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({'extended': 'true'}));
