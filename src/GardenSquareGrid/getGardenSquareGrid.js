@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {setSuggestedPlants, setSuggestedGarden} from '../Actions/GardenActions.js';
+import {setSuggestedPlants, setSuggestedGarden, toggleVR} from '../Actions/GardenActions.js';
 import axios from 'axios';
 import GardenGrid from './GardenGrid.js';
 import {Layer, Rect, Circle, Stage, Group} from 'react-konva';
@@ -10,6 +10,8 @@ import Autosuggest from 'react-autosuggest';
 import match from 'autosuggest-highlight/match'
 import parse from 'autosuggest-highlight/parse'
 import auth from '../client.js'
+import VRScene from '../AframeTest/VRScene.js'
+
 // console.log("Here is auth", auth)
 // // var profile = auth.getProfile();
 // // var email = profile.email
@@ -187,7 +189,37 @@ class GardenSquareGridView extends React.Component{
   }
 
 
+  return2DGrid(){
+    return(
 
+
+        <Stage id="cat" width={800} height={670} fill="white" stroke="black" className="gardenGrid">
+          <GardenGrid />
+          <PlantGrid />
+        </Stage>
+
+    )
+  }
+
+  return3DGrid(){
+    return (<VRScene />)
+  }
+
+  toggleView(viewIsTwoD){
+    if(viewIsTwoD === true){
+      return this.return2DGrid()
+    } else {
+      return this.return3DGrid()
+    }
+  }
+
+  renderButtonText(viewIsTwoD){
+    if(viewIsTwoD === true){
+      return "Switch to 3D"
+    } else {
+      return "Switch to 2D"
+    }
+  }
 
   render() {
 
@@ -229,10 +261,11 @@ class GardenSquareGridView extends React.Component{
           <div className="col-md-8">
 
               <div className="row">
-                  <Stage width={700} height={700} fill="white" stroke="black" className = "text-center">
-                    <GardenGrid />
-                    <PlantGrid />
-                  </Stage>
+                {this.toggleView(this.props.viewIsTwoD)}
+              </div>
+              <div>
+                <button onClick={() => {
+                    this.props.dispatchToggleVR(this.props.viewIsTwoD);}}>{this.renderButtonText(this.props.viewIsTwoD)}</button>
               </div>
             </div>
             <div className="col-md-4">
@@ -250,7 +283,9 @@ class GardenSquareGridView extends React.Component{
 }
 const mapStateToProps = (state) => {
   return {
-    gardenDropdown: state.gardenReducer.gardenDropdown
+    gardenDropdown: state.gardenReducer.gardenDropdown,
+    viewIsTwoD: state.gardenReducer.viewIsTwoD
+
   };
 };
 
@@ -261,6 +296,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     dispatchSetSuggestedPlants(suggestedPlants){
       dispatch(setSuggestedPlants(suggestedPlants))
+    },
+    dispatchToggleVR() {
+      dispatch(toggleVR());
     }
   };
 };
