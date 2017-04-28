@@ -14,7 +14,7 @@ const cron = require('node-cron');
 console.log("IN HERE!")
 var date = new Date();
 
-cron.schedule('* * * * *', function(){
+cron.schedule('10 * * * *', function(){
   console.log('running a task every minute', date);
      let api_key = 'key-b90d2dcc5bdd42c5abceba45568ea1dd';
   let domain = 'sandboxa7ed15c3bb5b4de696ad9041ddcadb4a.mailgun.org';
@@ -53,7 +53,7 @@ cron.schedule('* * * * *', function(){
               if (error) {
                 console.log("You had an error", error);
               } else {
-             console.log("The body is ", bbody);
+             console.log("The body is ", body);
               }
             })
       }
