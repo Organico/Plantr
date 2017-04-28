@@ -4,10 +4,8 @@ const makeImage = function(urlsrc) {
   return newImage;
 };
 
-console.log(makeImage('https://c1.staticflickr.com/3/2909/33168957064_a7ef238410_o.png'));
 const initialGardenState = {
   viewIsTwoD:true,
-
   location: [0, 2],
   isDragging: false,
   tooltipOpen: false,
@@ -15,23 +13,21 @@ const initialGardenState = {
   gardenXYCoordinates:[{"x":75,"y":75,"viability":true},{"x":75,"y":125,"viability":true},{"x":75,"y":175,"viability":true},{"x":75,"y":225,"viability":true},{"x":75,"y":275,"viability":true},{"x":125,"y":75,"viability":true},{"x":125,"y":125,"viability":true},{"x":125,"y":175,"viability":true},{"x":125,"y":225,"viability":true},{"x":125,"y":275,"viability":true},{"x":175,"y":75,"viability":true},{"x":175,"y":125,"viability":true},{"x":175,"y":175,"viability":true},{"x":175,"y":225,"viability":true},{"x":175,"y":275,"viability":true},{"x":225,"y":75,"viability":true},{"x":225,"y":125,"viability":true},{"x":225,"y":175,"viability":true},{"x":225,"y":225,"viability":true},{"x":225,"y":275,"viability":true},{"x":275,"y":75,"viability":true},{"x":275,"y":125,"viability":true},{"x":275,"y":175,"viability":true},{"x":275,"y":225,"viability":true},{"x":275,"y":275,"viability":true}],
   selectedTitle: "https://c1.staticflickr.com/3/2923/33742489190_3e30fca5f7_o.jpg",
   harvestTable:[],
-
   pastPlantGridStates: [],
   futurePlantGrideStates: [],
   analytics: {
-  "numberPlants": 0,
-  "squareFootage":0,
-  "soilSquareFootage":0,
-  "seedPacketCosts": 0,
-  "numSeedPackets": 0,
-  "totalCost": 0,
-  "totalNumberOfSeedPackets": 0,
-  "plantLibrary": {},
-  "numFruits": 0,
-  "numVeggies": 0,
-  "numFlowers": 0
+    "numberPlants": 0,
+    "squareFootage":0,
+    "soilSquareFootage":0,
+    "seedPacketCosts": 0,
+    "numSeedPackets": 0,
+    "totalCost": 0,
+    "totalNumberOfSeedPackets": 0,
+    "plantLibrary": {},
+    "numFruits": 0,
+    "numVeggies": 0,
+    "numFlowers": 0
   },
-
   seedPacket:{
     'name': 'tomato',
     'price': 0,
@@ -45,14 +41,13 @@ const initialGardenState = {
     'packetImg': '/seedPacketIMGs/tomatoResized.png'
   },
   plantGrowthGraph: [
-      {name: 'Start Seedlings', uv: 0},
-      {name: 'Sow', uv: 20},
-      {name: 'Harvest', uv:45},
-      {name: 'End', uv: 60}
-],
-  gardenGrid: [{"x":75,"y":75,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg","viability":true},{"x":75,"y":125,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg","viability":true},{"x":75,"y":175,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg","viability":true},{"x":75,"y":225,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg","viability":true},{"x":75,"y":275,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg","viability":true},{"x":125,"y":75,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg","viability":true},{"x":125,"y":125,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg","viability":true},{"x":125,"y":175,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg","viability":true},{"x":125,"y":225,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg","viability":true},{"x":125,"y":275,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg","viability":true},{"x":175,"y":75,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg","viability":true},{"x":175,"y":125,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg","viability":true},{"x":175,"y":175,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg","viability":true},{"x":175,"y":225,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg","viability":true},{"x":175,"y":275,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg","viability":true},{"x":225,"y":75,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg","viability":true},{"x":225,"y":125,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg","viability":true},{"x":225,"y":175,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg","viability":true},{"x":225,"y":225,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg","viability":true},{"x":225,"y":275,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg","viability":true},{"x":275,"y":75,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg","viability":true},{"x":275,"y":125,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg","viability":true},{"x":275,"y":175,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg","viability":true},{"x":275,"y":225,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg","viability":true},{"x":275,"y":275,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg","viability":true}],
-  plantGrid: [
+    {name: 'Start Seedlings', uv: 0},
+    {name: 'Sow', uv: 20},
+    {name: 'Harvest', uv:45},
+    {name: 'End', uv: 60}
   ],
+  gardenGrid: [{"x":75,"y":75,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg","viability":true},{"x":75,"y":125,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg","viability":true},{"x":75,"y":175,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg","viability":true},{"x":75,"y":225,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg","viability":true},{"x":75,"y":275,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg","viability":true},{"x":125,"y":75,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg","viability":true},{"x":125,"y":125,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg","viability":true},{"x":125,"y":175,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg","viability":true},{"x":125,"y":225,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg","viability":true},{"x":125,"y":275,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg","viability":true},{"x":175,"y":75,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg","viability":true},{"x":175,"y":125,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg","viability":true},{"x":175,"y":175,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg","viability":true},{"x":175,"y":225,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg","viability":true},{"x":175,"y":275,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg","viability":true},{"x":225,"y":75,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg","viability":true},{"x":225,"y":125,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg","viability":true},{"x":225,"y":175,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg","viability":true},{"x":225,"y":225,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg","viability":true},{"x":225,"y":275,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg","viability":true},{"x":275,"y":75,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg","viability":true},{"x":275,"y":125,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg","viability":true},{"x":275,"y":175,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg","viability":true},{"x":275,"y":225,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg","viability":true},{"x":275,"y":275,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg","viability":true}],
+  plantGrid: [],
   height: 5,
   width: 5,
 
@@ -60,37 +55,37 @@ const initialGardenState = {
     {
       'name': 'sunflower',
       'type': 'flower',
-      'x':50,
-      'y':600,
-      'img':'https://c1.staticflickr.com/3/2909/33168957064_a7ef238410_o.png',
-      'model':'https://s3-us-west-2.amazonaws.com/ryaperry-bucket/plantModels/sunflowerModel.dae',
+      'x': 50,
+      'y': 600,
+      'img': 'https://c1.staticflickr.com/3/2909/33168957064_a7ef238410_o.png',
+      'model': 'https://s3-us-west-2.amazonaws.com/ryaperry-bucket/plantModels/sunflowerModel.dae',
       'isDraggable': true,
-       'packetImg' : '/seedPacketIMGs/genericResized.png',
+       'packetImg': '/seedPacketIMGs/genericResized.png',
        'price': 20,
       'quantity': 5,
       'season': "Spring",
       'description': "After Start State",
       'instructions': "Take great care of me",
       'sunlight': "Full-sun",
-      'harvest':40,
-      'extremeWarning':[0,45],
+      'harvest': 40,
+      'extremeWarning':[10,40],
       'growthGraph': [
         {name: 'Sow', uv: 0},
         {name: 'Seedlings Emerge', uv: 7},
-        {name: 'Bloom Start', uv: 45},
-        {name: 'Harvest', uv: 50},
+        {name: 'Bloom Start', uv: 38},
+        {name: 'Harvest', uv: 51},
         {name: 'End', uv: 65}
       ],
     },
     {
       'name': 'potato',
       'type': 'vegetable',
-      'x':100,
-      'y':600,
+      'x': 100,
+      'y': 600,
       'img': 'https://c1.staticflickr.com/3/2844/33627640530_f866a32b60_o.png',
       'model':'https://s3-us-west-2.amazonaws.com/ryaperry-bucket/plantModels/sunflowerModel.dae',
       'isDraggable': true,
-       'packetImg' : '/seedPacketIMGs/genericResized.png',
+       'packetImg': '/seedPacketIMGs/genericResized.png',
       'price': 15,
       'quantity': 20,
       'season': "Spring",
@@ -98,7 +93,7 @@ const initialGardenState = {
       'instructions': "Take great care of me",
       'sunlight': "Full-sun",
       'harvest':40,
-      'extremeWarning':[0,45],
+      'extremeWarning':[5,25],
       'growthGraph': [
         {name: 'Sow', uv: 0},
         {name: 'Seedlings Emerge', uv: 7},
