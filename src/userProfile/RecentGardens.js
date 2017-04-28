@@ -87,8 +87,11 @@ class RecentGardens extends Component {
                     </div>
                   }
               )}</div>
-                ) : (<div className="container-fluid">
-      <h4>{gardenName}</h4>
+                ) : (
+
+      <div className="container-fluid">
+               <h4>{gardenName}</h4>
+
         <div className="row">
           <div className="col-md-2">
             <div className="row"></div>
