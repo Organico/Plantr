@@ -51,6 +51,8 @@ const MakeGardenSquareGridView = React.createClass({
               console.log("Here is your image");
             // window.open(myImage);
       }
+    }).then((res) => {
+      javascript:window.location.replace("#/squares")
     });
 
     // console.log("myImage is! ", myImage)
