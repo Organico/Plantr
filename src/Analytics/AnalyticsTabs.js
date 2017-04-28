@@ -61,9 +61,9 @@ class AnalyticsTabs extends React.Component {
           <TabPane tabId="2">
                 <Card block style={divStyle}>
                   <CardTitle>Stats</CardTitle>
-                  <CardText>Square Footage: </CardText>
-                  <CardText>Hardiness Zone: </CardText>
-                  <CardText>Estimated Plant Cost: </CardText>
+                  <CardText>Square Footage: {this.props.squareFootage} ft</CardText>
+                  <CardText>Hardiness Zone: 6b </CardText>
+                  <CardText>Estimated Garden Cost: {this.props.analytics.totalCost}</CardText>
                        { (function() {
                     if (true) {
                       return <CardText>Warning: You have plants out of your Hardiness zone</CardText>
@@ -112,7 +112,9 @@ class AnalyticsTabs extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    harvestTable: state.gardenReducer.harvestTable
+    harvestTable: state.gardenReducer.harvestTable,
+    squareFootage: state.gardenReducer.squareFootage,
+    analytics: state.gardenReducer.analytics
   }
 }
 

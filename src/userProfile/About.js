@@ -3,7 +3,7 @@ import axios from 'axios';
 import auth from '../client.js';
 
 let userAboutObject = {};
-userAboutObject.about = "Meow"
+userAboutObject.about = "Farming is a big passion of mine that I inherited from my father. He was raised on a mango and banana farm in the outskirts of Ismalia, Egypt. My current passion is trying to grow hardy plants in unexpected places, including Russian Pomegranates and Hardy Kiwis in Northern Virginia."
 class About extends Component {
   constructor() {
     super()

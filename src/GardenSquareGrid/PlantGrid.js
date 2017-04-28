@@ -19,7 +19,7 @@ const PlantGrid = React.createClass({
               model={plantSquare.model}
               plantStats ={plantSquare}
               isDraggable={plantSquare.isDraggable}
-              plantZone={'8b'}
+              plantZone={plantSquare.zone}
               />)
           }
         </Layer>
