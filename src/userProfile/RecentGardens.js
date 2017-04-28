@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import GardenSquareGridView from '../GardenSquareGrid/getGardenSquareGrid';
-import {setSuggestedPlants, setSuggestedGarden} from '../Actions/GardenActions.js';
+import {setSuggestedPlants, setSuggestedGarden, setDropdownStatus} from '../Actions/GardenActions.js';
 
 import ReactDOM from 'react-dom'
 import { connect } from 'react-redux';
@@ -11,7 +11,7 @@ import auth from '../client.js';
 import { setPosts } from '../Actions/ForumActions';
 
 let userGardens = [];
-
+console.log('BACK INSIDE RECENT GARDENSSSSSSS')
 var context;
 class RecentGardens extends Component {
   constructor() {
@@ -19,7 +19,7 @@ class RecentGardens extends Component {
       this.state = {
         gardenGrid: [],
         plantGrid: [],
-        dropDownStatus: false
+        dropdownStatus: false
       }
   }
 
@@ -36,7 +36,9 @@ class RecentGardens extends Component {
       console.log("here is this ", this)
       this.context.props.dispatchSetSuggestedPlants(this.plantGrid);
       this.context.props.dispatchSetSuggestedGarden(this.gardenGrid);
-      this.context.setState({dropDownStatus: !this.context.state.dropDownStatus});
+      // this.context.setState({dropDownStatus: !this.context.state.dropDownStatus});
+      console.log("Inside of handle click of recent gardens", this.context.pro)
+      this.context.props.dispatchSetDropdownStatus(this.context.props.dropdownStatus);
   }
 
   getUserGardens() {
@@ -66,14 +68,13 @@ class RecentGardens extends Component {
   render() {
     const profile = auth.getProfile();
     const context = this;
-    const dropDownStatus = this.state.dropDownStatus
-    console.log("THIS THE DROPDOWN STATUS", dropDownStatus)
+
     return (
       <div className="row">
         <div className="col-md-12 offset-md-2 right userGarden">
           <div className="userGardenSpan">
             <h3>Recent Gardens</h3>
-            {!dropDownStatus ? (
+            {!this.props.dropdownStatus ? (
               <div>
               { userGardens.map((garden, i) => {
                   return <div>
@@ -91,7 +92,8 @@ class RecentGardens extends Component {
 const mapStateToProps = (state) => {
   return {
     posts: state.forumReducer.posts,
-    currentPost: state.forumReducer.currentPost
+    currentPost: state.forumReducer.currentPost,
+    dropdownStatus: state.gardenReducer.dropdownStatus
   };
 };
 
@@ -105,6 +107,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     dispatchSetSuggestedPlants(suggestedPlants){
       dispatch(setSuggestedPlants(suggestedPlants))
+    },
+    dispatchSetDropdownStatus(dropdownStatus){
+      dispatch(setDropdownStatus(dropdownStatus))
     }
   };
 };

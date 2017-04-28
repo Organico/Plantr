@@ -113,3 +113,8 @@ export function toggleVR() {
   console.log('toggleVR CALLED');
   return { type: 'TOGGLE_VR'};
 }
+
+export function setDropdownStatus(action) {
+  console.log('set setDropdownStatus', action);
+  return { type: 'SET_DROPDOWN_STATUS'};
+}

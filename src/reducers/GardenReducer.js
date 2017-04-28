@@ -10,6 +10,7 @@ const initialGardenState = {
   isDragging: false,
   tooltipOpen: false,
   colladaCache: {},
+  dropdownStatus: false,
   gardenXYCoordinates:[{"x":75,"y":75,"viability":true},{"x":75,"y":125,"viability":true},{"x":75,"y":175,"viability":true},{"x":75,"y":225,"viability":true},{"x":75,"y":275,"viability":true},{"x":125,"y":75,"viability":true},{"x":125,"y":125,"viability":true},{"x":125,"y":175,"viability":true},{"x":125,"y":225,"viability":true},{"x":125,"y":275,"viability":true},{"x":175,"y":75,"viability":true},{"x":175,"y":125,"viability":true},{"x":175,"y":175,"viability":true},{"x":175,"y":225,"viability":true},{"x":175,"y":275,"viability":true},{"x":225,"y":75,"viability":true},{"x":225,"y":125,"viability":true},{"x":225,"y":175,"viability":true},{"x":225,"y":225,"viability":true},{"x":225,"y":275,"viability":true},{"x":275,"y":75,"viability":true},{"x":275,"y":125,"viability":true},{"x":275,"y":175,"viability":true},{"x":275,"y":225,"viability":true},{"x":275,"y":275,"viability":true}],
   selectedTitle: "https://c1.staticflickr.com/3/2923/33742489190_3e30fca5f7_o.jpg",
   harvestTable:[],
@@ -1316,6 +1317,17 @@ const toggleVR = (state, action) => {
 }
 
 
+const setDropdownStatus = (state, action) => {
+  const newState = {};
+
+  Object.assign(newState, state, {dropdownStatus: !action.dropdownStatus});
+
+  console.log('(before) state: ', !state.viewIsTwoD);
+  console.log('(after) state: ', newState);
+  return newState;
+}
+
+
 function gardenReducer(state = initialGardenState, action) {
   console.log('GardenReducer.js - Reducer called');
   console.log('current action: ', action);
@@ -1364,6 +1376,8 @@ function gardenReducer(state = initialGardenState, action) {
     return setHeight(state, action);
   case 'SET_SUGGESTED_GARDEN':
     return setSuggestedGarden(state, action);
+  case 'SET_DROPDOWN_STATUS':
+    return setDropdownStatus(state, action);
   case 'SET_SUGGESTED_PLANTS':
     return setSuggestedPlants(state, action);
   default:

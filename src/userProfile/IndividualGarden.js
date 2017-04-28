@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import GardenSquareGridView from '../GardenSquareGrid/getGardenSquareGrid';
+import {setDropdownStatus} from '../Actions/GardenActions.js';
 import ReactDOM from 'react-dom'
 import { connect } from 'react-redux';
 import axios from 'axios';
@@ -10,6 +11,14 @@ import GardenGrid from '../GardenSquareGrid/GardenGrid';
 import {Layer, Rect, Circle, Stage, Group} from 'react-konva';
 
 class IndividualGarden extends Component {
+
+
+
+  handleClick(str){
+      console.log(this.props);
+      console.log("Here is this inside of the individual garden")
+      this.props.dispatchSetDropdownStatus(this.context.props.dropdownStatus);
+  }
 
   render() {
     let profilePic = {
@@ -35,7 +44,9 @@ class IndividualGarden extends Component {
                 </div>
               </div>
             </div>
-            <div className="row" onClick={ () => {this.props.onClick(); }}>
+            <button onClick={() => {
+                    this.props.dispatchSetDropdownStatus(this.props.dropdownStatus);}}>Go Back to your Garden</button>
+            <div className="row" onClick={ () => {this.handleClick}}>
               <div className="col-mid-10 gardenName">
                 { this.props.gardenName }
                 <div className="row">
@@ -56,7 +67,8 @@ class IndividualGarden extends Component {
 const mapStateToProps = (state) => {
   return {
     posts: state.forumReducer.posts,
-    currentPost: state.forumReducer.currentPost
+    dropdownStatus: state.gardenReducer.dropdownStatus
+
   };
 };
 
@@ -64,6 +76,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     dispatchSetPost(message) {
       dispatch(setPosts(message));
+    },
+    dispatchSetDropdownStatus(dropdownStatus){
+      dispatch(setDropdownStatus(dropdownStatus))
     }
   };
 };
