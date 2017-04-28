@@ -1320,9 +1320,10 @@ const toggleVR = (state, action) => {
 const setDropdownStatus = (state, action) => {
   const newState = {};
 
+  console.log("Here is the action", action)
   Object.assign(newState, state, {dropdownStatus: !action.dropdownStatus});
 
-  console.log('(before) state: ', !state.viewIsTwoD);
+  console.log('(before) state: ', state);
   console.log('(after) state: ', newState);
   return newState;
 }

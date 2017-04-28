@@ -9,10 +9,14 @@ import IndividualGardenInfo from './IndividualGardenInfo';
 import axios from 'axios';
 import auth from '../client.js';
 import { setPosts } from '../Actions/ForumActions';
+import {Layer, Rect, Circle, Stage, Group} from 'react-konva';
+import PlantGrid from '../GardenSquareGrid/PlantGrid';
+import GardenGrid from '../GardenSquareGrid/GardenGrid';
+
 
 let userGardens = [];
-console.log('BACK INSIDE RECENT GARDENSSSSSSS')
 var context;
+var gardenName = "";
 class RecentGardens extends Component {
   constructor() {
     super()
@@ -36,8 +40,9 @@ class RecentGardens extends Component {
       console.log("here is this ", this)
       this.context.props.dispatchSetSuggestedPlants(this.plantGrid);
       this.context.props.dispatchSetSuggestedGarden(this.gardenGrid);
-      // this.context.setState({dropDownStatus: !this.context.state.dropDownStatus});
-      console.log("Inside of handle click of recent gardens", this.context.pro)
+      console.log("Inside of handle click of recent gardens", this)
+
+      gardenName = this.gardenName
       this.context.props.dispatchSetDropdownStatus(this.context.props.dropdownStatus);
   }
 
@@ -82,7 +87,34 @@ class RecentGardens extends Component {
                     </div>
                   }
               )}</div>
-                ) : (<IndividualGarden/>)}
+                ) : (<div className="container-fluid">
+      <h4>{gardenName}</h4>
+        <div className="row">
+          <div className="col-md-2">
+            <div className="row"></div>
+
+              <div className="col-md-12 offset-md-3 postPicture" style={profilePic}>
+              </div>
+              <div className="row">
+                <div className="col-md-12 postUsername">{ this.props.nickname }
+                </div>
+              </div>
+            </div>
+            <h2></h2>
+            <button onClick={() => {
+                    this.props.dispatchSetDropdownStatus(this.props.dropdownStatus);}}>Go Back to your Garden</button>
+            <div className="row" onClick={ () => {this.handleClick}}>
+              <div className="col-mid-10 gardenName">
+                <div className="row">
+                <Stage width={500} height={500} fill="white" stroke="black" className="text-center">
+                  <GardenGrid />
+                  <PlantGrid />
+                </Stage>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>)}
           </div>
         </div>
       </div>
