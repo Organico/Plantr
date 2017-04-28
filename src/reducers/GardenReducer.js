@@ -833,14 +833,14 @@ const initialGardenState = {
    { 'name': 'soil',
       'x':50,
       'y':50,
-      'img': "https://s3-us-west-2.amazonaws.com/ryaperry-bucket/gardenTextures/soilTexture.jpg",
+      'img': "https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg",
       'stroke': 'black',
       'viability': true
     },
     { 'name': 'grass',
       'x':104,
       'y':50,
-      'img':"https://s3-us-west-2.amazonaws.com/ryaperry-bucket/gardenTextures/grassTexture.jpg",
+      'img':"https://c1.staticflickr.com/3/2923/33742489190_3e30fca5f7_o.jpg",
       'stroke': 'black',
       'viability': true
 
