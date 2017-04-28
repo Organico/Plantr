@@ -91,7 +91,7 @@ class VRScene extends React.Component {
               geometry={{primitive: 'box', width: 100, height:30, depth:100}}
               material={{src: materialCube.img}}
               scale={{x: 1, y: 1, z: 1}}
-              position={{x: materialCube.x * 2 - 500, y: 0, z: materialCube.y * 2 - 500}}
+              position={{x: materialCube.x * 2 - 475, y: 0, z: materialCube.y * 2 - 475}}
               click-drag
             />
           )}
