@@ -261,28 +261,3 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(MakeGardenSquareGridView);
-    },
-    dispatchSetGarden(dbGardenGrid) {
-      dispatch(setGarden(dbGardenGrid));
-    },
-    dispatchSetHeight(height){
-      dispatch(setHeight(height));
-    },
-    dispatchSetWidth(width){
-      dispatch(setWidth(width));
-    },
-    dispatchUndo() {
-      dispatch(undo());
-    },
-    dispatchRedo() {
-      dispatch(redo());
-    },
-    dispatchClear() {
-      dispatch(clear());
-    },
-    dispatchToggleVR() {
-      dispatch(toggleVR());
-    }
-  };
-};
-export default connect(mapStateToProps, mapDispatchToProps)(MakeGardenSquareGridView);
