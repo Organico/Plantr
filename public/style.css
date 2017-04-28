@@ -125,7 +125,7 @@ button {
 }
 
 .navbar {
-  background-color: #d6eef9;
+  background-color: white;
   font-family: 'Quicksand', sans-serif;
   font-weight: bold;
   letter-spacing: 2px;
@@ -175,14 +175,14 @@ button {
 }
 
 .lineChart {
-  margin-left: -100px;
+  margin-left: -75px;
 }
 .profileLeft {
   margin-top: 20px;
-  background-color: #d6eef9;
+  background-color: white;
   border-style: solid;
-  border-width: 7px;
-  border-color: #8AC73D;
+  border-width: 2px;
+  border-color: grey;
   border-radius: 20px;
 }
 #picDiv {
@@ -201,7 +201,7 @@ button {
   margin: 1em 0;
   padding: 0;*/
   border-style: solid;
-  border-width: 3px;
+  border-width: 1px;
   border-color: #FF8400;
   border-radius: 15px;
 }
@@ -226,8 +226,8 @@ button {
 .userRecent {
   background-color: white;
   border-style: solid;
-  border-width: 7px;
-  border-color: #8AC73D;
+  border-width: 2px;
+  border-color: grey;
   border-radius: 20px;
   margin-top: 20px;
   min-height: 225px;
@@ -243,7 +243,9 @@ button {
   font-weight: bold;
   border-radius: 10px;
 }
-
+#aboutMe {
+  color: black;
+}
 .userRecentSpan {
   text-align: center;
   font-size: 20px;
@@ -261,10 +263,10 @@ button {
 .userGarden {
   background-color: white;
   border-style: solid;
-  border-width: 7px;
-  border-color: #8AC73D;
+  border-width: 2px;
+  border-color: grey;
   border-radius: 20px;
-  color: #8DC83B;
+  color: black;
   margin-top: 20px;
   min-height: 100px;
 }
@@ -345,10 +347,10 @@ button {
   text-align: center;
   width: 100%;
   margin-top: 75px;
-  background-color: #d6eef9;
+  background-color: white;
   border-style: solid;
-  border-width: 7px;
-  border-color: #8AC73D;
+  border-width: 2px;
+  border-color: grey;
   border-radius: 20px;
 }
 
@@ -522,14 +524,16 @@ body {
 
 .profiles {
   clear: both;
+  border: solid 2px grey;
+  border-radius: 5px;
   margin-bottom: 5px;
   padding: 5px;
   min-height: 100px;
-  background-color: #E9F7FF;
+  background-color: white;
 }
 
 .profiles:hover {
-  background-color: #efe;
+  background-color: #bec1c4;
 }
 
 .profiles img {
@@ -550,13 +554,26 @@ body {
   margin-left: 20px;
 }
 
+.toolBar {
+  background-color: white;
+  border: solid 2px grey;
+  border-radius: 5px;
+}
+
+#postHere {
+  margin: 10px;
+  margin-bottom: 20px;
+}
 
 .profiles .name {
   font-size: 20px;
   font-weight: 600;
+  color: black;
 }
 
-
+.topAbout {
+  margin-top: 10px;
+}
 
 /*////////////////////////////////////////////////////////////*/
 
