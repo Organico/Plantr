@@ -21,6 +21,16 @@ import './SnapToGrid'
 import './CursorListener'
 
 
+
+          // <a-plane
+          //   position={"" + 370 + " " + 140 + " " + -375}
+          //   rotation={"" + 0 + " " + -90 + " " + 0}
+          //   scale="40 50 50"
+          //   src="#seed"
+          // ></a-plane>
+
+
+
 class VRScene extends React.Component {
 
   constructor(props, context) {
@@ -44,15 +54,6 @@ class VRScene extends React.Component {
     return (
       <div id="embed-aframe">
         <a-scene embedded>
-          <a-sphere
-            id="sphere"
-            position="0 1.25 -5"
-            radius="100"
-            color="#EF2D5E"
-            click-drag
-            cursor-listener
-          >
-          </a-sphere>
 
           <a-entity
             camera
@@ -80,7 +81,6 @@ class VRScene extends React.Component {
               event-set__enter="_event: mouseenter; scale: 70 70 70"
               event-set__leave="_event: mouseleave; scale: 50 50 50"
 
-              click-drag
             />
           )}
 
@@ -91,38 +91,11 @@ class VRScene extends React.Component {
               geometry={{primitive: 'box', width: 100, height:30, depth:100}}
               material={{src: materialCube.img}}
               scale={{x: 1, y: 1, z: 1}}
-              position={{x: materialCube.x * 2 - 500, y: 0, z: materialCube.y * 2 - 500}}
+              position={{x: materialCube.x * 2 - 475, y: 0, z: materialCube.y * 2 - 475}}
               click-drag
             />
           )}
 
-            <Entity
-              id="colladaBookshelf"
-              primitive="a-collada-model"
-              src={"https://s3-us-west-2.amazonaws.com/ryaperry-bucket/bookshelf/bookshelf2.dae"}
-              position={"" + 400 + " " + 0 + " " + -350}
-              scale="40 40 30"
-              event-set__enter="_event: mouseenter; scale: 70 70 70"
-              event-set__leave="_event: mouseleave; scale: 50 50 50"
-
-              click-drag
-            />
-
-          <a-assets>
-            <img id="seed" src="https://s3-us-west-2.amazonaws.com/ryaperry-bucket/seedPackets/tomatoResized.png" crossOrigin="anonymous"></img>
-          </a-assets>
-
-
-          <a-plane
-            position={"" + 370 + " " + 140 + " " + -375}
-            rotation={"" + 0 + " " + -90 + " " + 0}
-            scale="40 50 50"
-            src="#seed"
-          ></a-plane>
-
-
-          <a-entity id="rain" particle-system="preset: snow; color: #24CAFF; particleCount: 10000"></a-entity>
-          <a-entity position="0 500 0" particle-system="preset: snow" positionSpread="1000 1000 1000" size="10"></a-entity>
           <a-entity position="0 500 0" cubemap="folder: https://s3-us-west-2.amazonaws.com/ryaperry-bucket/homeCubeMapAframeBlue3/; edgeLength: 1000"></a-entity>
 
         </a-scene >
