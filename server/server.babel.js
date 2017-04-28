@@ -14,18 +14,33 @@ const cron = require('node-cron');
 console.log("IN HERE!")
 var date = new Date();
 
-cron.schedule('5 * * * *', function(){
+cron.schedule('* * * * *', function(){
   console.log('running a task every minute', date);
      let api_key = 'key-b90d2dcc5bdd42c5abceba45568ea1dd';
   let domain = 'sandboxa7ed15c3bb5b4de696ad9041ddcadb4a.mailgun.org';
   let mailgun = require('mailgun-js')({apiKey: api_key, domain: domain});
+
+  const OPEN_WEATHER_MAP_URL = 'http://api.openweathermap.org/data/2.5/weather?&appid=b625bae7d54136d7e2d33c6a3f383f9e&units=metric';
+
+  var encodedLocation = encodeURIComponent('Lafayette, CA');
+    console.log("Encoded Location: ", encodedLocation)
+
+  var requestUrl = `${OPEN_WEATHER_MAP_URL}&q=${encodedLocation}`;
+
+  let hotWeatherAlert = {
+    from: 'Plantr <postmaster@sandboxa7ed15c3bb5b4de696ad9041ddcadb4a.mailgun.org>',
+    to: 'skebaish1992@gmail.com',
+    subject: 'Warning: Your garden may be experiencing exceess heat today',
+    text: 'Heat Warning',
+    html: '<html><img src=' +"https://c1.staticflickr.com/5/4179/34164138582_a460eccfd7_b.jpg" + '></html>'
+  };
 
   var temperature;
 
     request.get(requestUrl, function(err, andrewChung ) {
       if (err) {
         console.error('There was an error getting the hardiness zone on the server: ', err);
-        andrewChung .status(404);
+        andrewChung.status(404);
       } else {
           // description = andrewChung .andrewChung .weather[0].description;
          var weatherData = (JSON.parse(andrewChung.body))
@@ -33,12 +48,12 @@ cron.schedule('5 * * * *', function(){
 
 
 
-             mailgun.messages().send(data, function (error, body) {
+             mailgun.messages().send(hotWeatherAlert, function (error, body) {
             console.log(error);
               if (error) {
                 console.log("You had an error", error);
               } else {
-             console.log("The body is ", weather);
+             console.log("The body is ", bbody);
               }
             })
       }

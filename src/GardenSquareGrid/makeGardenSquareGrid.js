@@ -38,34 +38,7 @@ const customStyles = {
 };
 
 
-class MakeGardenSquareGridView extends Component{
-    constructor() {
-    super();
-
-    this.state = {
-      modalIsOpen: false
-    };
-
-    this.openModal = this.openModal.bind(this);
-    this.afterOpenModal = this.afterOpenModal.bind(this);
-    this.closeModal = this.closeModal.bind(this);
-  }
-
-  openModal() {
-    this.setState({modalIsOpen: true});
-  }
-
-  afterOpenModal() {
-    // references are now sync'd and can be accessed.
-    this.subtitle.style.color = '#f00';
-  }
-
-  closeModal() {
-    this.setState({modalIsOpen: false});
-  }
-
-
-
+const MakeGardenSquareGridView = React.createClass({
 
 
 
@@ -100,19 +73,19 @@ class MakeGardenSquareGridView extends Component{
       console.error(err);
       console.log("Error in getGardenSquareGrid getAllGardens()")
     });
-  }
+  },
   setHeight(e){
       let height = parseInt(e.target.value);
       this.props.dispatchSetHeight(height);
       // console.log(this.props)
       this.props.dispatchSetGardenParameters(this.props.width, height);
-  }
+  },
 
   setWidth(e){
       let width = parseInt(e.target.value);
       this.props.dispatchSetWidth(width);
       this.props.dispatchSetGardenParameters(width, this.props.height);
-  }
+  },
 
   return2DGrid(){
     return(
@@ -128,11 +101,11 @@ class MakeGardenSquareGridView extends Component{
         </Stage>
 
     )
-  }
+  },
 
   return3DGrid(){
     return (<VRScene />)
-  }
+  },
 
   toggleView(viewIsTwoD){
     if(viewIsTwoD === true){
@@ -140,7 +113,7 @@ class MakeGardenSquareGridView extends Component{
     } else {
       return this.return3DGrid()
     }
-  }
+  },
 
   renderButtonText(viewIsTwoD){
     if(viewIsTwoD === true){
@@ -148,7 +121,7 @@ class MakeGardenSquareGridView extends Component{
     } else {
       return "Switch to 2D"
     }
-  }
+  },
 
 
   render () {
@@ -159,7 +132,6 @@ class MakeGardenSquareGridView extends Component{
     let center = {
       textAlign: "center"
     };
-    let that = this;
     let gardenName;
     let profile = auth.getProfile();
     let profilePicture = profile.picture
@@ -179,7 +151,7 @@ class MakeGardenSquareGridView extends Component{
         </div>
       <hr className="hrTwoD"/>
         <div className="row">
-          <div className="col-md-3 toolBar">
+          <div className="col-md-3">
             Garden Height <br/>
             <span><strong>{this.props.width} ft</strong></span>
               <form action="#">
@@ -194,16 +166,6 @@ class MakeGardenSquareGridView extends Component{
                   <input type="range"  min="1" max="14" step="1" value={this.props.height} onChange={this.setHeight}/>
                 </p>
               </form>
-                <button id="postHere" type="submit" onClick={that.openModal}>Post Here!</button>
-                 <Modal
-            isOpen={this.state.modalIsOpen}
-            onAfterOpen={this.afterOpenModal}
-            onRequestClose={this.closeModal}
-            style={customStyles}
-            contentLabel="Example Modal"
-          >        <h3>Post Your Questions or Successes Onto the Forum</h3>
-            <button onClick={this.closeModal}>close</button>
-         </Modal>
 
              <input ref={(node) => gardenName = node } type="text" name="gardenName" placeholder='Name your new garden' required/>
                 <button className="btn btn-primary btn-sm" onClick={() => {
@@ -255,7 +217,7 @@ class MakeGardenSquareGridView extends Component{
     );
   }
 }
-};
+});
 
 const mapStateToProps = (state) => {
   return {
