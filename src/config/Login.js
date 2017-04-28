@@ -9,13 +9,12 @@ export class Login extends React.Component {
     const { auth } = this.props;
     const profileState = this.props.profile
     return (
-      <div className="container login">
+      <div className="login">
         <LogoAnimation />
-           <p>From customization to cost and weather integration, Plantr gives you the tools to make gardening quick and easy. Sign up to join our community of local growers to find out how you can take your gardening skills to the next level! </p>
-          <p className="lead">
+          <p className="loginLead">
             { (function() {
               if (!profileState) {
-                return <button className="btn btn-primary" onClick={auth.login.bind(this)}>Getting Started</button>
+                return <button className="btn btn-primary login-btn" onClick={auth.login.bind(this)}>Get Started</button>
                 }
               }())
             }
