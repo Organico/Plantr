@@ -38,10 +38,10 @@ class LogoAnimation extends React.Component {
     return (
       <ReactSWFCompat
           container={<div style={{background: '#cccccc'}} />}
-          src={'https://s3-us-west-2.amazonaws.com/ryaperry-bucket/plantr_banner_animation_02.swf'}
+          src={'https://s3-us-west-2.amazonaws.com/ryaperry-bucket/plantr_banner_animation_03.swf'}
           name={'plantr_banner_animation'}
-          width={960}
-          height={510}
+          width={1920}
+          height={1200}
           wmode={'transparent'}
           play={true}
           menu={false}
