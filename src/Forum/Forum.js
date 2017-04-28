@@ -127,10 +127,8 @@ class Forum extends Component {
             style={customStyles}
             contentLabel="Example Modal"
           >
-            <h3>Description</h3>
-
-            <textarea rows="4" cols="50">
-            </textarea>
+            <h3>Share Your Stories</h3>
+            <CreateNewPost closeModal={this.closeModal} />
             <button onClick={this.closeModal}>close</button>
          </Modal>
          <div className="col-md-8 offset-md-2">

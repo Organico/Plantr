@@ -92,7 +92,7 @@ class ForumPost extends Component {
                 { message }
               </div>
             </div>
-            <div className="row">
+            <div>
               <div>
                 <div className="col-md-12">
                   {this.props.replies.map((reply, i) => {
