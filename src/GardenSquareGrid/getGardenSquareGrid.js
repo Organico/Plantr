@@ -198,10 +198,12 @@ class GardenSquareGridView extends React.Component{
       onChange: this.onChange
     };
     const profPic = {
-      magin: 'auto',
-      width: '100px',
-      height: '250px',
-      backgroundSize: '150px 150px',
+      margin: 'auto',
+      marginTop: '10px',
+      marginBottom: '5px',
+      width: '150px',
+      height: '150px',
+      backgroundSize: '100%',
       backgroundRepeat: 'no-repeat',
       backgroundPosition: 'center',
       backgroundImage: 'url(' + profileImage + ')'
@@ -233,11 +235,12 @@ class GardenSquareGridView extends React.Component{
                   </Stage>
               </div>
             </div>
-            <div className="col-md-4">
+            <div className="col-md-3">
               <div id="currentPublicGarden">
                 <div style={profPic}></div>
-                <div><h3>{profileName}</h3></div>
-                <div><p>user about goes here. this is a little something sweet about me. and maybe even something about the current garden. who knows what is possible!</p></div>
+                <div className="communityGardenUserName">{profileName}</div>
+                <hr className="hrTwoD" />
+                <div><p className="aboutGarden">user about goes here. this is a little something sweet about me. and maybe even something about the current garden. who knows what is possible!</p></div>
               </div>
             </div>
           </div>
