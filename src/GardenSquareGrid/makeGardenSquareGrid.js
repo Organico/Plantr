@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import {setGardenParameters, setGarden, undo, redo, clear, setHeight, setWidth, toggleVR} from '../Actions/GardenActions.js';
 import axios from 'axios';
@@ -20,10 +20,54 @@ import VRScene from '../AframeTest/VRScene.js'
 import { TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTitle, CardText, Row, Col } from 'reactstrap';
 import html2canvas from 'html2canvas';
 import auth from '../client.js'
+import Modal from  'react-modal';
+import CreateNewPost from '../Forum/CreateNewPost';
+
+
+const customStyles = {
+  content : {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)',
+    backgroundColor: '#d6eef9',
+    borderRadius: '10px'
+  }
+};
+
+
+class MakeGardenSquareGridView extends Component{
+    constructor() {
+    super();
+
+    this.state = {
+      modalIsOpen: false
+    };
+
+    this.openModal = this.openModal.bind(this);
+    this.afterOpenModal = this.afterOpenModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
+  }
+
+  openModal() {
+    this.setState({modalIsOpen: true});
+  }
+
+  afterOpenModal() {
+    // references are now sync'd and can be accessed.
+    this.subtitle.style.color = '#f00';
+  }
+
+  closeModal() {
+    this.setState({modalIsOpen: false});
+  }
 
 
 
-const MakeGardenSquareGridView = React.createClass({
+
+
 
   saveGarden(profilePicture, profileEmail, profileNickname, gardenName, zone) {
     console.log("Saving garden...")
@@ -56,19 +100,19 @@ const MakeGardenSquareGridView = React.createClass({
       console.error(err);
       console.log("Error in getGardenSquareGrid getAllGardens()")
     });
-  },
+  }
   setHeight(e){
       let height = parseInt(e.target.value);
       this.props.dispatchSetHeight(height);
       // console.log(this.props)
       this.props.dispatchSetGardenParameters(this.props.width, height);
-  },
+  }
 
   setWidth(e){
       let width = parseInt(e.target.value);
       this.props.dispatchSetWidth(width);
       this.props.dispatchSetGardenParameters(width, this.props.height);
-  },
+  }
 
   return2DGrid(){
     return(
@@ -84,11 +128,11 @@ const MakeGardenSquareGridView = React.createClass({
         </Stage>
 
     )
-  },
+  }
 
   return3DGrid(){
     return (<VRScene />)
-  },
+  }
 
   toggleView(viewIsTwoD){
     if(viewIsTwoD === true){
@@ -96,7 +140,7 @@ const MakeGardenSquareGridView = React.createClass({
     } else {
       return this.return3DGrid()
     }
-  },
+  }
 
   renderButtonText(viewIsTwoD){
     if(viewIsTwoD === true){
@@ -104,7 +148,7 @@ const MakeGardenSquareGridView = React.createClass({
     } else {
       return "Switch to 2D"
     }
-  },
+  }
 
 
   render () {
@@ -115,6 +159,7 @@ const MakeGardenSquareGridView = React.createClass({
     let center = {
       textAlign: "center"
     };
+    let that = this;
     let gardenName;
     let profile = auth.getProfile();
     let profilePicture = profile.picture
@@ -149,11 +194,23 @@ const MakeGardenSquareGridView = React.createClass({
                   <input type="range"  min="1" max="14" step="1" value={this.props.height} onChange={this.setHeight}/>
                 </p>
               </form>
+                <button type="submit" onClick={that.openModal}>Post Here!</button>
+                 <Modal
+            isOpen={this.state.modalIsOpen}
+            onAfterOpen={this.afterOpenModal}
+            onRequestClose={this.closeModal}
+            style={customStyles}
+            contentLabel="Example Modal"
+          >        <h3>Post Your Questions or Successes Onto the Forum</h3>
+            <button onClick={this.closeModal}>close</button>
+         </Modal>
+
              <input ref={(node) => gardenName = node } type="text" name="gardenName" placeholder='Name your new garden' required/>
                 <button className="btn btn-primary btn-sm" onClick={() => {
                   this.saveGarden(profilePicture, profileEmail, profileNickname, gardenName.value, this.props.zone);
                   }} type="submit">Submit Garden
                 </button>
+
               <div id="seedHolder">
                 <SeedPacket />
               </div>
@@ -198,7 +255,7 @@ const MakeGardenSquareGridView = React.createClass({
     );
   }
 }
-});
+};
 
 const mapStateToProps = (state) => {
   return {

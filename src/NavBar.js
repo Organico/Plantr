@@ -37,7 +37,7 @@ export default class NavBar extends React.Component {
         <ul className="navbar-nav mr-auto">
 
             <li className="nav-item">
-              <a className="nav-link" href="#vrgarden">VR Gardens</a>
+              <a className="nav-link" href="#about">About Us</a>
             </li>
             <li className="nav-item">
               <a className="nav-link" href="#squares">Community Gardens</a>
