@@ -179,7 +179,7 @@ class MakeGardenSquareGridView extends Component{
         </div>
       <hr className="hrTwoD"/>
         <div className="row">
-          <div className="col-md-3">
+          <div className="col-md-3 toolBar">
             Garden Height <br/>
             <span><strong>{this.props.width} ft</strong></span>
               <form action="#">
@@ -194,7 +194,7 @@ class MakeGardenSquareGridView extends Component{
                   <input type="range"  min="1" max="14" step="1" value={this.props.height} onChange={this.setHeight}/>
                 </p>
               </form>
-                <button type="submit" onClick={that.openModal}>Post Here!</button>
+                <button id="postHere" type="submit" onClick={that.openModal}>Post Here!</button>
                  <Modal
             isOpen={this.state.modalIsOpen}
             onAfterOpen={this.afterOpenModal}

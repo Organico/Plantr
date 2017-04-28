@@ -37,9 +37,6 @@ export default class NavBar extends React.Component {
         <ul className="navbar-nav mr-auto">
 
             <li className="nav-item">
-              <a className="nav-link" href="#about">About Us</a>
-            </li>
-            <li className="nav-item">
               <a className="nav-link" href="#squares">Community Gardens</a>
             </li>
             <li className="nav-item">
@@ -47,6 +44,9 @@ export default class NavBar extends React.Component {
             </li>
             <li className="nav-item">
               <a className="nav-link" href="#forum">Forum</a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link" href="#about">About Us</a>
             </li>
         </ul>
         <ul className="navbar-nav">

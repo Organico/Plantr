@@ -52,7 +52,7 @@ class About extends Component {
     return (
       <div className="row userAboutMe">
         <div className="col-md-12 about">
-          <h3> About Me </h3>
+          <h3 id="aboutMe"> About Me </h3>
           <div>
           { (function() {
             if (userAboutObject.about && that.state.edit) {
