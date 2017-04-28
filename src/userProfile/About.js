@@ -3,6 +3,7 @@ import axios from 'axios';
 import auth from '../client.js';
 
 let userAboutObject = {};
+userAboutObject.about = "Meow"
 class About extends Component {
   constructor() {
     super()
@@ -42,7 +43,7 @@ class About extends Component {
   }
 
   componentDidMount() {
-    this.getAbout();
+    // this.getAbout();
   }
 
   render() {
@@ -55,7 +56,7 @@ class About extends Component {
           <h3 id="aboutMe"> About Me </h3>
           <div>
           { (function() {
-            if (userAboutObject.about && that.state.edit) {
+            if (that.state.edit) {
               return <div>
                 <textarea className="textArea" rows="4" ref={(message) => newMessage = message } type="string" name="newMessage" defaultValue={JSON.parse(userAboutObject.about)}>
                 </textarea>
@@ -65,23 +66,13 @@ class About extends Component {
                   newMessage.value = '';
                 }}>submit</button>
             </div>
-            } else if (userAboutObject.about && !that.state.edit) {
+            } else{
               return <div>
                 <p>{userAboutObject.about}</p>
                 <button type="submit" onClick ={ () => {
                   that.toggleState();
               }}>edit</button>
             </div>
-            } else {
-              return <div>
-                <textarea className="textArea" rows="4" ref={(message) => newMessage = message } type="string" name="newMessage" placeholder='Who knows you better than yourself?'>
-                </textarea>
-                <button type="submit" onClick ={ () => {
-                  newMessage.value = JSON.stringify(newMessage.value);
-                  that.setAbout(userAboutObject.id, newMessage.value);
-                  newMessage.value = '';
-                }}>submit</button>
-              </div>
             }
           }())
           }
