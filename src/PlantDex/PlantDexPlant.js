@@ -66,9 +66,7 @@ class PlantDexPlant extends React.Component {
                 onDragStart={this.handleMouseDragStart}
                 onDragEnd={this.handleMouseDragEnd}
             />
-
         );
-
     }
 }
 

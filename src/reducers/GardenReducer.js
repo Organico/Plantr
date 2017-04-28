@@ -841,10 +841,10 @@ const toggleSquare = (state, action) => {
   var squareToToggleImg = squareToToggle.img;
     console.log("HERE", squareToToggleImg);
 
-  var tileToToggleTo = state.selectedTitle.img;
+  var tileToToggleTo = state.selectedTitle.img || 'https://s3-us-west-2.amazonaws.com/ryaperry-bucket/gardenTextures/soilTexture.jpg';
 
   var gardenXYCoordinatesCopy = state.gardenXYCoordinates.slice();
-  gardenXYCoordinatesCopy[squareToToggleIndex].viability = state.selectedTitle.viability;
+  gardenXYCoordinatesCopy[squareToToggleIndex].viability = state.selectedTitle.viability || true;
 
 
 
@@ -1147,7 +1147,8 @@ const undo = (state, action) => {
 const clear = (state, action) => {
   const newState = {};
 
-  Object.assign(newState, state, {plantGrid: [], pastPlantGridStates: [], futurePlantGrideStates: []});
+
+  Object.assign(newState, state, {plantGrid: [], pastPlantGridStates: [], futurePlantGridStates: [], gardenGrid: [], gardenXYCoordinates:[]});
 
   console.log('(before) state: ', state);
   console.log('(after) state: ', newState);
