@@ -841,10 +841,10 @@ const toggleSquare = (state, action) => {
   var squareToToggleImg = squareToToggle.img;
     console.log("HERE", squareToToggleImg);
 
-  var tileToToggleTo = state.selectedTitle.img;
+  var tileToToggleTo = state.selectedTitle.img || 'https://s3-us-west-2.amazonaws.com/ryaperry-bucket/gardenTextures/soilTexture.jpg';
 
   var gardenXYCoordinatesCopy = state.gardenXYCoordinates.slice();
-  gardenXYCoordinatesCopy[squareToToggleIndex].viability = state.selectedTitle.viability;
+  gardenXYCoordinatesCopy[squareToToggleIndex].viability = state.selectedTitle.viability || true;
 
 
 

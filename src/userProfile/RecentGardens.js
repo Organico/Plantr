@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import GardenSquareGridView from '../GardenSquareGrid/getGardenSquareGrid';
+import {setSuggestedPlants, setSuggestedGarden} from '../Actions/GardenActions.js';
+
 import ReactDOM from 'react-dom'
 import { connect } from 'react-redux';
 import IndividualGarden from './IndividualGarden';
@@ -10,17 +12,31 @@ import { setPosts } from '../Actions/ForumActions';
 
 let userGardens = [];
 
+var context;
 class RecentGardens extends Component {
   constructor() {
     super()
       this.state = {
-        dropDown: false
+        gardenGrid: [],
+        plantGrid: [],
+        dropDownStatus: false
       }
   }
 
-  toggleDropDown() {
+  toggleDropDown(ref) {
     console.log('toggleDropDown is being toggled');
-    this.setState({dropDown: !this.state.dropDown});
+    console.log("THIS IS ", this)
+    console.log("the plant grid is ", this.plantGrid);
+    console.log("the garden grid is ", dispatchSetSuggestedPlants(newPlantGrid))
+    // this.setState({dropDownStatus: !.dropDownStatus});
+  }
+
+  handleClick(str){
+      console.log("here, let's try this. this is the e", str);
+      console.log("here is this ", this)
+      this.context.props.dispatchSetSuggestedPlants(this.plantGrid);
+      this.context.props.dispatchSetSuggestedGarden(this.gardenGrid);
+      this.context.setState({dropDownStatus: !this.context.state.dropDownStatus});
   }
 
   getUserGardens() {
@@ -49,22 +65,23 @@ class RecentGardens extends Component {
 
   render() {
     const profile = auth.getProfile();
+    const context = this;
+    const dropDownStatus = this.state.dropDownStatus
+    console.log("THIS THE DROPDOWN STATUS", dropDownStatus)
     return (
       <div className="row">
         <div className="col-md-12 offset-md-2 right userGarden">
           <div className="userGardenSpan">
             <h3>Recent Gardens</h3>
+            {!dropDownStatus ? (
+              <div>
               { userGardens.map((garden, i) => {
-
-                if (!this.state.dropDown) {
                   return <div>
-                    <IndividualGardenInfo gardenName={garden.gardenName} nickname={profile.nickname} profilePicture={garden.profilePicture} onClick={ () => { this.toggleDropDown(); }}/>
+                    <IndividualGardenInfo gardenName={garden.gardenName} nickname={profile.nickname} profilePicture={garden.profilePicture} ref={i} onClick={this.handleClick} context={context} gardenGrid={garden.gardenGrid} plantGrid={garden.plantGrid}/>
                     </div>
-                  } else {
-                    return <IndividualGarden gardenName={garden.gardenName} plantGrid={garden.plantGrid} gardenGrid={garden.gardenGrid} nickname={profile.nickname} profilePicture={garden.profilePicture} onClick={ () => { this.toggleDropDown(); }}/>
                   }
-                }
-              )}
+              )}</div>
+                ) : (<IndividualGarden/>)}
           </div>
         </div>
       </div>
@@ -82,6 +99,12 @@ const mapDispatchToProps = (dispatch) => {
   return {
     dispatchSetPost(message) {
       dispatch(setPosts(message));
+    },
+    dispatchSetSuggestedGarden(suggestedGarden){
+      dispatch(setSuggestedGarden(suggestedGarden))
+    },
+    dispatchSetSuggestedPlants(suggestedPlants){
+      dispatch(setSuggestedPlants(suggestedPlants))
     }
   };
 };
