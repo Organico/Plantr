@@ -235,12 +235,12 @@ class GardenSquareGridView extends React.Component{
                   </Stage>
               </div>
             </div>
-            <div className="col-md-3">
+            <div className="col-md-4">
               <div id="currentPublicGarden">
                 <div style={profPic}></div>
-                <div className="communityGardenUserName">{profileName}</div>
+                <div className="communityGardenUserName"><h4>{profileName}</h4></div>
                 <hr className="hrTwoD" />
-                <div><p className="aboutGarden">user about goes here. this is a little something sweet about me. and maybe even something about the current garden. who knows what is possible!</p></div>
+                <div><p className="aboutGarden">I'm so excited that I get to work on my garden. From what the create garden app says, it should turn out great!</p></div>
               </div>
             </div>
           </div>
