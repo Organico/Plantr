@@ -60,24 +60,15 @@ const initialGardenState = {
       'img': 'https://c1.staticflickr.com/3/2909/33168957064_a7ef238410_o.png',
       'model': 'https://s3-us-west-2.amazonaws.com/ryaperry-bucket/plantModels/sunflowerModel.dae',
       'isDraggable': true,
-<<<<<<< HEAD
-      'packetImg': '/seedPacketIMGs/genericResized.png',
-      'price': 20,
-=======
        'packetImg': '/seedPacketIMGs/genericResized.png',
        'price': 20,
->>>>>>> f34e1e64078d4f26223fd73af5b01d8549035959
       'quantity': 5,
       'season': "Spring",
       'description': "After Start State",
       'instructions': "Take great care of me",
       'sunlight': "Full-sun",
       'harvest': 40,
-<<<<<<< HEAD
       'extremeWarning': [10,40],
-=======
-      'extremeWarning':[10,40],
->>>>>>> f34e1e64078d4f26223fd73af5b01d8549035959
       'growthGraph': [
         {name: 'Sow', uv: 0},
         {name: 'Seedlings Emerge', uv: 7},
