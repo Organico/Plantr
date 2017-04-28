@@ -502,5 +502,52 @@ body {
 
 
 
+.our-team {
+  padding: 0;
+  text-align: right;
+}
+
+.name {
+  float: right;
+}
+
+.profiles {
+  clear: both;
+  margin-bottom: 5px;
+  padding: 5px;
+  min-height: 100px;
+  background-color: #E9F7FF;
+}
+
+.profiles:hover {
+  background-color: #efe;
+}
+
+.profiles img {
+  float: left;
+  margin: 0 5px;
+  height: 90px;
+  border-radius: 50%;
+}
+
+.profiles .description {
+  float: right;
+  margin-right: 10px;
+  margin-left: 20px;
+}
+.aboutButton {
+  float: right;
+  margin-right: 10px;
+  margin-left: 20px;
+}
+
+
+.profiles .name {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+
+
 /*////////////////////////////////////////////////////////////*/
 
