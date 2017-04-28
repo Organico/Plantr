@@ -56,7 +56,7 @@ class AnalyticsTabs extends React.Component {
         <TabContent activeTab={this.state.activeTab}>
           <TabPane tabId="1">
             <br></br>
-            <Calendar stle={divStyle}/>
+            <PlantBreakdown stle={divStyle}/>
           </TabPane>
           <TabPane tabId="2">
                 <Card block style={divStyle}>

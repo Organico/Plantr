@@ -185,6 +185,7 @@ const MakeGardenSquareGridView = React.createClass({
             <div className="col-md-12">
               <PlantDex />
             </div>
+            <br></br>
             <div className="col-md-12 AnalyticsTabs">
               <AnalyticsTabs />
             </div>

@@ -1147,7 +1147,8 @@ const undo = (state, action) => {
 const clear = (state, action) => {
   const newState = {};
 
-  Object.assign(newState, state, {plantGrid: [], pastPlantGridStates: [], futurePlantGrideStates: []});
+
+  Object.assign(newState, state, {plantGrid: [], pastPlantGridStates: [], futurePlantGridStates: [], gardenGrid: [], gardenXYCoordinates:[]});
 
   console.log('(before) state: ', state);
   console.log('(after) state: ', newState);
