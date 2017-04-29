@@ -24,6 +24,7 @@ class Profile extends Component {
 
   getHardiness() {
   let zipCode = this.props.coordinates;
+  console.log("GETTING HARDINESS")
   console.log('here is the zipCode: ', this.props)
     axios.get('api/users/hardiness', {
       params: {

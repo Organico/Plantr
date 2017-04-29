@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import GardenSquareGridView from '../GardenSquareGrid/getGardenSquareGrid';
-import {setSuggestedPlants, setSuggestedGarden} from '../Actions/GardenActions.js';
+import {setSuggestedPlants, setSuggestedGarden, setDropdownStatus} from '../Actions/GardenActions.js';
 
 import ReactDOM from 'react-dom'
 import { connect } from 'react-redux';
@@ -9,17 +9,21 @@ import IndividualGardenInfo from './IndividualGardenInfo';
 import axios from 'axios';
 import auth from '../client.js';
 import { setPosts } from '../Actions/ForumActions';
+import {Layer, Rect, Circle, Stage, Group} from 'react-konva';
+import PlantGrid from '../GardenSquareGrid/PlantGrid';
+import GardenGrid from '../GardenSquareGrid/GardenGrid';
+
 
 let userGardens = [];
-
 var context;
+var gardenName = "";
 class RecentGardens extends Component {
   constructor() {
     super()
       this.state = {
         gardenGrid: [],
         plantGrid: [],
-        dropDownStatus: false
+        dropdownStatus: false
       }
   }
 
@@ -36,7 +40,10 @@ class RecentGardens extends Component {
       console.log("here is this ", this)
       this.context.props.dispatchSetSuggestedPlants(this.plantGrid);
       this.context.props.dispatchSetSuggestedGarden(this.gardenGrid);
-      this.context.setState({dropDownStatus: !this.context.state.dropDownStatus});
+      console.log("Inside of handle click of recent gardens", this)
+
+      gardenName = this.gardenName
+      this.context.props.dispatchSetDropdownStatus(this.context.props.dropdownStatus);
   }
 
   getUserGardens() {
@@ -66,14 +73,13 @@ class RecentGardens extends Component {
   render() {
     const profile = auth.getProfile();
     const context = this;
-    const dropDownStatus = this.state.dropDownStatus
-    console.log("THIS THE DROPDOWN STATUS", dropDownStatus)
+
     return (
       <div className="row">
         <div className="col-md-12 offset-md-2 right userGarden">
           <div className="userGardenSpan">
             <h3>Recent Gardens</h3>
-            {!dropDownStatus ? (
+            {!this.props.dropdownStatus ? (
               <div>
               { userGardens.map((garden, i) => {
                   return <div>
@@ -81,7 +87,38 @@ class RecentGardens extends Component {
                     </div>
                   }
               )}</div>
-                ) : (<IndividualGarden/>)}
+                ) : (
+
+      <div className="container-fluid">
+               <h4>{gardenName}</h4>
+
+        <div className="row">
+          <div className="col-md-2">
+            <div className="row"></div>
+
+              <div className="col-md-12 offset-md-3 postPicture" style={profilePic}>
+              </div>
+              <div className="row">
+                <div className="col-md-12 postUsername">{ this.props.nickname }
+                </div>
+              </div>
+            </div>
+            <h2></h2>
+            <div>
+            <button onClick={() => {
+                    this.props.dispatchSetDropdownStatus(this.props.dropdownStatus);}}>Go Back to your Garden</button></div>
+            <div className="row" onClick={ () => {this.handleClick}}>
+              <div className="col-mid-10 gardenName">
+                <div className="row">
+                <Stage width={500} height={500} fill="white" stroke="black" className="text-center">
+                  <GardenGrid />
+                  <PlantGrid />
+                </Stage>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>)}
           </div>
         </div>
       </div>
@@ -91,7 +128,8 @@ class RecentGardens extends Component {
 const mapStateToProps = (state) => {
   return {
     posts: state.forumReducer.posts,
-    currentPost: state.forumReducer.currentPost
+    currentPost: state.forumReducer.currentPost,
+    dropdownStatus: state.gardenReducer.dropdownStatus
   };
 };
 
@@ -105,6 +143,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     dispatchSetSuggestedPlants(suggestedPlants){
       dispatch(setSuggestedPlants(suggestedPlants))
+    },
+    dispatchSetDropdownStatus(dropdownStatus){
+      dispatch(setDropdownStatus(dropdownStatus))
     }
   };
 };

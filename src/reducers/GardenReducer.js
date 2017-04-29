@@ -10,6 +10,8 @@ const initialGardenState = {
   isDragging: false,
   tooltipOpen: false,
   colladaCache: {},
+  dropdownStatus: false,
+  squareFootage: 25,
   gardenXYCoordinates:[{"x":75,"y":75,"viability":true},{"x":75,"y":125,"viability":true},{"x":75,"y":175,"viability":true},{"x":75,"y":225,"viability":true},{"x":75,"y":275,"viability":true},{"x":125,"y":75,"viability":true},{"x":125,"y":125,"viability":true},{"x":125,"y":175,"viability":true},{"x":125,"y":225,"viability":true},{"x":125,"y":275,"viability":true},{"x":175,"y":75,"viability":true},{"x":175,"y":125,"viability":true},{"x":175,"y":175,"viability":true},{"x":175,"y":225,"viability":true},{"x":175,"y":275,"viability":true},{"x":225,"y":75,"viability":true},{"x":225,"y":125,"viability":true},{"x":225,"y":175,"viability":true},{"x":225,"y":225,"viability":true},{"x":225,"y":275,"viability":true},{"x":275,"y":75,"viability":true},{"x":275,"y":125,"viability":true},{"x":275,"y":175,"viability":true},{"x":275,"y":225,"viability":true},{"x":275,"y":275,"viability":true}],
   selectedTitle: "https://c1.staticflickr.com/3/2923/33742489190_3e30fca5f7_o.jpg",
   harvestTable:[],
@@ -41,7 +43,7 @@ const initialGardenState = {
     "packetImg": "/seedPacketIMGs/tomatoResized.png"
   },
   plantGrowthGraph: [
-    {name: 'Start Seedlings', uv: 0},
+    {name: 'Start Seeds', uv: 0},
     {name: 'Sow', uv: 20},
     {name: 'Harvest', uv: 45},
     {name: 'End', uv: 60}
@@ -67,15 +69,16 @@ const initialGardenState = {
       'description': "After Start State",
       'instructions': "Take great care of me",
       'sunlight': "Full-sun",
-      'harvest': 40,
+      'harvest': 51,
       'extremeWarning': [10,40],
       'growthGraph': [
         {name: 'Sow', uv: 0},
-        {name: 'Seedlings Emerge', uv: 7},
+        {name: 'Seed', uv: 7},
         {name: 'Bloom Start', uv: 38},
         {name: 'Harvest', uv: 51},
         {name: 'End', uv: 65}
-      ]
+      ],
+      'zone': 6
     },
     {
       'name': 'corn',
@@ -92,15 +95,16 @@ const initialGardenState = {
       'description': "After Start State",
       'instructions': "Take great care of me",
       'sunlight': "Full-sun",
-      'harvest': 40,
+      'harvest': 45,
       'extremeWarning': [7, 35],
       'growthGraph': [
         {name: 'Sow', uv: 0},
-        {name: 'Seedlings \r Emerge', uv: 7},
+        {name: 'Seed', uv: 7},
         {name: 'Bloom \r Start', uv: 27},
         {name: 'Harvest', uv: 45},
         {name: 'Harvest \r End', uv: 65}
-      ]
+      ],
+      'zone': 6
     },
     { 'name': 'tomato',
       'type': 'fruit',
@@ -120,11 +124,12 @@ const initialGardenState = {
       'extremeWarning': [10,35],
       'growthGraph': [
         {name: 'Sow', uv: 0},
-        {name: 'Seedlings \r Emerge', uv: 5},
+        {name: 'Seed', uv: 5},
         {name: 'Bloom \r Start', uv: 22},
         {name: 'Harvest', uv: 40},
         {name: 'Harvest \r End', uv: 72}
-      ]
+      ],
+      'zone': 6
     },
     {
       'name': 'green bean',
@@ -141,15 +146,16 @@ const initialGardenState = {
       'description': "After Start State",
       'instructions': "Take great care of me",
       'sunlight': "Full-sun",
-      'harvest': 40,
+      'harvest': 53,
       'extremeWarning': [12,35],
       'growthGraph': [
         {name: 'Sow', uv: 0},
-        {name: 'Seedlings \r Emerge', uv: 8},
+        {name: 'Seed', uv: 8},
         {name: 'Bloom \r Start', uv: 23},
         {name: 'Harvest', uv: 53},
         {name: 'Harvest \r End', uv: 68}
-      ]
+      ],
+      'zone': 6
     },
     {
       'name': 'carrots',
@@ -166,15 +172,16 @@ const initialGardenState = {
       'description': "After Start State",
       'instructions': "Take great care of me",
       'sunlight': "Full-sun",
-      'harvest': 40,
+      'harvest': 42,
       'extremeWarning': [5, 27],
       'growthGraph': [
         {name: 'Sow', uv: 0},
-        {name: 'Seedlings \r Emerge', uv: 5},
+        {name: 'Seed', uv: 5},
         {name: 'Bloom \r Start', uv: 25},
         {name: 'Harvest', uv: 42},
         {name: 'Harvest \r End', uv: 52}
-      ]
+      ],
+      'zone': 6
     },
     {
       'name': 'okra',
@@ -191,15 +198,16 @@ const initialGardenState = {
       'description': "After Start State",
       'instructions': "Take great care of me",
       'sunlight': "Full-sun",
-      'harvest': 40,
+      'harvest': 47,
       'extremeWarning': [12, 30],
       'growthGraph': [
         {name: 'Sow', uv: 0},
-        {name: 'Seedlings \r Emerge', uv: 10},
+        {name: 'Seed', uv: 10},
         {name: 'Bloom \r Start', uv: 32},
         {name: 'Harvest', uv: 47},
         {name: 'Harvest \r End', uv: 60}
-      ]
+      ],
+      'zone': 6
     },
     { 'name': 'strawberry',
       'type': 'fruit',
@@ -215,15 +223,16 @@ const initialGardenState = {
       'description': "After Start State",
       'instructions': "Take great care of me",
       'sunlight': "Full-sun",
-      'harvest': 40,
+      'harvest': 37,
       'extremeWarning': [5, 25],
       'growthGraph': [
         {name: 'Sow', uv: 0},
-        {name: 'Seedlings \r Emerge', uv: 7},
+        {name: 'Seed', uv: 7},
         {name: 'Bloom \r Start', uv: 28},
         {name: 'Harvest', uv: 37},
         {name: 'Harvest \r End', uv: 55}
-      ]
+      ],
+      'zone': 6
     },
     {
       'name': 'chili pepper',
@@ -240,15 +249,16 @@ const initialGardenState = {
       'description': "After Start State",
       'instructions': "Take great care of me",
       'sunlight': "Full-sun",
-      'harvest': 40,
+      'harvest': 50,
       'extremeWarning':[7, 40],
       'growthGraph': [
         {name: 'Sow', uv: 0},
-        {name: 'Seedlings \r Emerge', uv: 4},
+        {name: 'Seed', uv: 4},
         {name: 'Bloom \r Start', uv: 32},
         {name: 'Harvest', uv: 50},
         {name: 'Harvest \r End', uv: 72}
-      ]
+      ],
+      'zone': 6
     }
   ],
 
@@ -273,11 +283,12 @@ const initialGardenState = {
       'extremeWarning': [12, 30],
       'growthGraph': [
         {name: 'Sow', uv: 0},
-        {name: 'Seedlings \r Emerge', uv: 10},
+        {name: 'Seed', uv: 10},
         {name: 'Bloom \r Start', uv: 32},
         {name: 'Harvest', uv: 47},
         {name: 'Harvest \r End', uv: 60}
-      ]
+      ],
+      'zone': 6
     },
     {
       'name': 'onion',
@@ -294,15 +305,16 @@ const initialGardenState = {
       'description': "After Start State",
       'instructions': "Take great care of me",
       'sunlight': "Full-sun",
-      'harvest':40,
+      'harvest':45,
       'extremeWarning': [5,40],
       'growthGraph': [
         {name: 'Sow', uv: 0},
-        {name: 'Seedlings \r Emerge', uv: 10},
+        {name: 'Seed', uv: 10},
         {name: 'Bloom \r Start', uv: 25},
         {name: 'Harvest', uv: 45},
         {name: 'Harvest \r End', uv: 60}
-      ]
+      ],
+      'zone': 6
     },
     {
       'name': 'green bean',
@@ -319,15 +331,16 @@ const initialGardenState = {
       'description': "After Start State",
       'instructions': "Take great care of me",
       'sunlight': "Full-sun",
-      'harvest': 40,
+      'harvest': 53,
       'extremeWarning': [12,35],
       'growthGraph': [
         {name: 'Sow', uv: 0},
-        {name: 'Seedlings \r Emerge', uv: 8},
+        {name: 'Seed', uv: 8},
         {name: 'Bloom \r Start', uv: 23},
         {name: 'Harvest', uv: 53},
         {name: 'Harvest \r End', uv: 68}
-      ]
+      ],
+      'zone': 6
     },
     {
       'name': 'onion',
@@ -344,15 +357,16 @@ const initialGardenState = {
       'description': "After Start State",
       'instructions': "Take great care of me",
       'sunlight': "Full-sun",
-      'harvest':40,
+      'harvest':45,
       'extremeWarning':[5,40],
       'growthGraph': [
         {name: 'Sow', uv: 0},
-        {name: 'Seedlings \r Emerge', uv: 10},
+        {name: 'Seed', uv: 10},
         {name: 'Bloom \r Start', uv: 25},
         {name: 'Harvest', uv: 45},
         {name: 'Harvest \r End', uv: 60}
-      ]
+      ],
+      'zone': 6
     },
     {
       'name': 'kale',
@@ -369,11 +383,11 @@ const initialGardenState = {
       'description': "After Start State",
       'instructions': "Take great care of me",
       'sunlight': "Full-sun",
-      'harvest': 40,
+      'harvest': 28,
       'extremeWarning': [2, 40],
       'growthGraph': [
         {name: 'Sow', uv: 0},
-        {name: 'Seedlings \r Emerge', uv: 7},
+        {name: 'Seed', uv: 7},
         {name: 'Bloom \r Start', uv: 20},
         {name: 'Harvest', uv: 28},
         {name: 'Harvest \r End', uv: 85}
@@ -394,15 +408,16 @@ const initialGardenState = {
       'description': "After Start State",
       'instructions': "Take great care of me",
       'sunlight': "Full-sun",
-      'harvest': 40,
+      'harvest': 34,
       'extremeWarning': [10, 32],
       'growthGraph': [
         {name: 'Sow', uv: 0},
-        {name: 'Seedlings \r Emerge', uv: 4},
+        {name: 'Seed', uv: 4},
         {name: 'Bloom \r Start', uv: 22},
         {name: 'Harvest', uv: 34},
         {name: 'Harvest \r End', uv: 65}
-      ]
+      ],
+      'zone': 6
     },
     {
       'name': 'potato',
@@ -419,7 +434,7 @@ const initialGardenState = {
       'description': "After Start State",
       'instructions': "Take great care of me",
       'sunlight': "Full-sun",
-      'harvest':40,
+      'harvest':50,
       'extremeWarning': [5,25],
       'growthGraph': [
         {name: 'Sow', uv: 0},
@@ -427,7 +442,8 @@ const initialGardenState = {
         {name: 'Bloom Start', uv: 37},
         {name: 'Harvest', uv: 50},
         {name: 'End', uv: 65}
-      ]
+      ],
+      'zone': 6
     },
     {
       'name': 'corn',
@@ -444,15 +460,16 @@ const initialGardenState = {
       'description': "After Start State",
       'instructions': "Take great care of me",
       'sunlight': "Full-sun",
-      'harvest': 40,
+      'harvest': 45,
       'extremeWarning': [7, 35],
       'growthGraph': [
         {name: 'Sow', uv: 0},
-        {name: 'Seedlings \r Emerge', uv: 7},
+        {name: 'Seed', uv: 7},
         {name: 'Bloom \r Start', uv: 27},
         {name: 'Harvest', uv: 45},
         {name: 'Harvest \r End', uv: 65}
-      ]
+      ],
+      'zone': 6
     },
     {
       'name': 'potato',
@@ -469,7 +486,7 @@ const initialGardenState = {
       'description': "After Start State",
       'instructions': "Take great care of me",
       'sunlight': "Full-sun",
-      'harvest': 40,
+      'harvest': 50,
       'extremeWarning': [5,25],
       'growthGraph': [
         {name: 'Sow', uv: 0},
@@ -477,7 +494,8 @@ const initialGardenState = {
         {name: 'Bloom Start', uv: 37},
         {name: 'Harvest', uv: 50},
         {name: 'End', uv: 65}
-      ]
+      ],
+      'zone': 6
     },
     {
       'name': 'Pumpkin',
@@ -494,14 +512,15 @@ const initialGardenState = {
       'description': "David Pumpkins",
       'instructions': "Take great care of me",
       'sunlight': "Full-sun",
-      'harvest': 40,
+      'harvest': 100,
       'extremeWarning':[5, 27],
       'growthGraph': [
         {name: 'Sow', uv: 0},
-        {name: 'Seedlings \r Emerge', uv: 12},
+        {name: 'Seed', uv: 12},
         {name: 'Harvest', uv: 100},
         {name: 'Harvest \r End', uv: 120}
-      ]
+      ],
+      'zone': 6
     },
     {
       'name': 'chili pepper',
@@ -518,15 +537,16 @@ const initialGardenState = {
       'description': "After Start State",
       'instructions': "Take great care of me",
       'sunlight': "Full-sun",
-      'harvest': 40,
+      'harvest': 50,
       'extremeWarning':[7, 40],
       'growthGraph': [
         {name: 'Sow', uv: 0},
-        {name: 'Seedlings \r Emerge', uv: 4},
+        {name: 'Seed', uv: 4},
         {name: 'Bloom \r Start', uv: 32},
         {name: 'Harvest', uv: 50},
         {name: 'Harvest \r End', uv: 72}
-      ]
+      ],
+      'zone': 6
     },
     {
       'name': 'cucumber',
@@ -543,15 +563,16 @@ const initialGardenState = {
       'description': "After Start State",
       'instructions': "Take great care of me",
       'sunlight': "Full-sun",
-      'harvest': 40,
+      'harvest': 46,
       'extremeWarning': [7, 38],
       'growthGraph': [
         {name: 'Sow', uv: 0},
-        {name: 'Seedlings \r Emerge', uv: 5},
+        {name: 'Seed', uv: 5},
         {name: 'Bloom \r Start', uv: 30},
         {name: 'Harvest', uv: 46},
         {name: 'Harvest \r End', uv: 75}
       ],
+      'zone': 6
     },
     {
       'name': 'cucumber',
@@ -568,15 +589,16 @@ const initialGardenState = {
       'description': "After Start State",
       'instructions': "Take great care of me",
       'sunlight': "Full-sun",
-      'harvest': 40,
+      'harvest': 50,
       'extremeWarning': [0, 40],
       'growthGraph': [
         {name: 'Sow', uv: 0},
-        {name: 'Seedlings \r Emerge', uv: 7},
+        {name: 'Seed', uv: 7},
         {name: 'Bloom \r Start', uv: 45},
         {name: 'Harvest', uv: 50},
         {name: 'Harvest \r End', uv: 65}
       ],
+      'zone': 6
     }
   ],
 
@@ -595,15 +617,16 @@ const initialGardenState = {
      'description': "After Start State",
      'instructions': "Take great care of me",
      'sunlight': "Full-sun",
-     'harvest': 40,
+     'harvest': 28,
      'extremeWarning': [5, 25],
      'growthGraph': [
        {name: 'Sow', uv: 0},
-       {name: 'Seedlings \r Emerge', uv: 7},
+       {name: 'Seed', uv: 7},
        {name: 'Bloom \r Start', uv: 28},
        {name: 'Harvest', uv: 37},
        {name: 'Harvest \r End', uv: 55}
-     ]
+     ],
+      'zone': 6
    },
    { 'name': 'tomato',
      'type': 'fruit',
@@ -623,11 +646,12 @@ const initialGardenState = {
      'extremeWarning': [10,35],
      'growthGraph': [
        {name: 'Sow', uv: 0},
-       {name: 'Seedlings \r Emerge', uv: 5},
+       {name: 'Seed', uv: 5},
        {name: 'Bloom \r Start', uv: 22},
        {name: 'Harvest', uv: 40},
        {name: 'Harvest \r End', uv: 72}
-     ]
+     ],
+      'zone': 6
    },
    /*-------------CONTINUE HERE--------------*/
     {
@@ -644,15 +668,16 @@ const initialGardenState = {
       'description': "After Start State",
       'instructions': "Take great care of me",
       'sunlight': "Full-sun",
-      'harvest':40,
+      'harvest':50,
       'extremeWarning':[0,45],
       'growthGraph': [
         {name: 'Sow', uv: 0},
-        {name: 'Seedlings \r Emerge', uv: 7},
+        {name: 'Seed', uv: 7},
         {name: 'Bloom \r Start', uv: 45},
         {name: 'Harvest', uv: 50},
         {name: 'Harvest \r End', uv: 65}
       ],
+      'zone': 6
     },
     { 'name': 'tomato',
       'type': 'fruit',
@@ -668,15 +693,16 @@ const initialGardenState = {
       'description': "After Start State",
       'instructions': "Take great care of me",
       'sunlight': "Full-sun",
-      'harvest':40,
+      'harvest':50,
       'extremeWarning':[0,45],
       'growthGraph': [
         {name: 'Sow', uv: 0},
-        {name: 'Seedlings \r Emerge', uv: 7},
+        {name: 'Seed', uv: 7},
         {name: 'Bloom \r Start', uv: 45},
         {name: 'Harvest', uv: 50},
         {name: 'Harvest \r End', uv: 65}
       ],
+      'zone': 6
       },
       {
       'name': 'pineapple',
@@ -693,15 +719,16 @@ const initialGardenState = {
       'description': "After Start State",
       'instructions': "Take great care of me",
       'sunlight': "Full-sun",
-      'harvest':40,
+      'harvest':50,
       'extremeWarning':[0,45],
       'growthGraph': [
         {name: 'Sow', uv: 0},
-        {name: 'Seedlings \r Emerge', uv: 7},
+        {name: 'Seed', uv: 7},
         {name: 'Bloom \r Start', uv: 45},
         {name: 'Harvest', uv: 50},
         {name: 'Harvest \r End', uv: 65}
       ],
+      'zone': 7
     },
     {
       'name': 'orange',
@@ -718,15 +745,16 @@ const initialGardenState = {
       'description': "After Start State",
       'instructions': "Take great care of me",
       'sunlight': "Full-sun",
-      'harvest':40,
+      'harvest':50,
       'extremeWarning':[0,45],
       'growthGraph': [
         {name: 'Sow', uv: 0},
-        {name: 'Seedlings \r Emerge', uv: 7},
+        {name: 'Seed', uv: 7},
         {name: 'Bloom \r Start', uv: 45},
         {name: 'Harvest', uv: 50},
         {name: 'Harvest \r End', uv: 65}
       ],
+      'zone': 7
     },
      {
       'name': 'apple',
@@ -743,15 +771,16 @@ const initialGardenState = {
       'description': "After Start State",
       'instructions': "Take great care of me",
       'sunlight': "Full-sun",
-      'harvest':40,
+      'harvest':50,
       'extremeWarning':[0,45],
       'growthGraph': [
         {name: 'Sow', uv: 0},
-        {name: 'Seedlings \r Emerge', uv: 7},
+        {name: 'Seed', uv: 7},
         {name: 'Bloom \r Start', uv: 45},
         {name: 'Harvest', uv: 50},
         {name: 'Harvest \r End', uv: 65}
       ],
+      'zone': 6
     },
     {
       'name': 'grapes',
@@ -768,15 +797,16 @@ const initialGardenState = {
       'description': "After Start State",
       'instructions': "Take great care of me",
       'sunlight': "Full-sun",
-      'harvest':40,
+      'harvest':50,
       'extremeWarning':[0,45],
       'growthGraph': [
         {name: 'Sow', uv: 0},
-        {name: 'Seedlings \r Emerge', uv: 7},
+        {name: 'Seed', uv: 7},
         {name: 'Bloom \r Start', uv: 45},
         {name: 'Harvest', uv: 50},
         {name: 'Harvest \r End', uv: 65}
       ],
+      'zone': 6
     },
     {
       'name': 'watermelon',
@@ -793,15 +823,16 @@ const initialGardenState = {
       'description': "After Start State",
       'instructions': "Take great care of me",
       'sunlight': "Full-sun",
-      'harvest':40,
+      'harvest':55,
       'extremeWarning':[0,45],
       'growthGraph': [
         {name: 'Sow', uv: 0},
-        {name: 'Seedlings \r Emerge', uv: 7},
+        {name: 'Seed', uv: 7},
         {name: 'Bloom \r Start', uv: 45},
         {name: 'Harvest', uv: 50},
         {name: 'Harvest \r End', uv: 65}
       ],
+      'zone': 6
     },
     {
       'name': 'canteloupe',
@@ -818,15 +849,16 @@ const initialGardenState = {
       'description': "After Start State",
       'instructions': "Take great care of me",
       'sunlight': "Full-sun",
-      'harvest':40,
+      'harvest':49,
       'extremeWarning':[0,45],
       'growthGraph': [
         {name: 'Sow', uv: 0},
-        {name: 'Seedlings \r Emerge', uv: 7},
+        {name: 'Seed', uv: 7},
         {name: 'Bloom \r Start', uv: 45},
         {name: 'Harvest', uv: 50},
         {name: 'Harvest \r End', uv: 65}
-      ]
+      ],
+      'zone': 6
     },
   ],
   tileDex: [
@@ -963,6 +995,7 @@ const setGardenParameters = (state, action) => {
 
   const {gardenGrid} = state;
   var idCounter = 0;
+  var newSquareFootage=action.width*action.height
 
   var gardenGridArray = [];
   var newGardenXYCoordinates=[];
@@ -977,7 +1010,7 @@ const setGardenParameters = (state, action) => {
   console.log(JSON.stringify(gardenGridArray))
   console.log(JSON.stringify(newGardenXYCoordinates))
   Object.assign(newState, state, {gardenGrid: gardenGridArray,
-    gardenXYCoordinates: newGardenXYCoordinates});
+    gardenXYCoordinates: newGardenXYCoordinates, squareFootage: newSquareFootage});
   return newState;
 }
 
@@ -1316,6 +1349,18 @@ const toggleVR = (state, action) => {
 }
 
 
+const setDropdownStatus = (state, action) => {
+  const newState = {};
+
+  console.log("Here is the action", action)
+  Object.assign(newState, state, {dropdownStatus: !action.dropdownStatus});
+
+  console.log('(before) state: ', state);
+  console.log('(after) state: ', newState);
+  return newState;
+}
+
+
 function gardenReducer(state = initialGardenState, action) {
   console.log('GardenReducer.js - Reducer called');
   console.log('current action: ', action);
@@ -1364,13 +1409,13 @@ function gardenReducer(state = initialGardenState, action) {
     return setHeight(state, action);
   case 'SET_SUGGESTED_GARDEN':
     return setSuggestedGarden(state, action);
+  case 'SET_DROPDOWN_STATUS':
+    return setDropdownStatus(state, action);
   case 'SET_SUGGESTED_PLANTS':
     return setSuggestedPlants(state, action);
   default:
     return state;
   }
 }
-
-
 
 export default gardenReducer;

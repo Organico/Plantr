@@ -263,10 +263,7 @@ class GardenSquareGridView extends React.Component{
               <div className="row">
                 {this.toggleView(this.props.viewIsTwoD)}
               </div>
-              <div>
-                <button onClick={() => {
-                    this.props.dispatchToggleVR(this.props.viewIsTwoD);}}>{this.renderButtonText(this.props.viewIsTwoD)}</button>
-              </div>
+
             </div>
             <div className="col-md-4">
               <div id="currentPublicGarden">
@@ -274,6 +271,10 @@ class GardenSquareGridView extends React.Component{
                 <div className="communityGardenUserName"><h4>{profileName}</h4></div>
                 <hr className="hrTwoD" />
                 <div><p className="aboutGarden">I'm so excited that I get to work on my garden. From what the create garden app says, it should turn out great!</p></div>
+                 <div>
+                <button onClick={() => {
+                    this.props.dispatchToggleVR(this.props.viewIsTwoD);}}>{this.renderButtonText(this.props.viewIsTwoD)}</button>
+              </div>
               </div>
             </div>
           </div>

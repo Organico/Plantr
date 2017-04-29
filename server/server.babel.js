@@ -32,6 +32,15 @@ cron.schedule('10 * * * *', function(){
     to: 'skebaish1992@gmail.com',
     subject: 'Warning: Your garden may be experiencing exceess heat today',
     text: 'Heat Warning',
+    html: '<html><img src=' +"https://c1.staticflickr.com/3/2841/34191201701_1d8b5dcec9_b.jpg" + '></html>'
+  };
+
+
+  let coldWeatherAlert = {
+    from: 'Plantr <postmaster@sandboxa7ed15c3bb5b4de696ad9041ddcadb4a.mailgun.org>',
+    to: 'skebaish1992@gmail.com',
+    subject: 'Warning: Your garden may be experiencing excees cold today',
+    text: 'Cold Warning',
     html: '<html><img src=' +"https://c1.staticflickr.com/5/4179/34164138582_a460eccfd7_b.jpg" + '></html>'
   };
 

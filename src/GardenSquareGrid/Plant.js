@@ -106,8 +106,9 @@ class Plant extends React.Component {
       var coordinateToCheckY = coordinateToCheck['y']+25;
       var coordinateToCheckViability = coordinateToCheck['viability'];
       console.log("HERE IS THE VIABILITY", coordinateToCheckViability)
-                console.log("THE ZONE:", this.props.zone)
-
+                console.log("THE ZONE:", this.props.hardiness)
+                console.log("The plants zone", this.props.plantZone)
+                console.log("The plant is", this.props.plant.zone)
 
       if (this.state.posX ===coordinateToCheckX && this.state.posY === coordinateToCheckY) {
         isWithinGridBounds = true;
@@ -115,9 +116,9 @@ class Plant extends React.Component {
         if (!coordinateToCheckViability){
           strokeColor = 'red';
           console.log('NOT VIABLE')
-        } else if (this.props.hardiness !== this.props.plantZone) {
+        } else if (this.props.plant.zone !== 6) {
           console.log(this.props.hardiness)
-          strokeColor = 'yellow';
+          strokeColor = 'red';
         }
 
         break;
