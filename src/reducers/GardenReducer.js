@@ -43,7 +43,7 @@ const initialGardenState = {
     "packetImg": "/seedPacketIMGs/tomatoResized.png"
   },
   plantGrowthGraph: [
-    {name: 'Start Seedlings', uv: 0},
+    {name: 'Start Seeds', uv: 0},
     {name: 'Sow', uv: 20},
     {name: 'Harvest', uv: 45},
     {name: 'End', uv: 60}

@@ -118,7 +118,7 @@ class Plant extends React.Component {
           console.log('NOT VIABLE')
         } else if (this.props.plant.zone !== 6) {
           console.log(this.props.hardiness)
-          strokeColor = 'yellow';
+          strokeColor = 'red';
         }
 
         break;

@@ -104,8 +104,9 @@ class RecentGardens extends Component {
               </div>
             </div>
             <h2></h2>
+            <div>
             <button onClick={() => {
-                    this.props.dispatchSetDropdownStatus(this.props.dropdownStatus);}}>Go Back to your Garden</button>
+                    this.props.dispatchSetDropdownStatus(this.props.dropdownStatus);}}>Go Back to your Garden</button></div>
             <div className="row" onClick={ () => {this.handleClick}}>
               <div className="col-mid-10 gardenName">
                 <div className="row">
