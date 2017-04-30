@@ -1,46 +1,46 @@
 const makeImage = function(urlsrc) {
-  var newImage = new Image();
+  let newImage = new Image();
   newImage.src = urlsrc;
   return newImage;
 };
 
 const initialGardenState = {
-  viewIsTwoD:true,
+  viewIsTwoD: true,
   location: [0, 2],
   isDragging: false,
   tooltipOpen: false,
   colladaCache: {},
   dropdownStatus: false,
   squareFootage: 25,
-  gardenXYCoordinates:[{"x":75,"y":75,"viability":true},{"x":75,"y":125,"viability":true},{"x":75,"y":175,"viability":true},{"x":75,"y":225,"viability":true},{"x":75,"y":275,"viability":true},{"x":125,"y":75,"viability":true},{"x":125,"y":125,"viability":true},{"x":125,"y":175,"viability":true},{"x":125,"y":225,"viability":true},{"x":125,"y":275,"viability":true},{"x":175,"y":75,"viability":true},{"x":175,"y":125,"viability":true},{"x":175,"y":175,"viability":true},{"x":175,"y":225,"viability":true},{"x":175,"y":275,"viability":true},{"x":225,"y":75,"viability":true},{"x":225,"y":125,"viability":true},{"x":225,"y":175,"viability":true},{"x":225,"y":225,"viability":true},{"x":225,"y":275,"viability":true},{"x":275,"y":75,"viability":true},{"x":275,"y":125,"viability":true},{"x":275,"y":175,"viability":true},{"x":275,"y":225,"viability":true},{"x":275,"y":275,"viability":true}],
-  selectedTitle: "https://c1.staticflickr.com/3/2923/33742489190_3e30fca5f7_o.jpg",
+  gardenXYCoordinates:[{'x': 75,'y': 75, 'viability': true},{'x': 75,'y': 125, 'viability': true},{'x': 75,'y': 175, 'viability': true},{'x': 75,'y': 225, 'viability': true},{'x': 75,'y': 275, 'viability': true},{'x': 125,'y': 75, 'viability': true},{'x': 125,'y': 125, 'viability': true},{'x': 125,'y': 175, 'viability': true},{'x': 125,'y': 225, 'viability': true},{'x': 125,'y': 275, 'viability': true},{'x': 175,'y': 75, 'viability': true},{'x': 175,'y': 125, 'viability': true},{'x': 175,'y': 175, 'viability': true},{'x': 175,'y': 225, 'viability': true},{'x': 175,'y': 275, 'viability': true},{'x': 225,'y': 75, 'viability': true},{'x': 225,'y': 125, 'viability': true},{'x': 225,'y': 175, 'viability': true},{'x': 225,'y': 225, 'viability': true},{'x': 225,'y': 275, 'viability': true},{'x': 275,'y': 75, 'viability': true},{'x': 275,'y': 125, 'viability': true},{'x': 275,'y': 175, 'viability': true},{'x': 275,'y': 225, 'viability': true},{'x': 275,'y': 275, 'viability': true}],
+  selectedTitle: 'https://c1.staticflickr.com/3/2923/33742489190_3e30fca5f7_o.jpg',
   harvestTable:[],
   pastPlantGridStates: [],
   futurePlantGrideStates: [],
   analytics: {
-    "numberPlants": 0,
-    "squareFootage":0,
-    "soilSquareFootage":0,
-    "seedPacketCosts": 0,
-    "numSeedPackets": 0,
-    "totalCost": 0,
-    "totalNumberOfSeedPackets": 0,
-    "plantLibrary": {},
-    "numFruits": 0,
-    "numVeggies": 0,
-    "numFlowers": 0
+    'numberPlants': 0,
+    'squareFootage':0,
+    'soilSquareFootage': 0,
+    'seedPacketCosts': 0,
+    'numSeedPackets': 0,
+    'totalCost': 0,
+    'totalNumberOfSeedPackets': 0,
+    'plantLibrary': {},
+    'numFruits': 0,
+    'numVeggies': 0,
+    'numFlowers': 0
   },
   seedPacket:{
-    "name": "tomato",
-    "price": 1.25,
-    "quantity": 10,
-    "season": "Spring",
-    "description": "Initial State",
-    "instructions": "Take good care of me",
-    "sunlight": "Full-sun",
-    "harvest": 50,
-    "extremeWarning": [10,37],
-    "packetImg": "/seedPacketIMGs/tomatoResized.png"
+    'name': 'tomato',
+    'price': 1.25,
+    'quantity': 10,
+    'season': 'Spring',
+    'description': 'Initial State',
+    'instructions': 'Take good care of me',
+    'sunlight': 'Full-sun',
+    'harvest': 50,
+    'extremeWarning': [10,37],
+    'packetImg': '/seedPacketIMGs/tomatoResized.png'
   },
   plantGrowthGraph: [
     {name: 'Start Seeds', uv: 0},
@@ -48,11 +48,10 @@ const initialGardenState = {
     {name: 'Harvest', uv: 45},
     {name: 'End', uv: 60}
   ],
-  gardenGrid: [{"x":75,"y":75,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg","viability":true},{"x":75,"y":125,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg","viability":true},{"x":75,"y":175,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg","viability":true},{"x":75,"y":225,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg","viability":true},{"x":75,"y":275,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg","viability":true},{"x":125,"y":75,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg","viability":true},{"x":125,"y":125,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg","viability":true},{"x":125,"y":175,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg","viability":true},{"x":125,"y":225,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg","viability":true},{"x":125,"y":275,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg","viability":true},{"x":175,"y":75,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg","viability":true},{"x":175,"y":125,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg","viability":true},{"x":175,"y":175,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg","viability":true},{"x":175,"y":225,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg","viability":true},{"x":175,"y":275,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg","viability":true},{"x":225,"y":75,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg","viability":true},{"x":225,"y":125,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg","viability":true},{"x":225,"y":175,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg","viability":true},{"x":225,"y":225,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg","viability":true},{"x":225,"y":275,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg","viability":true},{"x":275,"y":75,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg","viability":true},{"x":275,"y":125,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg","viability":true},{"x":275,"y":175,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg","viability":true},{"x":275,"y":225,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg","viability":true},{"x":275,"y":275,"img":"https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg","viability":true}],
+  gardenGrid: [{'x': 75,'y': 75, 'img': 'https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg', 'viability': true},{'x': 75,'y': 125, 'img': 'https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg', 'viability': true},{'x': 75,'y': 175, 'img': 'https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg', 'viability': true},{'x': 75,'y': 225, 'img': 'https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg', 'viability': true},{'x': 75,'y': 275, 'img': 'https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg', 'viability': true},{'x': 125,'y': 75, 'img': 'https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg', 'viability': true},{'x': 125,'y': 125, 'img': 'https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg', 'viability': true},{'x': 125,'y': 175, 'img': 'https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg', 'viability': true},{'x': 125,'y': 225, 'img': 'https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg', 'viability': true},{'x': 125,'y': 275, 'img': 'https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg', 'viability': true},{'x': 175,'y': 75, 'img': 'https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg', 'viability': true},{'x': 175,'y': 125, 'img': 'https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg', 'viability': true},{'x': 175,'y': 175, 'img': 'https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg', 'viability': true},{'x': 175,'y': 225, 'img': 'https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg', 'viability': true},{'x': 175,'y': 275, 'img': 'https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg', 'viability': true},{'x': 225,'y': 75, 'img': 'https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg', 'viability': true},{'x': 225,'y': 125, 'img': 'https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg', 'viability': true},{'x': 225,'y': 175, 'img': 'https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg', 'viability': true},{'x': 225,'y': 225, 'img': 'https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg', 'viability': true},{'x': 225,'y': 275, 'img': 'https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg', 'viability': true},{'x': 275,'y': 75, 'img': 'https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg', 'viability': true},{'x': 275,'y': 125, 'img': 'https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg', 'viability': true},{'x': 275,'y': 175, 'img': 'https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg', 'viability': true},{'x': 275,'y': 225, 'img': 'https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg', 'viability': true},{'x': 275,'y': 275, 'img': 'https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg', 'viability': true}],
   plantGrid: [],
   height: 5,
   width: 5,
-
   plantShelf: [
     {
       'name': 'sunflower',
@@ -62,13 +61,13 @@ const initialGardenState = {
       'img': 'https://c1.staticflickr.com/3/2909/33168957064_a7ef238410_o.png',
       'model': 'https://s3-us-west-2.amazonaws.com/ryaperry-bucket/plantModels/sunflowerModel.dae',
       'isDraggable': true,
-       'packetImg': '/seedPacketIMGs/genericResized.png',
-       'price': 20,
+      'packetImg': '/seedPacketIMGs/genericResized.png',
+      'price': 20,
       'quantity': 5,
-      'season': "Spring",
-      'description': "After Start State",
-      'instructions': "Take great care of me",
-      'sunlight': "Full-sun",
+      'season': 'Spring',
+      'description': 'After Start State',
+      'instructions': 'Take great care of me',
+      'sunlight': 'Full-sun',
       'harvest': 51,
       'extremeWarning': [10,40],
       'growthGraph': [
@@ -86,15 +85,15 @@ const initialGardenState = {
       'x': 100,
       'y': 600,
       'img': 'https://c2.staticflickr.com/4/3937/33984681002_35a872f2f2_o.png',
-      'model':'https://s3-us-west-2.amazonaws.com/ryaperry-bucket/plantModels/cornModel3.dae',
+      'model': 'https://s3-us-west-2.amazonaws.com/ryaperry-bucket/plantModels/cornModel3.dae',
       'isDraggable': true,
       'packetImg': '/seedPacketIMGs/cornResized.png',
       'price': 2.60,
       'quantity': 16,
-      'season': "Spring",
-      'description': "After Start State",
-      'instructions': "Take great care of me",
-      'sunlight': "Full-sun",
+      'season': 'Spring',
+      'description': 'After Start State',
+      'instructions': 'Take great care of me',
+      'sunlight': 'Full-sun',
       'harvest': 45,
       'extremeWarning': [7, 35],
       'growthGraph': [
@@ -108,18 +107,18 @@ const initialGardenState = {
     },
     { 'name': 'tomato',
       'type': 'fruit',
-      'x':150,
-      'y':600,
-      'img':'https://s3-us-west-2.amazonaws.com/ryaperry-bucket/plantImages/tomatoePlant.png',
-      'model':'https://s3-us-west-2.amazonaws.com/ryaperry-bucket/plantModels/tomatoeModel.dae',
+      'x': 150,
+      'y': 600,
+      'img': 'https://s3-us-west-2.amazonaws.com/ryaperry-bucket/plantImages/tomatoePlant.png',
+      'model': 'https://s3-us-west-2.amazonaws.com/ryaperry-bucket/plantModels/tomatoeModel.dae',
       'isDraggable': true,
       'packetImg': '/seedPacketIMGs/tomatoResized.png',
       'price': 3.25,
       'quantity': 20,
-      'season': "Spring",
-      'description': "After Start State",
-      'instructions': "Take great care of me",
-      'sunlight': "Full-sun",
+      'season': 'Spring',
+      'description': 'After Start State',
+      'instructions': 'Take great care of me',
+      'sunlight': 'Full-sun',
       'harvest': 40,
       'extremeWarning': [10,35],
       'growthGraph': [
@@ -137,15 +136,15 @@ const initialGardenState = {
       'x': 200,
       'y': 600,
       'img': 'https://c1.staticflickr.com/3/2939/33200675713_ea06c54442_o.png',
-      'model':'https://s3-us-west-2.amazonaws.com/ryaperry-bucket/plantModels/peppersModel3.dae',
+      'model': 'https://s3-us-west-2.amazonaws.com/ryaperry-bucket/plantModels/peppersModel3.dae',
       'isDraggable': true,
       'packetImg': '/seedPacketIMGs/beansResized.png',
       'price': 3,
       'quantity': 32,
-      'season': "Spring",
-      'description': "After Start State",
-      'instructions': "Take great care of me",
-      'sunlight': "Full-sun",
+      'season': 'Spring',
+      'description': 'After Start State',
+      'instructions': 'Take great care of me',
+      'sunlight': 'Full-sun',
       'harvest': 53,
       'extremeWarning': [12,35],
       'growthGraph': [
@@ -168,10 +167,10 @@ const initialGardenState = {
       'packetImg': '/seedPacketIMGs/carrotResized.png',
       'price': 4,
       'quantity': 12,
-      'season': "Spring",
-      'description': "After Start State",
-      'instructions': "Take great care of me",
-      'sunlight': "Full-sun",
+      'season': 'Spring',
+      'description': 'After Start State',
+      'instructions': 'Take great care of me',
+      'sunlight': 'Full-sun',
       'harvest': 42,
       'extremeWarning': [5, 27],
       'growthGraph': [
@@ -194,10 +193,10 @@ const initialGardenState = {
       'packetImg': '/seedPacketIMGs/genericResized.png',
       'price': 10,
       'quantity': 10,
-      'season': "Spring",
-      'description': "After Start State",
-      'instructions': "Take great care of me",
-      'sunlight': "Full-sun",
+      'season': 'Spring',
+      'description': 'After Start State',
+      'instructions': 'Take great care of me',
+      'sunlight': 'Full-sun',
       'harvest': 47,
       'extremeWarning': [12, 30],
       'growthGraph': [
@@ -219,10 +218,10 @@ const initialGardenState = {
       'packetImg': '/seedPacketIMGs/genericResized.png',
       'price': 3,
       'quantity': 10,
-      'season': "Spring",
-      'description': "After Start State",
-      'instructions': "Take great care of me",
-      'sunlight': "Full-sun",
+      'season': 'Spring',
+      'description': 'After Start State',
+      'instructions': 'Take great care of me',
+      'sunlight': 'Full-sun',
       'harvest': 37,
       'extremeWarning': [5, 25],
       'growthGraph': [
@@ -240,15 +239,15 @@ const initialGardenState = {
       'x': 400,
       'y': 600,
       'img': 'https://c1.staticflickr.com/3/2847/33984618022_9fb8c0250c_o.png',
-      'model':'https://s3-us-west-2.amazonaws.com/ryaperry-bucket/plantModels/peppersModel3.dae',
+      'model': 'https://s3-us-west-2.amazonaws.com/ryaperry-bucket/plantModels/peppersModel3.dae',
       'isDraggable': true,
       'packetImg': '/seedPacketIMGs/hotPeppersResized.png',
       'price': 1.20,
       'quantity': 15,
-      'season': "Spring",
-      'description': "After Start State",
-      'instructions': "Take great care of me",
-      'sunlight': "Full-sun",
+      'season': 'Spring',
+      'description': 'After Start State',
+      'instructions': 'Take great care of me',
+      'sunlight': 'Full-sun',
       'harvest': 50,
       'extremeWarning':[7, 40],
       'growthGraph': [
@@ -275,10 +274,10 @@ const initialGardenState = {
       'packetImg': '/seedPacketIMGs/OkraResized.png',
       'price': 10,
       'quantity': 10,
-      'season': "Spring",
-      'description': "After Start State",
-      'instructions': "Take great care of me",
-      'sunlight': "Full-sun",
+      'season': 'Spring',
+      'description': 'After Start State',
+      'instructions': 'Take great care of me',
+      'sunlight': 'Full-sun',
       'harvest': 40,
       'extremeWarning': [12, 30],
       'growthGraph': [
@@ -301,10 +300,10 @@ const initialGardenState = {
       'packetImg': '/seedPacketIMGs/OnionResized.png',
       'price': 1.50,
       'quantity': 10,
-      'season': "Spring",
-      'description': "After Start State",
-      'instructions': "Take great care of me",
-      'sunlight': "Full-sun",
+      'season': 'Spring',
+      'description': 'After Start State',
+      'instructions': 'Take great care of me',
+      'sunlight': 'Full-sun',
       'harvest':45,
       'extremeWarning': [5,40],
       'growthGraph': [
@@ -327,10 +326,10 @@ const initialGardenState = {
       'packetImg': '/seedPacketIMGs/beansResized.png',
       'price': 3,
       'quantity': 32,
-      'season': "Spring",
-      'description': "After Start State",
-      'instructions': "Take great care of me",
-      'sunlight': "Full-sun",
+      'season': 'Spring',
+      'description': 'After Start State',
+      'instructions': 'Take great care of me',
+      'sunlight': 'Full-sun',
       'harvest': 53,
       'extremeWarning': [12,35],
       'growthGraph': [
@@ -353,10 +352,10 @@ const initialGardenState = {
       'packetImg': '/seedPacketIMGs/OnionResized.png',
       'price': 1.50,
       'quantity': 10,
-      'season': "Spring",
-      'description': "After Start State",
-      'instructions': "Take great care of me",
-      'sunlight': "Full-sun",
+      'season': 'Spring',
+      'description': 'After Start State',
+      'instructions': 'Take great care of me',
+      'sunlight': 'Full-sun',
       'harvest':45,
       'extremeWarning':[5,40],
       'growthGraph': [
@@ -379,10 +378,10 @@ const initialGardenState = {
       'packetImg': '/seedPacketIMGs/KaleResized.png',
       'price': 1.20,
       'quantity': 15,
-      'season': "Spring",
-      'description': "After Start State",
-      'instructions': "Take great care of me",
-      'sunlight': "Full-sun",
+      'season': 'Spring',
+      'description': 'After Start State',
+      'instructions': 'Take great care of me',
+      'sunlight': 'Full-sun',
       'harvest': 28,
       'extremeWarning': [2, 40],
       'growthGraph': [
@@ -404,10 +403,10 @@ const initialGardenState = {
       'packetImg': '/seedPacketIMGs/genericResized.png',
       'price': 1.75,
       'quantity': 10,
-      'season': "Spring",
-      'description': "After Start State",
-      'instructions': "Take great care of me",
-      'sunlight': "Full-sun",
+      'season': 'Spring',
+      'description': 'After Start State',
+      'instructions': 'Take great care of me',
+      'sunlight': 'Full-sun',
       'harvest': 34,
       'extremeWarning': [10, 32],
       'growthGraph': [
@@ -430,10 +429,10 @@ const initialGardenState = {
       'packetImg': '/seedPacketIMGs/genericResized.png',
       'price': 0.75,
       'quantity': 20,
-      'season': "Spring",
-      'description': "After Start State",
-      'instructions': "Take great care of me",
-      'sunlight': "Full-sun",
+      'season': 'Spring',
+      'description': 'After Start State',
+      'instructions': 'Take great care of me',
+      'sunlight': 'Full-sun',
       'harvest':50,
       'extremeWarning': [5,25],
       'growthGraph': [
@@ -456,10 +455,10 @@ const initialGardenState = {
       'packetImg': '/seedPacketIMGs/cornResized.png',
       'price': 2.60,
       'quantity': 16,
-      'season': "Spring",
-      'description': "After Start State",
-      'instructions': "Take great care of me",
-      'sunlight': "Full-sun",
+      'season': 'Spring',
+      'description': 'After Start State',
+      'instructions': 'Take great care of me',
+      'sunlight': 'Full-sun',
       'harvest': 45,
       'extremeWarning': [7, 35],
       'growthGraph': [
@@ -482,10 +481,10 @@ const initialGardenState = {
       'packetImg': '/seedPacketIMGs/genericResized.png',
       'price': 0.75,
       'quantity': 20,
-      'season': "Spring",
-      'description': "After Start State",
-      'instructions': "Take great care of me",
-      'sunlight': "Full-sun",
+      'season': 'Spring',
+      'description': 'After Start State',
+      'instructions': 'Take great care of me',
+      'sunlight': 'Full-sun',
       'harvest': 50,
       'extremeWarning': [5,25],
       'growthGraph': [
@@ -508,10 +507,10 @@ const initialGardenState = {
       'packetImg': '/seedPacketIMGs/PumpkinResized.png',
       'price': 1.60,
       'quantity': 20,
-      'season': "Summer",
-      'description': "David Pumpkins",
-      'instructions': "Take great care of me",
-      'sunlight': "Full-sun",
+      'season': 'Summer',
+      'description': 'David Pumpkins',
+      'instructions': 'Take great care of me',
+      'sunlight': 'Full-sun',
       'harvest': 100,
       'extremeWarning':[5, 27],
       'growthGraph': [
@@ -528,15 +527,15 @@ const initialGardenState = {
       'x': 50,
       'y': 100,
       'img': 'https://c1.staticflickr.com/3/2847/33984618022_9fb8c0250c_o.png',
-      'model':'https://s3-us-west-2.amazonaws.com/ryaperry-bucket/plantModels/peppersModel3.dae',
+      'model': 'https://s3-us-west-2.amazonaws.com/ryaperry-bucket/plantModels/peppersModel3.dae',
       'isDraggable': false,
       'packetImg': '/seedPacketIMGs/hotPeppersResized.png',
       'price': 1.20,
       'quantity': 15,
-      'season': "Spring",
-      'description': "After Start State",
-      'instructions': "Take great care of me",
-      'sunlight': "Full-sun",
+      'season': 'Spring',
+      'description': 'After Start State',
+      'instructions': 'Take great care of me',
+      'sunlight': 'Full-sun',
       'harvest': 50,
       'extremeWarning':[7, 40],
       'growthGraph': [
@@ -559,10 +558,10 @@ const initialGardenState = {
       'packetImg': '/seedPacketIMGs/genericResized.png',
       'price': 2,
       'quantity': 20,
-      'season': "Spring",
-      'description': "After Start State",
-      'instructions': "Take great care of me",
-      'sunlight': "Full-sun",
+      'season': 'Spring',
+      'description': 'After Start State',
+      'instructions': 'Take great care of me',
+      'sunlight': 'Full-sun',
       'harvest': 46,
       'extremeWarning': [7, 38],
       'growthGraph': [
@@ -585,10 +584,10 @@ const initialGardenState = {
       'packetImg': '/seedPacketIMGs/genericResized.png',
       'price': 10,
       'quantity': 10,
-      'season': "Spring",
-      'description': "After Start State",
-      'instructions': "Take great care of me",
-      'sunlight': "Full-sun",
+      'season': 'Spring',
+      'description': 'After Start State',
+      'instructions': 'Take great care of me',
+      'sunlight': 'Full-sun',
       'harvest': 50,
       'extremeWarning': [0, 40],
       'growthGraph': [
@@ -603,7 +602,60 @@ const initialGardenState = {
   ],
 
   fruitDex: [
-   { 'name': 'strawberry',
+    {
+      'name': 'strawberry',
+      'type': 'fruit',
+      'x': 50,
+      'y': 50,
+      'img': 'https://c2.staticflickr.com/4/3954/33856016382_0778302b97_o.png',
+      'model': 'https://s3-us-west-2.amazonaws.com/ryaperry-bucket/plantModels/sunflowerModel.dae',
+      'isDraggable': false,
+      'packetImg': '/seedPacketIMGs/genericResized.png',
+      'price': 3,
+      'quantity': 10,
+      'season': 'Spring',
+      'description': 'After Start State',
+      'instructions': 'Take great care of me',
+      'sunlight': 'Full-sun',
+      'harvest': 28,
+      'extremeWarning': [5, 25],
+      'growthGraph': [
+        {name: 'Sow', uv: 0},
+        {name: 'Seed', uv: 7},
+        {name: 'Bloom \r Start', uv: 28},
+        {name: 'Harvest', uv: 37},
+        {name: 'Harvest \r End', uv: 55}
+      ],
+      'zone': 6
+    },
+    {
+      'name': 'tomato',
+      'type': 'fruit',
+      'x': 100,
+      'y': 50,
+      'img': 'https://s3-us-west-2.amazonaws.com/ryaperry-bucket/plantImages/tomatoePlant.png',
+      'model': 'https://s3-us-west-2.amazonaws.com/ryaperry-bucket/plantModels/carrotModel.dae',
+      'isDraggable': false,
+      'packetImg': '/seedPacketIMGs/tomatoResized.png',
+      'price': 3.25,
+      'quantity': 20,
+      'season': 'Spring',
+      'description': 'After Start State',
+      'instructions': 'Take great care of me',
+      'sunlight': 'Full-sun',
+      'harvest': 40,
+      'extremeWarning': [10,35],
+      'growthGraph': [
+        {name: 'Sow', uv: 0},
+        {name: 'Seed', uv: 5},
+        {name: 'Bloom \r Start', uv: 22},
+        {name: 'Harvest', uv: 40},
+        {name: 'Harvest \r End', uv: 72}
+      ],
+     'zone': 6
+   },
+   { //Samy, is this a duplicate?
+     'name': 'strawberry',
      'type': 'fruit',
      'x': 50,
      'y': 50,
@@ -611,63 +663,38 @@ const initialGardenState = {
      'model': 'https://s3-us-west-2.amazonaws.com/ryaperry-bucket/plantModels/sunflowerModel.dae',
      'isDraggable': false,
      'packetImg': '/seedPacketIMGs/genericResized.png',
-     'price': 3,
-     'quantity': 10,
-     'season': "Spring",
-     'description': "After Start State",
-     'instructions': "Take great care of me",
-     'sunlight': "Full-sun",
-     'harvest': 28,
-     'extremeWarning': [5, 25],
+     'price': 2,
+     'quantity': 15,
+     'season': 'Spring',
+     'description': 'After Start State',
+     'instructions': 'Take great care of me',
+     'sunlight': 'Full-sun',
+     'harvest': 50,
+     'extremeWarning': [5, 35],
      'growthGraph': [
-       {name: 'Sow', uv: 0},
-       {name: 'Seed', uv: 7},
-       {name: 'Bloom \r Start', uv: 28},
-       {name: 'Harvest', uv: 37},
-       {name: 'Harvest \r End', uv: 55}
-     ],
+        {name: 'Sow', uv: 0},
+        {name: 'Seed', uv: 7},
+        {name: 'Bloom \r Start', uv: 45},
+        {name: 'Harvest', uv: 50},
+        {name: 'Harvest \r End', uv: 65}
+      ],
       'zone': 6
-   },
-   { 'name': 'tomato',
-     'type': 'fruit',
-     'x': 100,
-     'y': 50,
-     'img': 'https://s3-us-west-2.amazonaws.com/ryaperry-bucket/plantImages/tomatoePlant.png',
-     'model': 'https://s3-us-west-2.amazonaws.com/ryaperry-bucket/plantModels/carrotModel.dae',
-     'isDraggable': false,
-     'packetImg': '/seedPacketIMGs/tomatoResized.png',
-     'price': 3.25,
-     'quantity': 20,
-     'season': "Spring",
-     'description': "After Start State",
-     'instructions': "Take great care of me",
-     'sunlight': "Full-sun",
-     'harvest': 40,
-     'extremeWarning': [10,35],
-     'growthGraph': [
-       {name: 'Sow', uv: 0},
-       {name: 'Seed', uv: 5},
-       {name: 'Bloom \r Start', uv: 22},
-       {name: 'Harvest', uv: 40},
-       {name: 'Harvest \r End', uv: 72}
-     ],
-      'zone': 6
-   },
-   /*-------------CONTINUE HERE--------------*/
-    {
+    },
+    { //Samy, is this a duplicate?
+      'name': 'tomato',
       'type': 'fruit',
-      'x':50,
+      'x':100,
       'y':50,
-      'img': 'https://c2.staticflickr.com/4/3954/33856016382_0778302b97_o.png',
-      'model':'https://s3-us-west-2.amazonaws.com/ryaperry-bucket/plantModels/sunflowerModel.dae',
-      'isDraggable': false,
-      'packetImg' : '/seedPacketIMGs/genericResized.png',
+      'img':'https://s3-us-west-2.amazonaws.com/ryaperry-bucket/plantImages/tomatoePlant.png',
+      'model':'https://s3-us-west-2.amazonaws.com/ryaperry-bucket/plantModels/tomatoeModel.dae',
+      'isDraggable': true,
+      'packetImg' : '/seedPacketIMGs/tomatoResized.png',
        'price': 10,
       'quantity': 10,
-      'season': "Spring",
-      'description': "After Start State",
-      'instructions': "Take great care of me",
-      'sunlight': "Full-sun",
+      'season': 'Spring',
+      'description': 'After Start State',
+      'instructions': 'Take great care of me',
+      'sunlight': 'Full-sun',
       'harvest':50,
       'extremeWarning':[0,45],
       'growthGraph': [
@@ -679,48 +706,23 @@ const initialGardenState = {
       ],
       'zone': 6
     },
-    { 'name': 'tomato',
-      'type': 'fruit',
-      'x':100,
-      'y':50,
-      'img':'https://s3-us-west-2.amazonaws.com/ryaperry-bucket/plantImages/tomatoePlant.png',
-      'model':'https://s3-us-west-2.amazonaws.com/ryaperry-bucket/plantModels/tomatoeModel.dae',
-      'isDraggable': true,
-      'packetImg' : '/seedPacketIMGs/tomatoResized.png',
-       'price': 10,
-      'quantity': 10,
-      'season': "Spring",
-      'description': "After Start State",
-      'instructions': "Take great care of me",
-      'sunlight': "Full-sun",
-      'harvest':50,
-      'extremeWarning':[0,45],
-      'growthGraph': [
-        {name: 'Sow', uv: 0},
-        {name: 'Seed', uv: 7},
-        {name: 'Bloom \r Start', uv: 45},
-        {name: 'Harvest', uv: 50},
-        {name: 'Harvest \r End', uv: 65}
-      ],
-      'zone': 6
-      },
-      {
+    {
       'name': 'pineapple',
       'type': 'fruit',
-      'x':150,
-      'y':50,
+      'x': 150,
+      'y': 50,
       'img':'https://c1.staticflickr.com/3/2850/33754040130_3aef5cfda7_o.png',
-      'model':'https://s3-us-west-2.amazonaws.com/ryaperry-bucket/plantModels/sunflowerModel.dae',
+      'model': 'https://s3-us-west-2.amazonaws.com/ryaperry-bucket/plantModels/sunflowerModel.dae',
       'isDraggable': false,
-      'packetImg' : '/seedPacketIMGs/genericResized.png',
-       'price': 10,
-      'quantity': 10,
-      'season': "Spring",
-      'description': "After Start State",
-      'instructions': "Take great care of me",
-      'sunlight': "Full-sun",
-      'harvest':50,
-      'extremeWarning':[0,45],
+      'packetImg': '/seedPacketIMGs/genericResized.png',
+      'price': 4,
+      'quantity': 12,
+      'season': 'Spring',
+      'description': 'After Start State',
+      'instructions': 'Take great care of me',
+      'sunlight': 'Full-sun',
+      'harvest': 50,
+      'extremeWarning': [0, 45],
       'growthGraph': [
         {name: 'Sow', uv: 0},
         {name: 'Seed', uv: 7},
@@ -734,51 +736,51 @@ const initialGardenState = {
       'name': 'orange',
       'type': 'fruit',
       'x': 200,
-      'y':50,
+      'y': 50,
       'img': 'https://c1.staticflickr.com/3/2813/33754040170_f89bbcf2d6_o.png',
-      'model':'https://s3-us-west-2.amazonaws.com/ryaperry-bucket/plantModels/sunflowerModel.dae',
+      'model': 'https://s3-us-west-2.amazonaws.com/ryaperry-bucket/plantModels/sunflowerModel.dae',
       'isDraggable': false,
-      'packetImg' : '/seedPacketIMGs/genericResized.png',
-       'price': 10,
-      'quantity': 10,
-      'season': "Spring",
-      'description': "After Start State",
-      'instructions': "Take great care of me",
-      'sunlight': "Full-sun",
+      'packetImg': '/seedPacketIMGs/genericResized.png',
+      'price': 10,
+      'quantity': 1,
+      'season': 'Spring',
+      'description': 'After Start State',
+      'instructions': 'Take great care of me',
+      'sunlight': 'Full-sun',
       'harvest':50,
-      'extremeWarning':[0,45],
+      'extremeWarning': [5, 40],
       'growthGraph': [
         {name: 'Sow', uv: 0},
         {name: 'Seed', uv: 7},
         {name: 'Bloom \r Start', uv: 45},
-        {name: 'Harvest', uv: 50},
-        {name: 'Harvest \r End', uv: 65}
+        {name: 'Harvest', uv: 60},
+        {name: 'Harvest \r End', uv: 120}
       ],
       'zone': 7
     },
-     {
+    {
       'name': 'apple',
       'type': 'fruit',
       'x': 250,
-      'y':50,
+      'y': 50,
       'img': 'https://c1.staticflickr.com/3/2839/33296406404_4e33cb289d_o.png',
-      'model':'https://s3-us-west-2.amazonaws.com/ryaperry-bucket/plantModels/sunflowerModel.dae',
+      'model': 'https://s3-us-west-2.amazonaws.com/ryaperry-bucket/plantModels/sunflowerModel.dae',
       'isDraggable': false,
       'packetImg' : '/seedPacketIMGs/genericResized.png',
-       'price': 10,
-      'quantity': 10,
-      'season': "Spring",
-      'description': "After Start State",
-      'instructions': "Take great care of me",
-      'sunlight': "Full-sun",
-      'harvest':50,
-      'extremeWarning':[0,45],
+      'price': 10,
+      'quantity': 1,
+      'season': 'Spring',
+      'description': 'After Start State',
+      'instructions': 'Take great care of me',
+      'sunlight': 'Full-sun',
+      'harvest': 50,
+      'extremeWarning': [5, 30],
       'growthGraph': [
         {name: 'Sow', uv: 0},
         {name: 'Seed', uv: 7},
         {name: 'Bloom \r Start', uv: 45},
-        {name: 'Harvest', uv: 50},
-        {name: 'Harvest \r End', uv: 65}
+        {name: 'Harvest', uv: 60},
+        {name: 'Harvest \r End', uv: 120}
       ],
       'zone': 6
     },
@@ -786,25 +788,25 @@ const initialGardenState = {
       'name': 'grapes',
       'type': 'fruit',
       'x': 300,
-      'y':50,
+      'y': 50,
       'img': 'https://c2.staticflickr.com/4/3942/33296407624_dcf0cc66f7_o.png',
-      'model':'https://s3-us-west-2.amazonaws.com/ryaperry-bucket/plantModels/sunflowerModel.dae',
+      'model': 'https://s3-us-west-2.amazonaws.com/ryaperry-bucket/plantModels/sunflowerModel.dae',
       'isDraggable': false,
       'packetImg' : '/seedPacketIMGs/genericResized.png',
-       'price': 10,
-      'quantity': 10,
-      'season': "Spring",
-      'description': "After Start State",
-      'instructions': "Take great care of me",
-      'sunlight': "Full-sun",
-      'harvest':50,
-      'extremeWarning':[0,45],
+      'price': 10,
+      'quantity': 1,
+      'season': 'Spring',
+      'description': 'After Start State',
+      'instructions': 'Take great care of me',
+      'sunlight': 'Full-sun',
+      'harvest': 50,
+      'extremeWarning': [8, 35],
       'growthGraph': [
         {name: 'Sow', uv: 0},
-        {name: 'Seed', uv: 7},
-        {name: 'Bloom \r Start', uv: 45},
-        {name: 'Harvest', uv: 50},
-        {name: 'Harvest \r End', uv: 65}
+        {name: 'Seed', uv: 14},
+        {name: 'Bloom \r Start', uv: 52},
+        {name: 'Harvest', uv: 80},
+        {name: 'Harvest \r End', uv: 105}
       ],
       'zone': 6
     },
@@ -812,25 +814,25 @@ const initialGardenState = {
       'name': 'watermelon',
       'type': 'fruit',
       'x': 350,
-      'y':50,
+      'y': 50,
       'img': 'https://c1.staticflickr.com/3/2912/33754040210_6c36b8074b_o.png',
-      'model':'https://s3-us-west-2.amazonaws.com/ryaperry-bucket/plantModels/sunflowerModel.dae',
+      'model': 'https://s3-us-west-2.amazonaws.com/ryaperry-bucket/plantModels/sunflowerModel.dae',
       'isDraggable': false,
       'packetImg' : '/seedPacketIMGs/genericResized.png',
-       'price': 10,
-      'quantity': 10,
-      'season': "Spring",
-      'description': "After Start State",
-      'instructions': "Take great care of me",
-      'sunlight': "Full-sun",
-      'harvest':55,
-      'extremeWarning':[0,45],
+      'price': 3,
+      'quantity': 20,
+      'season': 'Spring',
+      'description': 'After Start State',
+      'instructions': 'Take great care of me',
+      'sunlight': 'Full-sun',
+      'harvest': 55,
+      'extremeWarning':[10, 40],
       'growthGraph': [
         {name: 'Sow', uv: 0},
         {name: 'Seed', uv: 7},
-        {name: 'Bloom \r Start', uv: 45},
-        {name: 'Harvest', uv: 50},
-        {name: 'Harvest \r End', uv: 65}
+        {name: 'Bloom \r Start', uv: 32},
+        {name: 'Harvest', uv: 60},
+        {name: 'Harvest \r End', uv: 80}
       ],
       'zone': 6
     },
@@ -840,65 +842,63 @@ const initialGardenState = {
       'x': 400,
       'y':50,
       'img': 'https://c1.staticflickr.com/3/2873/33327563603_5715bcf622_o.png',
-      'model':'https://s3-us-west-2.amazonaws.com/ryaperry-bucket/plantModels/sunflowerModel.dae',
+      'model': 'https://s3-us-west-2.amazonaws.com/ryaperry-bucket/plantModels/sunflowerModel.dae',
       'isDraggable': false,
       'packetImg' : '/seedPacketIMGs/genericResized.png',
-       'price': 10,
+      'price': 10,
       'quantity': 10,
-      'season': "Spring",
-      'description': "After Start State",
-      'instructions': "Take great care of me",
-      'sunlight': "Full-sun",
-      'harvest':49,
-      'extremeWarning':[0,45],
+      'season': 'Spring',
+      'description': 'After Start State',
+      'instructions': 'Take great care of me',
+      'sunlight': 'Full-sun',
+      'harvest': 49,
+      'extremeWarning': [10, 40],
       'growthGraph': [
         {name: 'Sow', uv: 0},
         {name: 'Seed', uv: 7},
-        {name: 'Bloom \r Start', uv: 45},
-        {name: 'Harvest', uv: 50},
-        {name: 'Harvest \r End', uv: 65}
+        {name: 'Bloom \r Start', uv: 32},
+        {name: 'Harvest', uv: 60},
+        {name: 'Harvest \r End', uv: 80}
       ],
       'zone': 6
     },
   ],
   tileDex: [
    { 'name': 'soil',
-      'x':50,
-      'y':50,
-      'img': "https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg",
+      'x': 50,
+      'y': 50,
+      'img': 'https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg',
       'stroke': 'black',
       'viability': true
     },
     { 'name': 'grass',
-      'x':104,
-      'y':50,
-      'img':"https://c1.staticflickr.com/3/2923/33742489190_3e30fca5f7_o.jpg",
+      'x': 104,
+      'y': 50,
+      'img': 'https://c1.staticflickr.com/3/2923/33742489190_3e30fca5f7_o.jpg',
       'stroke': 'black',
       'viability': true
 
       },
       {
       'name': 'rocks',
-      'x':158,
-      'y':50,
-      'img':'https://c1.staticflickr.com/3/2888/33316224483_1c8a775cf0_o.jpg',
+      'x': 158,
+      'y': 50,
+      'img': 'https://c1.staticflickr.com/3/2888/33316224483_1c8a775cf0_o.jpg',
       'stroke': 'black',
       'viability': false
-
     },
     {
       'name': 'gardenTile',
       'x': 212,
-      'y':50,
+      'y': 50,
       'img': 'https://c1.staticflickr.com/3/2865/33285295564_e948bbe297_o.jpg',
       'stroke': 'black',
       'viability': false
-
     },
     {
       'name': 'gnome',
       'x': 104,
-      'y':150,
+      'y': 150,
       'img': 'https://c1.staticflickr.com/3/2832/33285295044_f9354e513e_o.png',
       'stroke': 'black',
       'viability': false
@@ -906,7 +906,7 @@ const initialGardenState = {
     {
       'name': 'RyanGnome',
       'x': 50,
-      'y':100,
+      'y': 100,
       'img': 'https://c1.staticflickr.com/3/2936/34033385761_c776af67f7_o.png',
       'stroke': 'black',
       'viability': false
@@ -914,7 +914,7 @@ const initialGardenState = {
     {
       'name': 'ArielGnome',
       'x': 104,
-      'y':100,
+      'y': 100,
       'img': 'https://c1.staticflickr.com/3/2838/33779524940_77d4e0b1c5_o.png',
       'stroke': 'black',
       'viability': false
@@ -922,7 +922,7 @@ const initialGardenState = {
     {
       'name': 'NathanGnome',
       'x': 158,
-      'y':100,
+      'y': 100,
       'img': 'https://c1.staticflickr.com/3/2920/33353040833_da5d00443d_o.png',
       'stroke': 'black',
       'viability': false
@@ -930,7 +930,7 @@ const initialGardenState = {
     ,{
       'name': 'SamyGnome',
       'x': 212,
-      'y':100,
+      'y': 100,
       'img': 'https://c1.staticflickr.com/3/2910/34164510815_2e26ff97cd_o.png',
       'stroke': 'black',
       'viability': false
@@ -938,7 +938,7 @@ const initialGardenState = {
     {
       'name': 'TreGnome',
       'x': 50,
-      'y':150,
+      'y': 150,
       'img': 'https://c1.staticflickr.com/3/2816/33353374503_0dca33c3ba_o.png',
       'stroke': 'black',
       'viability': false
@@ -952,418 +952,268 @@ const initialGardenState = {
 
 /*SQUARE */
 const toggleSquare = (state, action) => {
-  var squareToToggle;
-  var squareToToggleIndex;
-
-  for (var i = 0; i<state.gardenGrid.length; i++){
-    var individualSquare = state.gardenGrid[i];
+  let squareToToggle;
+  let squareToToggleIndex;
+  for (let i = 0; i < state.gardenGrid.length; i++) {
+    let individualSquare = state.gardenGrid[i];
     if (individualSquare.x === action.x && individualSquare.y === action.y) {
       squareToToggle = individualSquare;
       squareToToggleIndex = i;
     }
   }
-
-
-  var squareToToggleImg = squareToToggle.img;
-    console.log("HERE", squareToToggleImg);
-
-  var tileToToggleTo = state.selectedTitle.img || 'https://s3-us-west-2.amazonaws.com/ryaperry-bucket/gardenTextures/soilTexture.jpg';
-
-  var gardenXYCoordinatesCopy = state.gardenXYCoordinates.slice();
+  let squareToToggleImg = squareToToggle.img;
+  let tileToToggleTo = state.selectedTitle.img || 'https://s3-us-west-2.amazonaws.com/ryaperry-bucket/gardenTextures/soilTexture.jpg';
+  let gardenXYCoordinatesCopy = state.gardenXYCoordinates.slice();
   gardenXYCoordinatesCopy[squareToToggleIndex].viability = state.selectedTitle.viability || true;
-
-
-
-  var gardenCopy = state.gardenGrid.slice();
-  gardenCopy[squareToToggleIndex].img = tileToToggleTo
-
-  const {gardenGrid} = state;
-  const newState = {};
-
-  Object.assign(newState, state, {gardenGrid: gardenCopy})
-
-  console.log('(before) state: ', state);
-  console.log('(after) state: ', newState);
+  let gardenCopy = state.gardenGrid.slice();
+  gardenCopy[squareToToggleIndex].img = tileToToggleTo;
+  let {gardenGrid} = state;
+  let newState = {};
+  Object.assign(newState, state, {gardenGrid: gardenCopy});
   return newState;
 }
 
-
-
 /*GARDEN*/
 const setGardenParameters = (state, action) => {
-  const newState = {};
-
-  const {gardenGrid} = state;
-  var idCounter = 0;
-  var newSquareFootage=action.width*action.height
-
-  var gardenGridArray = [];
-  var newGardenXYCoordinates=[];
-  for (var i = 1; i < action.height + 1; i++ ) {
-    for (var j =1; j < action.width + 1; j++) {
-      var squareCounter = "square" + idCounter;
-      gardenGridArray.push({'x': i * 50+25, 'y': j * 50+25, 'img': "https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg", 'viability': true});
-      newGardenXYCoordinates.push({'x': i * 50+25, 'y': j * 50+25, 'viability': true})
+  let newState = {};
+  let {gardenGrid} = state;
+  let idCounter = 0;
+  let newSquareFootage =action.width * action.height;
+  let gardenGridArray = [];
+  let newGardenXYCoordinates=[];
+  for (let i = 1; i < action.height + 1; i++) {
+    for (let j =1; j < action.width + 1; j++) {
+      let squareCounter = 'square' + idCounter;
+      gardenGridArray.push({'x': i * 50 + 25, 'y': j * 50 + 25, 'img': 'https://c1.staticflickr.com/3/2818/33742487580_30e485f9ac_o.jpg', 'viability': true});
+      newGardenXYCoordinates.push({'x': i * 50 + 25, 'y': j * 50 + 25, 'viability': true});
       idCounter++;
     }
   }
-  console.log(JSON.stringify(gardenGridArray))
-  console.log(JSON.stringify(newGardenXYCoordinates))
   Object.assign(newState, state, {gardenGrid: gardenGridArray,
     gardenXYCoordinates: newGardenXYCoordinates, squareFootage: newSquareFootage});
   return newState;
 }
 
 const getAllGardens = (state, action) => {
-  console.log(makeImage('https://c1.staticflickr.com/3/2909/33168957064_a7ef238410_o.png'));
-
-  console.log('(before) state: ', state);
-
-  const newState = {};
-  const {gardens} = state;
-
+  let newState = {};
+  let {gardens} = state;
   Object.assign(newState, state, {gardens: action.dbGardenGrids});
-  console.log('(before) state: ', state);
-  console.log('(after) state: ', newState);
   return newState;
 }
 
 
 
 const getGardenFromDropdown = (state, action) => {
-  console.log('(before) state: ', state);
-  const newState = {};
-  const { gardens } = state
-
-  var newGardenGrid = gardens[action.gardenIndex];
-  const {gardenGrid} = state;
-
+  let newState = {};
+  let { gardens } = state;
+  let newGardenGrid = gardens[action.gardenIndex];
+  let {gardenGrid} = state;
   Object.assign(newState, state, {gardenGrid: newGardenGrid});
-  console.log('(before) state: ', state);
-  console.log('(after) state: ', newState);
-
   return newState;
 };
 
 
 
 const setDropdown = (state, action) => {
-
-  const newState = {};
-  const {gardenDropdown} = state;
-
-  var newGardenDropdown = action.dbDropdownOptions
+  let newState = {};
+  let {gardenDropdown} = state;
+  let newGardenDropdown = action.dbDropdownOptions;
   Object.assign(newState, state, {gardenDropdown: newGardenDropdown});
-
-  console.log('(before) state: ', state);
-  console.log('(after) state: ', newState);
-
   return newState;
 }
 
 /*PLANTS*/
 const getPlants = (state, action) => {
-  const newState = {};
-  const {plants} = state;
-  console.log("HERE ARE ALL YOUR PLANTS", "ARIEL")
-
+  let newState = {};
+  let {plants} = state;
   Object.assign(newState, state, {plants: action.dbPlantGrids});
-  console.log('(before) state: ', state);
-  console.log('(after) state: ', newState);
-
   return newState;
 }
 
 const getPlantsFromDropdown = (state, action) => {
-  console.log('(before) state: ', state);
-  const newState = {};
-  const { plants } = state
-
-  var newPlantGrid = plants[action.gardenIndex]; //NOTE: THIS STAYS THE SAME "GRADEN.INDEX(?)
-  const {plantGrid} = state;
-
+  let newState = {};
+  let { plants } = state;
+  let newPlantGrid = plants[action.gardenIndex]; //NOTE: THIS STAYS THE SAME 'GRADEN.INDEX(?)
+  let {plantGrid} = state;
   Object.assign(newState, state, {plantGrid: newPlantGrid});
-  console.log('(before) state: ', state);
-  console.log('(after) state: ', newState);
-
   return newState;
 };
 
 const addPlantToPlantGrid = (state, action) => {
-
-  var plantToMove;
-  var plantToMoveIndex;
-  const newState = {};
-  const {plantGrid} = state;
-  var oldPlantGrid = plantGrid.slice();
-  var newPlantGrid = plantGrid.slice();
-
-  var newAnalytics = {};
+  let plantToMove;
+  let plantToMoveIndex;
+  let newState = {};
+  let {plantGrid} = state;
+  let oldPlantGrid = plantGrid.slice();
+  let newPlantGrid = plantGrid.slice();
+  let newAnalytics = {};
   Object.assign(newAnalytics, state.analytics);
-
-
-  for(var i = 0; i < state.plantGrid.length; i++){
-    var individualPlant = state.plantGrid[i];
-    if(individualPlant.x === action.plant.x && individualPlant.y === action.plant.y){
-      plantToMove = individualPlant
-      plantToMoveIndex = i
+  for(let i = 0; i < state.plantGrid.length; i++) {
+    let individualPlant = state.plantGrid[i];
+    if(individualPlant.x === action.plant.x && individualPlant.y === action.plant.y) {
+      plantToMove = individualPlant;
+      plantToMoveIndex = i;
     }
   }
-
-  console.log("Here is the new analytics ", newAnalytics);
-
-  var harvestTableCopy = state.harvestTable.slice();
-
-  var generateAnalytics = function(plantToBeAdded) {
-
-
-    var today = new Date();
-    var numberOfDaysToAdd = plantToBeAdded.plant.harvest;
+  let harvestTableCopy = state.harvestTable.slice();
+  const generateAnalytics = function(plantToBeAdded) {
+    let today = new Date();
+    let numberOfDaysToAdd = plantToBeAdded.plant.harvest;
     today.setDate(today.getDate() + numberOfDaysToAdd);
-    var dd = today.getDate();
-    var mm = today.getMonth() + 1;
-    var y = today.getFullYear();
-
-    var someFormattedDate = dd + '/'+ mm + '/'+ y;
+    let dd = today.getDate();
+    let mm = today.getMonth() + 1;
+    let y = today.getFullYear();
+    let someFormattedDate = dd + '/'+ mm + '/'+ y;
     //increment the number of that plant if already in the library
-    console.log("INSIDE GENERATE ANALYTICS, ",plantToBeAdded)
-    console.log("This is newAnalytics", newAnalytics);
-
-    if (newAnalytics["plantLibrary"][plantToBeAdded.plant.name]){
-      console.log("WE ALREADY HAVE THIS PLANT", plantToBeAdded.plant.name)
-      newAnalytics["plantLibrary"][plantToBeAdded.plant.name]["quantity"]+=1;
+    if (newAnalytics["plantLibrary"][plantToBeAdded.plant.name]) {
+      newAnalytics["plantLibrary"][plantToBeAdded.plant.name]["quantity"]++;
     } else {
       //if plant has yet been added, instantiate a key value pair
-
       newAnalytics["plantLibrary"][plantToBeAdded.plant.name] = {};
-      newAnalytics["plantLibrary"][plantToBeAdded.plant.name]["quantity"]=1;
+      newAnalytics["plantLibrary"][plantToBeAdded.plant.name]["quantity"] = 1;
       harvestTableCopy.push({name: plantToBeAdded.plant.name, harvest:plantToBeAdded.plant.harvest, harvestDate: someFormattedDate});
-      newAnalytics["totalCost"]+=plantToBeAdded.plant.price;
-      newAnalytics["numSeedPackets"]+=1;
+      newAnalytics["totalCost"] += plantToBeAdded.plant.price;
+      newAnalytics["numSeedPackets"]++;
     }
-
-    if (plantToBeAdded.plant.type === "fruit"){
-      newAnalytics["numFruits"]+=1;
-    } else if (plantToBeAdded.plant.type ==="flower"){
-      newAnalytics["numFlowers"]+=1;
+    if (plantToBeAdded.plant.type === "fruit") {
+      newAnalytics["numFruits"]++;
+    } else if (plantToBeAdded.plant.type ==="flower") {
+      newAnalytics["numFlowers"]++;
     } else {
-      newAnalytics["numVeggies"]+=1;
+      newAnalytics["numVeggies"]++;
     }
   }
 
   /*Add the plant if there is no plant there already*/
-  if(!plantToMoveIndex){
-    console.log("THIS IS THE PLANT!!!", action.plant)
+  if(!plantToMoveIndex) {
     newPlantGrid.push(action.plant);
-    console.log("The old analytics", state.analytics);
     generateAnalytics(action.plant);
-    console.log("The new analytics is ", newAnalytics);
-  Object.assign(newState, state, {pastPlantGridStates: oldPlantGrid, plantGrid: newPlantGrid, analytics: newAnalytics, harvestTable: harvestTableCopy});
+    Object.assign(newState, state, {pastPlantGridStates: oldPlantGrid, plantGrid: newPlantGrid, analytics: newAnalytics, harvestTable: harvestTableCopy});
   } else {
     Object.assign(newState, state, {plantGrid: newPlantGrid});
   }
-
-
-  return newState
+  return newState;
 }
 
 const setTooltip = (state, action) => {
-  var newTooltip = !state.tooltipOpen;
-
+  let newTooltip = !state.tooltipOpen;
   Object.assign(newState, state, {tooltipOpen: newTooltip});
-
-  console.log('(before) state: ', state);
-  console.log('(after) state: ', newState);
   return newState;
 };
 
 
 const setTile = (state, action) => {
-  var newTile;
-  var indexOfTile;
-  const newState = {};
+  let newTile;
+  let indexOfTile;
+  let newState = {};
 
-  for (var i = 0; i<state.tileDex.length; i++)  {
-    state.tileDex[i]['stroke'] = 'black'
+  for (let i = 0; i < state.tileDex.length; i++)  {
+    state.tileDex[i]['stroke'] = 'black';
     if (action.name === state.tileDex[i]['name']) {
-      console.log("I FOUND YOU")
-      newTile = {}
-      newTile= state.tileDex[i]
-      console.log("Here is the new tile", newTile)
+      newTile = {};
+      newTile= state.tileDex[i];
       indexOfTile = i;
     }
   }
-
-  var tileDexCopy = state.tileDex.slice();
-  tileDexCopy[indexOfTile]['stroke'] = 'yellow'
-
-  console.log("THE TILE NAME IS", action.name);
-
+  let tileDexCopy = state.tileDex.slice();
+  tileDexCopy[indexOfTile]['stroke'] = 'yellow';
   Object.assign(newState, state, {selectedTitle: newTile, tileDex: tileDexCopy});
-
-  console.log('(before) state: ', state);
-  console.log('(after) state: ', newState);
   return newState;
 };
 
 const setSeedPacket= (state, action) => {
-  var newPacket = action.packet
-
-  const newState = {};
-
-
+  let newPacket = action.packet;
+  let newState = {};
   Object.assign(newState, state, {seedPacket: newPacket});
-
-  console.log('(before) state: ', state);
-  console.log('(after) state: ', newState);
   return newState;
 };
 
 
 const addToShelf= (state, action) => {
-  var newShelfObject = action.shelfObject
-  var plantShelfCopy = state.plantShelf.slice();
-
-  if (plantShelfCopy.length>8){
+  let newShelfObject = action.shelfObject;
+  let plantShelfCopy = state.plantShelf.slice();
+  if (plantShelfCopy.length > 8) {
     plantShelfCopy.shift();
-    for (var i = 0; i<plantShelfCopy.length; i++){
-      plantShelfCopy[i]['x'] = plantShelfCopy[i]['x']-50
+    for (let i = 0; i <plantShelfCopy.length; i++) {
+      plantShelfCopy[i]['x'] = plantShelfCopy[i]['x'] - 50;
     }
   }
-
-  var lastObject = plantShelfCopy[plantShelfCopy.length-1];
-  var lastObjectX = lastObject['x'];
-  var lastObjectY = lastObject['y'];
-
-  var newShelfX = lastObjectX+50;
-  var newShelfY = lastObjectY;
-
+  let lastObject = plantShelfCopy[plantShelfCopy.length--];
+  let lastObjectX = lastObject['x'];
+  let lastObjectY = lastObject['y'];
+  let newShelfX = lastObjectX + 50;
+  let newShelfY = lastObjectY;
   newShelfObject['x'] = newShelfX;
   newShelfObject['y']= newShelfY;
-
-  console.log("New shelf after coordinate change", newShelfObject);
-
-
-  const newState = {};
-
-
+  let newState = {};
   plantShelfCopy.push(newShelfObject)
-
-
   Object.assign(newState, state, {plantShelf: plantShelfCopy});
-
-  console.log('(before) state: ', state);
-  console.log('(after) state: ', newState);
   return newState;
 };
 
 const undo = (state, action) => {
-  const newState = {};
-  var futurePlantGrid = state.plantGrid.slice();
-  var oldPlantGrid = state.pastPlantGridStates.slice();
-  var oldOldPlantGrid =state.pastPlantGridStates.slice();
+  let newState = {};
+  let futurePlantGrid = state.plantGrid.slice();
+  let oldPlantGrid = state.pastPlantGridStates.slice();
+  let oldOldPlantGrid =state.pastPlantGridStates.slice();
   oldOldPlantGrid.pop();
-
   Object.assign(newState, state, {plantGrid: oldPlantGrid , pastPlantGridStates: oldOldPlantGrid, futurePlantGrideStates: futurePlantGrid});
-
-  console.log('(before) state: ', state);
-  console.log('(after) state: ', newState);
   return newState;
 };
 
 const clear = (state, action) => {
-  const newState = {};
-
-
+  let newState = {};
   Object.assign(newState, state, {plantGrid: [], pastPlantGridStates: [], futurePlantGridStates: [], gardenGrid: [], gardenXYCoordinates:[]});
-
-  console.log('(before) state: ', state);
-  console.log('(after) state: ', newState);
   return newState;
 };
 
 const setGrowthGraph = (state, action) => {
-  console.log("INSIDE THE GROWTH GRAPHHHHHHH", action.graph)
-  const newState = {};
-  const newGraph = action.graph;
-
+  let newState = {};
+  let newGraph = action.graph;
   Object.assign(newState, state, {plantGrowthGraph: action.graph});
-
-  console.log('(before) state: ', state);
-  console.log('(after) state: ', newState);
   return newState;
 };
 
 const setHeight = (state, action) => {
-  const newState = {};
-
+  let newState = {};
   Object.assign(newState, state, {height: action.height});
-
-  console.log('(before) state: ', state);
-  console.log('(after) state: ', newState);
   return newState;
 };
 
 const setWidth = (state, action) => {
-  const newState = {};
-
+  let newState = {};
   Object.assign(newState, state, {width: action.width});
-
-  console.log('(before) state: ', state);
-  console.log('(after) state: ', newState);
   return newState;
 }
 
 const setSuggestedPlants = (state, action) => {
-  const newState = {};
-
+  let newState = {};
   Object.assign(newState, state, {plantGrid: action.suggestedPlants});
-
-  console.log('(before) state: ', state);
-  console.log('(after) state: ', newState);
   return newState;
 }
 
 const setSuggestedGarden = (state, action) => {
-  const newState = {};
-
+  let newState = {};
   Object.assign(newState, state, {gardenGrid: action.suggestedGarden});
-
-  console.log('(before) state: ', state);
-  console.log('(after) state: ', newState);
   return newState;
 }
 
 
 const toggleVR = (state, action) => {
-  console.log("in toggleVR")
-  console.log("state: ", state)
-  console.log("action: ", action)
-  const newState = {};
-
+  let newState = {};
   Object.assign(newState, state, {viewIsTwoD: !state.viewIsTwoD});
-
-  console.log('(before) state: ', !state.viewIsTwoD);
-  console.log('(after) state: ', newState);
   return newState;
 }
 
 
 const setDropdownStatus = (state, action) => {
-  const newState = {};
-
-  console.log("Here is the action", action)
+  let newState = {};
   Object.assign(newState, state, {dropdownStatus: !action.dropdownStatus});
-
-  console.log('(before) state: ', state);
-  console.log('(after) state: ', newState);
   return newState;
 }
 
 
 function gardenReducer(state = initialGardenState, action) {
-  console.log('GardenReducer.js - Reducer called');
-  console.log('current action: ', action);
   switch (action.type) {
   case 'TOGGLE_SQUARE':
     return toggleSquare(state, action);

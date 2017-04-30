@@ -1,69 +1,57 @@
 const initialForumState = {
-     messageToEdit: '',
-     editing: false,
-     posts: [],
-     currentPost: {
-      title: '',
-      message: '',
-      replies: [],
-      editing: false
-     }
+  messageToEdit: '',
+  editing: false,
+  posts: [],
+  currentPost: {
+    title: '',
+    message: '',
+    replies: [],
+    editing: false
+  }
 }
 
 
 const addPost = (state, action) => {
-  const newState = {};
-  const newPost = { title: action.message.title, message: action.message.message };
-
+  let newState = {};
+  let newPost = { title: action.message.title, message: action.message.message };
   Object.assign(newState, state, {currentPost: newPost});
-
   return newState;
 };
 
 const togglePost = (state, action) => {
-  const newState = {};
-
+  let newState = {};
   let newPosts = state.posts.slice();
-  const { posts } = state;
-
+  let { posts } = state;
   for (let i = 0; i<newPosts.length; i++) {
     let individualMessage = newPosts[i];
     let individualMessageId = individualMessage['_id'];
-
-    if (individualMessageId === action.id){
+    if (individualMessageId === action.id) {
       individualMessage.isShort = !individualMessage.isShort;
     }
   }
-
   Object.assign(newState, state, {posts: newPosts});
-
   return newState;
 };
 
 const setEditing = (state, action) => {
-  const newState = {};
+  let newState = {};
   Object.assign(newState, state, { editing: !state.editing, messageToEdit: action.editing});
   return newState;
 };
 
 const setPosts = (state, action) => {
-  const newState = {};
-  const { posts } = state;
-
+  let newState = {};
+  let { posts } = state;
   Object.assign(newState, state, {posts: action.message});
-
   return newState;
 };
 
 const setReplies = (state, action) => {
-  const newState = {};
-  const { replies } = state;
-
+  let newState = {};
+  let { replies } = state;
   Object.assign(newState, state, {replies: action.message});
-
   return newState;
 };
-
 
 function forumReducer(state = initialForumState, action) {
   switch (action.type) {
@@ -81,6 +69,5 @@ function forumReducer(state = initialForumState, action) {
     return state;
   }
 }
-
 
 export default forumReducer;
