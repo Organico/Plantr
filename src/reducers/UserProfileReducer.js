@@ -6,10 +6,10 @@ const initialUserState = {
 }
 
 const userProfile = (state, action) => {
-  const newState = {};
-  const {username, gardens} = state;
+  let newState = {};
+  let {username, gardens} = state;
   Object.assign(newState, state, {username: action.username, gardens: action.gardens});
-  return newState
+  return newState;
 }
 
 function userReducer(state = initialUserState, action) {
