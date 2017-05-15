@@ -1,6 +1,6 @@
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
-var gardenSchema = new mongoose.Schema({
+const gardenSchema = new mongoose.Schema({
   gardenId: Number,
   plantId: Number,
   gardenGrid: Array,
@@ -14,7 +14,7 @@ var gardenSchema = new mongoose.Schema({
   hardinessZone: String
 });
 
-var Garden = mongoose.model('Garden', gardenSchema);
+const Garden = mongoose.model('Garden', gardenSchema);
 
 module.exports = Garden;
 

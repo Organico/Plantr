@@ -1,14 +1,6 @@
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
-var forumSchema = new mongoose.Schema({
-  // category: String,
-  // subjectLine: String,
-  // message: String,
-  // tags: Array,
-  // region: String,
-  // replies: Array,
-  // voteCount: Number,
-  // userId: Number
+const forumSchema = new mongoose.Schema({
   profile: String,
   title: String,
   message: String,
@@ -18,7 +10,7 @@ var forumSchema = new mongoose.Schema({
   time: String
 });
 
-var Forum = mongoose.model('Forum', forumSchema);
+const Forum = mongoose.model('Forum', forumSchema);
 
 module.exports = Forum;
 
