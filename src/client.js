@@ -4,21 +4,16 @@ import '../public/style.css';
 import axios from 'axios';
 import Home from './Home/Home'
 import store from './store';
-import {Provider} from 'react-redux';
-import {Layer, Rect, Circle, Stage, Group} from 'react-konva';
+import { Provider } from 'react-redux';
+import { Layer, Rect, Circle, Stage, Group } from 'react-konva';
 import Login from './config/Login.js';
 import AuthService from './config/AuthService.js';
-import {
-  HashRouter as Router,
-  Route,
-  Link
-} from 'react-router-dom';
+import { HashRouter as Router, Route, Link } from 'react-router-dom';
 import GardenSquareGridView from './GardenSquareGrid/getGardenSquareGrid';
 import MakeGardenSquareGridView from './GardenSquareGrid/makeGardenSquareGrid';
 import Profile from './userProfile/Profile';
 import NavBar from './NavBar';
 import Forum from './Forum/Forum';
-// <Route path="/userprofile" component={UserProfile}></Route>
 import Weather from './weather/Weather'
 const auth = new AuthService('vBOwXk8xIgy3kroSs5vz1TFfrYyFQNFf', 'skebaish1992.auth0.com');
 import VRScene from './AframeTest/VRScene'
