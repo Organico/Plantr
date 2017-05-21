@@ -1,34 +1,18 @@
-import 'aframe';
+import aframe from 'aframe'
 import 'aframe-particle-system-component';
 import 'aframe-mountain-component';
 import 'aframe-cubemap-component';
 import 'aframe-gridhelper-component'
 import 'aframe-mouse-cursor-component'
 import 'aframe-event-set-component'
-
-
 import {Entity, Scene} from 'aframe-react';
 import React from 'react';
 import ReactDOM from 'react-dom';
-
-import aframe from 'aframe'
 import registerClickDrag from 'aframe-click-drag-component';
 registerClickDrag(aframe);
-
 import store from '../store';
-
 import './SnapToGrid'
 import './CursorListener'
-
-
-
-          // <a-plane
-          //   position={"" + 370 + " " + 140 + " " + -375}
-          //   rotation={"" + 0 + " " + -90 + " " + 0}
-          //   scale="40 50 50"
-          //   src="#seed"
-          // ></a-plane>
-
 
 
 class VRScene extends React.Component {
@@ -47,8 +31,6 @@ class VRScene extends React.Component {
     console.log('Collided!');
   }
 
-            // event-set__enter="_event: mouseenter; material.color: yellowgreen; scale: 3 1 1"
-            // event-set__leave="_event: mouseleave; material.color: skyblue; scale: 1 1 1"
   render () {
     var cat = 10
     return (
@@ -105,6 +87,3 @@ class VRScene extends React.Component {
 }
 
 export default VRScene
-
-// <a-entity position="0 500 0" cubemap="folder: https://s3-us-west-2.amazonaws.com/ryaperry-bucket/homeCubeMapAframe/; edgeLength: 1000"></a-entity>
-// ReactDOM.render(<VRScene/>, document.querySelector('#sceneContainer'));
