@@ -1,31 +1,21 @@
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom'
+import About from './About';
+import auth from '../client.js';
+import axios from 'axios';
 import { connect } from 'react-redux';
 import ProfilePic from './ProfilePic';
-import About from './About';
+import React, { Component } from 'react';
+import ReactDOM from 'react-dom'
 import RecentGardens from './RecentGardens';
 import RecentPosts from './RecentPosts';
-import axios from 'axios';
 import { setPlantHardiness } from '../Actions/WeatherActions';
-import auth from '../client.js';
 
 class Profile extends Component {
-
-  postUser() {
-    const profile = auth.getProfile();
-    console.log("HERE IS THE PROFILE:", profile)
-    axios.post('/api/users', {
-      username: profile.nickname,
-      email: profile.email,
-      profilePhoto: profile.picture,
-      about: ''
-    })
+  profile() {
+    return auth.getProfile();
   }
 
   getHardiness() {
-  let zipCode = this.props.coordinates;
-  console.log("GETTING HARDINESS")
-  console.log('here is the zipCode: ', this.props)
+    let zipCode = this.props.coordinates;
     axios.get('api/users/hardiness', {
       params: {
         zipCode: zipCode
@@ -38,25 +28,36 @@ class Profile extends Component {
     })
   }
 
+  postUser() {
+    const profile = this.profile();
+    axios.post('/api/users', {
+      username: profile.nickname,
+      email: profile.email,
+      profilePhoto: profile.picture,
+      about: ''
+    })
+  }
+
   componentDidMount() {
     this.getHardiness();
     this.postUser();
   }
 
   render() {
+    const profile = this.profile();
     return(
       <div>
         <div className="container-fluid containerStyle">
           <div className="row">
             <div className="col-md-3 profileLeft">
-              <ProfilePic />
+              <ProfilePic profile={profile} />
               <hr className="profileDividerLine" />
-              <About />
+              <About profile={profile} />
               <hr className="profileDividerLine" />
             </div>
             <div className="col-md-6">
-              <RecentPosts />
-              <RecentGardens />
+              <RecentPosts profile={profile} />
+              <RecentGardens profile={profile} />
             </div>
           </div>
         </div>

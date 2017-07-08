@@ -7,7 +7,6 @@ import { connect } from 'react-redux';
 import IndividualGarden from './IndividualGarden';
 import IndividualGardenInfo from './IndividualGardenInfo';
 import axios from 'axios';
-import auth from '../client.js';
 import { setPosts } from '../Actions/ForumActions';
 import {Layer, Rect, Circle, Stage, Group} from 'react-konva';
 import PlantGrid from '../GardenSquareGrid/PlantGrid';
@@ -47,7 +46,7 @@ class RecentGardens extends Component {
   }
 
   getUserGardens() {
-    const profile = auth.getProfile();
+    const profile = this.props.profile;
     axios.get('/api/gardens/' + profile.email).then((res) => {
       let personalGarden = res.data;
       userGardens = [];
@@ -71,7 +70,7 @@ class RecentGardens extends Component {
   }
 
   render() {
-    const profile = auth.getProfile();
+    const profile = this.props.profile;
     const context = this;
 
     return (

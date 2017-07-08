@@ -1,4 +1,3 @@
-import auth from '../client.js';
 import axios from 'axios';
 import React, { Component } from 'react';
 
@@ -14,7 +13,7 @@ class About extends Component {
   }
 
   getAbout() {
-    const profile = auth.getProfile();
+    const profile = this.props.profile;
     axios.get('api/users/' + profile.email)
     .then((res) => {
       userAboutObject = {

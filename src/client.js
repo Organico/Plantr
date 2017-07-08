@@ -17,9 +17,7 @@ const auth = new AuthService('vBOwXk8xIgy3kroSs5vz1TFfrYyFQNFf', 'skebaish1992.a
 
 // validate authentication for private routes
 const requireAuth = (nextState, replace) => {
-  console.log('nextState', nextState)
   if (!auth.loggedIn()) {
-    console.log("Not logged in!")
     replace({ pathname: '/' });
   }
 };
