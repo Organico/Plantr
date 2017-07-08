@@ -59,17 +59,19 @@ class App extends Component {
     return (
         <Provider store={store}>
             <Router>
-              <div className="container-fluid">
+              <div>
                 <NavBar />
-                <Route exact path="/" component={Home}></Route>
-                <Route path="/home" component={Home}></Route>
-                <Route path="/login" component={Login}></Route>
-                <Route path="/about" component={AboutUs}></Route>
-                <Route path="/squares" component={GardenSquareGridView}></Route>
-                <Route path="/creategarden" component={MakeGardenSquareGridView}></Route>
-                <Route path="/profile" component={Profile}></Route>
-                <Route path="/forum" component={Forum}></Route>
-                <Route path="/weather" component={Weather}></Route>
+                <div className="container-fluid">
+                  <Route exact path="/" component={Home}></Route>
+                  <Route path="/home" component={Home}></Route>
+                  <Route path="/login" component={Login}></Route>
+                  <Route path="/about" component={AboutUs}></Route>
+                  <Route path="/squares" component={GardenSquareGridView}></Route>
+                  <Route path="/creategarden" component={MakeGardenSquareGridView}></Route>
+                  <Route path="/profile" component={Profile}></Route>
+                  <Route path="/forum" component={Forum}></Route>
+                  <Route path="/weather" component={Weather}></Route>
+                </div>
               </div>
             </Router>
         </Provider>
