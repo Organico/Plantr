@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Forum = require('../../db/models/Forum')
+const Forum = require('../db/models/forum-model')
 
 /*--------------------GET REQUEST---------------------------------------------*/
 

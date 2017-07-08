@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Garden = require('../../db/models/Garden')
+const Garden = require('../db/models/garden-model')
 
 /*--------------------GET REQUEST---------------------------------------------*/
 
