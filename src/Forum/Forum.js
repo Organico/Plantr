@@ -94,71 +94,74 @@ class Forum extends Component {
     this.getPost();
   }
 
+  renderPostSection(profile, post, i) {
+    let that = this;
+    if (profile.email === post.email && !this.props.editing && !that.state.modalIsOpen) {
+      return <div className="post">
+        <div className="editDelete">
+          <i className="fa fa-pencil-square-o" ariaHidden="true" onClick={ () => {
+            this.props.dispatchSetEditing(post.message);
+          }}></i>
+          <i className="fa fa-trash" ariaHidden="true" onClick={ () => {
+            this.deletePost(post._id);
+          }}></i>
+        </div>
+        <ForumPost key={i} post={post} nickname={post.nickname} title={post.title} message={post.message} replies={post.replies} />
+      </div>
+    } else if (profile.email === post.email && this.props.editing && (post.message === this.props.messageToEdit)) {
+      return <div className="post">
+        <div className="editDelete">
+          <i className="fa fa-trash" ariaHidden="true" onClick={ () => {
+            this.deletePost(post._id);
+          }}></i>
+        </div>
+        <EditPost id={post._id} post={post} nickname={post.nickname} message={post.message} title={post.title} replies={post.replies} />
+      </div>
+    }
+    return <div className="post">
+      <ForumPost key={i} post={post} nickname={post.nickname} title={post.title} message={post.message} replies={post.replies} />
+    </div>
+  }
+
   render() {
     const profile = auth.getProfile();
     let that = this;
-    return(
-        <div className="row">
-          <div className="col-md-8 offset-md-2">
-            <div className="post">
-              <div className="row">
-                <div className="col-md-8 offset-md-2">
-                  <h3>Let Your Community Know About Your Garden</h3>
-                </div>
-                <div className="replyEditDelete">
-                  { (function() {
-                    if (!that.props.editing) {
-                     return  <button type="submit" onClick={that.openModal}>Post Here!</button>
-                    }
-                  }())
-                  }
-                </div>
+    return (
+      <div className="row">
+        <div className="col-md-8 offset-md-2">
+          <div className="post">
+            <div className="row">
+              <div className="col-md-8 offset-md-2">
+                <h3>Let Your Community Know About Your Garden</h3>
               </div>
-            </div>
-            <br/>
-            <div className="searchForum">
-              <input className="searchForumInput" />
-            </div>
+              <div className="replyEditDelete">
+                { (function() {
+                  if (!that.props.editing) {
+                    return <button type="submit" onClick={that.openModal}>Post Here!</button>
+                  }
+                 }())
+                }
+             </div>
+           </div>
           </div>
-          <Modal
-            isOpen={this.state.modalIsOpen}
-            onAfterOpen={this.afterOpenModal}
-            onRequestClose={this.closeModal}
-            style={customStyles}
-            contentLabel="Example Modal"
-          >
-            <h3>Share Your Stories</h3>
-            <CreateNewPost closeModal={this.closeModal} />
-            <button onClick={this.closeModal}>close</button>
-         </Modal>
-         <div className="col-md-8 offset-md-2">
-           {this.props.posts.map((post, i) => {
-             if (profile.email === post.email && !this.props.editing && !that.state.modalIsOpen) {
-            return <div className="post">
-                 <div className="editDelete">
-                   <i className="fa fa-pencil-square-o" ariaHidden="true" onClick={ () => {
-                       this.props.dispatchSetEditing(post.message);
-                     }}></i>
-                   <i className="fa fa-trash" ariaHidden="true" onClick={ () => {
-                       this.deletePost(post._id);
-                     }}></i>
-                 </div>
-              <ForumPost key={i} post={post} nickname={post.nickname} title={post.title} message={post.message} replies={post.replies} />
-            </div>
-           } else if (profile.email === post.email && this.props.editing && (post.message === this.props.messageToEdit)) {
-                return <div className="post">
-                  <div className="editDelete">
-                    <i className="fa fa-trash" ariaHidden="true" onClick={ () => {
-                      this.deletePost(post._id);
-                    }}></i>
-                  </div>
-                  <EditPost id={post._id} post={post} nickname={post.nickname} message={post.message} title={post.title} replies={post.replies} />
-                </div>
-            } else {
-              return <div className="post"><ForumPost key={i} post={post} nickname={post.nickname} title={post.title} message={post.message} replies={post.replies} /></div>
-            }
-          }
-          )}
+          <br/>
+          <div className="searchForum">
+            <input className="searchForumInput" />
+          </div>
+        </div>
+        <Modal
+          isOpen={this.state.modalIsOpen}
+          onAfterOpen={this.afterOpenModal}
+          onRequestClose={this.closeModal}
+          style={customStyles}
+          contentLabel="Example Modal"
+        >
+          <h3>Share Your Stories</h3>
+          <CreateNewPost closeModal={this.closeModal} />
+          <button onClick={this.closeModal}>close</button>
+        </Modal>
+        <div className="col-md-8 offset-md-2">
+          {this.props.posts.map((post, i) => this.renderPostSection(profile, post, i))}
         </div>
       </div>
     )
