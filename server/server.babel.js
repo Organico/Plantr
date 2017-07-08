@@ -2,14 +2,13 @@ const express = require('express');
 const app = express();
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
-const axios = require('axios');
 const mongoose = require('mongoose');
 const request = require('request');
 const cron = require('node-cron');
-const forum = require('./routes/forum/forum-controller');
-const gardens = require('./routes/garden/garden-controller');
-const plants = require('./routes/plant/plant-controller');
-const users = require('./routes/user/user-controller');
+const forum = require('./routes/forum-controller');
+const gardens = require('./routes/garden-controller');
+const plants = require('./routes/plant-controller');
+const users = require('./routes/user-controller');
 
 var date = new Date();
 
