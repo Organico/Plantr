@@ -1,6 +1,6 @@
 body{
-  background-color: #EAE8E3;
-  /*updated from: #EAE0CC*/
+  background-color: #cffcfc;
+  /*updated from: #EAE0CC & #EAE8E3*/
 }
 
 #embed-aframe {
@@ -133,6 +133,7 @@ button {
   font-family: 'Quicksand', sans-serif;
   font-weight: bold;
   letter-spacing: 2px;
+  border-radius: 5px;
 }
 
 .nav {

@@ -3,13 +3,12 @@ import ReactDOM from 'react-dom'
 import { connect } from 'react-redux';
 import ForumPost from '../Forum/ForumPost';
 import axios from 'axios';
-import auth from '../client.js';
 import { setPosts } from '../Actions/ForumActions';
 
 class RecentPosts extends Component {
 
   getPost() {
-    const profile = auth.getProfile();
+    const profile = this.props.profile;
     axios.get('/api/forum/' + profile.email)
     .then((res) => {
       let dbPostData = res.data;

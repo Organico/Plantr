@@ -1,19 +1,17 @@
 import React, { Component } from 'react';
-import auth from '../client.js'
 
 class ProfilePic extends Component {
-
   render() {
-  const profile = auth.getProfile();
-  const profPic = {
-    magin: 'auto',
-    width: '100px',
-    height: '250px',
-    backgroundSize: '150px 150px',
-    backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'center',
-    backgroundImage: 'url(' + profile.picture + ')'
-  }
+    const profile = this.props.profile;
+    const profPic = {
+      magin: 'auto',
+      width: '100px',
+      height: '250px',
+      backgroundSize: '150px 150px',
+      backgroundRepeat: 'no-repeat',
+      backgroundPosition: 'center',
+      backgroundImage: 'url(' + profile.picture + ')'
+    }
     return (
       <div id="profilePic">
         <div>
@@ -31,6 +29,5 @@ class ProfilePic extends Component {
     );
   }
 }
-
 
 export default ProfilePic;
