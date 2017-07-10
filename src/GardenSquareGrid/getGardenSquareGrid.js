@@ -255,6 +255,12 @@ class GardenSquareGridView extends React.Component{
                 getSuggestionValue={this.getSuggestionValue}
                 renderSuggestion={this.renderSuggestion}
                 inputProps={inputProps} />
+                <br></br>
+                <h4>Likes</h4>
+                <h4>Dislikes</h4>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/67/Facebook_logo_thumbs_up_like_transparent.png" height="40" onClick={()=> alert("You liked it!")}/>
+                <img src="https://3.bp.blogspot.com/-qYdpTgtVfxM/VI0U19aUXeI/AAAAAAAACjI/TGhREhcnSes/s1600/2.png" height="40" onClick={()=> alert("You disliked it!")}/>
+
             </div>
           </div>
         <div className="row">
