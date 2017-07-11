@@ -1,16 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import axios from 'axios';
-import { setCoordinates, setForecast } from '../Actions/WeatherActions.js';
+import { setCoordinates } from '../Actions/WeatherActions.js';
 
 let zipCode;
 
 class Home extends Component {
-  constructor() {
-    super();
-    this.state = {};
-  };
-
   setCoordinates(zipCode) {
     this.props.dispatchSetCoordinates(zipCode)
   };

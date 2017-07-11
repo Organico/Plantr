@@ -30,11 +30,22 @@ class Profile extends Component {
 
   postUser() {
     const profile = this.profile();
-    axios.post('/api/users', {
-      username: profile.nickname,
-      email: profile.email,
-      profilePhoto: profile.picture,
-      about: ''
+    axios.get('/api/users/' + profile.email)
+    .then((res) => {
+      if (res.data) {
+        console.log('here is the res in profile: ', res);
+      } else {
+        axios.post('/api/users', {
+          username: profile.nickname,
+          email: profile.email,
+          profilePhoto: profile.picture,
+          about: [],
+          _id: profile.clientID
+        })
+      }
+    })
+    .catch((err) => {
+      console.error('there was a profile get error: ', err);
     })
   }
 

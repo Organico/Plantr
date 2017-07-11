@@ -103,11 +103,11 @@ class RecentGardens extends Component {
               </div>
               <div>
                 <button onClick={() => {
-                        this.props.dispatchSetDropdownStatus(this.props.dropdownStatus);}}>Go Back to your Garden
+                        this.props.dispatchSetDropdownStatus(this.props.dropdownStatus);}}>Go Back to your Gardens
                 </button>
               </div>
               <div className="row" onClick={ () => {this.handleClick}}>
-                <div className="col-mid-10 gardenName">
+                <div className="col-mid-10 offset-md-1 gardenName">
                   <div className="row">
                     <Stage width={500} height={500} fill="white" stroke="black" className="text-center">
                       <GardenGrid />

@@ -14,8 +14,10 @@ class About extends Component {
 
   getAbout() {
     const profile = this.props.profile;
-    axios.get('api/users/' + profile.email)
+    console.log('here is the profile: ', profile)
+    axios.get('api/users/')
     .then((res) => {
+      console.log('here is the res in ABOUTJS: ', res)
       userAboutObject = {
         id: res.data._id,
         about: res.data.about
@@ -28,6 +30,10 @@ class About extends Component {
 
   renderAboutMe() {
     let newMessage;
+    // 3 conditions:
+    //  1. empty
+    //  2. not empty
+    //  3. update
     // functionality doesn't exist - needs to be reworked
     if (this.state.edit) {
       return (
@@ -69,7 +75,7 @@ class About extends Component {
   }
 
   componentDidMount() {
-    // this.getAbout();
+    this.getAbout();
   }
 
   render() {
