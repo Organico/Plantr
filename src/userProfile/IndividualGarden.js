@@ -12,11 +12,7 @@ import {Layer, Rect, Circle, Stage, Group} from 'react-konva';
 
 class IndividualGarden extends Component {
 
-
-
   handleClick(str){
-      console.log(this.props);
-      console.log("Here is this inside of the individual garden")
       this.props.dispatchSetDropdownStatus(this.context.props.dropdownStatus);
   }
 
@@ -31,7 +27,6 @@ class IndividualGarden extends Component {
       zIndex: '900',
       borderRadius: '50%'
     }
-    console.log('THIS PROPS IN INDIVIDUAL: ', this);
     return (
       <div className="container-fluid">
         <div className="row">
