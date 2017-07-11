@@ -2,9 +2,9 @@ import About from './About';
 import auth from '../client.js';
 import axios from 'axios';
 import { connect } from 'react-redux';
+import FriendsList from './FriendsList.js'
 import ProfilePic from './ProfilePic';
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom'
 import RecentGardens from './RecentGardens';
 import RecentPosts from './RecentPosts';
 import { setPlantHardiness } from '../Actions/WeatherActions';
@@ -23,8 +23,8 @@ class Profile extends Component {
     }).then((res) => {
       console.log('res here', res.data);
       this.props.dispatchPlantHardiness(res.data);
-    }).catch(err => {
-      console.error('error is: ', err)
+    }).catch((err) => {
+      console.error('error in ProfileJS: ', err)
     })
   }
 
@@ -55,9 +55,12 @@ class Profile extends Component {
               <About profile={profile} />
               <hr className="profileDividerLine" />
             </div>
-            <div className="col-md-6">
+            <div className="col-md-5">
               <RecentPosts profile={profile} />
               <RecentGardens profile={profile} />
+            </div>
+            <div className="col-md-3 offset-md-1">
+              <FriendsList profile={profile} />
             </div>
           </div>
         </div>

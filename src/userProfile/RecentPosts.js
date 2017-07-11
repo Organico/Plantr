@@ -28,7 +28,7 @@ class RecentPosts extends Component {
   }
 
   render() {
-    const profile = auth.getProfile();
+    const profile = this.props.profile;
     return (
       <div className="row">
         <div className="col-md-12 offset-md-2 right userRecent">

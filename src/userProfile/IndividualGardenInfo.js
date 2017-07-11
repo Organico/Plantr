@@ -22,7 +22,6 @@ class IndividualGardenInfo extends Component {
       zIndex: '900',
       borderRadius: '50%'
     }
-    console.log('THIS PROPS IN INDIVIDUAL: ', this);
     return (
       <div className="container-fluid">
         <div className="row">
@@ -36,7 +35,7 @@ class IndividualGardenInfo extends Component {
               </div>
             </div>
             <div className="row" onClick={ () => {this.props.onClick(); }}>
-              <div className="col-mid-10 gardenName">
+              <div className="col-md-8 offset-md-2 gardenName">
                 { this.props.gardenName }
               </div>
             </div>
