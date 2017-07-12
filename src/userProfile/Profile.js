@@ -1,4 +1,5 @@
 import About from './About';
+import { addAbout } from '../Actions/UserActions';
 import auth from '../client.js';
 import axios from 'axios';
 import { connect } from 'react-redux';
@@ -94,6 +95,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    dispatchAboutParameters(about) {
+      dispatch(setAboutMe(about));
+    },
     dispatchUserParameters(username, gardens) {
       dispatch(setUserParameters(username, gardens));
     },
