@@ -41,6 +41,10 @@ class Profile extends Component {
           email: profile.email,
           profilePhoto: profile.picture,
           about: ''
+        }).then((res) => {
+          window.location.replace("http://stackoverflow.com");
+        }).catch((err) => {
+          console.error('there was a profile post error: ', err);
         })
       }
     })
