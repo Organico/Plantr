@@ -1,12 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const User = require('../db/models/user-model');
+const Client = require('../db/models/user-model');
 
 /*--------------------GET REQUEST---------------------------------------------*/
 
 router.get('/', function(req, res, next) {
   console.log('the user get request is happening now')
-  User.find({}, (err, data) => {
+  Client.find({}, (err, data) => {
     if (err) {
       console.error('There was an error getting the user info: ', err);
       res.status(404);
@@ -19,7 +19,7 @@ router.get('/', function(req, res, next) {
 
 router.get('/:email', function(req, res, next) {
   let userInfo;
-  User.find({}, (err, data) => {
+  Client.find({}, (err, data) => {
     if (err) {
       console.error('There was an error getting a specific user info: ', err);
       res.status(404);
@@ -38,7 +38,7 @@ router.get('/:email', function(req, res, next) {
 router.get('/:id', function(req, res, next) {
   console.log('making a get request based on the ID: ', req)
   let userInfo;
-  User.find({}, (err, data) => {
+  Client.find({}, (err, data) => {
     if (err) {
       console.error('There was an error getting a specific user info: ', err);
       res.status(404);
@@ -81,12 +81,12 @@ router.get('/hardiness', function(req, res, next) {
 /*--------------------POST REQUEST---------------------------------------------*/
 
 router.post('/', (req, res, next) => {
-  let user = new User({
+  console.log('here is the id: ', req.body)
+  let user = new Client({
     username: req.body.username,
     email: req.body.email,
     profilePhoto: req.body.profilePhoto,
-    about: req.body.about,
-    _id: req.body._id
+    about: req.body.about
     // gardens: req.body.gardens, <-- possible addition
     // coverPhoto: req.body.coverPhoto, <-- possible addition
   });
@@ -99,7 +99,7 @@ router.post('/', (req, res, next) => {
       res.status(200).send(data);
     }
   })
-  // User.findById(req.body.id, (err, result) => {
+  // Client.findById(req.body.id, (err, result) => {
   //   if (err) {
   //     console.error('There has been a serverside error posting user info: ', err);
   //   } else {
@@ -118,11 +118,12 @@ router.post('/', (req, res, next) => {
 
 // updating the user About Me
 router.put('/:id', (req, res, next) => {
-  User.findById(req.body.id, (err, result) => {
+  Client.findById(req.params.id, (err, result) => {
     if (err) {
       console.error('There has been a serverside error updating the aboutMe: ', err);
       res.status(500);
     } else {
+      console.log('here is the result: ', result)
       result.about = req.body.about;
       result.save((err) => {
         if (err) {

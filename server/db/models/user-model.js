@@ -4,10 +4,9 @@ const userSchema = new mongoose.Schema({
   username: String,
   email: String,
   profilePhoto: String,
-  about: Array,
-  _id: String
+  about: String
 });
 
-const User = mongoose.model('User', userSchema);
+const Client = mongoose.model('Client', userSchema);
 
-module.exports = User;
+module.exports = Client;

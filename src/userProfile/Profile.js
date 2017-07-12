@@ -34,13 +34,13 @@ class Profile extends Component {
     .then((res) => {
       if (res.data) {
         console.log('here is the res in profile: ', res);
+        return;
       } else {
         axios.post('/api/users', {
           username: profile.nickname,
           email: profile.email,
           profilePhoto: profile.picture,
-          about: [],
-          _id: profile.clientID
+          about: ''
         })
       }
     })
