@@ -2,7 +2,16 @@ const initialUserState = {
   username: '',
   gardens: [],
   isFetching: false,
-  isAuthenticated: localStorage.getItem('id_token') ? true : false
+  isAuthenticated: localStorage.getItem('id_token') ? true : false,
+  about: ''
+}
+
+const setAboutMe = (state, action) => {
+  console.log('The about reducer action is: ', action);
+  let newState = {};
+  let newAbout = ''
+  Object.assign(newState, state, {about: newAbout});
+  return newState;
 }
 
 const userProfile = (state, action) => {
@@ -14,6 +23,8 @@ const userProfile = (state, action) => {
 
 function userReducer(state = initialUserState, action) {
   switch (action.type) {
+  case 'ADD_ABOUT' :
+    return setAboutMe(state, action);
   case 'LOGIN_REQUEST':
     return Object.assign({}, state, {
       isFetching: true,

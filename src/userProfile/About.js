@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { Component } from 'react';
+import { addAbout } from '../Actions/UserActions';
 
 let userAboutObject = {};
 class About extends Component {

@@ -70,7 +70,7 @@
     "react-portal-tooltip": "^1.1.5",
     "react-redux": "^5.0.3",
     "react-router": "^4.0.0",
-    "react-router-dom": "^4.0.0",
+    "react-router-dom": "^4.1.1",
     "react-sizeme": "^2.3.1",
     "react-swf": "^1.0.6",
     "react-three": "^0.9.7",

@@ -36,7 +36,6 @@ router.get('/:email', function(req, res, next) {
 });
 
 router.get('/:id', function(req, res, next) {
-  console.log('making a get request based on the ID: ', req)
   let userInfo;
   Client.find({}, (err, data) => {
     if (err) {
@@ -99,19 +98,6 @@ router.post('/', (req, res, next) => {
       res.status(200).send(data);
     }
   })
-  // Client.findById(req.body.id, (err, result) => {
-  //   if (err) {
-  //     console.error('There has been a serverside error posting user info: ', err);
-  //   } else {
-  //     console.log('here is the result: ', result)
-  //   }
-  //   // if user exists
-  //   // return user info
-  //   // else
-  //   // create user in DB
-  // })
-  // // user.save({}, (err, data)=> {
-  // // });
 });
 
 /*--------------------PUT REQUEST-----------------------------------------*/
@@ -123,7 +109,6 @@ router.put('/:id', (req, res, next) => {
       console.error('There has been a serverside error updating the aboutMe: ', err);
       res.status(500);
     } else {
-      console.log('here is the result: ', result)
       result.about = req.body.about;
       result.save((err) => {
         if (err) {

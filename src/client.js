@@ -2,7 +2,7 @@ import AboutUs from './About/AboutUs'
 import AuthService from './config/AuthService.js';
 import Forum from './Forum/Forum';
 import GardenSquareGridView from './GardenSquareGrid/getGardenSquareGrid';
-import { HashRouter as Router, Route, Link } from 'react-router-dom';
+import { HashRouter as BrowserRouter, Route, Link } from 'react-router-dom';
 import Home from './Home/Home'
 import Login from './config/Login.js';
 import MakeGardenSquareGridView from './GardenSquareGrid/makeGardenSquareGrid';
@@ -45,23 +45,41 @@ class App extends Component {
         </div>
       );
     } else {
+      const profile = auth.getProfile();
+      console.log('profile can be passed down from the start or saved: ', profile)
       return (
         <Provider store={store}>
-          <Router>
+          <BrowserRouter>
             <div>
-              <NavBar />
+              <Route render={ () => (
+                <NavBar profile={profile} />
+              )} />
               <div className="container-fluid">
-                <Route exact path="/" component={Home}></Route>
-                <Route path="/home" component={Home}></Route>
+                <Route exact path="/" render={ () => (
+                  <Home profile={profile} />
+                )} />
+                <Route path="/home" render={ () => (
+                  <Home profile={profile} />
+                )} />
                 <Route path="/login" component={Login}></Route>
-                <Route path="/about" component={AboutUs}></Route>
-                <Route path="/squares" component={GardenSquareGridView}></Route>
-                <Route path="/creategarden" component={MakeGardenSquareGridView}></Route>
-                <Route path="/profile" component={Profile}></Route>
-                <Route path="/forum" component={Forum}></Route>
+                <Route path="/about" render={ () => (
+                  <AboutUs profile={profile} />
+                )} />
+                <Route path="/squares" render={ () => (
+                  <GardenSquareGridView profile={profile} />
+                )} />
+                <Route path="/creategarden" render={ () => (
+                  <MakeGardenSquareGridView profile={profile} />
+                )} />
+                <Route path="/profile" render={ () => (
+                  <Profile profile={profile} />
+                )} />
+                <Route path="/forum" render={ () => (
+                  <Forum profile={profile} />
+                )} />
               </div>
             </div>
-          </Router>
+          </BrowserRouter>
         </Provider>
         );
       }
