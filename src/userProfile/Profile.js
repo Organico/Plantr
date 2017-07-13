@@ -50,6 +50,7 @@ class Profile extends Component {
   }
 
   componentDidMount() {
+    console.log(this.props)
     this.getHardiness();
     this.postUser();
   }
@@ -82,24 +83,24 @@ class Profile extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    username: state.username,
-    gardens: state.gardens,
-    coordinates: state.weatherReducer.coordinates
+    profile: state.userProfileReducer.profile
+    // gardens: state.gardens,
+    // coordinates: state.weatherReducer.coordinates
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    dispatchAboutParameters(about) {
-      dispatch(setAboutMe(about));
-    },
-    dispatchUserParameters(username, gardens) {
-      dispatch(setUserParameters(username, gardens));
-    },
-    dispatchPlantHardiness(data) {
-      dispatch(setPlantHardiness(data))
-    }
-  };
-};
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     dispatchAboutParameters(about) {
+//       dispatch(setAboutMe(about));
+//     },
+//     dispatchUserParameters(username, gardens) {
+//       dispatch(setUserParameters(username, gardens));
+//     },
+//     dispatchPlantHardiness(data) {
+//       dispatch(setPlantHardiness(data))
+//     }
+//   };
+// };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Profile);
+export default connect(mapStateToProps)(Profile);
