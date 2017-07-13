@@ -1,6 +1,5 @@
 import About from './About';
 import { addAbout } from '../Actions/UserActions';
-import auth from '../client.js';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import FriendsList from './FriendsList.js'
@@ -11,10 +10,6 @@ import RecentPosts from './RecentPosts';
 import { setPlantHardiness } from '../Actions/WeatherActions';
 
 class Profile extends Component {
-  profile() {
-    return auth.getProfile();
-  }
-
   getHardiness() {
     let zipCode = this.props.coordinates;
     axios.get('api/users/hardiness', {
@@ -30,7 +25,7 @@ class Profile extends Component {
   }
 
   postUser() {
-    const profile = this.profile();
+    const profile = this.props.profile;
     axios.get('/api/users/' + profile.email)
     .then((res) => {
       if (res.data) {
@@ -60,7 +55,7 @@ class Profile extends Component {
   }
 
   render() {
-    const profile = this.profile();
+    const profile = this.props.profile;
     return(
       <div>
         <div className="container-fluid containerStyle">
