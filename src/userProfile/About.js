@@ -2,13 +2,14 @@ import axios from 'axios';
 import React, { Component } from 'react';
 import { addAbout } from '../Actions/UserActions';
 
-let userAboutObject = {};
+// let userAboutObject = {};
 class About extends Component {
   constructor() {
     super()
     this.state = {
       edit: false,
-      about: ''
+      about: '',
+      id: ''
     }
   }
 
@@ -17,11 +18,12 @@ class About extends Component {
     console.log('here is the profile: ', profile)
     axios.get('api/users/' + profile.email)
     .then((res) => {
-      console.log('here is the res in ABOUTJS: ', res)
-      userAboutObject = {
-        id: res.data._id,
-        about: res.data.about
-      }
+      this.setState({ about: res.data.about, id: res.data._id })
+      // console.log('here is the res in ABOUTJS: ', res)
+      // userAboutObject = {
+      //   id: res.data._id,
+      //   about: res.data.about
+      // }
       console.log('successfully getting the user information in AboutJS')
     }).catch((err) => {
       console.error('there has been an error in rendering your AboutMe: ', err);
@@ -33,11 +35,11 @@ class About extends Component {
     if (this.state.edit) {
       return (
         <div>
-          <textarea className="textArea" rows="4" ref={(message) => newMessage = message } type="string" name="newMessage" defaultValue={userAboutObject.about}>
+          <textarea className="textArea" rows="4" ref={(message) => newMessage = message } type="string" name="newMessage" defaultValue={this.state.about}>
           </textarea>
           <button type="submit" onClick ={ () => {
             newMessage.value = JSON.stringify(newMessage.value);
-            this.setAbout(userAboutObject.id, newMessage.value);
+            this.setAbout(this.state.id, newMessage.value);
             newMessage.value = '';
           }}>submit</button>
         </div>
@@ -45,7 +47,7 @@ class About extends Component {
     }
     return (
       <div>
-        <p>{userAboutObject.about}</p>
+        <p>{this.state.about}</p>
         <button type="submit" onClick ={ () => {
           this.toggleState();
           }}>edit</button>

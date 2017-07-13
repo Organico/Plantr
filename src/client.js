@@ -1,5 +1,6 @@
 import AboutUs from './About/AboutUs'
 import AuthService from './config/AuthService.js';
+// import { connect } from 'react-redux'
 import Forum from './Forum/Forum';
 import GardenSquareGridView from './GardenSquareGrid/getGardenSquareGrid';
 import { HashRouter as BrowserRouter, Route, Link } from 'react-router-dom';
@@ -11,6 +12,7 @@ import Profile from './userProfile/Profile';
 import { Provider } from 'react-redux';
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import setProfile from './Actions/UserActions';
 import store from './store';
 
 const auth = new AuthService('vBOwXk8xIgy3kroSs5vz1TFfrYyFQNFf', 'skebaish1992.auth0.com');
@@ -46,7 +48,8 @@ class App extends Component {
       );
     } else {
       const profile = auth.getProfile();
-      console.log('profile can be passed down from the start or saved: ', profile)
+      store.getState().userProfileReducer.profile = profile
+      // this.props.dispatchSetProfile(profile);
       return (
         <Provider store={store}>
           <BrowserRouter>
@@ -71,9 +74,7 @@ class App extends Component {
                 <Route path="/creategarden" render={ () => (
                   <MakeGardenSquareGridView profile={profile} />
                 )} />
-                <Route path="/profile" render={ () => (
-                  <Profile profile={profile} />
-                )} />
+                <Route path="/profile" component={Profile} />
                 <Route path="/forum" render={ () => (
                   <Forum profile={profile} />
                 )} />
@@ -93,6 +94,16 @@ class App extends Component {
     )
   }
 };
+
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     dispatchSetProfile(profile) {
+//       dispatch(setProfile(profile))
+//     }
+//   }
+// };
+
+// export default connect(mapDispatchToProps)(App);
 
 export default auth;
 
