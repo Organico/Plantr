@@ -5,7 +5,7 @@ const Client = require('../db/models/user-model');
 /*--------------------GET REQUEST---------------------------------------------*/
 
 router.get('/', function(req, res, next) {
-  console.log('the user get request is happening now')
+
   Client.find({}, (err, data) => {
     if (err) {
       console.error('There was an error getting the user info: ', err);
@@ -20,24 +20,7 @@ router.get('/', function(req, res, next) {
 router.get('/:email', function(req, res, next) {
   let userInfo;
   Client.find({}, (err, data) => {
-    if (err) {
-      console.error('There was an error getting a specific user info: ', err);
-      res.status(404);
-    } else {
-      data.forEach((user) => {
-        if (user.email === req.params.email) {
-          userInfo = user;
-        }
-      })
-      console.log('Successful get request for specific user info');
-      res.status(200).send(userInfo);
-    }
-  })
-});
 
-router.get('/:id', function(req, res, next) {
-  let userInfo;
-  Client.find({}, (err, data) => {
     if (err) {
       console.error('There was an error getting a specific user info: ', err);
       res.status(404);
@@ -80,8 +63,12 @@ router.get('/hardiness', function(req, res, next) {
 /*--------------------POST REQUEST---------------------------------------------*/
 
 router.post('/', (req, res, next) => {
+<<<<<<< HEAD
   console.log('here is the id: ', req.body)
   let user = new Client({
+=======
+  let client = new Client({
+>>>>>>> Adding categories
     username: req.body.username,
     email: req.body.email,
     profilePhoto: req.body.profilePhoto,
@@ -89,7 +76,11 @@ router.post('/', (req, res, next) => {
     // gardens: req.body.gardens, <-- possible addition
     // coverPhoto: req.body.coverPhoto, <-- possible addition
   });
+<<<<<<< HEAD
   user.save({}, (err, data) => {
+=======
+  client.save({}, (err, data)=> {
+>>>>>>> Adding categories
     if (err) {
       console.error('There was an error saving the user info onto the server: ', err);
       res.status(500);
