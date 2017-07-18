@@ -17,8 +17,6 @@ class Profile extends Component {
         zipCode: zipCode
       }
     }).then((res) => {
-      // console.log('res here: ', res.data);
-      // res.data is running into a CORS issue - not sure why - need to debug
       this.props.dispatchPlantHardiness(res.data);
     }).catch((err) => {
       console.error('error in ProfileJS: ', err)

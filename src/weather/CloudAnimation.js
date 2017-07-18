@@ -10,7 +10,6 @@ let nextUID = 0;
 class CloudAnimation extends React.Component {
   constructor(props) {
     super(props);
-    console.log("in CloudAnimation")
     // For most purposes nextUID is sufficient. However, if you rely on
     // non-trivial server rendering you must generate deterministic UIDs per
     // React root to avoid markup mismatch.
@@ -25,7 +24,6 @@ class CloudAnimation extends React.Component {
 
   handleSWFCall() {
     // Beware; SWF calls are executed in the context of SWF Player.
-    console.log('SWFCall', arguments);
     return 'foobar';
   }
 

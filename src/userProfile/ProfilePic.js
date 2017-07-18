@@ -21,8 +21,7 @@ class ProfilePic extends Component {
             </div>
           </div>
           <div className="row">
-            <div id="picDiv" style={profPic} className="col-md-6 offset-md-3">
-            </div>
+            <div id="picDiv" style={profPic} className="col-md-6 offset-md-3"></div>
           </div>
         </div>
       </div>

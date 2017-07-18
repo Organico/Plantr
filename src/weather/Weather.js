@@ -79,7 +79,6 @@ class WeatherTest extends React.Component {
         if (res.data.cod && res.data.message){
           throw new Error(res.data.message);
         } else {
-          console.log("return data from axios request prefilter: ", res.data)
           coordinates = res.data.coord;
           return res.data.coord;
         }

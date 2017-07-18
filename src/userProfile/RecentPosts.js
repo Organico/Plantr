@@ -15,7 +15,6 @@ class RecentPosts extends Component {
         let message = dbPostData[i];
         message['isShort'] = true;
       }
-      console.log("Db post data", dbPostData)
       this.props.dispatchSetPost(dbPostData)
     }).catch((err) => {
       console.error("There was a get request error on the client in User RecentPosts", err);
