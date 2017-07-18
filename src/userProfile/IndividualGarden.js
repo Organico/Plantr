@@ -1,14 +1,9 @@
 import React, { Component } from 'react';
-import GardenSquareGridView from '../GardenSquareGrid/getGardenSquareGrid';
-import {setDropdownStatus} from '../Actions/GardenActions.js';
-import ReactDOM from 'react-dom'
+import { setDropdownStatus } from '../Actions/GardenActions.js';
 import { connect } from 'react-redux';
-import axios from 'axios';
-import auth from '../client.js';
-import { setPosts } from '../Actions/ForumActions';
 import PlantGrid from '../GardenSquareGrid/PlantGrid';
 import GardenGrid from '../GardenSquareGrid/GardenGrid';
-import {Layer, Rect, Circle, Stage, Group} from 'react-konva';
+import { Stage } from 'react-konva';
 
 class IndividualGarden extends Component {
 
@@ -24,7 +19,6 @@ class IndividualGarden extends Component {
       backgroundRepeat: 'no-repeat',
       backgroundSize: 'cover',
       backgroundPosition: 'center',
-      zIndex: '900',
       borderRadius: '50%'
     }
     return (
@@ -69,9 +63,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    dispatchSetPost(message) {
-      dispatch(setPosts(message));
-    },
     dispatchSetDropdownStatus(dropdownStatus){
       dispatch(setDropdownStatus(dropdownStatus))
     }

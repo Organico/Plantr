@@ -19,7 +19,6 @@ class WeatherTest extends React.Component {
     let city = response.city.toString();
     let state = response.region.toString();
     loc = city +", " + state;
-    console.log("LOC IS HERE ------>", loc);
     return loc;
     }, "jsonp").then(res => {
       this.getWeatherData(loc);
@@ -80,7 +79,6 @@ class WeatherTest extends React.Component {
         if (res.data.cod && res.data.message){
           throw new Error(res.data.message);
         } else {
-          console.log("return data from axios request prefilter: ", res.data)
           coordinates = res.data.coord;
           return res.data.coord;
         }
@@ -99,15 +97,9 @@ class WeatherTest extends React.Component {
   }
 
   getWeatherData(location){
-
     const OPEN_WEATHER_MAP_URL = 'http://api.openweathermap.org/data/2.5/weather?&appid=b625bae7d54136d7e2d33c6a3f383f9e&units=metric';
-
     var encodedLocation = encodeURIComponent(location);
-    console.log("Encoded Location: ", encodedLocation)
-
     var requestUrl = `${OPEN_WEATHER_MAP_URL}&q=${encodedLocation}`;
-    console.log("requestUrl : ", requestUrl)
-
     this.getTempData(requestUrl);
     this.getDescriptionData(requestUrl);
     this.getCoordinatesData(requestUrl);
@@ -118,7 +110,6 @@ class WeatherTest extends React.Component {
   }
 
   render() {
-
     return(
       <div>
         <div> {Math.round(((this.props.temperature * 9) / 5) + 32)}°F - {this.props.description}</div>
