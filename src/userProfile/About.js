@@ -15,16 +15,9 @@ class About extends Component {
 
   getAbout() {
     const profile = this.props.profile;
-    console.log('here is the profile: ', profile)
     axios.get('api/users/' + profile.email)
     .then((res) => {
       this.setState({ about: res.data.about, id: res.data._id })
-      // console.log('here is the res in ABOUTJS: ', res)
-      // userAboutObject = {
-      //   id: res.data._id,
-      //   about: res.data.about
-      // }
-      console.log('successfully getting the user information in AboutJS')
     }).catch((err) => {
       console.error('there has been an error in rendering your AboutMe: ', err);
     });
@@ -56,11 +49,9 @@ class About extends Component {
    }
 
   setAbout(id, about) {
-    console.log('here is the about id: ', id, ' here is the about in about ', about)
     axios.put('api/users/' + id, {
       about: about
     }).then((res) => {
-      console.log("Successfully posted your AboutMe! ", res.data);
       this.toggleState();
     }).then((res) => {
       this.getAbout();
@@ -90,6 +81,5 @@ class About extends Component {
       )
   }
 }
-
 
 export default About;

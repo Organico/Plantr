@@ -1,8 +1,7 @@
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom'
+import axios from 'axios';
 import { connect } from 'react-redux';
 import ForumPost from '../Forum/ForumPost';
-import axios from 'axios';
+import React, { Component } from 'react';
 import { setPosts } from '../Actions/ForumActions';
 
 class RecentPosts extends Component {
@@ -12,7 +11,7 @@ class RecentPosts extends Component {
     axios.get('/api/forum/' + profile.email)
     .then((res) => {
       let dbPostData = res.data;
-      for (let i = 0; i<dbPostData.length; i++) {
+      for (let i = 0; i < dbPostData.length; i++) {
         let message = dbPostData[i];
         message['isShort'] = true;
       }
@@ -36,7 +35,16 @@ class RecentPosts extends Component {
             <div>
                 {this.props.posts.map((post, i) => {
                   if (post.email === profile.email) {
-                    return <ForumPost key={i} post={post} nickname={post.nickname} title={post.title} message={post.message} replies={post.replies} />
+                    return (
+                      <ForumPost
+                        key={i}
+                        post={post}
+                        nickname={post.nickname}
+                        title={post.title}
+                        message={post.message}
+                        replies={post.replies}
+                      />
+                    )
                   }
                 }
                 )}
@@ -48,20 +56,18 @@ class RecentPosts extends Component {
   }
 }
 
-
 const mapStateToProps = (state) => {
   return {
     posts: state.forumReducer.posts,
-    currentPost: state.forumReducer.currentPost
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    dispatchSetPost(message) {
-      dispatch(setPosts(message));
+    dispatchSetPost(post) {
+      dispatch(setPosts(post))
     }
-  };
-};
+  }
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(RecentPosts);

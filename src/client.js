@@ -1,6 +1,5 @@
 import AboutUs from './About/AboutUs'
 import AuthService from './config/AuthService.js';
-// import { connect } from 'react-redux'
 import Forum from './Forum/Forum';
 import GardenSquareGridView from './GardenSquareGrid/getGardenSquareGrid';
 import { HashRouter as BrowserRouter, Route, Link } from 'react-router-dom';
@@ -49,7 +48,6 @@ class App extends Component {
     } else {
       const profile = auth.getProfile();
       store.getState().userProfileReducer.profile = profile
-      // this.props.dispatchSetProfile(profile);
       return (
         <Provider store={store}>
           <BrowserRouter>
@@ -94,16 +92,6 @@ class App extends Component {
     )
   }
 };
-
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     dispatchSetProfile(profile) {
-//       dispatch(setProfile(profile))
-//     }
-//   }
-// };
-
-// export default connect(mapDispatchToProps)(App);
 
 export default auth;
 

@@ -17,7 +17,8 @@ class Profile extends Component {
         zipCode: zipCode
       }
     }).then((res) => {
-      console.log('res here', res.data);
+      // console.log('res here: ', res.data);
+      // res.data is running into a CORS issue - not sure why - need to debug
       this.props.dispatchPlantHardiness(res.data);
     }).catch((err) => {
       console.error('error in ProfileJS: ', err)
@@ -29,7 +30,6 @@ class Profile extends Component {
     axios.get('/api/users/' + profile.email)
     .then((res) => {
       if (res.data) {
-        console.log('here is the res in profile: ', res);
         return;
       } else {
         axios.post('/api/users', {
@@ -50,7 +50,6 @@ class Profile extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props)
     this.getHardiness();
     this.postUser();
   }
@@ -84,23 +83,15 @@ class Profile extends Component {
 const mapStateToProps = (state) => {
   return {
     profile: state.userProfileReducer.profile
-    // gardens: state.gardens,
-    // coordinates: state.weatherReducer.coordinates
   };
 };
 
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     dispatchAboutParameters(about) {
-//       dispatch(setAboutMe(about));
-//     },
-//     dispatchUserParameters(username, gardens) {
-//       dispatch(setUserParameters(username, gardens));
-//     },
-//     dispatchPlantHardiness(data) {
-//       dispatch(setPlantHardiness(data))
-//     }
-//   };
-// };
+const mapDispatchToProps = (dispatch) => {
+  return {
+    dispatchPlantHardiness(hardiness) {
+      dispatch(setPlantHardiness(hardiness));
+    }
+  }
+}
 
-export default connect(mapStateToProps)(Profile);
+export default connect(mapStateToProps, mapDispatchToProps)(Profile);

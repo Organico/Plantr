@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import FriendsListEntry from './FriendsListEntry';
-import { setPosts } from '../Actions/ForumActions';
 
 class FriendsList extends Component {
   // TODO - ADD FRIEND FUNCTIONALITY
@@ -21,19 +20,12 @@ class FriendsList extends Component {
   }
 }
 
+// this is simply for demonstration purposes, once functionality exists
+// we will need to refactor mapping function to deal with actual friends
 const mapStateToProps = (state) => {
   return {
     posts: state.forumReducer.posts,
-    currentPost: state.forumReducer.currentPost
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    dispatchSetPost(message) {
-      dispatch(setPosts(message));
-    }
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(FriendsList);
+export default connect(mapStateToProps)(FriendsList);
