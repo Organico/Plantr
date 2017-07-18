@@ -1,6 +1,9 @@
-import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
 import { setCoordinates } from '../Actions/WeatherActions.js';
+import React, { Component } from 'react';
+import ReactDOM from 'react-dom'
+import { connect } from 'react-redux';
+import axios from 'axios';
+import auth from '../client.js';
 
 let zipCode;
 
@@ -60,6 +63,10 @@ class Home extends Component {
     )
   }
 };
+const mapStateToProps = (dispatch) => {
+  return {
+    }
+  };
 
 const mapDispatchToProps = (dispatch) => {
   return {

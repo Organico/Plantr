@@ -7,7 +7,9 @@ const initialForumState = {
     message: '',
     replies: [],
     editing: false
-  }
+  },
+  currentCategory: '',
+  forumActive: false
 }
 
 
@@ -53,6 +55,24 @@ const setReplies = (state, action) => {
   return newState;
 };
 
+const setCategory = (state, action) => {
+  let newState = {}
+  let {currentCategory} = state;
+  console.log("Here is the new category ", action.category)
+  Object.assign(newState, state, {currentCategory: action.category} )
+  return newState
+}
+
+const toggleForumStatus = (state, action) => {
+  let newState = {}
+  let {forumActive} = state;
+  console.log("Previous status ", forumActive)
+  let newForumActive = !forumActive
+  console.log("Here is the new status ", newForumActive)
+  Object.assign(newState, state, {forumActive: newForumActive})
+  return newState
+}
+
 function forumReducer(state = initialForumState, action) {
   switch (action.type) {
   case 'ADD_POST':
@@ -65,6 +85,10 @@ function forumReducer(state = initialForumState, action) {
     return togglePost(state, action);
   case 'ADD_REPLY':
     return addReply(state, action);
+  case 'SET_CATEGORY':
+    return setCategory(state, action);
+  case 'TOGGLE_FORUM_STATUS':
+    return toggleForumStatus(state, action);
   default:
     return state;
   }
