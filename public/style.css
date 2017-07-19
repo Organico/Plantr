@@ -550,7 +550,7 @@ body {
   clear: both;
   border: solid 2px grey;
   border-radius: 5px;
-  margin-bottom: 5px;
+  margin: 5px;
   padding: 5px;
   min-height: 100px;
   background-color: white;
@@ -558,6 +558,8 @@ body {
 
 .profiles:hover {
   background-color: #bec1c4;
+  text-decoration: none;
+
 }
 
 .profiles img {
@@ -590,13 +592,27 @@ body {
 }
 
 .profiles .name {
-  font-size: 20px;
+  font-variant: small-caps;
+  font-size: calc(15px + 0.345vw);
   font-weight: 600;
+  font-family: 'Quicksand';
+  letter-spacing: 1px;
   color: black;
 }
 
 .topAbout {
   margin-top: 10px;
+}
+
+.profile-description, .profile-description:hover {
+  color: black;
+  text-decoration: none;
+  padding: 3%;
+  font-family: 'Quicksand';
+}
+
+.about-me-description {
+
 }
 
 /*////////////////////////////////////////////////////////////*/
