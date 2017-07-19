@@ -31,6 +31,7 @@ class RecentPosts extends Component {
       <div className="row">
         <div className="col-md-12 offset-md-2 right userRecent">
           <div className="userRecentSpan"> Recent Posts
+            <hr />
             <div>
                 {this.props.posts.map((post, i) => {
                   if (post.email === profile.email) {

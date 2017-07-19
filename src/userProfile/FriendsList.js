@@ -10,6 +10,7 @@ class FriendsList extends Component {
       <div className="row">
         <div className="col-md-10 offset-md-2 right userRecent">
           <div className="userRecentSpan"> Friends List
+            <hr />
             <div>
                 {this.props.posts.map((post, i) => <FriendsListEntry key={i} friend={post} /> )}
             </div>
