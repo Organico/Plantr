@@ -6,7 +6,7 @@ import ForumPost from './ForumPost';
 import EditPost from './EditPost';
 import CreateNewPost from './CreateNewPost';
 import axios from 'axios';
-import { setPosts, setEditing } from '../Actions/ForumActions';
+import { setPosts, setEditing} from '../Actions/ForumActions';
 import auth from '../client.js';
 import Ajax from 'react-ajax';
 

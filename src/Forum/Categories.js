@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import auth from '../client.js';
 import SpecificCategory from './SpecificCategory'
 import Forum from './Forum.js'
+import {toggleForumStatus} from '../Actions/ForumActions'
+
 
 
 
@@ -21,7 +23,15 @@ class Categories extends Component {
     let that = this;
 
       if(this.props.forumActive){
-        return <Forum />
+        return (<div>
+          <Forum/>
+          <button onClick ={ ()=> {
+            this.props.dispatchToggleForumStatus();
+          }
+        }
+            >Return to Categories</button>
+            </div>
+        )
       } else {
         return (
         <div>
@@ -59,12 +69,9 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
 
-    // dispatchSetPost(message) {
-    //   dispatch(setPosts(message));
-    // },
-    // dispatchSetEditing(editing) {
-    //   dispatch(setEditing(editing));
-    // }
+    dispatchToggleForumStatus() {
+      dispatch(toggleForumStatus());
+    }
   };
 };
 
