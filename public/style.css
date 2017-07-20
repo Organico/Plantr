@@ -137,6 +137,8 @@ button {
   border: solid 5px red;
 }
 
+
+
 .navbar {
   background-color: white;
   font-family: 'Quicksand', sans-serif;
@@ -145,20 +147,63 @@ button {
   border-radius: 5px;
 }
 
+/*
+||||||||||||||||||||||| NAVBAR |||||||||||||||||||||||
+ */
+
 .nav {
   height: 20px;
   margin-top: 130px;
   color: white;
 }
+
 .navbarDivider{
   border-right: solid 1px #8AC73D;
 }
+
 #navbrand {
   color: #FF8400;
 }
+
 .navText {
   color: #E7E1D5;
   font-family: "Lobster";
+}
+
+.menu-button {
+  color: rgba(0,0,0,.5);
+  font-size: 18px;
+  font-weight: 800;
+ }
+
+.navbar {
+  margin-bottom: 20px;
+  font-weight: 800
+}
+
+.btn-secondary {
+  background: none !important;
+  border: none !important;
+}
+
+.btn {
+  -webkit-appearance: none !important;
+  border: none !important;
+}
+
+.navbar-toggler-icon {
+  margin-top: -1px !important;
+  padding-left: 35px;
+}
+
+.dropdown-menu {
+  left: -40% !important;
+  border: none !important;
+}
+
+.nav-link {
+  color: rgba(0,0,0,.5) !important;
+  font-weight: 800 !important;
 }
 
 @font-face {
