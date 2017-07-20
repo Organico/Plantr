@@ -74,7 +74,10 @@ input, textarea {
 button {
   font-family: "Quicksand";
   font-weight: bold;
-  border-radius: 5px;
+  border: none;
+  font-variant: small-caps;
+  letter-spacing: 1px;
+  padding-bottom: 1%;
 }
 
 .reply {
@@ -85,7 +88,10 @@ button {
 .forumMessage {
   font-family: "Quicksand";
   font-weight: bold;
+  font-size: calc(14px + 0.3vw);
+  margin-left: 5%;
 }
+
 .searchForum,
 .searchForumInput {
   font-family: "Quicksand";
@@ -97,18 +103,21 @@ button {
 .postUsername {
   font-family: "Quicksand";
   font-weight: bold;
-  font-size: 15px;
+  font-size: calc(15px + 0.25vw);
   text-align: center;
-  margin-left: -10px;
+  font-variant: small-caps;
+  /*margin-left: -10px;*/
 }
 
 .replyUsername {
   font-family: "Quicksand";
   font-weight: bold;
-  font-size: 15px;
-  margin-left: 10px;
-  margin-top: 5px;
+  font-size: calc(15px + 0.4vw);
+  margin-left: 3%;
+  margin-top: 0.5%;
   text-align: center;
+  font-variant: small-caps;
+  letter-spacing: 1px;
 }
 
 .aboutGarden {
@@ -128,6 +137,8 @@ button {
   border: solid 5px red;
 }
 
+
+
 .navbar {
   background-color: white;
   font-family: 'Quicksand', sans-serif;
@@ -136,20 +147,63 @@ button {
   border-radius: 5px;
 }
 
+/*
+||||||||||||||||||||||| NAVBAR |||||||||||||||||||||||
+ */
+
 .nav {
   height: 20px;
   margin-top: 130px;
   color: white;
 }
+
 .navbarDivider{
   border-right: solid 1px #8AC73D;
 }
+
 #navbrand {
   color: #FF8400;
 }
+
 .navText {
   color: #E7E1D5;
   font-family: "Lobster";
+}
+
+.menu-button {
+  color: rgba(0,0,0,.5);
+  font-size: 18px;
+  font-weight: 800;
+ }
+
+.navbar {
+  margin-bottom: 20px;
+  font-weight: 800
+}
+
+.btn-secondary {
+  background: none !important;
+  border: none !important;
+}
+
+.btn {
+  -webkit-appearance: none !important;
+  border: none !important;
+}
+
+.navbar-toggler-icon {
+  margin-top: -1px !important;
+  padding-left: 35px;
+}
+
+.dropdown-menu {
+  left: -40% !important;
+  border: none !important;
+}
+
+.nav-link {
+  color: rgba(0,0,0,.5) !important;
+  font-weight: 800 !important;
 }
 
 @font-face {
@@ -211,6 +265,13 @@ button {
   border-radius: 15px;
 }
 
+hr {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border-width: 3px;
+}
+
 .textArea {
   width: 95%;
 }
@@ -230,11 +291,13 @@ button {
 }
 .userRecent {
   background-color: white;
-  border-style: solid;
-  border-width: 2px;
-  border-color: grey;
-  border-radius: 20px;
-  margin-top: 20px;
+  /*border-style: solid;*/
+  /*border-width: 2px;*/
+  border: none;
+  /*border-color: grey;*/
+  /*border-radius: 20px;*/
+  margin-top: 5%;
+  padding-top: 5%;
   min-height: 225px;
 }
 
@@ -258,7 +321,7 @@ button {
   font-color: #647075;
   font-family: 'Quicksand', sans-serif;
   font-weight: bold;
-  border-radius: 10px;
+  /*border-radius: 10px;*/
 }
 
 .gardenName{
@@ -267,12 +330,13 @@ button {
 
 .userGarden {
   background-color: white;
-  border-style: solid;
-  border-width: 2px;
-  border-color: grey;
-  border-radius: 20px;
+  /*border-style: solid;*/
+  /*border-width: 2px;*/
+  /*border-color: grey;*/
+  /*border-radius: 20px;*/
   color: black;
-  margin-top: 20px;
+  margin-top: 5%;
+  padding-top: 5%;
   min-height: 100px;
 }
 .userGardenSpan {
@@ -372,7 +436,7 @@ button {
 .forumTitle {
   font-family: "Quicksand";
   font-weight: bold;
-  font-size: 30px;
+  font-size: calc(17px + 0.4vw);
 }
 .post {
   border-radius: 10px;
@@ -544,13 +608,13 @@ body {
 
 .name {
   float: right;
+  padding-right: 1%;
 }
 
 .profiles {
   clear: both;
-  border: solid 2px grey;
-  border-radius: 5px;
-  margin: 5px;
+  border: none;
+  margin: 1%;
   padding: 5px;
   min-height: 100px;
   background-color: white;
@@ -559,7 +623,6 @@ body {
 .profiles:hover {
   background-color: #bec1c4;
   text-decoration: none;
-
 }
 
 .profiles img {
@@ -593,7 +656,7 @@ body {
 
 .profiles .name {
   font-variant: small-caps;
-  font-size: calc(15px + 0.345vw);
+  font-size: calc(16px + 0.345vw);
   font-weight: 600;
   font-family: 'Quicksand';
   letter-spacing: 1px;

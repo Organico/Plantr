@@ -1,6 +1,7 @@
 import auth from './client.js';
 import React from 'react';
-import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
+// import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
+import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import WeatherTest from './weather/Weather.js';
 
@@ -9,14 +10,16 @@ export default class NavBar extends React.Component {
     super(props);
       this.toggle = this.toggle.bind(this);
       this.state = {
-        isOpen: false
+        dropdownOpen: false
       };
   }
+
   toggle() {
     this.setState({
-      isOpen: !this.state.isOpen
+      dropdownOpen: !this.state.dropdownOpen
     });
   }
+
   render() {
     let profilePic = {
     height: '30px',
@@ -29,9 +32,20 @@ export default class NavBar extends React.Component {
   }
     return (
       <nav className="navbar navbar-toggleable-md navbar-light bg-faded">
-        <button className="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span className="navbar-toggler-icon"></span>
-        </button>
+        <Dropdown className="navbar-toggler navbar-toggler-right btn" type="button" isOpen={this.state.dropdownOpen} toggle={this.toggle}>
+          <DropdownToggle>
+              <span className="menu-button">MENU <span className="navbar-toggler-icon" onClick={this.toggle}>
+              </span></span>
+          </DropdownToggle>
+          <DropdownMenu>
+            <DropdownItem><li className="nav-item">
+                <Link className="nav-link" to="/squares">Community Gardens</Link>
+              </li></DropdownItem>
+            <DropdownItem><Link className="nav-link" to="/creategarden">Create A Garden</Link></DropdownItem>
+            <DropdownItem><Link className="nav-link" to="/forum">Forum</Link></DropdownItem>
+            <DropdownItem><Link className="nav-link" to="/about">About Us</Link></DropdownItem>
+          </DropdownMenu>
+        </Dropdown>
         <Link className="navbar-brand" to="/"><img src="logo.png" height="40px" width="70px"/></Link>
         <div  id="navbarNavDropdown" className="navbar-collapse collapse">
           <ul className="navbar-nav mr-auto">

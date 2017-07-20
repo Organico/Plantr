@@ -61,6 +61,7 @@ class RecentGardens extends Component {
         <div className="col-md-12 offset-md-2 right userGarden">
           <div className="userGardenSpan">
             <div className="userRecentSpan">Recent Gardens</div>
+            <hr />
               {!this.props.dropdownStatus ? (
                   <div>
                     { this.state.userGardens.map((garden, i) => {
