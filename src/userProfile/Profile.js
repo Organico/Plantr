@@ -62,14 +62,12 @@ class Profile extends Component {
               <ProfilePic profile={profile} />
               <hr className="profileDividerLine" />
               <About profile={profile} />
+              <FriendsList profile={profile} />
               <hr className="profileDividerLine" />
             </div>
-            <div className="col-md-5">
+            <div className="col-md-9">
               <RecentPosts profile={profile} />
               <RecentGardens profile={profile} />
-            </div>
-            <div className="col-md-3 offset-md-1">
-              <FriendsList profile={profile} />
             </div>
           </div>
         </div>
@@ -93,3 +91,7 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profile);
+     /*       <div className="col-md-3 offset-md-1">
+              <FriendsList profile={profile} />
+            </div>*/
+

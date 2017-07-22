@@ -29,7 +29,7 @@ class RecentPosts extends Component {
     const profile = this.props.profile;
     return (
       <div className="row">
-        <div className="col-md-12 offset-md-2 right userRecent">
+        <div className="col-md-10 offset-md-1 right userRecent">
           <div className="userRecentSpan"> Recent Posts
             <hr />
             <div>

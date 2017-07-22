@@ -72,7 +72,7 @@ class AboutUs extends Component {
                 <br />
                 <br />
                 <div className="row profile-description">
-                  <p className="about-me-description">Samy Kebaish is a driven software engineer with a background in Biochemistry and Cognitive Neuroscience. He has a particular passion in solving challenging problems and delivering well-crafted code
+                  <p className="about-me-description">Samy Kebaish is a driven software engineer with a background in Biochemistry and Cognitive Neuroscience. He has a particular passion in solving challenging problems and delivering well-crafted code in both individual and group settings. Samy hopes to one day integrate his knowledge of science and technology and go into the bio-tech field.
                   </p>
                 </div>
               </div>

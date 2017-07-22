@@ -58,7 +58,7 @@ class RecentGardens extends Component {
     const context = this;
     return (
       <div className="row">
-        <div className="col-md-12 offset-md-2 right userGarden">
+        <div className="col-md-10 offset-md-1 right userGarden">
           <div className="userGardenSpan">
             <div className="userRecentSpan">Recent Gardens</div>
             <hr />
@@ -66,7 +66,7 @@ class RecentGardens extends Component {
                   <div>
                     { this.state.userGardens.map((garden, i) => {
                       return (
-                        <div>
+                        <div className="container-fluid">
                           <IndividualGardenInfo
                             context={context}
                             gardenGrid={garden.gardenGrid}
@@ -83,8 +83,8 @@ class RecentGardens extends Component {
                     )}
                   </div>
                 ) : (
-                 <div className="container-fluid">
-                   <h4>{this.state.gardenName}</h4>
+                 <div>
+                   <h4 className="garden-name-active">{this.state.gardenName}</h4>
                    <div className="row">
                      <div className="col-md-2">
                        <div className="col-md-12 offset-md-3 postPicture" style={profilePic}></div>
@@ -96,7 +96,7 @@ class RecentGardens extends Component {
                        <button onClick={() => this.props.dispatchSetDropdownStatus(this.props.dropdownStatus)}>Go Back to your Gardens</button>
                      </div>
                      <div className="row" onClick={ () => {this.handleClick}}>
-                       <div className="col-mid-10 offset-md-1 gardenName">
+                       <div className="col-mid-10 gardenName">
                          <div className="row">
                            <Stage width={500} height={500} fill="white" stroke="black" className="text-center">
                              <GardenGrid />

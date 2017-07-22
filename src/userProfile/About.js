@@ -40,7 +40,7 @@ class About extends Component {
     return (
       <div>
         <p>{this.state.about}</p>
-        <button type="submit" onClick ={ () => {
+        <button className="edit-about-button" type="submit" onClick ={ () => {
           this.toggleState();
           }}>edit</button>
       </div>

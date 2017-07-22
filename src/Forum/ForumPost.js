@@ -74,14 +74,14 @@ class ForumPost extends Component {
     return (
       <div className="container-fluid">
         <div className="row post">
-          <div className="col-md-2">
+          <div className="col-md-3">
             <div className="row"></div>
               <div className="col-md-12 offset-md-3 postPicture" style={profilePic}></div>
             <div className="row">
               <div className="col-md-12 postUsername">{ this.props.nickname }</div>
             </div>
           </div>
-          <div className="col-md-8 forumTitleText">
+          <div className="col-md-7 forumTitleText">
             <div onClick = {() => {
             this.props.dispatchTogglePost(this.props.post._id);
             }}>
