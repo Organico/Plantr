@@ -104,9 +104,7 @@ button {
   font-family: "Quicksand";
   font-weight: bold;
   font-size: calc(15px + 0.25vw);
-  text-align: center;
   font-variant: small-caps;
-  /*margin-left: -10px;*/
 }
 
 .replyUsername {
@@ -236,17 +234,24 @@ button {
 .lineChart {
   margin-left: -75px;
 }
-.profileLeft {
-  margin-top: 20px;
-  background-color: white;
-  border-style: solid;
-  border-width: 2px;
-  border-color: grey;
-  border-radius: 20px;
+
+.about-profile-name {
+  font-variant: small-caps;
 }
+
+.profileLeft {
+  margin-top: 1%;
+  background-color: white;
+}
+
 #picDiv {
   margin-top: -50px;
   margin-bottom: -50px;
+}
+
+.edit-about-button {
+  background: white;
+  margin-bottom: 10%;
 }
 
 .about {
@@ -296,7 +301,7 @@ hr {
   border: none;
   /*border-color: grey;*/
   /*border-radius: 20px;*/
-  margin-top: 5%;
+  margin-top: 1.5%;
   padding-top: 5%;
   min-height: 225px;
 }
@@ -306,26 +311,32 @@ hr {
   text-align: center;
   font-size: 20px;
   margin-bottom: 10px;
-  font-color: #647075;
   font-family: 'Quicksand', sans-serif;
   font-weight: bold;
-  border-radius: 10px;
 }
 #aboutMe {
   color: black;
+  font-variant: small-caps;
+  padding: 10%;
 }
 .userRecentSpan {
   text-align: center;
   font-size: 20px;
-  margin-bottom: 10px;
-  font-color: #647075;
+  padding-bottom: 5%;
+  /*color: #647075;*/
   font-family: 'Quicksand', sans-serif;
   font-weight: bold;
+  font-variant: small-caps;
   /*border-radius: 10px;*/
 }
 
 .gardenName{
-  text-align: center;
+  font-variant: small-caps;
+  padding-left: calc(-60px + 17vw);
+}
+
+.garden-name-active {
+  font-variant: small-caps;
 }
 
 .userGarden {
@@ -460,6 +471,7 @@ hr {
   font-family: "Quicksand";
   font-weight: bold;
   background: transparent;
+  font-size: calc(10px + 0.5vw);
 }
 .replyBox {
   margin-top: 20px;

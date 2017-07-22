@@ -17,7 +17,7 @@ class ProfilePic extends Component {
         <div>
           <div className="row">
             <div className="col-md-12">
-              <h3>{profile.nickname}</h3>
+              <h3 className="about-profile-name">{profile.nickname}</h3>
             </div>
           </div>
           <div className="row">

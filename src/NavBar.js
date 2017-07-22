@@ -1,6 +1,5 @@
 import auth from './client.js';
 import React from 'react';
-// import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import WeatherTest from './weather/Weather.js';
@@ -44,6 +43,9 @@ export default class NavBar extends React.Component {
             <DropdownItem><Link className="nav-link" to="/creategarden">Create A Garden</Link></DropdownItem>
             <DropdownItem><Link className="nav-link" to="/forum">Forum</Link></DropdownItem>
             <DropdownItem><Link className="nav-link" to="/about">About Us</Link></DropdownItem>
+            <DropdownItem><li className="nav-item">
+              <Link className="nav-link" to="/profile">Profile</Link>
+              </li></DropdownItem>
           </DropdownMenu>
         </Dropdown>
         <Link className="navbar-brand" to="/"><img src="logo.png" height="40px" width="70px"/></Link>
@@ -78,8 +80,3 @@ export default class NavBar extends React.Component {
     );
   }
 }
-
-
-            // <li className="nav-item">
-            //   <a className="nav-link" href="#plant">Plant Test Env</a>
-            // </li>
