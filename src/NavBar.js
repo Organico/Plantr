@@ -69,7 +69,7 @@ export default class NavBar extends React.Component {
                 <div className="nav-link weather"><WeatherTest className="nav-link" /></div>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="javascript:window.location.reload()" onClick={auth.logout.bind(this)}>Logout</Link>
+                <Link className="nav-link" onClick={auth.logout.bind(this)} to="javascript:window.location.reload()" >Logout</Link>
               </li>
               <li className="nav-item">
                 <Link className="nav-link" to="/profile"><img style={profilePic} /></Link>

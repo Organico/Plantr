@@ -90,6 +90,7 @@ button {
   font-weight: bold;
   font-size: calc(14px + 0.3vw);
   margin-left: 5%;
+  margin-right: 1%;
 }
 
 .searchForum,
