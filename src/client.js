@@ -1,6 +1,7 @@
 import AboutUs from './About/AboutUs'
 import AuthService from './config/AuthService.js';
 import Forum from './Forum/Forum';
+import Categories from './Forum/Categories'
 import GardenSquareGridView from './GardenSquareGrid/getGardenSquareGrid';
 import { HashRouter as BrowserRouter, Route, Link } from 'react-router-dom';
 import Home from './Home/Home'
@@ -74,7 +75,7 @@ class App extends Component {
                 )} />
                 <Route path="/profile" component={Profile} />
                 <Route path="/forum" render={ () => (
-                  <Forum profile={profile} />
+                  <Categories profile={profile} />
                 )} />
               </div>
             </div>

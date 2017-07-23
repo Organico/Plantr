@@ -6,7 +6,7 @@ import ForumPost from './ForumPost';
 import EditPost from './EditPost';
 import CreateNewPost from './CreateNewPost';
 import axios from 'axios';
-import { setPosts, setEditing } from '../Actions/ForumActions';
+import { setPosts, setEditing} from '../Actions/ForumActions';
 import auth from '../client.js';
 import Ajax from 'react-ajax';
 
@@ -96,7 +96,9 @@ class Forum extends Component {
 
   renderPostSection(profile, post, i) {
     let that = this;
-    if (profile.email === post.email && !this.props.editing && !that.state.modalIsOpen) {
+    console.log("Test")
+    var result = (profile.email === post.email && !this.props.editing && !that.state.modalIsOpen)
+    if (profile.email === post.email && !this.props.editing && !that.state.modalIsOpen && (post.category === this.props.currentCategory)) {
       return <div className="post">
         <div className="editDelete">
           <i className="fa fa-pencil-square-o" ariaHidden="true" onClick={ () => {
@@ -108,7 +110,7 @@ class Forum extends Component {
         </div>
         <ForumPost key={i} post={post} nickname={post.nickname} title={post.title} message={post.message} replies={post.replies} />
       </div>
-    } else if (profile.email === post.email && this.props.editing && (post.message === this.props.messageToEdit)) {
+    } else if (profile.email === post.email && this.props.editing && (post.message === this.props.messageToEdit) && (post.category === this.props.currentCategory)) {
       return <div className="post">
         <div className="editDelete">
           <i className="fa fa-trash" ariaHidden="true" onClick={ () => {
@@ -117,10 +119,14 @@ class Forum extends Component {
         </div>
         <EditPost id={post._id} post={post} nickname={post.nickname} message={post.message} title={post.title} replies={post.replies} />
       </div>
-    }
+    } if (post.category === this.props.currentCategory) {
+      console.log("The current post category is ", post.category);
+      console.log("The current props currentCategory ", this.props.currentCategory)
     return <div className="post">
       <ForumPost key={i} post={post} nickname={post.nickname} title={post.title} message={post.message} replies={post.replies} />
     </div>
+    }
+
   }
 
   render() {
@@ -173,7 +179,8 @@ const mapStateToProps = (state) => {
     messageToEdit: state.forumReducer.messageToEdit,
     posts: state.forumReducer.posts,
     currentPost: state.forumReducer.currentPost,
-    editing: state.forumReducer.editing
+    editing: state.forumReducer.editing,
+    currentCategory: state.forumReducer.currentCategory
   };
 };
 

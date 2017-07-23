@@ -20,6 +20,13 @@ var gardens = [];
 
 var myGardens = [];
 
+// var likeGarden(){
+//     axios.post('/api/likes') {
+//       likesAndDislikes: this.props.garden:ikesAndDislikes['likes'][]
+//     }
+//   }
+
+
 var getAllGardens = function() {
    axios.get('/api/gardens').then((res) => {
 
@@ -64,6 +71,11 @@ var getAllGardens = function() {
             console.log("Error in getGardenSquareGrid getAllGardens()")
           });
   }
+
+var likes = 0;
+var dislikes = 0;
+var currentUsername = 0;
+
 
 getAllGardens();
 
@@ -155,9 +167,6 @@ class GardenSquareGridView extends React.Component{
   getGardens(suggestion) {
     console.log("Suggestion plant grid is ", suggestion)
   }
-
-
-
 
   getSuggestionValue(suggestion) {
     console.log("CALLED GET SUGGESTION VALUE")
@@ -255,6 +264,16 @@ class GardenSquareGridView extends React.Component{
                 getSuggestionValue={this.getSuggestionValue}
                 renderSuggestion={this.renderSuggestion}
                 inputProps={inputProps} />
+                <br></br>
+                <h4>Likes: {this.props.likes || 0}</h4>
+                <h4>Dislikes: {this.props.dislikes || 0}</h4>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/67/Facebook_logo_thumbs_up_like_transparent.png" height="40" onClick={()=> alert("You liked it!")
+
+
+
+              }/>
+                <img src="https://3.bp.blogspot.com/-qYdpTgtVfxM/VI0U19aUXeI/AAAAAAAACjI/TGhREhcnSes/s1600/2.png" height="40" onClick={()=> alert("You disliked it!")}/>
+
             </div>
           </div>
         <div className="row">

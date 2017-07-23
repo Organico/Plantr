@@ -29,6 +29,8 @@ class CreateNewPost extends Component {
         backgroundSize: 'cover',
         backgroundPosition: 'center'
       }
+      const currentCategory = this.props.currentCategory;
+      console.log("currentCategory ", currentCategory);
       axios.post('/api/forum',
         {
           profile: profile.picture,
@@ -37,7 +39,8 @@ class CreateNewPost extends Component {
           nickname: profile.nickname,
           email: profile.email,
           replies: [],
-          time: new Date().toDateString()
+          time: new Date().toDateString(),
+          category: currentCategory
         }
       ).then((res) => {
         console.log("Successful posted on the client side of CreateNewPost");
@@ -77,7 +80,8 @@ class CreateNewPost extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    posts: state.forumReducer.posts
+    posts: state.forumReducer.posts,
+    currentCategory: state.forumReducer.currentCategory
   };
 };
 

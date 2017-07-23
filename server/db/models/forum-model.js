@@ -7,7 +7,8 @@ const forumSchema = new mongoose.Schema({
   nickname: String,
   email: String,
   replies: Array,
-  time: String
+  time: String,
+  category: String
 });
 
 const Forum = mongoose.model('Forum', forumSchema);

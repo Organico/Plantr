@@ -32,6 +32,7 @@ router.get('/:email', function(req, res, next) {
 /*--------------------POST REQUEST---------------------------------------------*/
 
 router.post('/', (req, res, next) => {
+  console.log("Hrere is the post category ", req.body.category)
   let forum = new Forum({
     profile: req.body.profile,
     title: req.body.title,
@@ -39,7 +40,8 @@ router.post('/', (req, res, next) => {
     nickname: req.body.nickname,
     email: req.body.email,
     replies: req.body.replies,
-    time: req.body.time
+    time: req.body.time,
+    category: req.body.category
   });
   forum.save({}, (err, data) => {
     if (err) {

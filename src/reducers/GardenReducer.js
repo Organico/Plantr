@@ -1263,6 +1263,10 @@ function gardenReducer(state = initialGardenState, action) {
     return setDropdownStatus(state, action);
   case 'SET_SUGGESTED_PLANTS':
     return setSuggestedPlants(state, action);
+  case 'LIKE_GARDEN':
+    return likeGarden(state, action);
+  case 'DISLIKE_GARDEN':
+    return dislikeGarden(state, action);
   default:
     return state;
   }

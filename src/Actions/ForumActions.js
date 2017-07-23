@@ -17,3 +17,12 @@ export function addReply(message) {
 export function setEditing(editing) {
   return {type: 'SET_EDITING', editing};
 }
+
+export function setCategory(category) {
+  console.log("Setting category ", category)
+  return {type: 'SET_CATEGORY', category};
+}
+
+export function toggleForumStatus() {
+  return {type: 'TOGGLE_FORUM_STATUS'};
+}
