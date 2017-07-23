@@ -11,7 +11,8 @@ const gardenSchema = new mongoose.Schema({
   profileEmail: String,
   profileNickname: String,
   gardenImage: String,
-  hardinessZone: String
+  hardinessZone: String,
+  likesAndDislikes: Object
 });
 
 const Garden = mongoose.model('Garden', gardenSchema);

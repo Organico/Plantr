@@ -65,7 +65,6 @@ export function addPlantToPlantGrid(plant){
   return {type: 'ADD_PLANT_TO_PLANT_GRID', plant}
 }
 
-
 export function undo() {
   return {type: 'UNDO'};
 }

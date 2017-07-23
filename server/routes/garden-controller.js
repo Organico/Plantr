@@ -48,7 +48,8 @@ router.post('/', (req, res, next) => {
     profilePicture: req.body.profilePicture,
     profileEmail: req.body.profileEmail,
     profileNickname: req.body.profileNickname,
-    hardinessZone: req.body.hardinessZone
+    hardinessZone: req.body.hardinessZone,
+    likesAndDislikes: req.body.likesAndDislikes
   });
   garden.save({}, (err, data) => {
     if (err) {

@@ -96,8 +96,9 @@ class Forum extends Component {
 
   renderPostSection(profile, post, i) {
     let that = this;
+    console.log("Test")
     var result = (profile.email === post.email && !this.props.editing && !that.state.modalIsOpen)
-    if (profile.email === post.email && !this.props.editing && !that.state.modalIsOpen) {
+    if (profile.email === post.email && !this.props.editing && !that.state.modalIsOpen && (post.category === this.props.currentCategory)) {
       return <div className="post">
         <div className="editDelete">
           <i className="fa fa-pencil-square-o" ariaHidden="true" onClick={ () => {
@@ -109,7 +110,7 @@ class Forum extends Component {
         </div>
         <ForumPost key={i} post={post} nickname={post.nickname} title={post.title} message={post.message} replies={post.replies} />
       </div>
-    } else if (profile.email === post.email && this.props.editing && (post.message === this.props.messageToEdit)) {
+    } else if (profile.email === post.email && this.props.editing && (post.message === this.props.messageToEdit) && (post.category === this.props.currentCategory)) {
       return <div className="post">
         <div className="editDelete">
           <i className="fa fa-trash" ariaHidden="true" onClick={ () => {
@@ -119,6 +120,8 @@ class Forum extends Component {
         <EditPost id={post._id} post={post} nickname={post.nickname} message={post.message} title={post.title} replies={post.replies} />
       </div>
     } if (post.category === this.props.currentCategory) {
+      console.log("The current post category is ", post.category);
+      console.log("The current props currentCategory ", this.props.currentCategory)
     return <div className="post">
       <ForumPost key={i} post={post} nickname={post.nickname} title={post.title} message={post.message} replies={post.replies} />
     </div>

@@ -63,10 +63,6 @@ class Home extends Component {
     )
   }
 };
-const mapStateToProps = (dispatch) => {
-  return {
-    }
-  };
 
 const mapDispatchToProps = (dispatch) => {
   return {
