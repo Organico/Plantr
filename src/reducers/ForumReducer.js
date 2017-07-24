@@ -58,7 +58,6 @@ const setReplies = (state, action) => {
 const setCategory = (state, action) => {
   let newState = {}
   let {currentCategory} = state;
-  console.log("Here is the new category ", action.category)
   Object.assign(newState, state, {currentCategory: action.category} )
   return newState
 }
@@ -66,9 +65,7 @@ const setCategory = (state, action) => {
 const toggleForumStatus = (state, action) => {
   let newState = {}
   let {forumActive} = state;
-  console.log("Previous status ", forumActive)
   let newForumActive = !forumActive
-  console.log("Here is the new status ", newForumActive)
   Object.assign(newState, state, {forumActive: newForumActive})
   return newState
 }

@@ -91,7 +91,3 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profile);
-     /*       <div className="col-md-3 offset-md-1">
-              <FriendsList profile={profile} />
-            </div>*/
-

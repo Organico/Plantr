@@ -1,16 +1,13 @@
-import React,{ Component } from 'react';
-import ReactDOM from 'react-dom'
-import { connect } from 'react-redux';
-import Modal from  'react-modal';
-import ForumPost from './ForumPost';
-import EditPost from './EditPost';
-import CreateNewPost from './CreateNewPost';
 import axios from 'axios';
-import { setPosts, setEditing} from '../Actions/ForumActions';
-import auth from '../client.js';
-import Ajax from 'react-ajax';
+import { connect } from 'react-redux';
+import CreateNewPost from './CreateNewPost';
+import EditPost from './EditPost';
+import ForumPost from './ForumPost';
+import Modal from  'react-modal';
+import React,{ Component } from 'react';
+import { setPosts, setEditing } from '../Actions/ForumActions';
 
-var customStyles = {
+const customStyles = {
   content : {
     top: '50%',
     left: '50%',
@@ -24,24 +21,17 @@ var customStyles = {
 };
 
 class Forum extends Component {
-  constructor() {
-    super();
-
+  constructor(props) {
+    super(props);
     this.state = {
       modalIsOpen: false
     };
-
     this.openModal = this.openModal.bind(this);
     this.afterOpenModal = this.afterOpenModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
   }
 
-  openModal() {
-    this.setState({modalIsOpen: true});
-  }
-
   afterOpenModal() {
-    // references are now sync'd and can be accessed.
     this.subtitle.style.color = '#f00';
   }
 
@@ -49,22 +39,35 @@ class Forum extends Component {
     this.setState({modalIsOpen: false});
   }
 
+  openModal() {
+    this.setState({modalIsOpen: true});
+  }
+
   check () {
     fetch("https://ipinfo.io/json")
-      .then((res) => res.json())
-      .then((ip) => {
-          let crd = this.state.coordinates; //***Turns into ==> this.props.coordinates
-          crd = crd || {
-            latitude: +ip.loc.split(",")[0],
-            longitude: +ip.loc.split(",")[1]
-          }
-          console.log('this is the CRD: ', crd);
-          console.log('GOOGLE API AIzaSyA6vXqv9uWnwy23Np7vN7CAOXFqtByzDL4')
-          return crd
-      })
-    }
+    .then((res) => res.json())
+    .then((ip) => {
+      let coordinate = this.state.coordinates; //***Turns into ==> this.props.coordinates
+      coordinate = coordinate || {
+        latitude: +ip.loc.split(",")[0],
+        longitude: +ip.loc.split(",")[1]
+      }
+      return coordinate;
+    })
+  }
 
-   getPost() {
+  deletePost(id) {
+    axios.delete('/api/forum/' + id, {
+      id: id
+    })
+    .then((res) => {
+      this.getPost();
+    }).catch((err) => {
+      console.error('There has been a clientside error in deleting the post in ForumJS ', err);
+    });
+  }
+
+  getPost() {
     axios.get('/api/forum')
     .then((res) => {
       let dbPostData = res.data;
@@ -78,16 +81,10 @@ class Forum extends Component {
     });
   }
 
-   deletePost(id) {
-    axios.delete('/api/forum/' + id, {
-      id: id
-    })
-    .then((res) => {
-      console.log('Successfully deleted user post');
-      this.getPost();
-    }).catch((err) => {
-      console.error('There has been a clientside error in deleting the post in ForumJS ', err);
-    });
+  renderEditButton() {
+    if (!this.props.editing) {
+      return <button type="submit" onClick={this.openModal}>Post Here!</button>
+    }
   }
 
   componentDidMount() {
@@ -95,43 +92,69 @@ class Forum extends Component {
   }
 
   renderPostSection(profile, post, i) {
-    let that = this;
-    console.log("Test")
-    var result = (profile.email === post.email && !this.props.editing && !that.state.modalIsOpen)
-    if (profile.email === post.email && !this.props.editing && !that.state.modalIsOpen && (post.category === this.props.currentCategory)) {
-      return <div className="post">
-        <div className="editDelete">
-          <i className="fa fa-pencil-square-o" ariaHidden="true" onClick={ () => {
-            this.props.dispatchSetEditing(post.message);
-          }}></i>
-          <i className="fa fa-trash" ariaHidden="true" onClick={ () => {
-            this.deletePost(post._id);
-          }}></i>
+    const categoryCheck = (post.category === this.props.currentCategory);
+    const emailCheck = (profile.email === post.email);
+    if (emailCheck && !this.props.editing && !this.state.modalIsOpen && categoryCheck) {
+      return (
+        <div className="post">
+          <div className="editDelete">
+            <i className="fa fa-pencil-square-o" onClick={ () => {
+              this.props.dispatchSetEditing(post.message);
+            }}></i>
+            <i className="fa fa-trash" onClick={ () => {
+              this.deletePost(post._id);
+            }}></i>
+          </div>
+          <ForumPost
+            key={post._id}
+            message={post.message}
+            nickname={post.nickname}
+            post={post}
+            profile={profile}
+            replies={post.replies}
+            title={post.title}
+          />
         </div>
-        <ForumPost key={i} post={post} nickname={post.nickname} title={post.title} message={post.message} replies={post.replies} />
-      </div>
-    } else if (profile.email === post.email && this.props.editing && (post.message === this.props.messageToEdit) && (post.category === this.props.currentCategory)) {
-      return <div className="post">
-        <div className="editDelete">
-          <i className="fa fa-trash" ariaHidden="true" onClick={ () => {
-            this.deletePost(post._id);
-          }}></i>
+      )
+    } else if (emailCheck && categoryCheck && this.props.editing && (post.message === this.props.messageToEdit)) {
+      return (
+        <div className="post">
+          <div className="editDelete">
+            <i className="fa fa-trash" onClick={ () => {
+              this.deletePost(post._id);
+            }}></i>
+          </div>
+          <EditPost
+            id={post._id}
+            message={post.message}
+            nickname={post.nickname}
+            post={post}
+            profile={profile}
+            replies={post.replies}
+            title={post.title}
+            />
         </div>
-        <EditPost id={post._id} post={post} nickname={post.nickname} message={post.message} title={post.title} replies={post.replies} />
-      </div>
-    } if (post.category === this.props.currentCategory) {
-      console.log("The current post category is ", post.category);
-      console.log("The current props currentCategory ", this.props.currentCategory)
-    return <div className="post">
-      <ForumPost key={i} post={post} nickname={post.nickname} title={post.title} message={post.message} replies={post.replies} />
-    </div>
+      )
     }
-
+    if (categoryCheck) {
+      return (
+        <div className="post">
+          <ForumPost
+            key={post._id}
+            message={post.message}
+            nickname={post.nickname}
+            post={post}
+            profile={profile}
+            replies={post.replies}
+            title={post.title}
+          />
+        </div>
+      )
+    }
   }
 
   render() {
-    const profile = auth.getProfile();
-    let that = this;
+    const profile = this.props.profile;
     return (
       <div className="row">
         <div className="col-md-8 offset-md-2">
@@ -141,12 +164,7 @@ class Forum extends Component {
                 <h3>Let Your Community Know About Your Garden</h3>
               </div>
               <div className="replyEditDelete">
-                { (function() {
-                  if (!that.props.editing) {
-                    return <button type="submit" onClick={that.openModal}>Post Here!</button>
-                  }
-                 }())
-                }
+                { this.renderEditButton() }
              </div>
            </div>
           </div>
@@ -176,6 +194,7 @@ class Forum extends Component {
 
 const mapStateToProps = (state) => {
   return {
+    profile: state.userProfileReducer.profile,
     messageToEdit: state.forumReducer.messageToEdit,
     posts: state.forumReducer.posts,
     currentPost: state.forumReducer.currentPost,
@@ -184,9 +203,9 @@ const mapStateToProps = (state) => {
   };
 };
 
+
 const mapDispatchToProps = (dispatch) => {
   return {
-
     dispatchSetPost(message) {
       dispatch(setPosts(message));
     },

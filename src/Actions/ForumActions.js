@@ -19,7 +19,6 @@ export function setEditing(editing) {
 }
 
 export function setCategory(category) {
-  console.log("Setting category ", category)
   return {type: 'SET_CATEGORY', category};
 }
 
