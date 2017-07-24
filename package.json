@@ -8,8 +8,7 @@
     "express-server": "node ./server/server",
     "dev": "concurrently --kill-others \"npm run webpack-watch\" \"npm run express-server\"",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ./server/server.js",
-    "seed": "node ./server/seed.js",
+    "start": "node ./server/server.babel.js",
     "build": "NODE_ENV=production webpack --progress --colors -p --config webpack.prod.config.js"
   },
   "keywords": [],
