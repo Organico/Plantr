@@ -1,10 +1,40 @@
+import $ from 'jquery';
 import { connect } from 'react-redux';
 import Forum from './Forum.js'
 import React,{ Component } from 'react';
 import SpecificCategory from './SpecificCategory'
-import { toggleForumStatus } from '../Actions/ForumActions'
+import { setCategory, toggleForumStatus } from '../Actions/ForumActions'
 
 class Categories extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      // searchTerm: ''
+    };
+    this.onInputChange = this.onInputChange.bind(this);
+  }
+
+  onInputChange(event) {
+    const search = this.refs.searchPosts.value
+    // $('html, body').animate({ scrollTop: 0 }, 'fast');
+    let newlyDisplayed = this.props.posts.filter((post) => {
+      let { message, nickname, category, title } = post;
+      if (message.includes(search) || nickname.includes(search) || category.includes(search) || title.includes(search)) {
+        // display through search
+        this.props.dispatchSetCategory(category);
+      }
+    })
+    // this.setState({
+    //   searchTerm: search,
+    //   posts: newlyDisplayed
+    // })
+  }
+
+  componentDidMount() {
+    this.props.dispatchSetCategory('General');
+    this.props.dispatchToggleForumStatus('General');
+  }
+
   renderCategory() {
     if (this.props.forumActive) {
       return <Forum/>
@@ -27,7 +57,11 @@ class Categories extends Component {
         </div>
         <br/>
         <div className="searchForum">
-          <input className="searchForumInput" />
+          <input
+            className="searchForumInput"
+            onChange={this.onInputChange}
+            ref="searchPosts"
+          />
         </div>
         <div className="row">
           <div className="col-md-4">
@@ -54,12 +88,16 @@ class Categories extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    forumActive: state.forumReducer.forumActive
+    forumActive: state.forumReducer.forumActive,
+    posts: state.forumReducer.posts
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    dispatchSetCategory(category) {
+      dispatch(setCategory(category));
+    },
     dispatchToggleForumStatus() {
       dispatch(toggleForumStatus());
     }

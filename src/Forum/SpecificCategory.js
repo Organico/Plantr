@@ -1,13 +1,8 @@
 import React,{ Component } from 'react';
 import { connect } from 'react-redux';
-import { setCategory, toggleForumStatus} from '../Actions/ForumActions';
+import { setCategory } from '../Actions/ForumActions';
 
 class SpecificCategory extends Component {
-  componentDidMount() {
-    this.props.dispatchSetCategory('General');
-    this.props.dispatchToggleForumStatus('General');
-  }
-
   render() {
     return (
       <div className="row">
@@ -35,9 +30,6 @@ const mapDispatchToProps = (dispatch) => {
   return {
     dispatchSetCategory(category) {
       dispatch(setCategory(category));
-    },
-    dispatchToggleForumStatus() {
-      dispatch(toggleForumStatus());
     }
   };
 };
