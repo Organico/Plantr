@@ -5,7 +5,7 @@ import SpecificCategory from './SpecificCategory'
 import { toggleForumStatus } from '../Actions/ForumActions'
 
 class Categories extends Component {
-  renderForum() {
+  renderCategory() {
     if (this.props.forumActive) {
       return (
         <div>
@@ -16,6 +16,9 @@ class Categories extends Component {
         </div>
       )
     }
+  }
+
+  renderForum() {
     return (
       <div>
         <div className="row">
@@ -29,12 +32,23 @@ class Categories extends Component {
             </div>
           </div>
         </div>
+        <br/>
+        <div className="searchForum">
+          <input className="searchForumInput" />
+        </div>
         <h2> Categories </h2>
-        <SpecificCategory categoryName={'General'}/>
-        <SpecificCategory categoryName={'Gardening'}/>
-        <SpecificCategory categoryName={'Compost Recipes'}/>
-        <SpecificCategory categoryName={'Plant Tips'}/>
-        <SpecificCategory categoryName={'Plantr Website Questions'}/>
+        <div className="row">
+          <div className="col-md-4">
+            <SpecificCategory categoryName={'General'}/>
+            <SpecificCategory categoryName={'Gardening'}/>
+            <SpecificCategory categoryName={'Compost Recipes'}/>
+            <SpecificCategory categoryName={'Plant Tips'}/>
+            <SpecificCategory categoryName={'Plantr Website Questions'}/>
+          </div>
+          <div className="col-md-8">
+            { this.renderCategory() }
+          </div>
+        </div>
       </div>
     )
   }

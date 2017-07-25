@@ -156,8 +156,8 @@ class Forum extends Component {
   render() {
     const profile = this.props.profile;
     return (
-      <div className="row">
-        <div className="col-md-8 offset-md-2">
+      <div>
+        <div className="col-md-10 offset-md-1">
           <div className="post">
             <div className="row">
               <div className="col-md-8 offset-md-2">
@@ -167,10 +167,6 @@ class Forum extends Component {
                 { this.renderEditButton() }
              </div>
            </div>
-          </div>
-          <br/>
-          <div className="searchForum">
-            <input className="searchForumInput" />
           </div>
         </div>
         <Modal
@@ -184,7 +180,7 @@ class Forum extends Component {
           <CreateNewPost closeModal={this.closeModal} />
           <button onClick={this.closeModal}>close</button>
         </Modal>
-        <div className="col-md-8 offset-md-2">
+        <div className="col-md-10 offset-md-1">
           {this.props.posts.map((post, i) => this.renderPostSection(profile, post, i))}
         </div>
       </div>
