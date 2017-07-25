@@ -37,46 +37,44 @@ export default class NavBar extends React.Component {
               </span></span>
           </DropdownToggle>
           <DropdownMenu>
-            <DropdownItem><li className="nav-item">
-                <Link className="nav-link" to="/squares">Community Gardens</Link>
-              </li></DropdownItem>
+            <DropdownItem><Link className="nav-link" to="/squares">Community Gardens</Link></DropdownItem>
             <DropdownItem><Link className="nav-link" to="/creategarden">Create A Garden</Link></DropdownItem>
             <DropdownItem><Link className="nav-link" to="/forum">Forum</Link></DropdownItem>
             <DropdownItem><Link className="nav-link" to="/about">About Us</Link></DropdownItem>
-            <DropdownItem><li className="nav-item">
-              <Link className="nav-link" to="/profile">Profile</Link>
-              </li></DropdownItem>
+            <DropdownItem><Link className="nav-link" to="/profile">Profile</Link>            </DropdownItem>
+            <DropdownItem><a className="nav-link" href="javascript:window.location.reload()" onClick={auth.logout.bind(this)}>Logout</a></DropdownItem>
           </DropdownMenu>
         </Dropdown>
         <Link className="navbar-brand" to="/"><img src="logo.png" height="40px" width="70px"/></Link>
         <div  id="navbarNavDropdown" className="navbar-collapse collapse">
           <ul className="navbar-nav mr-auto">
-              <li className="nav-item">
-                <Link className="nav-link" to="/squares">Community Gardens</Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/creategarden">Create A Garden</Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/forum">Forum</Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/about">About Us</Link>
-              </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/squares">Community Gardens</Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/creategarden">Create A Garden</Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/forum">Forum</Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/about">About Us</Link>
+            </li>
           </ul>
           <ul className="navbar-nav">
-              <li className="nav-item navbarDivider">
-                <div className="nav-link weather"><WeatherTest className="nav-link" /></div>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" onClick={auth.logout.bind(this)} to="javascript:window.location.reload()" >Logout</Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/profile"><img style={profilePic} /></Link>
-              </li>
+            <li className="nav-item navbarDivider">
+              <div className="nav-link weather"><WeatherTest className="nav-link" />
+              </div>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link" href="javascript:window.location.reload()" onClick={auth.logout.bind(this)}>Logout</a>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/profile"><img style={profilePic} /></Link>
+            </li>
           </ul>
         </div>
-    </nav>
+      </nav>
     );
   }
 }
