@@ -21,10 +21,13 @@ class ForumPost extends Component {
     });
   }
 
-  deletePost(id, replyId) {
+  deletePost(id, replyId, message) {
     axios.delete('/api/forum/' + id + '/' + replyId, {
-      userId: id,
-      replyId: replyId
+      params: {
+        userId: id,
+        replyId: replyId,
+        message: message
+      }
     })
     .then((res) => {
       this.getPost();
@@ -114,7 +117,7 @@ class ForumPost extends Component {
                                   this.props.dispatchSetEditing(reply.message);
                                 }}></i>
                                 <i className="fa fa-trash" onClick={ () => {
-                                  this.deletePost(reply.belongsToId, reply.replyUser.clientID);
+                                  this.deletePost(reply.belongsToId, reply.replyUser.clientID, reply.message);
                                 }}></i>
                               </div>
                             </div>

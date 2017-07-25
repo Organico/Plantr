@@ -152,7 +152,7 @@ router.delete('/:id/:replyId', (req, res, next) => {
       res.status(500);
     } else {
       result.replies.forEach( (key, i) => {
-        if (key['replyUser']['clientID'] === req.params.replyId) {
+        if (key['replyUser']['clientID'] === req.params.replyId && req.query.message === key['message']) {
           deleteId = i;
         }
       });

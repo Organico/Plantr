@@ -1,6 +1,6 @@
 import React, { Component }from 'react';
 
-export default class Replies extends Component{
+export default class Replies extends Component {
   render() {
     let profilePic = {
       marginTop: '5px',
