@@ -56,7 +56,6 @@ class CreateNewPost extends Component {
     render() {
     let titleInput;
     let messageInput;
-    console.log('THESE ARE THE PROPS: ', this.props)
     return (
       <div>
         <textarea cols="50" rows="1" ref={(node) => titleInput= node } type="string" name="titleInput" placeholder="Title Example: My organic compost tea recipe">

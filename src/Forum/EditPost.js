@@ -1,12 +1,9 @@
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom'
-import { connect } from 'react-redux';
 import axios from 'axios';
+import { connect } from 'react-redux';
+import React, { Component } from 'react';
 import { setPosts, setEditing } from '../Actions/ForumActions';
-import auth from '../client.js';
 
 class EditPost extends Component {
-
   getPost() {
     axios.get('/api/forum')
     .then((res) => {
@@ -29,7 +26,6 @@ class EditPost extends Component {
       title: title
     }
   ).then((res) => {
-    console.log("Post has been successfully updated on EditPost");
     this.props.dispatchSetEditing();
     this.getPost();
   }).catch((err) => {
@@ -38,7 +34,7 @@ class EditPost extends Component {
 }
 
 render() {
-  const profile = auth.getProfile();
+  const profile = this.props.profile;
   let profilePic = {
     height: '50px',
     width: '50px',
@@ -46,10 +42,8 @@ render() {
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
     backgroundPosition: 'center',
-    zIndex: '900',
     borderRadius: '50%'
   }
-
   let id = this.props.id;
   let newMessage;
   let newTitle;
@@ -95,13 +89,11 @@ render() {
 const mapStateToProps = (state) => {
   return {
     posts: state.forumReducer.posts,
-    currentPost: state.forumReducer.currentPost
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-
     dispatchSetPost(message) {
       dispatch(setPosts(message));
     },

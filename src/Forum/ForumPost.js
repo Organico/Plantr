@@ -1,15 +1,12 @@
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import { connect } from 'react-redux';
-import auth from '../client.js';
-import { setPosts, togglePost, setEditing } from '../Actions/ForumActions';
-import ReplyPost from './ReplyPost';
-import EditReply from './EditReply';
-import Replies from './Replies';
 import axios from 'axios';
+import { connect } from 'react-redux';
+import EditReply from './EditReply';
+import React, { Component } from 'react';
+import Replies from './Replies';
+import ReplyPost from './ReplyPost';
+import { setPosts, togglePost, setEditing } from '../Actions/ForumActions';
 
 class ForumPost extends Component {
-
   getPost() {
     axios.get('/api/forum')
    .then((res) => {
@@ -24,21 +21,29 @@ class ForumPost extends Component {
     });
   }
 
-  deletePost(id, replyId) {
+  deletePost(id, replyId, message) {
     axios.delete('/api/forum/' + id + '/' + replyId, {
-      userId: id,
-      replyId: replyId
+      params: {
+        userId: id,
+        replyId: replyId,
+        message: message
+      }
     })
     .then((res) => {
-      console.log('Successfully deleted the reply from ForumPost');
       this.getPost();
     }).catch((err) => {
       console.error('There has been a clientside error in deleting the post in ForumJS ', err);
     });
   }
 
+  renderReplies(postType) {
+    if (!postType && !this.props.editing) {
+      return <ReplyPost post={this.props.post}/>
+    }
+  }
+
   render() {
-    const profile = auth.getProfile();
+    const profile = this.props.profile;
     let profilePic = {
       height: '50px',
       width: '50px',
@@ -46,7 +51,6 @@ class ForumPost extends Component {
       backgroundRepeat: 'no-repeat',
       backgroundSize: 'cover',
       backgroundPosition: 'center',
-      zIndex: '900',
       borderRadius: '50%'
     }
     let props = this.props;
@@ -83,7 +87,7 @@ class ForumPost extends Component {
           </div>
           <div className="col-md-7 forumTitleText">
             <div onClick = {() => {
-            this.props.dispatchTogglePost(this.props.post._id);
+              this.props.dispatchTogglePost(this.props.post._id);
             }}>
               <div className="row">
                 <span className="forumTitle">{ title }</span>
@@ -96,56 +100,67 @@ class ForumPost extends Component {
               <div>
                 <div className="col-md-12">
                   {this.props.replies.map((reply, i) => {
+                    const emailCheck = (profile.email === reply.replyUser.email);
                     if (!postType) {
-                      if (profile.email === reply.replyUser.email && !this.props.editing) {
-                      return <div className="row">
+                      if (emailCheck && !this.props.editing) {
+                        return (
+                          <div className="row">
                             <div className="col-md-11">
-                              <Replies key={i} reply={reply} />
+                              <Replies
+                                key={i}
+                                reply={reply}
+                              />
                             </div>
                             <div className="col-md-1">
                               <div className="replyEditDelete">
-                                <i className="fa fa-pencil-square-o" ariaHidden="true" onClick={ () => {
-                                    this.props.dispatchSetEditing(reply.message);
-                                  }}></i>
-                                <i className="fa fa-trash" ariaHidden="true" onClick={ () => {
-                                    this.deletePost(reply.belongsToId, reply.replyUser.clientID);
-                                  }}></i>
+                                <i className="fa fa-pencil-square-o" onClick={ () => {
+                                  this.props.dispatchSetEditing(reply.message);
+                                }}></i>
+                                <i className="fa fa-trash" onClick={ () => {
+                                  this.deletePost(reply.belongsToId, reply.replyUser.clientID, reply.message);
+                                }}></i>
                               </div>
+                            </div>
                           </div>
-                      </div>
-                       } else if (profile.email === reply.replyUser.email && this.props.editing && (reply.message === this.props.messageToEdit)) {
-                        return <EditReply reply={reply} replyId={reply.replyUser.clientID} id={reply.belongsToId} message={reply.message}/>
-                       } else {
-                        return <Replies key={i} reply={reply} />
-                       }
+                        )
+                      } else if (emailCheck && this.props.editing && (reply.message === this.props.messageToEdit)) {
+                        return (
+                          <EditReply
+                            id={reply.belongsToId}
+                            message={reply.message}
+                            reply={reply}
+                            replyId={reply.replyUser.clientID}
+                          />
+                        )
+                      } else {
+                        return (
+                          <Replies
+                            key={reply.belongsToId}
+                            reply={reply}
+                          />
+                        )
+                      }
                     }
                   }
-                  )}
+                )}
                 </div>
-                  { (function() {
-                    if (!postType && !props.editing) {
-                      return <ReplyPost post={props.post}/>
-                    }
-                  }())
-                  }
+                  { this.renderReplies(postType) }
               </div>
             </div>
           </div>
           <div className="col-md-2 replyCount">Replies: {this.props.replies.length}
             <br />
-            <div className="replyCount"> { props.post.time } </div>
+            <div className="replyCount"> { this.props.post.time } </div>
           </div>
         </div>
       </div>
     )
   }
 }
-
 const mapStateToProps = (state) => {
   return {
     messageToEdit: state.forumReducer.messageToEdit,
     posts: state.forumReducer.posts,
-    currentPost: state.forumReducer.currentPost,
     editing: state.forumReducer.editing
   };
 };
@@ -164,3 +179,4 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ForumPost);
+

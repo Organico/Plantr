@@ -1,12 +1,9 @@
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom'
-import { connect } from 'react-redux';
 import axios from 'axios';
+import { connect } from 'react-redux';
+import React, { Component } from 'react';
 import { setPosts, setEditing } from '../Actions/ForumActions';
-import auth from '../client.js';
 
 class EditPost extends Component {
-
   getPost() {
     axios.get('/api/forum')
     .then((res) => {
@@ -30,7 +27,6 @@ class EditPost extends Component {
         oldMessage: oldMessage
       }
     }).then((res) => {
-      console.log("Post has been successfully updated on EditPost");
       this.props.dispatchSetEditing();
       this.getPost();
     }).catch((err) => {
@@ -83,8 +79,7 @@ class EditPost extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    posts: state.forumReducer.posts,
-    currentPost: state.forumReducer.currentPost
+    posts: state.forumReducer.posts
   };
 };
 

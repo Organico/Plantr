@@ -13,5 +13,6 @@ typings/
 .node_repl_history
 .floo
 .flooignore
+googleAPI.js
 .DS_Store
 .DS_Store?
