@@ -83,7 +83,7 @@ class Forum extends Component {
 
   renderEditButton() {
     if (!this.props.editing) {
-      return <button type="submit" onClick={this.openModal}>Post Here!</button>
+      return <button type="submit" onClick={this.openModal}>Post here!</button>
     }
   }
 
@@ -160,8 +160,8 @@ class Forum extends Component {
         <div className="col-md-10 offset-md-1">
           <div className="post">
             <div className="row">
-              <div className="col-md-8 offset-md-2">
-                <h3>Let Your Community Know About Your Garden</h3>
+              <div className="col-md-10">
+                <h3>Share Your Thoughts in the {this.props.currentCategory} Channel</h3>
               </div>
               <div className="replyEditDelete">
                 { this.renderEditButton() }
@@ -193,6 +193,7 @@ const mapStateToProps = (state) => {
     currentPost: state.forumReducer.currentPost,
     currentCategory: state.forumReducer.currentCategory,
     editing: state.forumReducer.editing,
+    forumActive: state.forumReducer.forumActive,
     messageToEdit: state.forumReducer.messageToEdit,
     posts: state.forumReducer.posts,
     profile: state.userProfileReducer.profile

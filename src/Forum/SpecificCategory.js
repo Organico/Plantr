@@ -3,6 +3,11 @@ import { connect } from 'react-redux';
 import { setCategory, toggleForumStatus} from '../Actions/ForumActions';
 
 class SpecificCategory extends Component {
+  componentDidMount() {
+    this.props.dispatchSetCategory('General');
+    this.props.dispatchToggleForumStatus('General');
+  }
+
   render() {
     return (
       <div className="row">
@@ -10,13 +15,9 @@ class SpecificCategory extends Component {
           <div className="post">
             <div className="row">
               <div className="col-md-8 offset-md-2">
-                <h3>{this.props.categoryName}</h3>
-              </div>
-              <div className="replyEditDelete">
-                <button type="submit" onClick={ () => {
+                <h3 onClick={ () => {
                   this.props.dispatchSetCategory(this.props.categoryName);
-                  this.props.dispatchToggleForumStatus(this.props.categoryName);
-                }}>See Posts!</button>
+                }}>{this.props.categoryName}</h3>
               </div>
             </div>
           </div>

@@ -7,14 +7,7 @@ import { toggleForumStatus } from '../Actions/ForumActions'
 class Categories extends Component {
   renderCategory() {
     if (this.props.forumActive) {
-      return (
-        <div>
-          <Forum/>
-          <button onClick ={ ()=> {
-            this.props.dispatchToggleForumStatus();
-          }}>Return to Categories</button>
-        </div>
-      )
+      return <Forum/>
     }
   }
 
@@ -36,7 +29,6 @@ class Categories extends Component {
         <div className="searchForum">
           <input className="searchForumInput" />
         </div>
-        <h2> Categories </h2>
         <div className="row">
           <div className="col-md-4">
             <SpecificCategory categoryName={'General'}/>
@@ -62,7 +54,7 @@ class Categories extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    forumActive: state.forumReducer.forumActive,
+    forumActive: state.forumReducer.forumActive
   };
 };
 
