@@ -194,12 +194,12 @@ class Forum extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    profile: state.userProfileReducer.profile,
+    currentPost: state.forumReducer.currentPost,
+    currentCategory: state.forumReducer.currentCategory,
+    editing: state.forumReducer.editing,
     messageToEdit: state.forumReducer.messageToEdit,
     posts: state.forumReducer.posts,
-    currentPost: state.forumReducer.currentPost,
-    editing: state.forumReducer.editing,
-    currentCategory: state.forumReducer.currentCategory
+    profile: state.userProfileReducer.profile
   };
 };
 

@@ -1,12 +1,9 @@
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import { connect } from 'react-redux';
-import { setPosts, togglePost, setEditing } from '../Actions/ForumActions';
-import auth from '../client.js';
 import axios from 'axios';
+import { connect } from 'react-redux';
+import React, { Component } from 'react';
+import { setPosts, setEditing } from '../Actions/ForumActions';
 
 class ReplyPost extends Component {
-
   getPost() {
     axios.get('/api/forum')
     .then((res) => {
@@ -22,7 +19,7 @@ class ReplyPost extends Component {
   }
 
   replyPost(replyMessage) {
-    const profile = auth.getProfile();
+    const profile = this.props.profile
     axios.put('/api/forum', {
       id: this.props.post._id,
       replies: {
@@ -32,7 +29,6 @@ class ReplyPost extends Component {
         time: new Date().toDateString()
       }
     }).then((res) => {
-      console.log("Successfully posted a reply");
       this.getPost();
     }).catch((err) => {
       console.error("Error in submitting a reply - replyPost: ", err);
@@ -41,8 +37,7 @@ class ReplyPost extends Component {
 
   render() {
     let replyMessage;
-
-    return(
+    return (
       <div className="row">
         <div className="replyBox col-md-9">
           <textarea  rows="2" className="textArea" ref={(node) => replyMessage = node } type="string" name="messageInput" placeholder='Got advice or questions about this post? Reply here'>
@@ -62,8 +57,7 @@ class ReplyPost extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    posts: state.forumReducer.posts,
-    currentPost: state.forumReducer.currentPost
+    profile: state.userProfileReducer.profile
   };
 };
 
@@ -71,9 +65,6 @@ const mapDispatchToProps = (dispatch) => {
   return {
     dispatchSetPost(message) {
       dispatch(setPosts(message));
-    },
-    dispatchReplyPost(message) {
-      dispatch(replyPost(message));
     }
   };
 };

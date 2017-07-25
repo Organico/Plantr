@@ -1,9 +1,3 @@
-/*
-    let postType = this.props.post.isShort;
-    let postResult = this.checkPost(postType);
-
-*/
-
 import axios from 'axios';
 import { connect } from 'react-redux';
 import EditReply from './EditReply';
@@ -13,28 +7,6 @@ import ReplyPost from './ReplyPost';
 import { setPosts, togglePost, setEditing } from '../Actions/ForumActions';
 
 class ForumPost extends Component {
-  checkPost(postType) {
-    let result = {};
-    if (postType) {
-      if (this.props.message.split(" ").length < 100) {
-        if (this.props.replies.length) {
-          result.message = this.props.message.split(" ").slice(0, 100).join(" ") + "...Click to see replies";
-          result.title = this.props.title.split(" ").slice(0, 20).join(" ");
-        } else {
-          result.title = this.props.title;
-          result.message = this.props.message;
-        }
-      } else {
-        result.message = this.props.message.split(" ").slice(0, 100).join(" ") + "...Click to Expand";
-        result.title = this.props.title.split(" ").slice(0, 20).join(" ");
-      }
-    } else {
-      result.message = this.props.message;
-      result.itle = this.props.title;
-    }
-    return result;
-  }
-
   getPost() {
     axios.get('/api/forum')
    .then((res) => {
@@ -55,7 +27,6 @@ class ForumPost extends Component {
       replyId: replyId
     })
     .then((res) => {
-      console.log('Successfully deleted the reply from ForumPost');
       this.getPost();
     }).catch((err) => {
       console.error('There has been a clientside error in deleting the post in ForumJS ', err);
@@ -77,7 +48,6 @@ class ForumPost extends Component {
       backgroundRepeat: 'no-repeat',
       backgroundSize: 'cover',
       backgroundPosition: 'center',
-      zIndex: '900',
       borderRadius: '50%'
     }
     let props = this.props;
@@ -153,10 +123,10 @@ class ForumPost extends Component {
                       } else if (emailCheck && this.props.editing && (reply.message === this.props.messageToEdit)) {
                         return (
                           <EditReply
-                            reply={reply}
-                            replyId={reply.replyUser.clientID}
                             id={reply.belongsToId}
                             message={reply.message}
+                            reply={reply}
+                            replyId={reply.replyUser.clientID}
                           />
                         )
                       } else {

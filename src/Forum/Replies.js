@@ -1,10 +1,6 @@
 import React, { Component }from 'react';
-import ReactDOM from 'react-dom';
-import { connect } from 'react-redux';
-import ReplyPost from './ReplyPost';
 
-class Replies extends Component{
-
+export default class Replies extends Component{
   render() {
     let profilePic = {
       marginTop: '5px',
@@ -34,5 +30,3 @@ class Replies extends Component{
     )
   }
 }
-
-export default Replies
