@@ -92,9 +92,62 @@ class Forum extends Component {
   }
 
   renderPostSection(profile, post, i) {
+    let { message, nickname, title } = post;
+    let result = this.props.result;
+    let messageCheck;
+    let titleCheck;
+    let nicknameCheck;
+    result.forEach((check) => {
+      if (message === check) {
+        messageCheck = true;
+      } else if (title === check) {
+        titleCheck = true;
+      } else if (nickname === check) {
+        nicknameCheck = true;
+      }
+    })
+    const isAllCategories = (this.props.currentCategory === 'All');
     const categoryCheck = (post.category === this.props.currentCategory);
     const emailCheck = (profile.email === post.email);
-    if (emailCheck && !this.props.editing && !this.state.modalIsOpen && categoryCheck) {
+    if (!this.props.editing && !this.state.modalIsOpen && isAllCategories) {
+      if (emailCheck && (titleCheck || messageCheck || nicknameCheck)) {
+        return (
+        <div className="post">
+          <div className="editDelete">
+            <i className="fa fa-pencil-square-o" onClick={ () => {
+              this.props.dispatchSetEditing(post.message);
+            }}></i>
+            <i className="fa fa-trash" onClick={ () => {
+              this.deletePost(post._id);
+            }}></i>
+          </div>
+          <ForumPost
+            key={post._id}
+            message={post.message}
+            nickname={post.nickname}
+            post={post}
+            profile={profile}
+            replies={post.replies}
+            title={post.title}
+          />
+        </div>
+        )
+      } else if (titleCheck || messageCheck || nicknameCheck) {
+        return (
+          <div className="post">
+            <ForumPost
+              key={post._id}
+              message={post.message}
+              nickname={post.nickname}
+              post={post}
+              profile={profile}
+              replies={post.replies}
+              title={post.title}
+            />
+          </div>
+        )
+      }
+    } else if (emailCheck && !this.props.editing && !this.state.modalIsOpen && categoryCheck) {
       return (
         <div className="post">
           <div className="editDelete">

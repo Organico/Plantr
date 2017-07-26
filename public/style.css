@@ -692,3 +692,9 @@ body {
 }
 
 /*////////////////////////////////////////////////////////////*/
+.alert-danger {
+  text-align: center;
+  font-size: calc(10px + 0.5vw);
+  font-weight: 800;
+  font-family: 'Quicksand';
+}

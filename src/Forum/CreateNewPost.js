@@ -1,13 +1,18 @@
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import { connect } from 'react-redux';
-import auth from '../client.js';
-import { setPosts, addPost, setEditing } from '../Actions/ForumActions';
+import { Alert } from 'reactstrap';
 import axios from 'axios';
+import { connect } from 'react-redux';
+import React, { Component } from 'react';
+import { setPosts, setEditing } from '../Actions/ForumActions';
 
 class CreateNewPost extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      success: ''
+    }
+  }
 
-   getPost() {
+  getPost() {
     axios.get('/api/forum')
     .then((res) => {
       let dbPostData = res.data;
@@ -21,16 +26,42 @@ class CreateNewPost extends Component {
     });
   }
 
-    savePost(title, message) {
-      const profile = auth.getProfile();
-      const profilePic = {
-        backgroundImage: 'url(' + profile.picture + ')',
-        backgroundRepeat: 'no-repeat',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center'
-      }
-      const currentCategory = this.props.currentCategory;
-      console.log("currentCategory ", currentCategory);
+  renderSuccessMessage() {
+    if (this.state.success === true) {
+      return (
+        <div>
+          <Alert color="success" className="sucess-alert">
+            <p>Your email was sent successfully. </p>
+          </Alert>
+        </div>
+      )
+    } else if (this.state.success === false) {
+        return (
+          <div>
+            <Alert color="danger" className="sucess-alert">
+              <p>Please make sure to fill-in all the input fields. </p>
+            </Alert>
+          </div>
+        )
+    } else {
+      return (
+          <br />
+      )
+    }
+  }
+
+  savePost(title, message) {
+    const profile = this.props.profile;
+    const profilePic = {
+      backgroundImage: 'url(' + profile.picture + ')',
+      backgroundRepeat: 'no-repeat',
+      backgroundSize: 'cover',
+      backgroundPosition: 'center'
+    }
+    const currentCategory = this.props.currentCategory;
+    if (title.length<= 2 || message.length <= 2) {
+      this.setState({ success: false });
+    } else {
       axios.post('/api/forum',
         {
           profile: profile.picture,
@@ -43,7 +74,6 @@ class CreateNewPost extends Component {
           category: currentCategory
         }
       ).then((res) => {
-        console.log("Successful posted on the client side of CreateNewPost");
         this.props.closeModal();
         this.props.dispatchSetEditing();
         this.getPost();
@@ -52,15 +82,23 @@ class CreateNewPost extends Component {
         console.error("Error in creating a new post on CreateNewPost", err);
       });
     }
+  }
 
-    render() {
+  componentDidUpdate() {
+    if (this.state.success === false) {
+      const context = this;
+      setTimeout(() => context.setState({ success: '' }), 5000)
+    }
+  }
+
+  render() {
     let titleInput;
     let messageInput;
     return (
       <div>
         <textarea cols="50" rows="1" ref={(node) => titleInput= node } type="string" name="titleInput" placeholder="Title Example: My organic compost tea recipe">
         </textarea>
-        <br />
+        <div>{this.renderSuccessMessage()}</div>
         <textarea  rows="15" cols="75" ref={(node) => messageInput = node } type="string" name="messageInput" placeholder="Message Example: This super special compost tea requires ...">
         </textarea>
         <button type="submit" onClick={() => {
@@ -80,15 +118,13 @@ class CreateNewPost extends Component {
 const mapStateToProps = (state) => {
   return {
     posts: state.forumReducer.posts,
+    profile: state.userProfileReducer.profile,
     currentCategory: state.forumReducer.currentCategory
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    dispatchAddPost(message) {
-      dispatch(addPost(message));
-    },
     dispatchSetPost(message) {
       dispatch(setPosts(message));
     },

@@ -8,8 +8,8 @@ const initialForumState = {
     replies: [],
     editing: false
   },
-  currentCategory: '',
-  forumActive: false
+  currentCategory: 'All',
+  forumActive: true
 }
 
 
@@ -58,7 +58,8 @@ const setReplies = (state, action) => {
 const setCategory = (state, action) => {
   let newState = {}
   let {currentCategory} = state;
-  Object.assign(newState, state, {currentCategory: action.category} )
+  let newAction = action.category;
+  Object.assign(newState, state, {currentCategory: newAction} )
   return newState
 }
 

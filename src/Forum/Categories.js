@@ -2,43 +2,37 @@ import $ from 'jquery';
 import { connect } from 'react-redux';
 import Forum from './Forum.js'
 import React,{ Component } from 'react';
-import SpecificCategory from './SpecificCategory'
-import { setCategory, toggleForumStatus } from '../Actions/ForumActions'
+import SpecificCategory from './SpecificCategory';
+import { setCategory, toggleForumStatus } from '../Actions/ForumActions';
 
 class Categories extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // searchTerm: ''
+      displayedPosts: []
     };
     this.onInputChange = this.onInputChange.bind(this);
   }
 
   onInputChange(event) {
+    let newDisplayedPosts = [];
     const search = this.refs.searchPosts.value
-    // $('html, body').animate({ scrollTop: 0 }, 'fast');
-    let newlyDisplayed = this.props.posts.filter((post) => {
-      let { message, nickname, category, title } = post;
-      if (message.includes(search) || nickname.includes(search) || category.includes(search) || title.includes(search)) {
-        // display through search
-        this.props.dispatchSetCategory(category);
+    this.props.posts.forEach((post) => {
+      let { message, nickname, title } = post;
+      if (message.includes(search)) {
+        newDisplayedPosts.push(message);
+      } else if (nickname.includes(search)) {
+        newDisplayedPosts.push(nickname);
+      } else if (title.includes(search)) {
+        newDisplayedPosts.push(title);
       }
-    })
-    // this.setState({
-    //   searchTerm: search,
-    //   posts: newlyDisplayed
-    // })
-  }
-
-  componentDidMount() {
-    this.props.dispatchSetCategory('General');
-    this.props.dispatchToggleForumStatus('General');
+      this.setState({ displayedPosts: newDisplayedPosts })
+    });
   }
 
   renderCategory() {
-    if (this.props.forumActive) {
-      return <Forum/>
-    }
+    const result = this.state.displayedPosts
+    return <Forum result={result} />
   }
 
   renderForum() {
@@ -65,6 +59,7 @@ class Categories extends Component {
         </div>
         <div className="row">
           <div className="col-md-4">
+            <SpecificCategory categoryName={'All'}/>
             <SpecificCategory categoryName={'General'}/>
             <SpecificCategory categoryName={'Gardening'}/>
             <SpecificCategory categoryName={'Compost Recipes'}/>
