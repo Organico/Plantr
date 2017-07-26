@@ -87,22 +87,64 @@ class Forum extends Component {
     }
   }
 
-  componentDidMount() {
-    this.getPost();
+  renderNonUserPosts(post, profile) {
+    return (
+      <div className="post">
+        <ForumPost
+          key={post._id}
+          message={post.message}
+          nickname={post.nickname}
+          post={post}
+          profile={profile}
+          replies={post.replies}
+          title={post.title}
+        />
+      </div>
+    )
+  }
+
+  renderUserPosts(post, profile) {
+    return (
+    <div className="post">
+      <div className="editDelete">
+        <i className="fa fa-pencil-square-o" onClick={ () => {
+          this.props.dispatchSetEditing(post.message);
+        }}></i>
+        <i className="fa fa-trash" onClick={ () => {
+          this.deletePost(post._id);
+        }}></i>
+      </div>
+      <ForumPost
+        key={post._id}
+        message={post.message}
+        nickname={post.nickname}
+        post={post}
+        profile={profile}
+        replies={post.replies}
+        title={post.title}
+      />
+    </div>
+    )
   }
 
   renderPostSection(profile, post, i) {
+    let initialCheck = true;
     let { message, nickname, title } = post;
     let result = this.props.result;
+    // resets the initial state
+    if (result.length) {
+      initialCheck = false;
+    }
     let messageCheck;
     let titleCheck;
     let nicknameCheck;
     result.forEach((check) => {
-      if (message === check) {
+      check = check.toLowerCase()
+      if (message.toLowerCase() === check) {
         messageCheck = true;
-      } else if (title === check) {
+      } else if (title.toLowerCase() === check) {
         titleCheck = true;
-      } else if (nickname === check) {
+      } else if (nickname.toLowerCase() === check) {
         nicknameCheck = true;
       }
     })
@@ -112,62 +154,25 @@ class Forum extends Component {
     if (!this.props.editing && !this.state.modalIsOpen && isAllCategories) {
       if (emailCheck && (titleCheck || messageCheck || nicknameCheck)) {
         return (
-        <div className="post">
-          <div className="editDelete">
-            <i className="fa fa-pencil-square-o" onClick={ () => {
-              this.props.dispatchSetEditing(post.message);
-            }}></i>
-            <i className="fa fa-trash" onClick={ () => {
-              this.deletePost(post._id);
-            }}></i>
-          </div>
-          <ForumPost
-            key={post._id}
-            message={post.message}
-            nickname={post.nickname}
-            post={post}
-            profile={profile}
-            replies={post.replies}
-            title={post.title}
-          />
-        </div>
+          <div>{this.renderUserPosts(post, profile)}</div>
         )
       } else if (titleCheck || messageCheck || nicknameCheck) {
         return (
-          <div className="post">
-            <ForumPost
-              key={post._id}
-              message={post.message}
-              nickname={post.nickname}
-              post={post}
-              profile={profile}
-              replies={post.replies}
-              title={post.title}
-            />
-          </div>
+          <div>{this.renderNonUserPosts(post, profile)}</div>
+        )
+      // Initial Step to ensure All Categories is populated
+      } else if (emailCheck && initialCheck) {
+        return (
+          <div>{this.renderUserPosts(post, profile)}</div>
+        )
+      } else if (initialCheck) {
+        return (
+          <div>{this.renderNonUserPosts(post, profile)}</div>
         )
       }
     } else if (emailCheck && !this.props.editing && !this.state.modalIsOpen && categoryCheck) {
       return (
-        <div className="post">
-          <div className="editDelete">
-            <i className="fa fa-pencil-square-o" onClick={ () => {
-              this.props.dispatchSetEditing(post.message);
-            }}></i>
-            <i className="fa fa-trash" onClick={ () => {
-              this.deletePost(post._id);
-            }}></i>
-          </div>
-          <ForumPost
-            key={post._id}
-            message={post.message}
-            nickname={post.nickname}
-            post={post}
-            profile={profile}
-            replies={post.replies}
-            title={post.title}
-          />
-        </div>
+        <div>{this.renderUserPosts(post, profile)}</div>
       )
     } else if (emailCheck && categoryCheck && this.props.editing && (post.message === this.props.messageToEdit)) {
       return (
@@ -191,19 +196,13 @@ class Forum extends Component {
     }
     if (categoryCheck) {
       return (
-        <div className="post">
-          <ForumPost
-            key={post._id}
-            message={post.message}
-            nickname={post.nickname}
-            post={post}
-            profile={profile}
-            replies={post.replies}
-            title={post.title}
-          />
-        </div>
+        <div>{this.renderNonUserPosts(post, profile)}</div>
       )
     }
+  }
+
+  componentDidMount() {
+    this.getPost();
   }
 
   render() {
