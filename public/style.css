@@ -240,6 +240,7 @@ hr {
   margin-left: auto;
   margin-right: auto;
   border-width: 3px;
+  background-color: rgba(201, 140, 255, 0.4)
 }
 
 .textArea {
@@ -458,9 +459,16 @@ hr {
 }
 
 .forum-title-text {
-  border-left: solid 2px #EAE0CC;
-  border-right: solid 2px #EAE0CC;
+  border-left: solid 2px #c98cff;
+  border-right: solid 2px #c98cff;
   padding-left: 20px;
+}
+
+.welcome-forum-background {
+  background-image: url('./textures/concrete.jpg');
+  margin-top: 0.5%;
+  padding: 4%;
+  text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
 }
 
 .search-forum,
@@ -474,7 +482,6 @@ hr {
 
 .post, .category, .forum-post, .categories-list {
   background-color: white;
-  margin-top: 1%;
 }
 
 .reply-message,
@@ -487,11 +494,22 @@ hr {
 }
 
 
-.forum-post {
+.forum-post-button {
+  background-color: #c98cff;
+  color: white;
+  margin-top: 12.5%;
 }
 
+.forum-post-button:hover {
+  background-color: #dddddd;
+  color: #c98cff;
+}
+
+
 .categories-list {
-  border-right: 3px solid rgba(0, 0, 0, .3);
+  border-right: 50px solid rgba(0, 0, 0, .3);
+  border-image: url('./textures/concrete.jpg') 3% round;
+  max-height: 350px;
 }
 
 .category, .category-header, .forum-header {
@@ -503,7 +521,21 @@ hr {
 
 .forum-header {
   text-align: center;
-  color: #930808;
+  border-bottom: 3px #a162db double;
+  color: #a162db;
+}
+
+.channel-name {
+  font-family: 'Oleo Script', sans-serif;
+  text-align: left;
+  padding-top: 2%;
+}
+
+.double-divide {
+  padding: 0;
+  margin-bottom: 19.5%;
+  margin-top: -7.5%;
+  margin-left: -35%;
 }
 
 .category:hover {

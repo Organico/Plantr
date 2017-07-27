@@ -81,9 +81,9 @@ class Forum extends Component {
     });
   }
 
-  renderEditButton() {
+  renderPostButton() {
     if (!this.props.editing) {
-      return <button type="submit" onClick={this.openModal}>Post here!</button>
+      return <button className="forum-post-button" type="submit" onClick={this.openModal}>Post here!</button>
     }
   }
 
@@ -212,12 +212,18 @@ class Forum extends Component {
         <div className="col-md-10 offset-md-1">
           <div className="forum-post">
             <div className="row">
-              <div className="col-md-10">
-                <h3>Share Your Thoughts in the {this.props.currentCategory} Channel</h3>
+              <div className="col-md-7">
+                <h2 className="channel-name">{this.props.currentCategory} //</h2>
               </div>
-              <div className="reply-edit-delete">
-                { this.renderEditButton() }
+              <div className="col-md-2 offset-md-3">
+                { this.renderPostButton() }
              </div>
+           </div>
+           <div className="row">
+            <div className="col-md-2">
+              <hr className="double-divide" />
+              <hr className="double-divide" />
+            </div>
            </div>
           </div>
         </div>

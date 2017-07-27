@@ -38,12 +38,12 @@ class Categories extends Component {
   renderForum() {
     return (
       <div>
-        <div className="row">
-          <div className="col-md-8 offset-md-2">
-            <div className="post">
+        <div className="row welcome-forum-background">
+          <div className="col-md-8 offset-md-2 ">
+            <div className="">
               <div className="row">
                 <div className="col-md-8 offset-md-2">
-                  <h2 className="forum-header">Welcome to the Forum!</h2>
+                  <h1 className="forum-header">Welcome to the Forum!</h1>
                 </div>
               </div>
             </div>
