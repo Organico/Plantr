@@ -43,22 +43,29 @@ class Categories extends Component {
             <div className="post">
               <div className="row">
                 <div className="col-md-8 offset-md-2">
-                  <h3>Welcome to the Forum!</h3>
+                  <h2 className="forum-header">Welcome to the Forum!</h2>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <br/>
-        <div className="searchForum">
+        <hr />
+        <div className="search-forum">
           <input
-            className="searchForumInput"
+            className="search-forum-input"
             onChange={this.onInputChange}
             ref="searchPosts"
+            placeholder="search forum posts"
           />
         </div>
         <div className="row">
-          <div className="col-md-4">
+          <div className="col-md-4 categories-list">
+            <div className="row">
+              <div className="col-md-9 offset-md-3">
+                <h2 className="category-header">Categories:</h2>
+                <hr />
+              </div>
+            </div>
             <SpecificCategory categoryName={'All'}/>
             <SpecificCategory categoryName={'General'}/>
             <SpecificCategory categoryName={'Gardening'}/>

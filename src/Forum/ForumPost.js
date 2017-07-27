@@ -51,7 +51,8 @@ class ForumPost extends Component {
       backgroundRepeat: 'no-repeat',
       backgroundSize: 'cover',
       backgroundPosition: 'center',
-      borderRadius: '50%'
+      borderRadius: '50%',
+      marginLeft: 'calc(2.5vw + 3.5vh)'
     }
     let props = this.props;
     let postType = this.props.post.isShort;
@@ -78,21 +79,21 @@ class ForumPost extends Component {
     return (
       <div className="container-fluid">
         <div className="row post">
-          <div className="col-md-3">
+          <div className="col-md-3 post-pic-username">
             <div className="row"></div>
               <div className="col-md-12 offset-md-3 postPicture" style={profilePic}></div>
             <div className="row">
-              <div className="col-md-12 postUsername">{ this.props.nickname }</div>
+              <div className="col-md-12 post-username">{ this.props.nickname }</div>
             </div>
           </div>
-          <div className="col-md-7 forumTitleText">
+          <div className="col-md-7 forum-title-text">
             <div onClick = {() => {
               this.props.dispatchTogglePost(this.props.post._id);
             }}>
               <div className="row">
-                <span className="forumTitle">{ title }</span>
+                <span className="forum-title">{ title }</span>
               </div>
-              <div className="row forumMessage">
+              <div className="row forum-message">
                 { message }
               </div>
             </div>
@@ -112,7 +113,7 @@ class ForumPost extends Component {
                               />
                             </div>
                             <div className="col-md-1">
-                              <div className="replyEditDelete">
+                              <div className="reply-edit-delete">
                                 <i className="fa fa-pencil-square-o" onClick={ () => {
                                   this.props.dispatchSetEditing(reply.message);
                                 }}></i>
@@ -148,9 +149,9 @@ class ForumPost extends Component {
               </div>
             </div>
           </div>
-          <div className="col-md-2 replyCount">Replies: {this.props.replies.length}
+          <div className="col-md-2 reply-count">Replies: {this.props.replies.length}
             <br />
-            <div className="replyCount"> { this.props.post.time } </div>
+            <div className="reply-count"> { this.props.post.time } </div>
           </div>
         </div>
       </div>

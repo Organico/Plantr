@@ -17,11 +17,11 @@ export default class Replies extends Component {
         <div className="row">
           <div className="col-md-1 offset-md-1" style={profilePic}>
           </div>
-          <div className="replyUsername">
+          <div className="reply-username">
             { this.props.reply.replyUser.nickname }
           </div>
           <div className="col-md-10 offset-md-1">
-            <div className="row replyMessage">
+            <div className="row reply-message">
               { this.props.reply.message + ' - ' + this.props.reply.time }
             </div>
           </div>

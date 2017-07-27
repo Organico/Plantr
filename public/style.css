@@ -16,9 +16,6 @@ body{
   margin-top: -30px;
 }
 
-.containerStyle {
-}
-
 .spacer {
   border: solid 2px transparent;
   border-radius: 2px;
@@ -38,37 +35,39 @@ body{
     background-size: cover;
 }
 
-.textHolder {
-
-}
-
-.logoHolder {
+.logo-holder {
   background-color: white;
-  margin-top: 100px;
-  margin-bottom: 20px;
-  border-radius: 50px;
-}
-.videoText {
+  margin-top: 9%;
+  margin-bottom: 3%;
+  opacity: 0.7;
   text-align: center;
-  font-size: 30px;
-  letter-spacing: 2px;
+  /*border-radius: 25px;*/
+}
+
+.video-text {
+  text-align: center;
+  font-size: 25px;
+  letter-spacing: 1.5px;
   color: white;
-  font-family: 'Reem Kufi', sans-serif;
+  /*font-family: 'Reem Kufi', sans-serif;*/
+  font-family: 'Zilla Slab', serif;
   background-color: rgba(0,0,0,0.4);
-  border-radius: 15px;
-  padding: 10px;
+  /*border-radius: 15px;*/
+  padding: 2% 5%;
 }
 
 h1, h2, h3, h4 {
   font-family: "Quicksand";
-  font-weight: bold;
-  padding: 10px;
+  /*font-weight: bold;*/
+  font-variant: small-caps;
+  padding: 1%;
   text-align: center;
 }
 input, textarea {
   font-family: "Quicksand";
   font-weight: bold;
-  border-radius: 10px;
+  font-variant: small-caps;
+  border: none;
 }
 
 button {
@@ -80,58 +79,22 @@ button {
   padding-bottom: 1%;
 }
 
-.reply {
-  border: solid 1px #89C83B;
-  margin-top: 10px;
-}
-.replyMessage,
-.forumMessage {
-  font-family: "Quicksand";
-  font-weight: bold;
-  font-size: calc(14px + 0.3vw);
-  margin-left: 5%;
-  margin-right: 1%;
-}
-
-.searchForum,
-.searchForumInput {
-  font-family: "Quicksand";
-  font-weight: bold;
-  text-align: center;
-  border-radius: 10px;
-}
-
-.postUsername {
-  font-family: "Quicksand";
-  font-weight: bold;
-  font-size: calc(15px + 0.25vw);
-  font-variant: small-caps;
-}
-
-.replyUsername {
-  font-family: "Quicksand";
-  font-weight: bold;
-  font-size: calc(15px + 0.4vw);
-  margin-left: 3%;
-  margin-top: 0.5%;
-  text-align: center;
-  font-variant: small-caps;
-  letter-spacing: 1px;
-}
-
 .aboutGarden {
   font-family: "Quicksand";
   font-weight: bold;
   font-size: 20px;
   padding: 10px;
 }
+
 .communityGardenUserName {
   font-weight: bold;
   font-size: 15px;
 }
+
 .postPicture {
   margin-top: 10px;
 }
+
 .test {
   border: solid 5px red;
 }
@@ -141,9 +104,10 @@ button {
 .navbar {
   background-color: white;
   font-family: 'Quicksand', sans-serif;
+  font-variant: small-caps;
   font-weight: bold;
   letter-spacing: 2px;
-  border-radius: 5px;
+  /*border-radius: 5px;*/
 }
 
 /*
@@ -435,25 +399,126 @@ hr {
   border-radius: 20px;
 }
 
-.editDelete {
-  margin-bottom: -44px;
-  margin-left: 10px;
+
+/*
+*********************************
+*************FORUM*************
+*********************************
+ */
+
+.edit-delete {
+  margin-bottom: -4%;
+  margin-left: 1%;
   position: relative;
-  z-index: 1000;
+  z-index: 2;
 }
-.replyEditDelete{
+
+.reply {
+  border: solid 1px #89C83B;
+  margin-top: 10px;
+}
+
+.post-username {
+  font-family: 'Zilla Slab', serif;
+  font-size: calc(12px + 0.25vw);
+  text-align: center;
+}
+
+.post-pic-username {
+  padding: 0;
+}
+
+.reply-username {
+  font-family: 'Zilla Slab', serif;
+  /*font-family: 'Nunito', sans-serif;*/
+  /*font-family: 'Oleo Script', sans-serif;*/
+  /*font-family: 'Muli', sans-serif;*/
+  /*font-family: 'Reem Kufi', sans-serif;*/
+  /*font-family: 'Bree Serif', sans-serif;*/
+  /*font-family: "Quicksand";*/
+  /*font-weight: bold;*/
+  font-size: calc(15px + 0.4vw);
+  margin-left: 3%;
+  margin-top: 0.5%;
+  text-align: center;
+  /*font-variant: small-caps;*/
+  letter-spacing: 1px;
+}
+
+.reply-edit-delete {
   margin-left: -20px;
   margin-top: 10px;
 }
-.forumTitle {
+
+.forum-title {
   font-family: "Quicksand";
-  font-weight: bold;
   font-size: calc(17px + 0.4vw);
+  font-variant: small-caps;
+  letter-spacing: 0.5px;
 }
-.post {
-  border-radius: 10px;
+
+.forum-title-text {
+  border-left: solid 2px #EAE0CC;
+  border-right: solid 2px #EAE0CC;
+  padding-left: 20px;
+}
+
+.search-forum,
+.search-forum-input {
+  text-align: center;
+  margin-bottom: 1%;
+  padding: 0 10%;
+  padding-bottom: 0.5%;
+  font-size: calc(19px + 0.3vw);
+}
+
+.post, .category, .forum-post, .categories-list {
   background-color: white;
-  margin-top: 20px;
+  margin-top: 1%;
+}
+
+.reply-message,
+.forum-message {
+  font-family: "Quicksand";
+  /*font-weight: bold;*/
+  font-size: calc(14px + 0.3vw);
+  margin-left: 5%;
+  margin-right: 1%;
+}
+
+
+.forum-post {
+}
+
+.categories-list {
+  border-right: 3px solid rgba(0, 0, 0, .3);
+}
+
+.category, .category-header, .forum-header {
+  font-family: 'Oleo Script', sans-serif;
+  text-align: right;
+  margin: 1%;
+  font-variant: small-caps;
+}
+
+.forum-header {
+  text-align: center;
+  color: #930808;
+}
+
+.category:hover {
+  margin: 1%
+  box-shadow: 0px 0px 10px #000000;
+  z-index: 2;
+  -webkit-transition: all 250ms ease-in;
+  -webkit-transform: scale(1.05);
+  -ms-transition: all 250ms ease-in;
+  -ms-transform: scale(1.05);
+  -moz-transition: all 250ms ease-in;
+  -moz-transform: scale(1.05);
+  transition: all 250ms ease-in;
+  transform: scale(1.05);
+  color: #c98cff;
 }
 
 .replyText {
@@ -463,35 +528,31 @@ hr {
     max-height: 100px;
 }
 
-.forumTitleText {
-  border-left: solid 2px #EAE0CC;
-  border-right: solid 2px #EAE0CC;
-  padding-left: 20px;
-}
-.replyCount {
+.reply-count {
   font-family: "Quicksand";
-  font-weight: bold;
+  padding: 1%;
   background: transparent;
   font-size: calc(10px + 0.5vw);
 }
-.replyBox {
+
+.reply-box {
   margin-top: 20px;
   margin-left: 30px;
-
 }
-#addReply {
+
+#add-reply {
   margin-top: 30px;
   margin-left: -25px;
 }
 @import url('https://fonts.googleapis.com/css?family=Arsenal');
 
-{
-    box-sizing: border-box;
-}
 
-
-body {
-  font-family: Helvetica, sans-serif;
+/*MODAL STYLING*/
+.alert-danger {
+  text-align: center;
+  font-size: calc(10px + 0.5vw);
+  font-weight: 800;
+  font-family: 'Quicksand';
 }
 
 .react-autosuggest__container {
@@ -692,9 +753,3 @@ body {
 }
 
 /*////////////////////////////////////////////////////////////*/
-.alert-danger {
-  text-align: center;
-  font-size: calc(10px + 0.5vw);
-  font-weight: 800;
-  font-family: 'Quicksand';
-}

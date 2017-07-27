@@ -85,7 +85,8 @@ router.post('/', (req, res, next) => {
     username: req.body.username,
     email: req.body.email,
     profilePhoto: req.body.profilePhoto,
-    about: req.body.about
+    about: req.body.about,
+    friends: []
     // gardens: req.body.gardens, <-- possible addition
     // coverPhoto: req.body.coverPhoto, <-- possible addition
   });
