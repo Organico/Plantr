@@ -34,7 +34,8 @@ class Profile extends Component {
           username: profile.nickname,
           email: profile.email,
           profilePhoto: profile.picture,
-          about: ''
+          about: '',
+          friends: []
         }).then((res) => {
           window.location.replace("http://stackoverflow.com");
         }).catch((err) => {

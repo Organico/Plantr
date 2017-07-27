@@ -39,11 +39,11 @@ class ReplyPost extends Component {
     let replyMessage;
     return (
       <div className="row">
-        <div className="replyBox col-md-9">
+        <div className="reply-box col-md-9">
           <textarea  rows="2" className="textArea" ref={(node) => replyMessage = node } type="string" name="messageInput" placeholder='Got advice or questions about this post? Reply here'>
           </textarea>
         </div>
-        <div className="col-md-1" id="addReply">
+        <div className="col-md-1" id="add-reply">
           <button type="submit" onClick={() => {
             replyMessage.value = JSON.stringify(replyMessage.value);
             this.replyPost(replyMessage.value);

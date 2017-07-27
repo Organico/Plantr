@@ -106,7 +106,7 @@ class Forum extends Component {
   renderUserPosts(post, profile) {
     return (
     <div className="post">
-      <div className="editDelete">
+      <div className="edit-delete">
         <i className="fa fa-pencil-square-o" onClick={ () => {
           this.props.dispatchSetEditing(post.message);
         }}></i>
@@ -177,7 +177,7 @@ class Forum extends Component {
     } else if (emailCheck && categoryCheck && this.props.editing && (post.message === this.props.messageToEdit)) {
       return (
         <div className="post">
-          <div className="editDelete">
+          <div className="edit-delete">
             <i className="fa fa-trash" onClick={ () => {
               this.deletePost(post._id);
             }}></i>
@@ -210,12 +210,12 @@ class Forum extends Component {
     return (
       <div>
         <div className="col-md-10 offset-md-1">
-          <div className="post">
+          <div className="forum-post">
             <div className="row">
               <div className="col-md-10">
                 <h3>Share Your Thoughts in the {this.props.currentCategory} Channel</h3>
               </div>
-              <div className="replyEditDelete">
+              <div className="reply-edit-delete">
                 { this.renderEditButton() }
              </div>
            </div>
