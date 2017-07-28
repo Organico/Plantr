@@ -69,10 +69,10 @@ class About extends Component {
 
   render() {
     return (
-      <div className="row userAboutMe">
+      <div className="row user-about-me">
         <div className="col-md-12 about">
-          <h3 id="aboutMe"> About Me </h3>
-          <div>
+          <h3 className="about-me-title"> About Me </h3>
+          <div className="about-me">
             { this.renderAboutMe() }
           </div>
         </div>

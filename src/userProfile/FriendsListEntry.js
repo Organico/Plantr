@@ -16,7 +16,7 @@ class FriendsListEntry extends Component {
       <div className="row">
         <div className="col-md-1 offset-md-1" style={profilePic}>
         </div>
-        <div className="replyUsername">
+        <div className="reply-username">
           { this.props.friend.nickname }
         </div>
       </div>

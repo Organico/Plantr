@@ -56,6 +56,15 @@ class RecentGardens extends Component {
   render() {
     const profile = this.props.profile;
     const context = this;
+    const profPic = {
+      magin: 'auto',
+      width: '100px',
+      height: '250px',
+      backgroundSize: '150px 150px',
+      backgroundRepeat: 'no-repeat',
+      backgroundPosition: 'center',
+      backgroundImage: 'url(' + profile.picture + ')'
+    }
     return (
       <div className="row">
         <div className="col-md-10 offset-md-1 right userGarden">
@@ -116,7 +125,8 @@ class RecentGardens extends Component {
 }
 const mapStateToProps = (state) => {
   return {
-    dropdownStatus: state.gardenReducer.dropdownStatus
+    dropdownStatus: state.gardenReducer.dropdownStatus,
+    profile: state.userProfileReducer.profile
   };
 };
 

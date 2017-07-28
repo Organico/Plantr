@@ -24,8 +24,10 @@ class Forum extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      displayedPosts: [],
       modalIsOpen: false
     };
+    this.onInputChange = this.onInputChange.bind(this);
     this.openModal = this.openModal.bind(this);
     this.afterOpenModal = this.afterOpenModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
@@ -81,6 +83,22 @@ class Forum extends Component {
     });
   }
 
+  onInputChange(event) {
+    let newDisplayedPosts = [];
+    const search = this.refs.searchPosts.value
+    this.props.posts.forEach((post) => {
+      let { message, nickname, title } = post;
+      if (message.includes(search)) {
+        newDisplayedPosts.push(message);
+      } else if (nickname.includes(search)) {
+        newDisplayedPosts.push(nickname);
+      } else if (title.includes(search)) {
+        newDisplayedPosts.push(title);
+      }
+      this.setState({ displayedPosts: newDisplayedPosts })
+    });
+  }
+
   renderPostButton() {
     if (!this.props.editing) {
       return <button className="forum-post-button" type="submit" onClick={this.openModal}>Post here!</button>
@@ -130,8 +148,7 @@ class Forum extends Component {
   renderPostSection(profile, post, i) {
     let initialCheck = true;
     let { message, nickname, title } = post;
-    let result = this.props.result;
-    // resets the initial state
+    let result = this.state.displayedPosts
     if (result.length) {
       initialCheck = false;
     }
@@ -209,21 +226,32 @@ class Forum extends Component {
     const profile = this.props.profile;
     return (
       <div>
+        <div className="search-forum">
+          <input
+            className="search-forum-input"
+            onChange={this.onInputChange}
+            ref="searchPosts"
+            placeholder="search forum posts"
+          />
+        </div>
         <div className="col-md-10 offset-md-1">
           <div className="forum-post">
             <div className="row">
               <div className="col-md-7">
                 <h2 className="channel-name">{this.props.currentCategory} //</h2>
+                <div className="col-xs-2 col-md-3">
+                  <hr className="double-divide" />
+                  <hr className="double-divide" />
+                </div>
               </div>
               <div className="col-md-2 offset-md-3">
+                <br />
+                <div>
                 { this.renderPostButton() }
+                </div>
              </div>
            </div>
            <div className="row">
-            <div className="col-md-2">
-              <hr className="double-divide" />
-              <hr className="double-divide" />
-            </div>
            </div>
           </div>
         </div>

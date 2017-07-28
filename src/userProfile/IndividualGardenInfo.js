@@ -16,9 +16,9 @@ class IndividualGardenInfo extends Component {
         <div className="row">
           <div className="col-md-2">
             <div className="row"></div>
-            <div className="col-md-12 offset-md-3 postPicture" style={profilePic}></div>
+            <div className="col-md-12 offset-md-3 post-picture" style={profilePic}></div>
             <div className="row">
-              <div className="col-md-12 postUsername">{ this.props.nickname }</div>
+              <div className="col-md-12 post-username">{ this.props.nickname }</div>
             </div>
           </div>
           <div className="row" onClick={ () => {this.props.onClick(); }}>

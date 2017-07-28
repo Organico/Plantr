@@ -31,8 +31,8 @@ class FriendsList extends Component {
     const profile = this.props.profile;
     return (
       <div className="row">
-        <div className="col-md-10 offset-md-1 right userRecent">
-          <div className="userRecentSpan"> Friends List
+        <div className="col-md-10 offset-md-1 right user-recent">
+          <div className="user-recent-span"> Friends List
             <div className="search-forum">
               <input
                 className="search-forum-input"

@@ -59,12 +59,12 @@ class Profile extends Component {
       <div>
         <div className="container-fluid containerStyle">
           <div className="row">
-            <div className="col-md-3 profileLeft">
+            <div className="col-md-3 profile-left">
               <ProfilePic profile={profile} />
-              <hr className="profileDividerLine" />
+              <hr className="profile-divider-line" />
               <About profile={profile} />
               <FriendsList profile={profile} />
-              <hr className="profileDividerLine" />
+              <hr className="profile-divider-line" />
             </div>
             <div className="col-md-9">
               <RecentPosts profile={profile} />
