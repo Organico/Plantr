@@ -21,12 +21,10 @@ export function setForecast(forecast){
 }
 
 export function setCoordinates(coordinates){
-  console.log('these are the coordinates in the actions: ', coordinates);
   return {type: 'SET_COORDINATES', coordinates};
 }
 
 export function setPlantHardiness(data){
-  console.log('these are the data in the actions: ', data);
   return {type: 'SET_PLANT_HARDINESS', data};
 }
 

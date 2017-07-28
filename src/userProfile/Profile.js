@@ -55,9 +55,10 @@ class Profile extends Component {
 
   render() {
     const profile = this.props.profile;
+    const userGardens = [];
     return(
       <div>
-        <div className="container-fluid containerStyle">
+        <div className="profile-style">
           <div className="row">
             <div className="col-md-3 profile-left">
               <ProfilePic profile={profile} />
@@ -68,7 +69,10 @@ class Profile extends Component {
             </div>
             <div className="col-md-9">
               <RecentPosts profile={profile} />
-              <RecentGardens profile={profile} />
+              <RecentGardens
+                profile={profile}
+                userGardens={userGardens}
+              />
             </div>
           </div>
         </div>
