@@ -6,38 +6,39 @@ class FriendsList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      displayedFriends: []
+      // displayedFriends: []
     };
     this.onInputChange = this.onInputChange.bind(this);
   }
 
   onInputChange(event) {
-    let newdisplayedFriends = [];
-    const search = this.refs.searchPosts.value
-    this.props.posts.forEach((post) => {
-      let { message, nickname, title } = post;
-      if (message.includes(search)) {
-        newDisplayedPosts.push(message);
-      } else if (nickname.includes(search)) {
-        newDisplayedPosts.push(nickname);
-      } else if (title.includes(search)) {
-        newDisplayedPosts.push(title);
-      }
-      this.setState({ displayedFriends: newDisplayedPosts })
-    });
+    // let newdisplayedFriends = [];
+    // const search = this.refs.searchPosts.value
+    // this.props.posts.forEach((post) => {
+    //   let { message, nickname, title } = post;
+    //   if (message.includes(search)) {
+    //     newDisplayedPosts.push(message);
+    //   } else if (nickname.includes(search)) {
+    //     newDisplayedPosts.push(nickname);
+    //   } else if (title.includes(search)) {
+    //     newDisplayedPosts.push(title);
+    //   }
+    //   this.setState({ displayedFriends: newDisplayedPosts })
+    // });
   }
 
   render() {
     const profile = this.props.profile;
     return (
       <div className="row">
-        <div className="col-md-10 offset-md-1 right userRecent">
-          <div className="userRecentSpan"> Friends List
-            <div className="search-forum">
+        <div className="col-md-10 offset-md-1 right user-recent">
+          <div className="user-recent-span"> Friends List
+            <div className="search-friends">
               <input
-                className="search-forum-input"
+                className="search-friends-input"
                 onChange={this.onInputChange}
                 ref="searchFriends"
+                placeholder="search for friends"
               />
             </div>
             <hr />

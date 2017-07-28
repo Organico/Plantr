@@ -91,9 +91,6 @@ button {
   font-size: 15px;
 }
 
-.postPicture {
-  margin-top: 10px;
-}
 
 .test {
   border: solid 5px red;
@@ -113,6 +110,10 @@ button {
 /*
 ||||||||||||||||||||||| NAVBAR |||||||||||||||||||||||
  */
+
+.post-picture {
+  margin-top: 10px;
+}
 
 .nav {
   height: 20px;
@@ -204,42 +205,15 @@ button {
   font-variant: small-caps;
 }
 
-.profileLeft {
-  margin-top: 1%;
-  background-color: white;
-}
 
-#picDiv {
-  margin-top: -50px;
-  margin-bottom: -50px;
-}
 
-.edit-about-button {
-  background: white;
-  margin-bottom: 10%;
-}
-
-.about {
-  color: white;
-}
-.profileDividerLine {
-/*  display: block;
-  height: 1px;
-  border: 0;
-  border-top: 1px solid #EAE0CC;
-  margin: 1em 0;
-  padding: 0;*/
-  border-style: solid;
-  border-width: 1px;
-  border-color: #FF8400;
-  border-radius: 15px;
-}
 
 hr {
   display: block;
   margin-left: auto;
   margin-right: auto;
   border-width: 3px;
+  background-color: rgba(201, 140, 255, 0.4)
 }
 
 .textArea {
@@ -259,8 +233,54 @@ hr {
 #innerProfilePic {
 
 }
-.userRecent {
-  background-color: white;
+/*
+*********************************
+*************PROFILE*************
+*********************************
+ */
+
+#picDiv {
+  margin: -10% 25%;
+}
+
+.edit-about-button {
+  background: #c98cff;
+  color: white;
+}
+
+.edit-about-button:hover {
+  background: white;
+  color: #c98cff;
+}
+
+.profile-divider-line {
+/*  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #EAE0CC;
+  margin: 1em 0;
+  padding: 0;*/
+  border-style: solid;
+  border-width: 1px;
+  border-color: #FF8400;
+  border-radius: 15px;
+}
+
+.about {
+  padding: 5%;
+  color: #a162db;
+}
+
+.search-friends-input {
+  border: 1px #c98cff solid;
+  text-align: center;
+  width: 100%;
+  margin-top: 3%;
+  padding-bottom: 1%;
+}
+
+.user-recent {
+  /*background-color: white;*/
   /*border-style: solid;*/
   /*border-width: 2px;*/
   border: none;
@@ -271,37 +291,62 @@ hr {
   min-height: 225px;
 }
 
-.userAboutMe {
-  background-color: rgba(0,0,0,0.2);
+.user-about-me {
+  background-image: url('./textures/concrete.jpg');
   text-align: center;
   font-size: 20px;
   margin-bottom: 10px;
   font-family: 'Quicksand', sans-serif;
   font-weight: bold;
 }
-#aboutMe {
-  color: black;
+
+.about-me-title, .profile-posts {
+  font-family: 'Oleo Script', sans-serif;
+  color: #a162db;
   font-variant: small-caps;
-  padding: 10%;
+  display: inline-block;
 }
-.userRecentSpan {
+
+.about-me-title {
+  border-bottom: 3px #a162db double;
+  padding-top: 7%;
+  padding-bottom: 3%;
+}
+
+.about-me {
+  padding: 5%;
+  /*font-family: 'Zilla Slab', serif;*/
+  font-variant: small-caps;
+}
+
+.user-recent-span {
   text-align: center;
   font-size: 20px;
   padding-bottom: 5%;
   /*color: #647075;*/
   font-family: 'Quicksand', sans-serif;
-  font-weight: bold;
+  /*font-weight: bold;*/
   font-variant: small-caps;
   /*border-radius: 10px;*/
 }
 
-.gardenName{
+.garden-name{
   font-variant: small-caps;
-  padding-left: calc(-60px + 17vw);
+  padding-left: calc(40vw - 70%);
+}
+
+.konvajs-content {
+  width: auto !important;
 }
 
 .garden-name-active {
   font-variant: small-caps;
+  text-align: center;
+}
+
+.profile-left {
+  margin-top: 1%;
+  background-color: white;
 }
 
 .userGarden {
@@ -458,14 +503,23 @@ hr {
 }
 
 .forum-title-text {
-  border-left: solid 2px #EAE0CC;
-  border-right: solid 2px #EAE0CC;
+  border-left: solid 2px #c98cff;
+  border-right: solid 2px #c98cff;
   padding-left: 20px;
+}
+
+.welcome-forum-background {
+  background-image: url('./textures/concrete.jpg');
+  margin-top: 0.5%;
+  padding: 4%;
+  text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+  text-align: center;
 }
 
 .search-forum,
 .search-forum-input {
   text-align: center;
+  margin-top: 2%;
   margin-bottom: 1%;
   padding: 0 10%;
   padding-bottom: 0.5%;
@@ -487,11 +541,23 @@ hr {
 }
 
 
-.forum-post {
+.forum-post-button {
+  background-color: #c98cff;
+  color: white;
 }
 
+.forum-post-button:hover {
+  background-color: #dddddd;
+  color: #c98cff;
+}
+
+
 .categories-list {
-  border-right: 3px solid rgba(0, 0, 0, .3);
+  border-right: 50px solid rgba(0, 0, 0, .3);
+  border-image: url('./textures/concrete.jpg') 3% round;
+  max-height: 350px;
+  background: none;
+  margin-bottom: 5%;
 }
 
 .category, .category-header, .forum-header {
@@ -503,7 +569,21 @@ hr {
 
 .forum-header {
   text-align: center;
-  color: #930808;
+  border-bottom: 3px #a162db double;
+  color: #a162db;
+  display: inline-block;
+}
+
+.channel-name {
+  font-family: 'Oleo Script', sans-serif;
+  text-align: left;
+  padding-top: 2%;
+}
+
+.double-divide {
+  padding: 0;
+  margin-left: -50%;
+  margin-right: 25%
 }
 
 .category:hover {

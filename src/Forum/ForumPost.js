@@ -52,7 +52,8 @@ class ForumPost extends Component {
       backgroundSize: 'cover',
       backgroundPosition: 'center',
       borderRadius: '50%',
-      marginLeft: 'calc(2.5vw + 3.5vh)'
+      marginLeft: 'calc(2.5vw + 3.5vh)',
+      marginTop: '5%'
     }
     let props = this.props;
     let postType = this.props.post.isShort;

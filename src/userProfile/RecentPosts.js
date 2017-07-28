@@ -29,8 +29,9 @@ class RecentPosts extends Component {
     const profile = this.props.profile;
     return (
       <div className="row">
-        <div className="col-md-10 offset-md-1 right userRecent">
-          <div className="userRecentSpan"> Recent Posts
+        <div className="col-md-10 offset-md-1 right user-recent">
+          <div className="user-recent-span">
+            <h3 className="profile-posts">Recent Posts</h3>
             <hr />
             <div>
                 {this.props.posts.map((post, i) => {

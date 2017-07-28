@@ -49,8 +49,27 @@ class CreateNewPost extends Component {
       )
     }
   }
+  checkInputs(input) {
+    // THIS NEEDS FURTHER FUNCTIONALITY
+    let tagBody = '(?:[^"\'>]|"[^"]*"|\'[^\']*\')*';
+    let tagOrComment = new RegExp(
+        '<(?:'
+        // Comment body.
+        + '!--(?:(?:-*[^->])*--+|-?)'
+        // Special "raw text" elements whose content should be elided.
+        + '|script\\b' + tagBody + '>[\\s\\S]*?</script\\s*'
+        + '|style\\b' + tagBody + '>[\\s\\S]*?</style\\s*'
+        // Regular name
+        + '|/?[a-z]'
+        + tagBody
+        + ')>',
+        'gi');
+      return input.replace(/</g, '&lt;');
+  }
 
   savePost(title, message) {
+    title = this.checkInputs(title);
+    message = this.checkInputs(message);
     const profile = this.props.profile;
     const profilePic = {
       backgroundImage: 'url(' + profile.picture + ')',
@@ -102,15 +121,13 @@ class CreateNewPost extends Component {
         <textarea  rows="15" cols="75" ref={(node) => messageInput = node } type="string" name="messageInput" placeholder="Message Example: This super special compost tea requires ...">
         </textarea>
         <button type="submit" onClick={() => {
-            titleInput.value = JSON.stringify(titleInput.value);
-            messageInput.value = JSON.stringify(messageInput.value);
-            this.savePost(titleInput.value, messageInput.value);
-            titleInput.value = '';
-            messageInput.value = '';
-          }}>
-          Add Post
-        </button>
-      </div>
+          this.savePost(titleInput.value, messageInput.value);
+          titleInput.value = '';
+          messageInput.value = '';
+        }}>
+        Add Post
+      </button>
+    </div>
     );
   }
 };
