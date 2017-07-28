@@ -2,7 +2,6 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import GardenGrid from '../GardenSquareGrid/GardenGrid';
 import GardenSquareGridView from '../GardenSquareGrid/getGardenSquareGrid';
-import IndividualGarden from './IndividualGarden';
 import IndividualGardenInfo from './IndividualGardenInfo';
 import PlantGrid from '../GardenSquareGrid/PlantGrid';
 import React, { Component } from 'react';
@@ -55,6 +54,7 @@ class RecentGardens extends Component {
 
   render() {
     const profile = this.props.profile;
+    const userGardens = this.state.userGardens;
     const context = this;
     const profPic = {
       magin: 'auto',
@@ -67,56 +67,50 @@ class RecentGardens extends Component {
     }
     return (
       <div className="row">
-        <div className="col-md-10 offset-md-1 right userGarden">
-          <div className="userGardenSpan">
-            <div className="userRecentSpan">Recent Gardens</div>
+        <div className="col-md-10 offset-md-1 right  user-recent">
+          <div className="user-recent-span">
+            <h3 className="profile-posts">Recent Gardens</h3>
             <hr />
+            <div>
               {!this.props.dropdownStatus ? (
-                  <div>
-                    { this.state.userGardens.map((garden, i) => {
-                      return (
-                        <div className="container-fluid">
-                          <IndividualGardenInfo
-                            context={context}
-                            gardenGrid={garden.gardenGrid}
-                            gardenName={garden.gardenName}
-                            nickname={profile.nickname}
-                            onClick={this.handleClick}
-                            plantGrid={garden.plantGrid}
-                            profilePicture={garden.profilePicture}
-                            ref={i}
-                            />
-                         </div>
-                         )
-                      }
-                    )}
-                  </div>
+                <div>
+                  { userGardens.map((garden, i) => {
+                    return (
+                      <div>
+                        <IndividualGardenInfo
+                          context={context}
+                          gardenGrid={garden.gardenGrid}
+                          gardenName={garden.gardenName}
+                          nickname={profile.nickname}
+                          onClick={this.handleClick}
+                          plantGrid={garden.plantGrid}
+                          profilePicture={garden.profilePicture}
+                          key={i}
+                          />
+                       </div>
+                       )
+                    }
+                  )}
+                </div>
                 ) : (
-                 <div>
-                   <h4 className="garden-name-active">{this.state.gardenName}</h4>
-                   <div className="row">
-                     <div className="col-md-2">
-                       <div className="col-md-12 offset-md-3 postPicture" style={profilePic}></div>
-                       <div className="row">
-                         <div className="col-md-12 postUsername">{ this.props.nickname }</div>
-                       </div>
-                     </div>
-                     <div>
-                       <button onClick={() => this.props.dispatchSetDropdownStatus(this.props.dropdownStatus)}>Go Back to your Gardens</button>
-                     </div>
+                 <div className="post">
+                   <h4 className="garden-name-active" onClick={() => this.props.dispatchSetDropdownStatus(this.props.dropdownStatus)}>{this.state.gardenName}</h4>
                      <div className="row" onClick={ () => {this.handleClick}}>
-                       <div className="col-mid-10 gardenName">
+                       <div className="col-mid-10 garden-name">
                          <div className="row">
-                           <Stage width={500} height={500} fill="white" stroke="black" className="text-center">
-                             <GardenGrid />
-                             <PlantGrid />
-                           </Stage>
+                            <div className="col-md-8 offset-md-4">
+                               <Stage width={500} height={500} fill="white" stroke="black" className="text-center">
+                               <GardenGrid />
+                               <PlantGrid />
+                             </Stage>
+                           </div>
                          </div>
                        </div>
                      </div>
-                   </div>
+
                  </div>
                )}
+              </div>
             </div>
           </div>
         </div>

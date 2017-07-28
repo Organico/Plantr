@@ -271,6 +271,14 @@ hr {
   color: #a162db;
 }
 
+.search-friends-input {
+  border: 1px #c98cff solid;
+  text-align: center;
+  width: 100%;
+  margin-top: 3%;
+  padding-bottom: 1%;
+}
+
 .user-recent {
   /*background-color: white;*/
   /*border-style: solid;*/
@@ -317,18 +325,23 @@ hr {
   padding-bottom: 5%;
   /*color: #647075;*/
   font-family: 'Quicksand', sans-serif;
-  font-weight: bold;
+  /*font-weight: bold;*/
   font-variant: small-caps;
   /*border-radius: 10px;*/
 }
 
-.gardenName{
+.garden-name{
   font-variant: small-caps;
-  padding-left: calc(-60px + 17vw);
+  padding-left: calc(40vw - 70%);
+}
+
+.konvajs-content {
+  width: auto !important;
 }
 
 .garden-name-active {
   font-variant: small-caps;
+  text-align: center;
 }
 
 .profile-left {
