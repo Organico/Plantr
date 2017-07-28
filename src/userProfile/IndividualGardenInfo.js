@@ -31,13 +31,3 @@ class IndividualGardenInfo extends Component {
 }
 
 export default IndividualGardenInfo;
-
-// this has great styling for user posts
-/*      <div className="container-fluid">
-          <div className="row" onClick={ () => {this.props.onClick(); }}>
-            <div className="col-md-8 offset-md-2 garden-name">
-            <h4 className="garden-name-active">{ this.props.gardenName }</h4>
-            </div>
-          </div>
-        </div>
-      </div>*/

@@ -39,9 +39,8 @@ class RecentGardens extends Component {
           gardenName: personalGarden[i].gardenName,
           profilePicture: personalGarden[i].profilePicture
         }
-        let newUserGarden = []
-        newUserGarden.push(gardenObj)
-        this.setState({userGardens: newUserGarden});
+        this.props.userGardens.push(gardenObj)
+        this.setState({userGardens: this.props.userGardens});
       }
     }).catch((err) => {
       console.error("There was a get request error on the client in User RecentGardens", err);
@@ -54,7 +53,6 @@ class RecentGardens extends Component {
 
   render() {
     const profile = this.props.profile;
-    const userGardens = this.state.userGardens;
     const context = this;
     const profPic = {
       magin: 'auto',
@@ -74,7 +72,7 @@ class RecentGardens extends Component {
             <div>
               {!this.props.dropdownStatus ? (
                 <div>
-                  { userGardens.map((garden, i) => {
+                  { this.props.userGardens.map((garden, i) => {
                     return (
                       <div>
                         <IndividualGardenInfo
@@ -95,19 +93,18 @@ class RecentGardens extends Component {
                 ) : (
                  <div className="post">
                    <h4 className="garden-name-active" onClick={() => this.props.dispatchSetDropdownStatus(this.props.dropdownStatus)}>{this.state.gardenName}</h4>
-                     <div className="row" onClick={ () => {this.handleClick}}>
-                       <div className="col-mid-10 garden-name">
-                         <div className="row">
-                            <div className="col-md-8 offset-md-4">
-                               <Stage width={500} height={500} fill="white" stroke="black" className="text-center">
-                               <GardenGrid />
-                               <PlantGrid />
-                             </Stage>
-                           </div>
+                   <div className="row" onClick={ () => {this.handleClick}}>
+                     <div className="col-mid-10 garden-name">
+                       <div className="row">
+                         <div className="col-md-8 offset-md-4">
+                           <Stage width={500} height={500} fill="white" stroke="black" className="text-center">
+                             <GardenGrid />
+                             <PlantGrid />
+                           </Stage>
                          </div>
                        </div>
                      </div>
-
+                   </div>
                  </div>
                )}
               </div>
