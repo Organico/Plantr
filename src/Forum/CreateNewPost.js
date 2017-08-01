@@ -27,25 +27,19 @@ class CreateNewPost extends Component {
   }
 
   renderSuccessMessage() {
-    if (this.state.success === true) {
+    if (this.state.success === '') {
       return (
         <div>
-          <Alert color="success" className="sucess-alert">
-            <p>Your email was sent successfully. </p>
-          </Alert>
+          <br />
         </div>
       )
     } else if (this.state.success === false) {
-        return (
-          <div>
-            <Alert color="danger" className="sucess-alert">
-              <p>Please make sure to fill-in all the input fields. </p>
-            </Alert>
-          </div>
-        )
-    } else {
       return (
-          <br />
+        <div className="col-md-6 offset-md-3">
+          <Alert color="danger" className="sucess-alert">
+            <p>Please make sure to fill-in all the input fields. </p>
+          </Alert>
+        </div>
       )
     }
   }
@@ -115,19 +109,33 @@ class CreateNewPost extends Component {
     let messageInput;
     return (
       <div>
-        <textarea cols="50" rows="1" ref={(node) => titleInput= node } type="string" name="titleInput" placeholder="Title Example: My organic compost tea recipe">
-        </textarea>
-        <div>{this.renderSuccessMessage()}</div>
-        <textarea  rows="15" cols="75" ref={(node) => messageInput = node } type="string" name="messageInput" placeholder="Message Example: This super special compost tea requires ...">
-        </textarea>
-        <button type="submit" onClick={() => {
-          this.savePost(titleInput.value, messageInput.value);
-          titleInput.value = '';
-          messageInput.value = '';
-        }}>
-        Add Post
-      </button>
-    </div>
+        <div className="row">
+          <textarea className="modal-title" ref={(node) => titleInput= node } type="string" name="titleInput" placeholder="Title Example: My organic compost tea recipe">
+          </textarea>
+        </div>
+        <div className="row">
+          <br />
+          {this.renderSuccessMessage()}
+        </div>
+        <div className="row">
+          <textarea className="modal-message" ref={(node) => messageInput = node } type="string" name="messageInput" placeholder="Message Example: This super special compost tea requires ...">
+          </textarea>
+        </div>
+        <div className="row modal-buttons">
+          <div className="col-sm-1">
+            <button className="modal-post-button" onClick={this.props.closeModal}>close</button>
+          </div>
+          <div className="col-sm-2 offset-sm-9">
+            <button className="modal-post-button" type="submit" onClick={() => {
+              this.savePost(titleInput.value, messageInput.value);
+              titleInput.value = '';
+              messageInput.value = '';
+            }}>
+            Add Post
+            </button>
+          </div>
+        </div>
+      </div>
     );
   }
 };

@@ -544,8 +544,7 @@ hr {
   margin-right: 1%;
 }
 
-
-.forum-post-button {
+.forum-post-button, .modal-post-button {
   background-color: #c98cff;
   color: white;
 }
@@ -555,6 +554,10 @@ hr {
   color: #c98cff;
 }
 
+.modal-post-button:hover {
+  background-color: white;
+  color: #c98cff;
+}
 
 .categories-list {
   border-right: 50px solid rgba(0, 0, 0, .3);
@@ -630,13 +633,46 @@ hr {
 }
 @import url('https://fonts.googleapis.com/css?family=Arsenal');
 
+/*
+*********************************
+*************MODAL*************
+*********************************
+ */
 
-/*MODAL STYLING*/
 .alert-danger {
   text-align: center;
   font-size: calc(10px + 0.5vw);
   font-weight: 800;
   font-family: 'Quicksand';
+  margin-top: 4%;
+}
+
+.modal-header {
+  font-family: 'Oleo Script', sans-serif;
+  font-variant: small-caps;
+  color: #a162db;
+  border-bottom: 3px #a162db double;
+  display: inline-block;
+  padding-bottom: 0;
+}
+
+.modal-title {
+  border: none;
+  width: 90%;
+  margin-left: 4%;
+  margin-top: 2%;
+}
+
+.modal-message {
+  border: none;
+  width: 90%;
+  margin-left: 4%;
+  height: 50vh;
+}
+
+.modal-buttons {
+  margin-top: 3%;
+  margin-left: 1%;
 }
 
 .react-autosuggest__container {

@@ -15,8 +15,9 @@ const customStyles = {
     bottom: 'auto',
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
-    backgroundColor: '#d6eef9',
-    borderRadius: '10px'
+    backgroundImage: "url('./textures/concrete.jpg')",
+    border: 'none',
+    minWidth: '60%',
   }
 };
 
@@ -262,9 +263,8 @@ class Forum extends Component {
           style={customStyles}
           contentLabel="Example Modal"
         >
-          <h3>Share Your Stories</h3>
+          <h1 className="modal-header">Share Your Stories</h1>
           <CreateNewPost closeModal={this.closeModal} />
-          <button onClick={this.closeModal}>close</button>
         </Modal>
         <div className="col-md-10 offset-md-1">
           {this.props.posts.map((post, i) => this.renderPostSection(profile, post, i))}
